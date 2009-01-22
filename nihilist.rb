@@ -40,7 +40,7 @@
 # R = 4   - = 94  A = 5   G = 95  M = 96  T = 6   
 # Y = 97  H = 98  N = 7   V = 99
 #
-# $Id: nihilist.rb,v 96ed61ae8961 2009/01/22 15:25:51 roberto $
+# $Id: nihilist.rb,v 89d3551bbf2f 2009/01/22 15:40:09 roberto $
 
 ## Base alphabet
 ##
@@ -54,7 +54,7 @@ class String
   def condense_word
     c_alpha = ''
     
-    self.scan (/./) {|c|
+    self.scan(/./) {|c|
       if c_alpha !~ /#{c}/
         c_alpha = c_alpha + c
       end
@@ -106,8 +106,8 @@ class Key < String
 end
 
 class CKey < Key
-  def initialize (key)
-    super (key)
+  def initialize(key)
+    super(key)
   end
 
   def to_s
@@ -118,8 +118,8 @@ end
 class Cipher
   attr_reader :alpha, :ralpha, :key
   
-  def initialize (key)
-    @key = Key.new (key)
+  def initialize(key)
+    @key = Key.new(key)
     @alpha = Hash.new
     @ralpha = Hash.new
   end
@@ -144,10 +144,10 @@ class Nihilist < Cipher
   attr_reader :super_key
 
   def initialize(key, super_key = "")
-    super (key)
+    super(key)
     complete = ''
     complete = (@key.to_s.upcase + $base).condense_word
-    code_word (gen_checkbd (complete, @key.to_s.length))
+    code_word(gen_checkbd(complete, @key.to_s.length))
     @super_key = super_key
   end
 
@@ -189,7 +189,7 @@ class Nihilist < Cipher
   ## SCIOXUDJPZBEKQ/WFLR-AGMT  YHNV   c=3  3 x 1
   ## SCIOXUDJPZBEKQ/WFLR-AGMTYHNV
 
-  def gen_checkbd (word, len)
+  def gen_checkbd(word, len)
     height = $base.length / len
     
     # Odd rectangle
@@ -199,12 +199,12 @@ class Nihilist < Cipher
     
     print "\ncheckboard size is #{len} x #{height}\n"
     res = ""
-    (len - 1).downto (0) {|i|
-      0.upto (height - 1) {|j|
+    (len - 1).downto(0) {|i|
+      0.upto(height - 1) {|j|
         if word.length <= (height - 1)
           return res + word
         else
-          c = word.slice! (i * j).chr
+          c = word.slice!(i * j).chr
           res = res + c
         end
       }
@@ -223,11 +223,11 @@ class Nihilist < Cipher
   ##
   ## Generate both the encoding and decoding rings.
   ##
-  def code_word (key)
+  def code_word(key)
     ind_u = 0
     ind_d = 80
 
-    key.to_s.scan (/./) {|c|
+    key.to_s.scan(/./) {|c|
       if c =~ /[ESANTIRU]/
         @alpha[c] = ind_u
         @ralpha[ind_u] = c
@@ -243,15 +243,15 @@ class Nihilist < Cipher
 end
 
 if $0 == __FILE__
-  a = CKey.new (ARGV[0].to_s.chomp)
+  a = CKey.new(ARGV[0].to_s.chomp)
   puts a.to_s
 
-  b = Key.new (ARGV[1].to_s.chomp)
-  print "generic " + b.gen_numeric_key.join (',')
+  b = Key.new(ARGV[1].to_s.chomp)
+  print "generic " + b.gen_numeric_key.join(',')
   puts ""
-  print "key2 " + b.gen_numeric_key2.join (',')
+  print "key2 " + b.gen_numeric_key2.join(',')
 
-  c = Nihilist.new (a)
+  c = Nihilist.new(a)
   puts c.key.to_s
 
   c.forward {|key, val|
