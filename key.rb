@@ -1,0 +1,233 @@
+#! /usr/bin/env ruby
+#
+# Description:: Dealing with encryption keys
+# Author:: Ollivier Robert <roberto@keltia.freenix.fr>
+# Copyright:: © 2001-2009 by Ollivier Robert 
+#
+
+# VCS stuff
+#
+VCS_ID = "$Id: key.rb,v 4a61ad89f91d 2009/01/27 14:49:55 roberto $"
+
+BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
+
+# == class String
+#
+class String
+  
+  # === condensed
+  #
+  # Condense word by removing every duplicated letter
+  #
+  def condensed
+    c_alpha = ''
+    
+    self.scan(/./) do |c|
+      if c_alpha !~ /#{c}/
+        c_alpha = c_alpha + c
+      end
+    end
+    c_alpha
+  end # -- condensed
+
+end # -- class String
+
+# == class Key
+#
+class Key
+  attr_reader :key, :full_key
+  attr_reader :alpha, :ralpha
+
+  def initialize(key)
+    raise ArgumentError if key.class != String and key and key.to_s == ""
+    @key = key.to_s.upcase.condensed
+    @alpha = Hash.new
+    @ralpha = Hash.new
+    @full_key = checkboard()
+    gen_rings()
+  end
+
+  def to_s
+    @key
+  end
+  
+  # === condensed
+  #
+  def condensed
+    @key.condensed
+  end
+
+  # === checkboard
+  #
+  # Shuffle the alphabet a bit to avoid sequential allocation of the
+  # code numbers
+  #
+  # Regular rectangle
+  # -----------------
+  # Key is ARABESQUE condensed into ARBESQU (len = 7) (height = 4)
+  # Let word be ARBESQUCDFGHIJKLMNOPTVWXYZ/-
+  #
+  # First passes will generate
+  #
+  # A  RBESQUCDFGHIJKLMNOPTVWXYZ/-   c=0  0 x 6
+  # AC  RBESQUDFGHIJKLMNOPTVWXYZ/-   c=6  1 x 6
+  # ACK  RBESQUDFGHIJLMNOPTVWXYZ/-   c=12 2 x 6
+  # ACKV  RBESQUDFGHIJLMNOPTWXYZ/-   c=18 3 x 6
+  # ACKVR  BESQUDFGHIJLMNOPTWXYZ/-   c=0  0 x 5
+  # ACKVRD  BESQUFGHIJLMNOPTWXYZ/-   c=5  1 x 5
+  # ...
+  # ACKVRDLWBFMXEGNYSHOZQIP/UJT-
+  #
+  # Irregular rectangle
+  # -------------------
+  # Key is SUBWAY condensed info SUBWAY (len = 6) (height = 5)
+  #
+  # S  UBWAYCDEFGHIJKLMNOPQRTVXZ/-   c=0  0 x 5
+  # SC  UBWAYDEFGHIJKLMNOPQRTVXZ/-   c=5  1 x 5
+  # SCI  UBWAYDEFGHJKLMNOPQRTVXZ/-   c=10 2 x 5
+  # SCIO  UBWAYDEFGHJKLMNPQRTVXZ/-   c=15 3 x 5
+  # SCIOX  UBWAYDEFGHJKLMNPQRTVZ/-   c=20 4 x 5
+  # SCIOXU  BWAYDEFGHJKLMNPQRTVZ/-   c=0  0 x 4
+  # ...
+  # SCIOXUDJPZBEKQ/WFLR-AG  YHMNTV   c=1  1 x 1
+  # SCIOXUDJPZBEKQ/WFLR-AGM  YHNTV   c=2  2 x 1
+  # SCIOXUDJPZBEKQ/WFLR-AGMT  YHNV   c=3  3 x 1
+  # SCIOXUDJPZBEKQ/WFLR-AGMTYHNV
+  #
+  def checkboard
+    word = (@key + BASE).condensed.dup
+    len = @key.length
+    height = BASE.length / len
+    
+    
+    # Odd rectangle
+    if (BASE.length % len) != 0
+      height = height + 1
+    end
+    
+    print "\ncheckboard size is #{len} x #{height}\n"
+    res = ""
+    (len - 1).downto(0) do |i|
+      0.upto(height - 1) do |j|
+        if word.length <= (height - 1) then
+          return res + word
+        else
+          c = word.slice!(i * j)
+          if not c.nil? then
+            res = res + c.chr
+          end
+        end
+      end
+    end
+    return res
+  end 
+
+  # == gen_rings
+  #
+  # Assign a code number for each letter. Each code number is
+  # sequentially allocated from two pools, one with 0..7 and
+  # the other with 80..99.
+  #
+  # Allocation is made on the following criterias
+  # - if letter is one of ESANTIRU assign a single code number
+  # - else assign of of the two letters ones
+  #
+  # Generate both the encoding and decoding rings.
+  #
+  def gen_rings
+    ind_u = 0
+    ind_d = 80
+
+    word = @full_key.dup
+    word.scan(/./) do |c|
+      if c =~ /[ESANTIRU]/
+        @alpha[c] = ind_u
+        @ralpha[ind_u] = c
+        ind_u = ind_u + 1
+      else
+        @alpha[c] = ind_d
+        @ralpha[ind_d] = c
+        ind_d = ind_d + 1
+      end
+    end
+  end # -- gen_rings
+
+end # -- class Key
+
+class TKey < Key
+  def initialize(key)
+    super(key)
+  end
+  
+  # === to_numeric
+  #
+  # Generate a numeric key from a keyword
+  #
+  # For each letter in the keyword, scan for the lowest letter, assign
+  # it an index # then scan again till there are no letter left
+  #
+  #
+  # By Dave Thomas, IRC #ruby-lang on Thu Aug  9 17:36:39 CEST 2001
+  # 
+  def to_numeric
+    letters = @key.to_s.split('')
+    sorted = letters.sort
+    num_key = letters.collect do |l|
+      k = sorted.index(l)
+      sorted[k] = nil
+      k + 1
+    end
+    num_key
+  end # -- to_numeric
+
+  # === to_numeric2
+  #
+  # Alternate version
+  # By dblack, IRC #ruby-lang
+  #
+  #
+  def to_numeric2
+    srt = @key.to_s.split('').sort
+
+    n_key = @key.to_s.split('').map do |s|
+      srt[srt.index(s)] = srt.index(s) + 1
+    end
+    n_key
+  end # -- to_numeric2
+
+end # -- class TKey
+
+if $0 == __FILE__ then
+  
+  # several test keys
+  #
+  # square
+  #
+  k = Key.new("ARABESQUE")
+  p k.condensed
+  
+  # not square but known -- see above comments
+  #
+  m = Key.new("subway")
+  p m.condensed
+  
+  # not square
+  #
+  n = Key.new("portable")
+  p n.condensed
+
+  # key for transposition
+  #
+  t = TKey.new("retribution")
+  #
+  # A TKey is a Key as well
+  #
+  p t.condensed
+  #
+  #
+  # Main usage, get the numerical order of letters
+  #
+  p t.to_numeric
+
+  exit(0)
+end
