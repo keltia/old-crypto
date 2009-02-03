@@ -7,9 +7,7 @@
 
 # VCS stuff
 #
-VCS_ID = "$Id: key.rb,v 4a61ad89f91d 2009/01/27 14:49:55 roberto $"
-
-BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
+VCS_ID = "$Id: key.rb,v 0dde729d0219 2009/02/03 23:30:01 roberto $"
 
 # == class String
 #
@@ -32,19 +30,17 @@ class String
 
 end # -- class String
 
+
 # == class Key
 #
+# Virtual base class for keys
+#
 class Key
-  attr_reader :key, :full_key
-  attr_reader :alpha, :ralpha
+  attr_reader :key
 
   def initialize(key)
     raise ArgumentError if key.class != String and key and key.to_s == ""
-    @key = key.to_s.upcase.condensed
-    @alpha = Hash.new
-    @ralpha = Hash.new
-    @full_key = checkboard()
-    gen_rings()
+    @key = key.to_s.upcase
   end
 
   def to_s
@@ -55,9 +51,110 @@ class Key
   #
   def condensed
     @key.condensed
-  end
+  end # -- condensed
 
-  # === checkboard
+  # === length
+  #
+  def length
+    @key.length
+  end # -- length
+  
+end # -- class Key
+
+# == class TKey
+#
+# Class for transposition keys
+#
+# A transposition key does not ghet condensed but serve as a generator for
+# a numeric key based on letters.  Later on, these numbers will be used to
+# extract columns.
+#
+# See http://en.wikipedia.org/wiki/Transposition_cipher
+
+class TKey < Key
+  def initialize(key)
+    super(key)
+  end
+  
+  # === to_numeric
+  #
+  # Generate a numeric key from a keyword
+  #
+  # For each letter in the keyword, scan for the lowest letter, assign
+  # it an index # then scan again till there are no letter left
+  #
+  # XXX modified to be 0-based
+  #
+  # By Dave Thomas, IRC #ruby-lang on Thu Aug  9 17:36:39 CEST 2001
+  # 
+  def to_numeric
+    letters = @key.to_s.split('')
+    sorted = letters.sort
+    num_key = letters.collect do |l|
+      k = sorted.index(l)
+      sorted[k] = nil
+      k
+    end
+    num_key
+  end # -- to_numeric
+
+  # === to_numeric2
+  #
+  # Alternate version
+  # By dblack, IRC #ruby-lang
+  #
+  # XXX modified to be 0-based
+  #
+  def to_numeric2
+    srt = @key.to_s.split('').sort
+
+    n_key = @key.to_s.split('').map do |s|
+      srt[srt.index(s)] = srt.index(s)
+    end
+    n_key
+  end # -- to_numeric2
+
+end # -- class TKey
+
+# == class SKey
+#
+# class for simple substitution keys
+#
+# See http://en.wikipedia.org/wiki/Substitution_cipher
+
+class SKey < Key
+  attr_reader :alpha, :ralpha
+
+  def initialize(key)
+    super(key)
+  end
+  
+end # -- class SKey
+
+# == class SCKey
+#
+# class for straddling checkerboard substitution keys
+#
+# SC-keys needs to be condensed and rings generated for ciphering/deciphering
+#
+# See http://en.wikipedia.org/wiki/Straddling_checkerboard
+
+class SCKey < Key
+
+  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
+
+  attr_reader :full_key
+  attr_reader :alpha, :ralpha
+  
+  def initialize(key)
+    super(key)
+    @alpha = Hash.new
+    @ralpha = Hash.new
+    @full_key = checkerboard()
+    gen_rings()
+  end
+  
+  # === checkerboard
   #
   # Shuffle the alphabet a bit to avoid sequential allocation of the
   # code numbers
@@ -94,18 +191,19 @@ class Key
   # SCIOXUDJPZBEKQ/WFLR-AGMT  YHNV   c=3  3 x 1
   # SCIOXUDJPZBEKQ/WFLR-AGMTYHNV
   #
-  def checkboard
+  def checkerboard
     word = (@key + BASE).condensed.dup
-    len = @key.length
+    len = @key.condensed.length
     height = BASE.length / len
     
     
     # Odd rectangle
+    #
     if (BASE.length % len) != 0
       height = height + 1
     end
     
-    print "\ncheckboard size is #{len} x #{height}\n"
+    print "\ncheckerboard size is #{len} x #{height}\n"
     res = ""
     (len - 1).downto(0) do |i|
       0.upto(height - 1) do |j|
@@ -134,6 +232,8 @@ class Key
   #
   # Generate both the encoding and decoding rings.
   #
+  # XXX FIXME Use of 80-99 is hardcoded
+  #
   def gen_rings
     ind_u = 0
     ind_d = 80
@@ -152,50 +252,7 @@ class Key
     end
   end # -- gen_rings
 
-end # -- class Key
-
-class TKey < Key
-  def initialize(key)
-    super(key)
-  end
-  
-  # === to_numeric
-  #
-  # Generate a numeric key from a keyword
-  #
-  # For each letter in the keyword, scan for the lowest letter, assign
-  # it an index # then scan again till there are no letter left
-  #
-  #
-  # By Dave Thomas, IRC #ruby-lang on Thu Aug  9 17:36:39 CEST 2001
-  # 
-  def to_numeric
-    letters = @key.to_s.split('')
-    sorted = letters.sort
-    num_key = letters.collect do |l|
-      k = sorted.index(l)
-      sorted[k] = nil
-      k + 1
-    end
-    num_key
-  end # -- to_numeric
-
-  # === to_numeric2
-  #
-  # Alternate version
-  # By dblack, IRC #ruby-lang
-  #
-  #
-  def to_numeric2
-    srt = @key.to_s.split('').sort
-
-    n_key = @key.to_s.split('').map do |s|
-      srt[srt.index(s)] = srt.index(s) + 1
-    end
-    n_key
-  end # -- to_numeric2
-
-end # -- class TKey
+end # -- class SCKey
 
 if $0 == __FILE__ then
   
@@ -203,26 +260,22 @@ if $0 == __FILE__ then
   #
   # square
   #
-  k = Key.new("ARABESQUE")
+  k = SCKey.new("ARABESQUE")
   p k.condensed
   
   # not square but known -- see above comments
   #
-  m = Key.new("subway")
+  m = SCKey.new("subway")
   p m.condensed
   
   # not square
   #
-  n = Key.new("portable")
+  n = SCKey.new("portable")
   p n.condensed
 
   # key for transposition
   #
   t = TKey.new("retribution")
-  #
-  # A TKey is a Key as well
-  #
-  p t.condensed
   #
   #
   # Main usage, get the numerical order of letters
