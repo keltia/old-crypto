@@ -1,3 +1,7 @@
+# VCS stuff
+#
+VCS_ID = "$Id: cipher.rb,v 877272dae5d5 2009/02/12 21:18:59 roberto $"
+
 module Cipher
 
 # == class SimpleCipher
