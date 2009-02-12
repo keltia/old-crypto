@@ -7,7 +7,7 @@
 
 # VCS stuff
 #
-VCS_ID = "$Id: key.rb,v 0dde729d0219 2009/02/03 23:30:01 roberto $"
+VCS_ID = "$Id: key.rb,v ec4d1c4942eb 2009/02/12 21:16:30 roberto $"
 
 # == class String
 #
@@ -203,7 +203,6 @@ class SCKey < Key
       height = height + 1
     end
     
-    print "\ncheckerboard size is #{len} x #{height}\n"
     res = ""
     (len - 1).downto(0) do |i|
       0.upto(height - 1) do |j|
