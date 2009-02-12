@@ -1,4 +1,4 @@
-# $Id: Rakefile,v 7f69ba3ed4f1 2009/02/12 21:18:11 roberto $
+# $Id: Rakefile,v 2371e41abf17 2009/02/12 23:25:02 roberto $
 #
 TESTDIR  = File.join(File.dirname(__FILE__), "test")
 
@@ -8,5 +8,6 @@ desc "Run test suite"
 task :test do
   Dir.chdir(TESTDIR) do
     ruby "-I.. test_key.rb"
+    ruby "-I.. test_cipher.rb"
   end
 end
