@@ -1,13 +1,13 @@
-# $Id: Rakefile,v 2371e41abf17 2009/02/12 23:25:02 roberto $
+# $Id: Rakefile,v 56696addd4a6 2009/02/16 11:15:55 roberto $
 #
-TESTDIR  = File.join(File.dirname(__FILE__), "test")
+require 'rake'
+require 'rake/testtask'
 
-task :default => "test"
+task :default => [:test_units]
 
-desc "Run test suite"
-task :test do
-  Dir.chdir(TESTDIR) do
-    ruby "-I.. test_key.rb"
-    ruby "-I.. test_cipher.rb"
-  end
-end
+desc "Run basic tests"
+Rake::TestTask.new("test_units") { |t|
+  t.pattern = 'test/test_*.rb'
+  t.verbose = true
+  t.warning = true
+}
