@@ -1,6 +1,5 @@
-# VCS stuff
 #
-VCS_ID = "$Id: cipher.rb,v 877272dae5d5 2009/02/12 21:18:59 roberto $"
+# $Id: cipher.rb,v 4b321eb0f80c 2009/02/19 13:48:45 roberto $
 
 module Cipher
 
