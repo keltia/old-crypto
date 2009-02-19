@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v bc07ab3a526c 2009/02/19 16:20:48 roberto $
+# $Id: cipher.rb,v 790c7468c59e 2009/02/19 16:23:31 roberto $
 
 require "key"
 
@@ -75,6 +75,20 @@ class Substitution < SimpleCipher
     end
   end # -- reverse
 end # -- class Cipher
+
+# == class Caesar
+#
+# Caesar cipher, monoalphabetic substitution, offset is 3
+#
+class Caesar < Substitution
+  
+  # === initialize
+  #
+  def initialize(offset = 3)
+    @key = ::Caesar.new(offset)
+  end # -- initialize
+  
+end # -- class Caesar
 
 # == class Transposition
 #

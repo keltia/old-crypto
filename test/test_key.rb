@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 30f366a1f2d8 2009/02/19 15:41:38 roberto $
+# $Id: test_key.rb,v 790c7468c59e 2009/02/19 16:23:31 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -121,13 +121,18 @@ class TestSKey < Test::Unit::TestCase
   end # -- test_presence_of_alpha
 end # -- class TestSKey
 
-# == class TestCaesar
+# == class TestKeyCaesar
 #
-class TestCaesar < Test::Unit::TestCase
+class TestKeyCaesar < Test::Unit::TestCase
   
   # === setup
   #
   def setup
+    @data = Hash.new
+    File.open("test/test_key_caesar.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+  
     word = 3
     @key = Caesar.new(word)
   end # -- setup
@@ -138,6 +143,22 @@ class TestCaesar < Test::Unit::TestCase
     assert_not_nil @key.alpha
     assert_not_nil @key.ralpha
   end # -- test_presence_of_alpha
+  
+  # === test_alpha
+  #
+  def test_alpha
+    @key.alpha.keys.each do |r|
+      assert r =~ /[A-Z]/
+    end
+  end # -- test_alpha
+  
+  # === test_ralpha
+  #
+  def test_ralpha
+    @key.ralpha.keys.each do |r|
+      assert r =~ /[A-Z]/
+    end
+  end # -- test_alpha
   
   # === test_encode
   #
@@ -154,7 +175,7 @@ class TestCaesar < Test::Unit::TestCase
     pt = @key.decode(ct)
     assert_equal pt, "A"
   end # -- test_decode
-end # -- class TestCaesar
+end # -- class TestKeyCaesar
 
 # == class TestSCKey
 #

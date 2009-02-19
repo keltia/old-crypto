@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v e49cf56356a8 2009/02/19 16:22:34 roberto $
+# $Id: test_cipher.rb,v 790c7468c59e 2009/02/19 16:23:31 roberto $
 
 require 'test/unit'
 
@@ -31,4 +31,48 @@ end # -- class TestSimpleCipher
 #
 class TestCipherCaesar < Test::Unit::TestCase
   
-end # -- class TestSimpleCipher
+  # === setup
+  #
+  def setup
+    @cipher = Cipher::Caesar.new
+  end # -- setup
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = "ABCDE"
+    ct = @cipher.encode(pt)
+    assert_equal ct, "DEFGH"
+  end # -- test_encode
+  
+  def test_decode
+    ct = "ABCDE"
+    pt = @cipher.decode(ct)
+    assert_equal pt, "XYZAB"
+  end
+end # -- class TestCipherCaesar
+
+# == class TestCipherCaesar7
+#
+class TestCipherCaesar7 < Test::Unit::TestCase
+  
+  # === setup
+  #
+  def setup
+    @cipher = Cipher::Caesar.new(7)
+  end # -- setup
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = "ABCDE"
+    ct = @cipher.encode(pt)
+    assert_equal ct, "HIJKL"
+  end # -- test_encode
+  
+  def test_decode
+    ct = "ABCDE"
+    pt = @cipher.decode(ct)
+    assert_equal pt, "TUVWX"
+  end
+end # -- class TestCipherCaesar_7
