@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 4b321eb0f80c 2009/02/19 13:48:45 roberto $
+# $Id: cipher.rb,v 9f9e20443c07 2009/02/19 15:38:01 roberto $
 
 module Cipher
 
@@ -38,7 +38,7 @@ class Substitution < SimpleCipher
   def encode(plain_text)
     cipher_text = ""
     plain_text.scan(/./) do |pt|
-      ct = @key.alpha[pt]
+      ct = @key.encode(pt)
       cipher_text << ct
     end
     return cipher_text
@@ -49,7 +49,7 @@ class Substitution < SimpleCipher
   def decode(cipher_text)
     plain_text = ""
     cipher_text.scan(/./) do |pt|
-      ct = @key.ralpha[pt]
+      ct = @key.decode(pt)
       plain_text << ct
     end
     return plain_text
