@@ -1,10 +1,12 @@
-# $Id: test_key.rb,v 4c170ce41bbe 2009/02/19 14:45:34 roberto $
+# $Id: test_key.rb,v ce596c6602c6 2009/02/19 15:41:16 roberto $
 
 require 'test/unit'
 require "yaml"
 
 require "key"
 
+# == class TestString
+#
 class TestString < Test::Unit::TestCase
 
   # === test_condensed1
@@ -21,6 +23,8 @@ class TestString < Test::Unit::TestCase
 
 end # -- class TestString
 
+# == class TestKey
+#
 class TestKey < Test::Unit::TestCase
 
   # === setup
@@ -61,6 +65,8 @@ class TestKey < Test::Unit::TestCase
   
 end # -- class TestKey
 
+# == TestTKey
+#
 class TestTKey < Test::Unit::TestCase
 
   # === setup
@@ -101,6 +107,8 @@ class TestTKey < Test::Unit::TestCase
   
 end # -- class TestTKey
 
+# == class TestSKey
+#
 class TestSKey < Test::Unit::TestCase
   
   # === test_alpha
