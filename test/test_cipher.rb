@@ -1,10 +1,12 @@
-# $Id: test_cipher.rb,v 383a43e15ad2 2009/02/19 16:22:17 roberto $
+# $Id: test_cipher.rb,v e49cf56356a8 2009/02/19 16:22:34 roberto $
 
 require 'test/unit'
 
 require "key"
 require "cipher"
 
+# == class TestSimpleCipher
+#
 class TestSimpleCipher < Test::Unit::TestCase
   
   # === test_encode
@@ -23,5 +25,10 @@ class TestSimpleCipher < Test::Unit::TestCase
     assert_equal ct, "plain text"
   end # -- test_decode
   
+end # -- class TestSimpleCipher
+
+# == class TestCipherCaesar
+#
+class TestCipherCaesar < Test::Unit::TestCase
   
 end # -- class TestSimpleCipher
