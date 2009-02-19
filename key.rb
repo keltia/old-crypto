@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 9ab29224f28a 2009/02/19 14:41:55 roberto $
+# $Id: key.rb,v 334cabbd4aa1 2009/02/19 14:42:45 roberto $
 
 # == class String
 #
@@ -154,7 +154,8 @@ class SCKey < Key
   # === checkerboard
   #
   # Shuffle the alphabet a bit to avoid sequential allocation of the
-  # code numbers
+  # code numbers.  This is actually performing a transposition with the word
+  # itself as key.
   #
   # Regular rectangle
   # -----------------
