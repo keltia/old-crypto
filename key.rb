@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 94ad28ddea89 2009/02/19 15:40:41 roberto $
+# $Id: key.rb,v 30f366a1f2d8 2009/02/19 15:41:38 roberto $
 
 # == class String
 #
@@ -144,6 +144,43 @@ class SKey < Key
   end # -- decode
 
 end # -- class SKey
+
+# == class Caesar
+#
+# class for Caesar-like substitution ciphers: monoalphabetic with ordered
+# alphabet
+#
+class Caesar < SKey
+  def initialize(key)
+    super
+    gen_rings()
+  end
+  
+  # === gen_rings
+  #
+  def gen_rings
+    offset = @key.to_i
+    
+    BASE.scan(/./) do |c|
+      d = (c[0].ord + offset).chr
+      @alpha[c]  = d
+      @ralpha[d] = c
+    end
+  end # -- gen_caesar_rings
+  
+  # === encode
+  #
+  def encode(c)
+    @alpha[c]
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(c)
+    @ralpha[c]
+  end # -- decode
+
+end # -- class Caesar
 
 # == class SCKey
 #

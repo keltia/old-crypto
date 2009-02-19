@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v ce596c6602c6 2009/02/19 15:41:16 roberto $
+# $Id: test_key.rb,v 30f366a1f2d8 2009/02/19 15:41:38 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -121,6 +121,43 @@ class TestSKey < Test::Unit::TestCase
   end # -- test_presence_of_alpha
 end # -- class TestSKey
 
+# == class TestCaesar
+#
+class TestCaesar < Test::Unit::TestCase
+  
+  # === setup
+  #
+  def setup
+    word = 3
+    @key = Caesar.new(word)
+  end # -- setup
+  
+  # === test_alpha
+  #
+  def test_presence_of_alpha
+    assert_not_nil @key.alpha
+    assert_not_nil @key.ralpha
+  end # -- test_presence_of_alpha
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = "A"
+    ct = @key.encode(pt)
+    assert_equal ct, "D"
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    ct = "D"
+    pt = @key.decode(ct)
+    assert_equal pt, "A"
+  end # -- test_decode
+end # -- class TestCaesar
+
+# == class TestSCKey
+#
 class TestSCKey < Test::Unit::TestCase
   
   # === setup
