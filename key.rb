@@ -4,10 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-
-# VCS stuff
-#
-VCS_ID = "$Id: key.rb,v ec4d1c4942eb 2009/02/12 21:16:30 roberto $"
+# $Id: key.rb,v 9ab29224f28a 2009/02/19 14:41:55 roberto $
 
 # == class String
 #
