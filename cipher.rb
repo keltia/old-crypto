@@ -1,5 +1,7 @@
 #
-# $Id: cipher.rb,v 9f9e20443c07 2009/02/19 15:38:01 roberto $
+# $Id: cipher.rb,v bc07ab3a526c 2009/02/19 16:20:48 roberto $
+
+require "key"
 
 module Cipher
 
