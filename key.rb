@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 334cabbd4aa1 2009/02/19 14:42:45 roberto $
+# $Id: key.rb,v 4c170ce41bbe 2009/02/19 14:45:34 roberto $
 
 # == class String
 #
@@ -249,6 +249,18 @@ class SCKey < Key
     end
   end # -- gen_rings
 
+  # === encode
+  #
+  def encode(c)
+    @alpha[c]
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(c)
+    @ralpha[c]
+  end # -- decode
+  
 end # -- class SCKey
 
 if $0 == __FILE__ then

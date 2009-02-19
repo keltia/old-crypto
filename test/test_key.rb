@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 39b7b840a7b7 2009/02/19 13:49:46 roberto $
+# $Id: test_key.rb,v 4c170ce41bbe 2009/02/19 14:45:34 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -154,4 +154,31 @@ class TestSCKey < Test::Unit::TestCase
     end
   end # -- test_gen_rings
 
+  # === test_encode
+  #
+  def test_encode
+    @data.keys.each do |word|
+      key = SCKey.new(word)
+      test = @data[word]["encode"]
+      encode_in = test["in"]
+      encode_out = test["out"]
+      encode_in.each do |c|
+        assert_equal key.encode(c), encode_out.shift
+      end
+    end
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    @data.keys.each do |word|
+      key = SCKey.new(word)
+      test = @data[word]["encode"]
+      decode_in = test["out"]
+      decode_out = test["in"]
+      decode_in.each do |c|
+        assert_equal key.decode(c), decode_out.shift
+      end
+    end
+  end # -- test_decode
 end # -- class TestSCKey
