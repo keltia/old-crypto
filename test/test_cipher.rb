@@ -1,7 +1,8 @@
-# $Id: test_cipher.rb,v 2371e41abf17 2009/02/12 23:25:02 roberto $
+# $Id: test_cipher.rb,v 383a43e15ad2 2009/02/19 16:22:17 roberto $
 
 require 'test/unit'
 
+require "key"
 require "cipher"
 
 class TestSimpleCipher < Test::Unit::TestCase
