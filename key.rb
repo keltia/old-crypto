@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 4c170ce41bbe 2009/02/19 14:45:34 roberto $
+# $Id: key.rb,v 94ad28ddea89 2009/02/19 15:40:41 roberto $
 
 # == class String
 #
@@ -120,12 +120,29 @@ end # -- class TKey
 # See http://en.wikipedia.org/wiki/Substitution_cipher
 
 class SKey < Key
+  
+  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  
   attr_reader :alpha, :ralpha
 
   def initialize(key)
     super(key)
+    @alpha = Hash.new
+    @ralpha = Hash.new
   end
   
+  # === encode
+  #
+  def encode(c)
+    @alpha[c] || ''
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(c)
+    @ralpha[c] || ''
+  end # -- decode
+
 end # -- class SKey
 
 # == class SCKey
