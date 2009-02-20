@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 71d7510d8a14 2009/02/20 19:00:49 roberto $
+# $Id: key.rb,v aaa810d73ce6 2009/02/20 23:36:07 roberto $
 
 # == class String
 #
@@ -195,7 +195,6 @@ class SCKey < SKey
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
 
   attr_reader :full_key
-  attr_reader :alpha, :ralpha
   
   def initialize(key)
     super(key)
@@ -302,6 +301,7 @@ class SCKey < SKey
       end
     end
   end # -- gen_rings
+end # -- class SCKey
 
   # === encode
   #
