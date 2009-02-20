@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 6ba0b6bf3d27 2009/02/20 19:04:51 roberto $
+# $Id: cipher.rb,v 8f9dc4317ad0 2009/02/20 19:13:02 roberto $
 
 require "key"
 
@@ -172,6 +172,8 @@ class Transposition < SimpleCipher
   
 end # -- class Transposition
 
+# == class Nihilist
+#
 class Nihilist
   attr_reader :super_key
 
