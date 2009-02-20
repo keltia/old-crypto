@@ -1,6 +1,7 @@
-# $Id: test_cipher.rb,v 790c7468c59e 2009/02/19 16:23:31 roberto $
+# $Id: test_cipher.rb,v e0aaddf81515 2009/02/20 18:33:45 roberto $
 
 require 'test/unit'
+require 'yaml'
 
 require "key"
 require "cipher"
@@ -76,3 +77,41 @@ class TestCipherCaesar7 < Test::Unit::TestCase
     assert_equal pt, "TUVWX"
   end
 end # -- class TestCipherCaesar_7
+
+# == class TestTransposition
+#
+class TestTransposition < Test::Unit::TestCase
+
+  # === setup
+  #
+  def setup
+    @data = Hash.new
+    File.open("test/test_cipher_transp.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"]
+  end # -- setup
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::Transposition.new(word)
+      ct = cipher.encode(pt)
+      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+    end
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    plain = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::Transposition.new(word)
+      pt = cipher.decode(@keys[word]["ct"])
+      assert_equal plain, pt, "key is #{word}" 
+    end
+  end # -- test_decode
+end # -- class TestTransposition
+

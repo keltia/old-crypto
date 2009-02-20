@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 790c7468c59e 2009/02/19 16:23:31 roberto $
+# $Id: cipher.rb,v e0aaddf81515 2009/02/20 18:33:45 roberto $
 
 require "key"
 
@@ -127,7 +127,47 @@ class Transposition < SimpleCipher
   
   # === decode
   #
-  def decode(text)
+  def decode(cipher_text)
+    #
+    # Look whether we are square or not
+    #
+    text = cipher_text.dup
+    t_len = @key.length
+    pad = text.length % t_len
+    #
+    # if pad is non-zero, last line is not finished by pad i.e.
+    # columns pad-1 .. t_len-1 are shorter by 1
+    #
+    t_height = (text.length / t_len) + 1
+    table = Array.new(t_len) { "" }
+    plain_text = ""
+    
+    puts "#{text.length} #{pad} #{t_height}"
+    tkey = @key.to_numeric
+    #
+    # Fill in transposition board
+    #
+    for i in 0..(t_len - 1) do
+      ind = tkey.index(i)
+      how_many = t_height
+      if ind > pad - 1 then
+        how_many -= 1
+      end
+      ct = text.slice!(0, how_many)
+      table[ind] << ct
+      puts "#{ct} #{how_many} #{ind} #{i}"
+    end
+    #
+    # Now take the plain text
+    #
+    plain = ""
+    for j in 0..(t_height - 1) do
+      for i in 0..(t_len - 1) do
+        col = table[i]
+        plain << (col[j] || '')
+      end
+    end
+    return plain
   end # -- decode
   
 end # -- class Transposition
