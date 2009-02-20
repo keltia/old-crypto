@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v a6c5b68b7c88 2009/02/20 18:32:49 roberto $
+# $Id: test_key.rb,v f7f81f5c1ec6 2009/02/20 23:37:38 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -250,3 +250,42 @@ class TestSCKey < Test::Unit::TestCase
     end
   end # -- test_decode
 end # -- class TestSCKey
+
+# == class TestSQKey
+#
+class TestSQKey < Test::Unit::TestCase
+
+  # === setup
+  #
+  def setup
+    @data = Hash.new
+    File.open("test/test_sqkey.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+  end # -- setup
+
+  # === test_gen_rings
+  #
+  def test_gen_rings
+    @data.keys.each do |word|
+      key = SQKey.new(word, @data[word]["type"])
+    
+      assert_equal key.class, SQKey
+      assert_equal key.alpha, @data[word]["alpha"]
+      assert_equal key.ralpha, @data[word]["ralpha"]
+    end
+  end # -- test_gen_rings
+
+  # === test_encode
+  #
+  def test_encode
+    false
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    false
+  end # -- test_decode
+  
+end # -- class TestSQKey
