@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 5a13db59fca3 2009/02/20 09:27:40 roberto $
+# $Id: test_key.rb,v a6c5b68b7c88 2009/02/20 18:32:49 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -76,13 +76,12 @@ class TestTKey < Test::Unit::TestCase
     File.open("test/test_tkey.yaml") do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
   end # -- setup
   
   # === test_init
   #
   def test_init
-    @keys.keys.each do |word|
+    @data.keys.each do |word|
       key = TKey.new(word)
       assert_equal key.key, word.upcase
     end
@@ -91,30 +90,20 @@ class TestTKey < Test::Unit::TestCase
   # === test_to_numeric_1
   #
   def test_to_numeric_1
-    @keys.keys.each do |word|
+    @data.keys.each do |word|
       key = TKey.new(word)
-      assert_equal key.to_numeric, @keys[word]["num"]
+      assert_equal key.to_numeric, @data[word]["num"]
     end
   end # -- test_to_numeric_1
   
   # === test_to_numeric_2
   #
   def test_to_numeric_2
-    @keys.keys.each do |word|
+    @data.keys.each do |word|
       key = TKey.new(word)
-      assert_equal key.to_numeric2, @keys[word]["num"]
+      assert_equal key.to_numeric2, @data[word]["num"]
     end
   end # -- test_to_numeric_2
-  
-  # === test_encode
-  #
-  def test_encode
-  end # -- test_encode
-  
-  # === test_decode
-  #
-  def test_decode
-  end # -- test_decode
 end # -- class TestTKey
 
 # == class TestSKey

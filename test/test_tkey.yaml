@@ -1,37 +1,31 @@
 --- 
-keys:
-  arabesque: 
-    num: 
-    - 0
-    - 6
-    - 1
-    - 2
-    - 3
-    - 7
-    - 5
-    - 8
-    - 4
-    ct: ATPXDNBXTAI30TN2AWNXRII3KA4EMNHTDO2MIY1CNTSEOGAT2NUST
-  subway: 
-    num: 
-    - 2
-    - 3
-    - 1
-    - 4
-    - 0
-    - 5
-    ct: CWI2DUNG3TDP2EEIN1AAATXOIBTTTT4SRTYXAAOXNMOI2KNN3MNSH
-  portable: 
-    num: 
-    - 5
-    - 4
-    - 6
-    - 7
-    - 0
-    - 1
-    - 3
-    - 2
-    ct: CA2DIN3KTXMTITO3ROHAP2OIGTANSMSXADIXENTTWTEUB1AD4NNY2
-text:
-  plain: ATTACKATDAWNATPOINT42X23XSENDMOREMUNITIONSBYNIGHTX123
+arabesque: 
+  num: 
+  - 0
+  - 6
+  - 1
+  - 2
+  - 3
+  - 7
+  - 5
+  - 8
+  - 4
+subway: 
+  num: 
+  - 2
+  - 3
+  - 1
+  - 4
+  - 0
+  - 5
+portable: 
+  num: 
+  - 5
+  - 4
+  - 6
+  - 7
+  - 0
+  - 1
+  - 3
+  - 2
  
