@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 7080efeb2b85 2009/02/19 16:21:20 roberto $
+# $Id: key.rb,v 71d7510d8a14 2009/02/20 19:00:49 roberto $
 
 # == class String
 #
@@ -190,7 +190,7 @@ end # -- class Caesar
 #
 # See http://en.wikipedia.org/wiki/Straddling_checkerboard
 
-class SCKey < Key
+class SCKey < SKey
 
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
 
