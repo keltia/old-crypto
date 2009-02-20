@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 790c7468c59e 2009/02/19 16:23:31 roberto $
+# $Id: test_key.rb,v e66f6a5c87ef 2009/02/20 08:43:09 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -128,11 +128,6 @@ class TestKeyCaesar < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @data = Hash.new
-    File.open("test/test_key_caesar.yaml") do |fh|
-      @data = YAML.load(fh)
-    end
-  
     word = 3
     @key = Caesar.new(word)
   end # -- setup
@@ -166,6 +161,10 @@ class TestKeyCaesar < Test::Unit::TestCase
     pt = "A"
     ct = @key.encode(pt)
     assert_equal ct, "D"
+    
+    pt = "Y"
+    ct = @key.encode(pt)
+    assert_equal ct, "B"
   end # -- test_encode
   
   # === test_decode
@@ -174,6 +173,10 @@ class TestKeyCaesar < Test::Unit::TestCase
     ct = "D"
     pt = @key.decode(ct)
     assert_equal pt, "A"
+    
+    ct = "C"
+    pt = @key.decode(ct)
+    assert_equal pt, "Z"
   end # -- test_decode
 end # -- class TestKeyCaesar
 
