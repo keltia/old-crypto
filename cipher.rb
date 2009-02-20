@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v e0aaddf81515 2009/02/20 18:33:45 roberto $
+# $Id: cipher.rb,v 6ba0b6bf3d27 2009/02/20 19:04:51 roberto $
 
 require "key"
 
@@ -142,7 +142,7 @@ class Transposition < SimpleCipher
     table = Array.new(t_len) { "" }
     plain_text = ""
     
-    puts "#{text.length} #{pad} #{t_height}"
+    #puts "#{text.length} #{pad} #{t_height}"
     tkey = @key.to_numeric
     #
     # Fill in transposition board
@@ -155,7 +155,7 @@ class Transposition < SimpleCipher
       end
       ct = text.slice!(0, how_many)
       table[ind] << ct
-      puts "#{ct} #{how_many} #{ind} #{i}"
+      #puts "#{ct} #{how_many} #{ind} #{i}"
     end
     #
     # Now take the plain text
