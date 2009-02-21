@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v d27736fd846b 2009/02/21 14:23:30 roberto $
+# $Id: cipher.rb,v a00c422469a5 2009/02/21 22:13:08 roberto $
 
 require "key"
 
@@ -216,6 +216,13 @@ class Nihilist
 
 end # -- class Nihilist
 
+# Implementation of the well known cipher used by Germany during
+# WWI. Code number assignment is probably different from the original
+# cipher due to implementation choices.
+#
+# See The Codebreakers, D. Kahn, 1996 for reference.
+#     http://en.wikipedia.org/wiki/ADFGVX
+#
 class ADFGVX
   attr_reader :subst, :transp
   
