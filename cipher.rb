@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 47fb25e84154 2009/02/21 14:21:36 roberto $
+# $Id: cipher.rb,v d27736fd846b 2009/02/21 14:23:30 roberto $
 
 require "key"
 
@@ -222,19 +222,26 @@ class ADFGVX
   # === initialize
   #
   def initialize(key, super_key)
-    @subst = ::SQKey.new(key)
+    @subst = Cipher::Polybius.new(key)
     @transp = Cipher::Transposition.new(super_key)
   end # -- initialize
   
   # === encode
   #
   def encode(text)
+    ct = @subst.encode(text)
+    cipher_text = @transp.encode(ct)
+    return cipher_text
   end # -- encode(text)
   
   # === decode
   #
   def decode(text)
+    pt = @transp.decode(text)
+    plain_text = @subst.decode(pt)
+    return plain_text
   end # -- decode
+  
 end # -- ADFGVX
 
 end # -- module Cipher
