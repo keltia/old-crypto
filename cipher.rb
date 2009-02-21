@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v c5324a7009a6 2009/02/21 00:52:34 roberto $
+# $Id: cipher.rb,v 47fb25e84154 2009/02/21 14:21:36 roberto $
 
 require "key"
 
@@ -96,9 +96,24 @@ class Polybius < Substitution
   
   # === initialize
   #
-  def initialize(key)
-    @key = ::SQKey.new(key, 1)
+  def initialize(key, type = SQKey::SQ_ADFGVX)
+    @key = ::SQKey.new(key, type)
   end # -- initialize
+
+  # === decode
+  #
+  def decode(cipher_text)
+    plain_text = ""
+    
+    ct = cipher_text.dup
+    len = cipher_text.length / 2
+    for i in 0..(len - 1) do
+      bigram = ct.slice!(0,2) 
+      pt = @key.decode(bigram)
+      plain_text << pt
+    end
+    return plain_text
+  end # -- decode
   
 end # -- class Polybius
 
