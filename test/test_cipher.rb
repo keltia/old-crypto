@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 02f54bae22e3 2009/02/21 00:51:55 roberto $
+# $Id: test_cipher.rb,v 4488ad1d8245 2009/02/21 14:22:35 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -134,7 +134,7 @@ class TestPolybius < Test::Unit::TestCase
   def test_encode
     pt = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Polybius.new(word)
+      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
       ct = cipher.encode(pt)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
@@ -145,9 +145,9 @@ class TestPolybius < Test::Unit::TestCase
   def test_decode
     plain = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Polybius.new(word)
+      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
       pt = cipher.decode(@keys[word]["ct"])
-      assert_equal plain, pt, "key is #{word}" 
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
 end # -- class TestPolybius
