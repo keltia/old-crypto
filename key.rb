@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 48334643e66f 2009/02/21 22:14:40 roberto $
+# $Id: key.rb,v 8c17f92acc3e 2009/02/21 22:35:35 roberto $
 
 # == class String
 #
@@ -162,11 +162,19 @@ class Caesar < SKey
   #
   def gen_rings
     offset = @key.to_i
-    
-    BASE.scan(/./) do |c|
-      d = ( (((c[0].ord - 65) + offset) % 26) + 65).chr
-      @alpha[c]  = d
-      @ralpha[d] = c
+  
+    if RUBY_VERSION =~ /1\.9/ then
+      BASE.scan(/./) do |c|
+        d = ( (((c.ord - 65) + offset) % 26) + 65).chr
+        @alpha[c]  = d
+        @ralpha[d] = c
+      end
+    else
+      BASE.scan(/./) do |c|
+        d = ( (((c[0].ord - 65) + offset) % 26) + 65).chr
+        @alpha[c]  = d
+        @ralpha[d] = c
+      end
     end
   end # -- gen_rings
   
