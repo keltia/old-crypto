@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 8f9dc4317ad0 2009/02/20 19:13:02 roberto $
+# $Id: cipher.rb,v 02f54bae22e3 2009/02/21 00:51:55 roberto $
 
 require "key"
 
@@ -89,6 +89,18 @@ class Caesar < Substitution
   end # -- initialize
   
 end # -- class Caesar
+
+# == class Polybius
+#
+class Polybius < Substitution
+  
+  # === initialize
+  #
+  def initialize(key)
+    @key = ::SQKey.new(key, 1)
+  end # -- initialize
+  
+end # -- class Polybius
 
 # == class Transposition
 #
