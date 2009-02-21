@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 02f54bae22e3 2009/02/21 00:51:55 roberto $
+# $Id: cipher.rb,v c5324a7009a6 2009/02/21 00:52:34 roberto $
 
 require "key"
 
@@ -202,12 +202,24 @@ class Nihilist
 end # -- class Nihilist
 
 class ADFGVX
-  attr_reader :super_key
+  attr_reader :subst, :transp
   
+  # === initialize
+  #
   def initialize(key, super_key)
-    super(key)
-    @super_key = TKey.new(super_key)
-  end
+    @subst = ::SQKey.new(key)
+    @transp = Cipher::Transposition.new(super_key)
+  end # -- initialize
+  
+  # === encode
+  #
+  def encode(text)
+  end # -- encode(text)
+  
+  # === decode
+  #
+  def decode(text)
+  end # -- decode
 end # -- ADFGVX
 
 end # -- module Cipher
