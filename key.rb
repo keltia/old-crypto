@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 8c17f92acc3e 2009/02/21 22:35:35 roberto $
+# $Id: key.rb,v e8ecf5eefa2f 2009/02/22 23:11:32 roberto $
 
 # == class String
 #
@@ -178,18 +178,6 @@ class Caesar < SKey
     end
   end # -- gen_rings
   
-  # === encode
-  #
-  def encode(c)
-    @alpha[c]
-  end # -- encode
-  
-  # === decode
-  #
-  def decode(c)
-    @ralpha[c]
-  end # -- decode
-
 end # -- class Caesar
 
 # == class SCKey
