@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v f7f81f5c1ec6 2009/02/20 23:37:38 roberto $
+# $Id: test_key.rb,v e6063f56d5d9 2009/02/22 23:32:28 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -279,13 +279,32 @@ class TestSQKey < Test::Unit::TestCase
   # === test_encode
   #
   def test_encode
-    false
+    @data.keys.each do |word|
+      key = SQKey.new(word, @data[word]["type"])
+      test = @data[word]["encode"]
+      encode_in = test["in"]
+      encode_out = test["out"]
+      encode_in.each do |c|
+        assert_equal encode_out.shift, key.encode(c), "#{word}"
+      end
+    end
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    false
+    @data.keys.each do |word|
+      key = SQKey.new(word, @data[word]["type"])
+      test = @data[word]["encode"]
+      encode_in = test["out"]
+      encode_out = test["in"]
+      len = encode_in.length / 2
+      for i in (0..len - 1) do
+        c = encode_in.slice(0,2)
+        puts c
+        assert_equal encode_out.shift, key.encode(c), "#{word}"
+      end
+    end
   end # -- test_decode
   
 end # -- class TestSQKey
