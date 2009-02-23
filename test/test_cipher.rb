@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v d27736fd846b 2009/02/21 14:23:30 roberto $
+# $Id: test_cipher.rb,v 4b9233f34dfe 2009/02/23 15:23:35 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -152,6 +152,45 @@ class TestPolybius < Test::Unit::TestCase
   end # -- test_decode
 end # -- class TestPolybius
 
+# == class TestNihilistT
+#
+class TestNihilistT < Test::Unit::TestCase
+  # === setup
+  #
+  def setup
+    @data = Hash.new
+    File.open("test/test_cipher_nihilistt.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"]
+  end # -- setup
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = @data["plain"]
+    @keys.keys.each do |word|
+      s, t = word.split(%r{,})
+      cipher = Cipher::NihilistT.new(s, t)
+      ct = cipher.encode(pt)
+      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+    end
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    plain = @data["plain"]
+    @keys.keys.each do |word|
+      s, t = word.split(%{,})
+      cipher = Cipher::NihilistT.new(s, t)
+      pt = cipher.decode(@keys[word]["ct"])
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+    end
+  end # -- test_decode
+  
+end # -- class TestNihilistT
+
 # == class TestADFGVX
 #
 class TestADFGVX < Test::Unit::TestCase
@@ -165,6 +204,7 @@ class TestADFGVX < Test::Unit::TestCase
     end
     @keys = @data["keys"]
   end # -- setup
+
   # === test_encode
   #
   def test_encode
