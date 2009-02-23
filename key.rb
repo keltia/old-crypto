@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v e8ecf5eefa2f 2009/02/22 23:11:32 roberto $
+# $Id: key.rb,v 0389553c543f 2009/02/23 15:20:14 roberto $
 
 # == class String
 #
@@ -192,12 +192,13 @@ class SCKey < SKey
 
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
 
-  attr_reader :full_key
+  attr_reader :full_key, :long
   
-  def initialize(key)
+  def initialize(key, long = [ 8, 9 ])
     super(key)
     @alpha = Hash.new
     @ralpha = Hash.new
+    @long = long
     @full_key = checkerboard()
     gen_rings()
   end
@@ -280,22 +281,20 @@ class SCKey < SKey
   #
   # Generate both the encoding and decoding rings.
   #
-  # XXX FIXME Use of 80-99 is hardcoded
-  #
   def gen_rings
-    ind_u = 0
-    ind_d = 80
+    shortc = (0..9).collect{|i| i unless @long.include?(i) }.compact
+    longc = @long.collect{|i| (0..9).collect{|j| i*10+j } }.flatten
 
     word = @full_key.dup
     word.scan(/./) do |c|
       if c =~ /[ESANTIRU]/
-        @alpha[c] = ind_u
-        @ralpha[ind_u] = c
-        ind_u = ind_u + 1
+        ind = shortc.shift
+        @alpha[c] = ind
+        @ralpha[ind] = c
       else
-        @alpha[c] = ind_d
-        @ralpha[ind_d] = c
-        ind_d = ind_d + 1
+        ind = longc.shift
+        @alpha[c] = ind
+        @ralpha[ind] = c
       end
     end
   end # -- gen_rings
