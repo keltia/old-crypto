@@ -40,7 +40,7 @@
 # R = 4   - = 94  A = 5   G = 95  M = 96  T = 6   
 # Y = 97  H = 98  N = 7   V = 99
 #
-# $Id: nihilist.rb,v 89d3551bbf2f 2009/01/22 15:40:09 roberto $
+# $Id$
 
 ## Base alphabet
 ##

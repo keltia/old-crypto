@@ -40,7 +40,7 @@
 # R = 4   - = 94  A = 5   G = 95  M = 96  T = 6   
 # Y = 97  H = 98  N = 7   V = 99
 #
-# $Id: nihilist.plain.rb,v 96ed61ae8961 2009/01/22 15:25:51 roberto $
+# $Id$
 
 ## Forward and backward alphabet for ciphering/deciphering
 ##
