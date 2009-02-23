@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 0389553c543f 2009/02/23 15:20:14 roberto $
+# $Id: key.rb,v b7ef3d0f58ec 2009/02/23 21:59:52 roberto $
 
 # == class String
 #
@@ -192,13 +192,13 @@ class SCKey < SKey
 
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
 
-  attr_reader :full_key, :long
+  attr_reader :full_key, :long, :shortc, :long
   
-  def initialize(key, long = [ 8, 9 ])
+  def initialize(key, longc = [ 8, 9 ])
     super(key)
     @alpha = Hash.new
     @ralpha = Hash.new
-    @long = long
+    @longc = longc
     @full_key = checkerboard()
     gen_rings()
   end
@@ -282,8 +282,9 @@ class SCKey < SKey
   # Generate both the encoding and decoding rings.
   #
   def gen_rings
-    shortc = (0..9).collect{|i| i unless @long.include?(i) }.compact
-    longc = @long.collect{|i| (0..9).collect{|j| i*10+j } }.flatten
+    shortc = (0..9).collect{|i| i unless @longc.include?(i) }.compact
+    long = @longc.collect{|i| (0..9).collect{|j| i*10+j } }.flatten
+    @shortc = shortc.dup
 
     word = @full_key.dup
     word.scan(/./) do |c|
@@ -292,7 +293,7 @@ class SCKey < SKey
         @alpha[c] = ind
         @ralpha[ind] = c
       else
-        ind = longc.shift
+        ind = long.shift
         @alpha[c] = ind
         @ralpha[ind] = c
       end
