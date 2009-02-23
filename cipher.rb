@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 11e9d2976241 2009/02/23 15:23:59 roberto $
+# $Id: cipher.rb,v 67fc3967e56d 2009/02/23 22:03:23 roberto $
 
 require "key"
 
@@ -244,10 +244,15 @@ class NihilistT
     plain_text = ""
     
     ct = @super_key.decode(cipher_text)
-    
-    for i in 0..(len - 1) do
-      bigram = ct.slice!(0,2) 
-      pt = @key.decode(bigram)
+    while ct.length do
+      c = ct.slice!(0,1)
+      #
+      # XXX US-ASCII hack
+      #
+      if @key.is_long?(c[0] - 65)
+        c << ct.slice!(0,1)
+      end
+      pt = @key.decode(c)
       plain_text << pt
     end
     return plain_text
