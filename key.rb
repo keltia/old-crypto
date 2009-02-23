@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v b7ef3d0f58ec 2009/02/23 21:59:52 roberto $
+# $Id: key.rb,v af0ad34a00a2 2009/02/23 22:00:42 roberto $
 
 # == class String
 #
@@ -299,6 +299,13 @@ class SCKey < SKey
       end
     end
   end # -- gen_rings
+  
+  # === is_long?
+  #
+  def is_long?(digit)
+    return @longc.include?(digit)
+  end # -- is_long?
+  
 end # -- class SCKey
 
 # == class SQKey

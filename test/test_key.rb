@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v ae37023217ff 2009/02/23 15:22:00 roberto $
+# $Id: test_key.rb,v af0ad34a00a2 2009/02/23 22:00:42 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -222,6 +222,15 @@ class TestSCKey < Test::Unit::TestCase
     end
   end # -- test_gen_rings
 
+  # === test_is_long
+  #
+  def test_is_long
+    key = SCKey.new("arabesque")
+    
+    assert !key.is_long?(0)
+    assert key.is_long?(9)
+  end # -- test_is_long
+  
   # === test_encode
   #
   def test_encode
