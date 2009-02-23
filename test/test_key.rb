@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 152a9e71dbff 2009/02/23 15:21:44 roberto $
+# $Id: test_key.rb,v ae37023217ff 2009/02/23 15:22:00 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -298,11 +298,8 @@ class TestSQKey < Test::Unit::TestCase
       test = @data[word]["encode"]
       encode_in = test["out"]
       encode_out = test["in"]
-      len = encode_in.length / 2
-      for i in (0..len - 1) do
-        c = encode_in.slice(0,2)
-        puts c
-        assert_equal encode_out.shift, key.encode(c), "#{word}"
+      encode_in.each do |ct|
+        assert_equal encode_out.shift, key.decode(ct), "#{word}"
       end
     end
   end # -- test_decode
