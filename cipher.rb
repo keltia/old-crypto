@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v a00c422469a5 2009/02/21 22:13:08 roberto $
+# $Id: cipher.rb,v 11e9d2976241 2009/02/23 15:23:59 roberto $
 
 require "key"
 
@@ -201,20 +201,59 @@ end # -- class Transposition
 
 # == class Nihilist
 #
-class Nihilist
+# The Nihilist cipher has gone through several variations over the original
+# version by the Russians nihilists.  Main characteristics is  the 
+# checkerboard which shorten the cryptogram by having frequent letters use
+# one letter as ciphertext and thus disturbing the recognition of 
+# bigrams/monograms.
+#
+# The version used by USSR intelligence (aka spies) was using a super
+# encryption by using an additive key (digit by digit without carryover)
+#
+# One possible variation would be having a transposition as supercipher.
+# This is the one here.
+#
+class NihilistT
   attr_reader :super_key
 
   def initialize(key, super_key = "")
-    super(key)
-    complete = ''
-    complete = (@key.to_s.upcase + BASE).condense_word
-    code_word(gen_checkbd(complete, @key.to_s.length))
-    @super_key = TKey.new(super_key)
+    @scb = SCKey.new(key)
+    @super_key = Cipher::Transposition.new(super_key)
   end
 
-  private
-
-end # -- class Nihilist
+  # === encode
+  #
+  def encode(plain_text)
+    cipher_text = ""
+    
+    # First pass ciphertext
+    #
+    ct = ""
+    
+    pt = plain_text.dup
+    pt.scan(/./) do |c|
+      ct << @scb.encode(c)
+    end
+    cipher_text = super_key.encode(ct)
+    return ct
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(cipher_text)
+    plain_text = ""
+    
+    ct = @super_key.decode(cipher_text)
+    
+    for i in 0..(len - 1) do
+      bigram = ct.slice!(0,2) 
+      pt = @key.decode(bigram)
+      plain_text << pt
+    end
+    return plain_text
+  end # -- decode
+  
+end # -- class NihilistT
 
 # Implementation of the well known cipher used by Germany during
 # WWI. Code number assignment is probably different from the original
