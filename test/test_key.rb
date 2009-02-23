@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v e6063f56d5d9 2009/02/22 23:32:28 roberto $
+# $Id: test_key.rb,v 152a9e71dbff 2009/02/23 15:21:44 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -206,7 +206,7 @@ class TestSCKey < Test::Unit::TestCase
   def test_checkerboard
     @data.keys.each do |word|
       key = SCKey.new(word)
-      assert_equal key.full_key, @data[word]["full_key"]
+      assert_equal @data[word]["full_key"], key.full_key
     end
   end # -- test_checkerboard
   
@@ -216,9 +216,9 @@ class TestSCKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = SCKey.new(word)
     
-      assert_equal key.class, SCKey
-      assert_equal key.alpha, @data[word]["alpha"]
-      assert_equal key.ralpha, @data[word]["ralpha"]
+      assert_equal SCKey, key.class
+      assert_equal @data[word]["alpha"], key.alpha
+      assert_equal @data[word]["ralpha"], key.ralpha
     end
   end # -- test_gen_rings
 
@@ -231,7 +231,7 @@ class TestSCKey < Test::Unit::TestCase
       encode_in = test["in"]
       encode_out = test["out"]
       encode_in.each do |c|
-        assert_equal key.encode(c), encode_out.shift
+        assert_equal encode_out.shift, key.encode(c)
       end
     end
   end # -- test_encode
@@ -245,7 +245,7 @@ class TestSCKey < Test::Unit::TestCase
       decode_in = test["out"]
       decode_out = test["in"]
       decode_in.each do |c|
-        assert_equal key.decode(c), decode_out.shift
+        assert_equal decode_out.shift, key.decode(c)
       end
     end
   end # -- test_decode
