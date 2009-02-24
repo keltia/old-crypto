@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v f34acfb09681 2009/02/24 11:26:16 roberto $
+# $Id: test_cipher.rb,v ec23621364b4 2009/02/24 12:17:15 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -173,6 +173,7 @@ class TestNihilistT < Test::Unit::TestCase
     fp = cipher.first_phase(pt)
     assert_equal  @data["keys"]["arabesque,subway"]["fp"], fp
   end # -- test_first_phase
+  
   # === test_encode
   #
   def test_encode
