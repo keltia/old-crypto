@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v a93cbaec67c3 2009/02/24 11:25:23 roberto $
+# $Id: test_cipher.rb,v f34acfb09681 2009/02/24 11:26:16 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -162,7 +162,7 @@ class TestNihilistT < Test::Unit::TestCase
     File.open("test/test_cipher_nihilistt.yaml") do |fh|
       @data = YAML.load(fh)
     end
-    #@keys = @data["keys"]
+    @keys = @data["keys"]
   end # -- setup
   
   # === test_first_phase
