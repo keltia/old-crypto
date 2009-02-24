@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v af0ad34a00a2 2009/02/23 22:00:42 roberto $
+# $Id: key.rb,v 15291c86a19d 2009/02/24 00:09:30 roberto $
 
 # == class String
 #
@@ -192,7 +192,7 @@ class SCKey < SKey
 
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
 
-  attr_reader :full_key, :long, :shortc, :long
+  attr_reader :full_key, :long, :shortc, :longc
   
   def initialize(key, longc = [ 8, 9 ])
     super(key)
