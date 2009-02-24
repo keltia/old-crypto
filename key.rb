@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 15291c86a19d 2009/02/24 00:09:30 roberto $
+# $Id: key.rb,v 43a347c34d80 2009/02/24 10:29:30 roberto $
 
 # == class String
 #
@@ -290,12 +290,12 @@ class SCKey < SKey
     word.scan(/./) do |c|
       if c =~ /[ESANTIRU]/
         ind = shortc.shift
-        @alpha[c] = ind
-        @ralpha[ind] = c
+        @alpha[c] = ind.to_s
+        @ralpha[ind.to_s] = c
       else
         ind = long.shift
-        @alpha[c] = ind
-        @ralpha[ind] = c
+        @alpha[c] = ind.to_s
+        @ralpha[ind.to_s] = c
       end
     end
   end # -- gen_rings
