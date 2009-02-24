@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 67fc3967e56d 2009/02/23 22:03:23 roberto $
+# $Id: cipher.rb,v a93cbaec67c3 2009/02/24 11:25:23 roberto $
 
 require "key"
 
@@ -221,6 +221,25 @@ class NihilistT
     @super_key = Cipher::Transposition.new(super_key)
   end
 
+  # === first_phase
+  #
+  def first_phase(plain_text)
+    # First pass ciphertext
+    #
+    ct = ""
+    
+    pt = plain_text.dup
+    pt.scan(/./) do |c|
+      if c >= "0" and c <= "9" then
+        ct << @scb.encode("/")
+        ct << c + c
+        ct << @scb.encode("/")
+      end
+      ct << @scb.encode(c)
+    end
+    return ct
+  end # -- first_phase
+
   # === encode
   #
   def encode(plain_text)
@@ -228,14 +247,9 @@ class NihilistT
     
     # First pass ciphertext
     #
-    ct = ""
-    
-    pt = plain_text.dup
-    pt.scan(/./) do |c|
-      ct << @scb.encode(c)
-    end
-    cipher_text = super_key.encode(ct)
-    return ct
+    ct = first_phase(plain_text)
+    cipher_text = @super_key.encode(ct)
+    return cipher_text
   end # -- encode
   
   # === decode
