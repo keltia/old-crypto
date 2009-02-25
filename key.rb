@@ -1,12 +1,16 @@
 #! /usr/bin/env ruby
 #
+# = key.rb various key handling classes
+#
 # Description:: Dealing with encryption keys
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 43a347c34d80 2009/02/24 10:29:30 roberto $
+# $Id: key.rb,v b8de7aaf98c2 2009/02/25 13:18:27 roberto $
 
 # == class String
+#
+# Small addon to String class
 #
 class String
   
