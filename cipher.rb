@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v a7da860dada0 2009/02/25 15:13:36 roberto $
+# $Id: cipher.rb,v dd854a6faf58 2009/02/25 15:40:31 roberto $
 
 require "key"
 
@@ -240,7 +240,12 @@ class StraddlingCheckerboard
       #
       # XXX US-ASCII hack
       #
-      if @scb.is_long?(c[0] - 48)
+      if RUBY_VERSION =~/1\.9/ then
+        d = c.ord - 48
+      else
+        d = c[0] - 48
+      end
+      if @scb.is_long?(d)
         c << ct.slice!(0,1)
       end
       pt = @scb.decode(c)
