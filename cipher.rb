@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 2907becd9c5d 2009/02/24 11:26:02 roberto $
+# $Id: cipher.rb,v db488de075ed 2009/02/25 14:48:17 roberto $
 
 require "key"
 
@@ -234,8 +234,9 @@ class NihilistT
         ct << @scb.encode("/")
         ct << c + c
         ct << @scb.encode("/")
+      else
+        ct << @scb.encode(c)
       end
-      ct << @scb.encode(c)
     end
     return ct
   end # -- first_phase
