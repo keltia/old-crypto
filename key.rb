@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 02c21fd02836 2009/02/25 22:24:27 roberto $
+# $Id: key.rb,v 05749325e0e1 2009/02/25 23:13:41 roberto $
 
 # == class String
 #
@@ -175,7 +175,7 @@ class Caesar < SKey
       end
     else
       BASE.scan(/./) do |c|
-        d = ( (((c[0].ord - 65) + offset) % 26) + 65).chr
+        d = ( (((c[0] - 65) + offset) % 26) + 65).chr
         @alpha[c]  = d
         @ralpha[d] = c
       end
