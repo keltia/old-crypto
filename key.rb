@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v b8de7aaf98c2 2009/02/25 13:18:27 roberto $
+# $Id: key.rb,v 02c21fd02836 2009/02/25 22:24:27 roberto $
 
 # == class String
 #
@@ -40,7 +40,7 @@ class Key
   attr_reader :key
 
   def initialize(key)
-    raise ArgumentError if key.class != String and key and key.to_s == ""
+    raise ArgumentError if key.class != String and key.to_s == ""
     @key = key.to_s.upcase
   end
 
