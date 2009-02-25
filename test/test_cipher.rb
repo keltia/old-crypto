@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v ec23621364b4 2009/02/24 12:17:15 roberto $
+# $Id: test_cipher.rb,v 3192bbdf20ad 2009/02/25 14:58:12 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -152,6 +152,43 @@ class TestPolybius < Test::Unit::TestCase
   end # -- test_decode
 end # -- class TestPolybius
 
+# == class TestStraddlingCheckerboard
+#
+class TestStraddlingCheckerboard < Test::Unit::TestCase
+  # === setup
+  #
+  def setup
+    @data = Hash.new
+    File.open("test/test_cipher_straddling.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"]
+  end # -- setup
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::StraddlingCheckerboard.new(word)
+      ct = cipher.encode(pt)
+      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+    end
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    plain = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::StraddlingCheckerboard.new(word)
+      pt = cipher.decode(@keys[word]["ct"])
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+    end
+  end # -- test_decode
+  
+end # -- class TestStraddlingCheckerboard
+
 # == class TestNihilistT
 #
 class TestNihilistT < Test::Unit::TestCase
@@ -164,15 +201,6 @@ class TestNihilistT < Test::Unit::TestCase
     end
     @keys = @data["keys"]
   end # -- setup
-  
-  # === test_first_phase
-  #
-  def test_first_phase
-    pt = @data["plain"]
-    cipher = Cipher::NihilistT.new("arabesque", "subway")
-    fp = cipher.first_phase(pt)
-    assert_equal  @data["keys"]["arabesque,subway"]["fp"], fp
-  end # -- test_first_phase
   
   # === test_encode
   #

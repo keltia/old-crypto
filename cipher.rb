@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v db488de075ed 2009/02/25 14:48:17 roberto $
+# $Id: cipher.rb,v 3192bbdf20ad 2009/02/25 14:58:12 roberto $
 
 require "key"
 
@@ -199,66 +199,41 @@ class Transposition < SimpleCipher
   
 end # -- class Transposition
 
-# == class Nihilist
+# == class StraddlingCheckerboard
 #
-# The Nihilist cipher has gone through several variations over the original
-# version by the Russians nihilists.  Main characteristics is  the 
-# checkerboard which shorten the cryptogram by having frequent letters use
-# one letter as ciphertext and thus disturbing the recognition of 
-# bigrams/monograms.
+# This is the Straddling Checkerboard system (intended as a first pass to
+# the Nihilist cipher and possibly others).
 #
-# The version used by USSR intelligence (aka spies) was using a super
-# encryption by using an additive key (digit by digit without carryover)
-#
-# One possible variation would be having a transposition as supercipher.
-# This is the one here.
-#
-class NihilistT
-  attr_reader :super_key
-
+class StraddlingCheckerboard
   def initialize(key, super_key = "")
     @scb = SCKey.new(key)
     @super_key = Cipher::Transposition.new(super_key)
   end
-
-  # === first_phase
-  #
-  def first_phase(plain_text)
-    # First pass ciphertext
-    #
-    ct = ""
-    
-    pt = plain_text.dup
-    pt.scan(/./) do |c|
-      if c >= "0" and c <= "9" then
-        ct << @scb.encode("/")
-        ct << c + c
-        ct << @scb.encode("/")
-      else
-        ct << @scb.encode(c)
-      end
-    end
-    return ct
-  end # -- first_phase
 
   # === encode
   #
   def encode(plain_text)
     cipher_text = ""
     
-    # First pass ciphertext
-    #
-    ct = first_phase(plain_text)
-    cipher_text = @super_key.encode(ct)
+    pt = plain_text.dup
+    pt.scan(/./) do |c|
+      if c >= "0" and c <= "9" then
+        cipher_text << @scb.encode("/")
+        cipher_text << c + c
+        cipher_text << @scb.encode("/")
+      else
+        cipher_text << @scb.encode(c)
+      end
+    end
     return cipher_text
   end # -- encode
-  
+
   # === decode
   #
   def decode(cipher_text)
     plain_text = ""
-    
-    ct = @super_key.decode(cipher_text)
+
+    ct = cipher_text.dup
     in_numbers = false
     while ct.length != 0 do
       c = ct.slice!(0,1)
@@ -285,6 +260,52 @@ class NihilistT
         plain_text << pt
       end
     end
+    return plain_text
+  end # -- decode
+  
+end # -- class StraddlingCheckerboard
+
+# == class Nihilist
+#
+# The Nihilist cipher has gone through several variations over the original
+# version by the Russians nihilists.  Main characteristics is  the 
+# checkerboard which shorten the cryptogram by having frequent letters use
+# one letter as ciphertext and thus disturbing the recognition of 
+# bigrams/monograms.
+#
+# The version used by USSR intelligence (aka spies) was using a super
+# encryption by using an additive key (digit by digit without carryover)
+#
+# One possible variation would be having a transposition as supercipher.
+# This is the one here.
+#
+class NihilistT
+  attr_reader :super_key
+
+  def initialize(key, super_key = "")
+    @scb = Cipher::StraddlingCheckerboard.new(key)
+    @super_key = Cipher::Transposition.new(super_key)
+  end
+
+  # === encode
+  #
+  def encode(plain_text)
+    cipher_text = ""
+    
+    # First pass ciphertext
+    #
+    ct = @scb.encode(plain_text)
+    cipher_text = @super_key.encode(ct)
+    return cipher_text
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(cipher_text)
+    plain_text = ""
+    
+    ct = @super_key.decode(cipher_text)
+    plain_text = @scb.decode(ct)
     return plain_text
   end # -- decode
   
