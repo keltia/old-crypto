@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 3192bbdf20ad 2009/02/25 14:58:12 roberto $
+# $Id: cipher.rb,v a7da860dada0 2009/02/25 15:13:36 roberto $
 
 require "key"
 
@@ -205,9 +205,9 @@ end # -- class Transposition
 # the Nihilist cipher and possibly others).
 #
 class StraddlingCheckerboard
+  
   def initialize(key, super_key = "")
     @scb = SCKey.new(key)
-    @super_key = Cipher::Transposition.new(super_key)
   end
 
   # === encode
