@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 078887fd5b1f 2009/03/03 14:05:33 roberto $
+# $Id: key.rb,v 5a4b8cc6aee0 2009/03/03 14:15:41 roberto $
 
 # == class String
 #
@@ -425,7 +425,7 @@ class VICKey
   #                                             
   # for i in len..len+4
   #
-  def expand5to10(data)
+  def self.expand5to10(data)
     expd = data.dup
     len = data.length
     data.each_index do |i|
