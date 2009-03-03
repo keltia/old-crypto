@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 4bcd9f836ba2 2009/03/03 13:25:33 roberto $
+# $Id: key.rb,v 0a9688543355 2009/03/03 14:03:40 roberto $
 
 # == class String
 #
@@ -414,7 +414,7 @@ class VICKey
   
   # === expand5to10
   #
-  # [ x, y, z, t, u ] is expand into
+  # [ x, y, z, t, u ] is expanded into
   # [ x, y, z, t, u, x + y, y + z, z + t, t + u, u + ( x + y) ]
   #   a0 a1 a2 a3 a4 a5     a6     a7     a8     a9
   #                  a0 + a1
