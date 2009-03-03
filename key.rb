@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 36ac3cf8800a 2009/03/03 19:10:30 roberto $
+# $Id: key.rb,v 10830414ed7d 2009/03/03 22:20:20 roberto $
 
 # == class String
 #
@@ -449,7 +449,7 @@ class VICKey
     len = a.length
     a.each_with_index{|e,i| b[i] = (e + b[(i+1) % len]) % 10 }
     b
-  end # -- expand5to10
+  end # -- chainadd
   
   # == VICKey.expand5to10
   #
