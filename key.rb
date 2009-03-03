@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 4c4615289442 2009/03/03 19:10:13 roberto $
+# $Id: key.rb,v 36ac3cf8800a 2009/03/03 19:10:30 roberto $
 
 # == class String
 #
@@ -460,7 +460,7 @@ class VICKey
     (data + expd)
   end # -- expand5to10
   
-  # === self.addmod10
+  # === addmod10
   #
   # Addition modulo 10
   #
