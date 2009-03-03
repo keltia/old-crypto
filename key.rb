@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v eeb010babff5 2009/03/03 17:19:52 roberto $
+# $Id: key.rb,v 10f2a1baa6e8 2009/03/03 18:45:55 roberto $
 
 # == class String
 #
@@ -424,7 +424,7 @@ class VICKey
   #
   # Substraction modulo 10 (step 1)
   #
-  def self.substract10(a, b)
+  def VICKey.substract10(a, b)
     len = a.length
     c = (0..len-1).collect{|i| (a[i] - b[i] + 10) % 10 }
   end # -- substract10
@@ -433,7 +433,7 @@ class VICKey
   #
   # XXX ASCII-dependant
   #
-  def self.to_numeric(str)
+  def VICKey.to_numeric(str)
     if RUBY_VERSION =~ /1\.9/ then
       str.scan(/./).collect{|e| e.ord - 48 }
     else
@@ -453,7 +453,7 @@ class VICKey
   # b4 = a4 + b0
   #
   #
-  def self.chainadd(a)
+  def VICKey.chainadd(a)
     b = a.dup
     len = a.length
     a.each_with_index{|e,i| b[i] = (e + b[(i+1) % len]) % 10 }
@@ -464,7 +464,7 @@ class VICKey
   #
   # Use VICKey.chainadd to generate the expanded key
   #
-  def self.expand5to10(data)
+  def VICKey.expand5to10(data)
     expd = VICKey.chainadd(data)
     (data + expd)
   end # -- expand5to10
@@ -473,7 +473,7 @@ class VICKey
   #
   # Addition modulo 10
   #
-  def self.addmod10(a, b)
+  def VICKey.addmod10(a, b)
     raise DataError if a.length != b.length
     (0..a.length-1).collect {|i| (a[i] + b[i]) % 10  }
   end # -- self.addmod10
