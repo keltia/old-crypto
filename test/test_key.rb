@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v eda08fe55fc0 2009/03/03 22:29:25 roberto $
+# $Id: test_key.rb,v e436dc8941d1 2009/03/03 22:34:03 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -341,15 +341,28 @@ class TestVICKey < Test::Unit::TestCase
     key = VICKey.new(@init["ikey"], @init["phrase"], @init["imsg"])
     #assert_equal key.first
   end # -- test_init
-  # === test_key_schedule
+
+  # === test_p1_encode
   #
-  def test_key_schedule
-    false
-#    @data.keys.each do |word|
-#      ikey, phrase, imsg = word.split
-#      key = VICKey.new(ikey, phrase, imsg)
-#    end
-  end # -- test_key_schedule
+  def test_p1_encode
+    #
+    # Get test data
+    #
+    init = @data["init"]
+    p1 = @data["p1"]
+    in_p1 = p1["r1"]
+    in_p2 = p1["r2"]
+    exp = p1["r"]
+    
+    assert_equal Array, in_p1.class
+    assert_equal Array, in_p2.class
+    assert_equal Array, exp.class
+    
+    res = VICKey.p1_encode(in_p1, in_p2)
+    
+    assert_not_nil res
+    assert_equal exp, res
+  end # -- test_p1_encode
   
   # === test_to_numeric
   #

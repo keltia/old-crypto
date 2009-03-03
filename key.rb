@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 84b5ac77d4ae 2009/03/03 22:28:00 roberto $
+# $Id: key.rb,v e436dc8941d1 2009/03/03 22:34:03 roberto $
 
 # == class String
 #
@@ -445,6 +445,19 @@ class VICKey
       str.scan(/./).collect{|e| e[0] - 48 }
     end
   end # -- to_numeric
+  
+  # === p1_encode
+  #
+  # This encoding method uses the array p2 to encode array p1
+  # in a simplified tabular substitution
+  #
+  def VICKey.p1_encode(p1, p2)
+    r = Array.new
+    p1.each do |e|
+      r << p2[(e + 10) % 10 - 1]
+    end
+    r
+  end # -- p1_encode
   
   # === VICKey.chainadd
   #
