@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 09b3770ce062 2009/03/03 17:16:53 roberto $
+# $Id: test_key.rb,v fb322d19ce56 2009/03/03 19:08:50 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -366,14 +366,14 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal b, VICKey.to_numeric(a)
   end # -- test_to_numeric
   
-  # === test_substract10
+  # === test_submod10
   #
-  def test_substract10
+  def test_submod10
     a = [ 7, 7, 6, 5, 1 ]
     b = [ 7, 4, 1, 7, 7 ]
     r = [ 0, 3, 5, 8, 4 ]
-    assert_equal r, VICKey.substract10(a,b)
-  end # -- test_substract10
+    assert_equal r, VICKey.submod10(a,b)
+  end # -- test_submod10
   
   # === test_chainadd
   #
