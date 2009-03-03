@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 4b3921cd16b2 2009/03/03 23:52:52 roberto $
+# $Id: key.rb,v 8b8c7cc1a9e0 2009/03/03 23:54:07 roberto $
 
 # == class String
 #
@@ -428,6 +428,18 @@ class VICKey
     #
     # Third phase
     #
+    # We run 5 times through chainadd
+    #
+    r = @second.dup
+    5.times do
+      r = VICKey.chainadd(r)
+    end
+    @third = r
+    if RUBY_VERSION =~ /1\.9/ then
+      @sc_key = TKey.new(@third.join).to_numeric
+    else
+      @sc_key = TKey.new(@third.to_s).to_numeric
+    end
   end # -- initialize
   
   # === key_schedule

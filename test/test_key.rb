@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 1c5914ded430 2009/03/03 23:16:59 roberto $
+# $Id: test_key.rb,v 8b8c7cc1a9e0 2009/03/03 23:54:07 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -385,6 +385,11 @@ class TestVICKey < Test::Unit::TestCase
     key = VICKey.new(init["ikey"], init["phrase"], init["imsg"])
     
     assert_not_nil key
+    assert_not_nil key.first
+    assert_not_nil key.second
+    assert_not_nil key.third
+    assert_not_nil key.sc_key
+    
     assert_equal Array, key.p1.class
     assert_equal Array, key.p2.class
     assert_equal Array, key.first.class
@@ -394,6 +399,9 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal init["ikey5"], key.ikey5
     assert_equal init["first"], key.first
     assert_equal init["second"], key.second
+    
+    assert_equal init["third"], key.third
+    assert_equal init["sc_key"], key.sc_key
   end # -- test_init
 
   # === test_normalize
