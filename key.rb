@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v fb322d19ce56 2009/03/03 19:08:50 roberto $
+# $Id: key.rb,v 4c4615289442 2009/03/03 19:10:13 roberto $
 
 # == class String
 #
@@ -420,15 +420,6 @@ class VICKey
   def key_expand
   end # -- key_expand
   
-  # === submod10
-  #
-  # Substraction modulo 10 (step 1)
-  #
-  def VICKey.submod10(a, b)
-    len = a.length
-    c = (0..len-1).collect{|i| (a[i] - b[i] + 10) % 10 }
-  end # -- submod10
-  
   # === to_numeric
   #
   # XXX ASCII-dependant
@@ -476,7 +467,16 @@ class VICKey
   def VICKey.addmod10(a, b)
     raise DataError if a.length != b.length
     (0..a.length-1).collect {|i| (a[i] + b[i]) % 10  }
-  end # -- self.addmod10
+  end # -- addmod10
+  
+  # === submod10
+  #
+  # Substraction modulo 10 (step 1)
+  #
+  def VICKey.submod10(a, b)
+    len = a.length
+    c = (0..len-1).collect{|i| (a[i] - b[i] + 10) % 10 }
+  end # -- submod10
   
 end # -- class VICKey
 
