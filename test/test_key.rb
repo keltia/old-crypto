@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 08a1b1534356 2009/03/03 15:17:17 roberto $
+# $Id: test_key.rb,v c39567927c3e 2009/03/03 17:16:16 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -347,6 +347,26 @@ class TestVICKey < Test::Unit::TestCase
 #      key = VICKey.new(ikey, phrase, imsg)
 #    end
   end # -- test_key_schedule
+  
+  # === test_to_numeric
+  #
+  def test_to_numeric
+    @num = @data["num"]
+    a = @num["a"]
+    b = @num["b"]
+    assert_equal String, a.class
+    assert_equal Array, b.class
+    assert_equal b, VICKey.to_numeric(a)
+  end # -- test_to_numeric
+  
+  # === test_substract10
+  #
+  def test_substract10
+    a = [ 7, 7, 6, 5, 1 ]
+    b = [ 7, 4, 1, 7, 7 ]
+    r = [ 0, 3, 5, 8, 4 ]
+    assert_equal r, VICKey.substract10(a,b)
+  end # -- test_substract10
   
   # === test_chainadd
   #

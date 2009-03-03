@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 08a1b1534356 2009/03/03 15:17:17 roberto $
+# $Id: key.rb,v c39567927c3e 2009/03/03 17:16:16 roberto $
 
 # == class String
 #
@@ -411,6 +411,27 @@ class VICKey
   #
   def key_expand
   end # -- key_expand
+  
+  # === substract10
+  #
+  # Substraction modulo 10 (step 1)
+  #
+  def self.substract10(a, b)
+    len = a.length
+    c = (0..len-1).collect{|i| (a[i] - b[i] + 10) % 10 }
+  end # -- substract10
+  
+  # === to_numeric
+  #
+  # XXX ASCII-dependant
+  #
+  def self.to_numeric(str)
+    if RUBY_VERSION =~ /1\.9/ then
+      str.scan(/./).collect{|e| e.chr - 48 }
+    else
+      str.scan(/./).collect{|e| e[0] - 48 }
+    end
+  end # -- to_numeric
   
   # === VICKey.chainadd
   #
