@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 4bcd9f836ba2 2009/03/03 13:25:33 roberto $
+# $Id: test_key.rb,v aff22dc2b8fb 2009/03/03 14:04:26 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -335,7 +335,6 @@ class TestVICKey < Test::Unit::TestCase
     File.open("test/test_vickey.yaml") do |fh|
       @data = YAML.load(fh)
     end
-    @expd = @data["expd"]
   end # -- setup
 
   # === test_key_schedule
@@ -351,6 +350,7 @@ class TestVICKey < Test::Unit::TestCase
   # === test_expand5to10
   #
   def test_expand5to10
+    @expd = @data["expd"]
     key = VICKey.new
     expd = key.expand5to10(@expd["base"])
     assert_equal @expd["5to10"], expd
