@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v af0ad34a00a2 2009/02/23 22:00:42 roberto $
+# $Id: test_key.rb,v c2530d33145f 2009/03/03 13:12:46 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -104,6 +104,15 @@ class TestTKey < Test::Unit::TestCase
       assert_equal key.to_numeric2, @data[word]["num"]
     end
   end # -- test_to_numeric_2
+
+  # === test_to_numeric_10
+  #
+  def test_to_numeric10
+    @data.keys.each do |word|
+      key = TKey.new(word)
+      assert_equal key.to_numeric10, @data[word]["num10"]
+    end
+  end # -- test_to_numeric10
 end # -- class TestTKey
 
 # == class TestSKey

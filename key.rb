@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 05749325e0e1 2009/02/25 23:13:41 roberto $
+# $Id: key.rb,v c2530d33145f 2009/03/03 13:12:46 roberto $
 
 # == class String
 #
@@ -114,6 +114,23 @@ class TKey < Key
     end
     n_key
   end # -- to_numeric2
+
+  # === to_numeric10
+  #
+  # 1-based version modulo 10
+  #
+  # Based on:
+  # Alternate version
+  # By dblack, IRC #ruby-lang
+  #
+  def to_numeric10
+    srt = @key.to_s.split('').sort
+
+    n_key = @key.to_s.split('').map do |s|
+      srt[srt.index(s)] = (srt.index(s) + 1) % 10
+    end
+    n_key
+  end # -- to_numeric10
 
 end # -- class TKey
 
