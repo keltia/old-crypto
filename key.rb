@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 09b3770ce062 2009/03/03 17:16:53 roberto $
+# $Id: key.rb,v eeb010babff5 2009/03/03 17:19:52 roberto $
 
 # == class String
 #
@@ -435,7 +435,7 @@ class VICKey
   #
   def self.to_numeric(str)
     if RUBY_VERSION =~ /1\.9/ then
-      str.scan(/./).collect{|e| e.chr - 48 }
+      str.scan(/./).collect{|e| e.ord - 48 }
     else
       str.scan(/./).collect{|e| e[0] - 48 }
     end
