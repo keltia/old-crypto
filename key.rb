@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 0a9688543355 2009/03/03 14:03:40 roberto $
+# $Id: key.rb,v 078887fd5b1f 2009/03/03 14:05:33 roberto $
 
 # == class String
 #
@@ -433,6 +433,15 @@ class VICKey
     end
     expd
   end # -- expand5to10
+  
+  # === self.addmod10
+  #
+  # Addition modulo 10
+  #
+  def self.addmod10(a, b)
+    raise DataError if a.length != b.length
+    (0..a.length-1).collect {|i| (a[i] + b[i]) % 10  }
+  end # -- self.addmod10
   
 end # -- class VICKey
 

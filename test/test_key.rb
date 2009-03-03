@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v aff22dc2b8fb 2009/03/03 14:04:26 roberto $
+# $Id: test_key.rb,v 078887fd5b1f 2009/03/03 14:05:33 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -355,5 +355,16 @@ class TestVICKey < Test::Unit::TestCase
     expd = key.expand5to10(@expd["base"])
     assert_equal @expd["5to10"], expd
   end # -- test_expand5to10
+  
+  # === test_addmod10
+  #
+  def test_addmod10
+    test = @data["addmod"]
+    a = test["a"]
+    b = test["b"]
+    assert a.length == b.length
+    c = VICKey.addmod10(a,b)
+    assert_equal test["c"], c
+  end # -- test_addmod10
   
 end # -- class TestVICKey
