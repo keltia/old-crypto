@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 53b3b8934d84 2009/03/03 22:51:02 roberto $
+# $Id: key.rb,v 2c77a57aa6bb 2009/03/03 22:51:22 roberto $
 
 # == class String
 #
@@ -415,7 +415,7 @@ class VICKey
     res = VICKey.submod10(@imsg, @ikey5)
     @first = VICKey.expand5to10(res)
     #
-    # Second phase
+    # Second phase (we use TKey to get numeric keys)
     #
     @p1 = TKey.new(phrase[0..9]).to_numeric
     @p2 = TKey.new(phrase[10..19]).to_numeric
