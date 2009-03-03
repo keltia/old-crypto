@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 27ed200a0e8d 2009/03/03 22:21:51 roberto $
+# $Id: key.rb,v 84b5ac77d4ae 2009/03/03 22:28:00 roberto $
 
 # == class String
 #
@@ -391,6 +391,9 @@ end # -- class SQKey
 #
 # and a working example is here:
 # http://www.hypermaths.org/quadibloc/crypto/pp1324.htm
+#
+# XXX Most of the arrays' content is 1-based mod 10 data
+# (i.e. 0 == 10 and 1 is the lowest)
 #
 # This uses a very complex key schedule as the basis of a straddling
 # checkerboard.
