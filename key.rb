@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v c39567927c3e 2009/03/03 17:16:16 roberto $
+# $Id: key.rb,v 09b3770ce062 2009/03/03 17:16:53 roberto $
 
 # == class String
 #
@@ -395,11 +395,19 @@ end # -- class SQKey
 # This uses a very complex key schedule as the basis of a straddling
 # checkerboard.
 #
+# Step1 uses VICKey.expand5to10
+# Step2 uses VICKey.chainadd on phrase (after conversion)
+#
 class VICKey
+  attr_reader :first, :t_phrase, :two, :ikey5
   
   # === initialize
   #
-  def initialize
+  def initialize(ikey, phrase, imsg)
+    @ikey5 = VICKey.to_numeric(ikey[0..4])
+    @first = VICKey.expand5to10(ikey5)
+    @t_phrase = TKey.new(phrase[0..9])
+    @two = VICKey.chainadd(@t_phrase.to_numeric10)
   end # -- initialize
   
   # === key_schedule
