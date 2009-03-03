@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v e436dc8941d1 2009/03/03 22:34:03 roberto $
+# $Id: test_key.rb,v 7ac4aed205c1 2009/03/03 22:36:00 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -337,9 +337,14 @@ class TestVICKey < Test::Unit::TestCase
   # === test_init
   #
   def test_init
-    @init = @data["init"]
-    key = VICKey.new(@init["ikey"], @init["phrase"], @init["imsg"])
-    #assert_equal key.first
+    init = @data["init"]
+    key = VICKey.new(init["ikey"], init["phrase"], init["imsg"])
+    
+    assert_not_nil key
+    assert_equal Array, key.p1.class
+    assert_equal Array, key.p2.class
+    assert_equal Array, key.first.class
+    assert(key.first.length != 0)
   end # -- test_init
 
   # === test_p1_encode
