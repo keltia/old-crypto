@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v fb322d19ce56 2009/03/03 19:08:50 roberto $
+# $Id: test_key.rb,v 87b15a8dafa3 2009/03/03 22:23:41 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -30,7 +30,6 @@ class TestKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @data = Hash.new
     File.open("test/test_key.yaml") do |fh|
       @data = YAML.load(fh)
     end
@@ -195,7 +194,6 @@ class TestSCKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @data = Hash.new
     File.open("test/test_sckey.yaml") do |fh|
       @data = YAML.load(fh)
     end
@@ -276,7 +274,6 @@ class TestSQKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @data = Hash.new
     File.open("test/test_sqkey.yaml") do |fh|
       @data = YAML.load(fh)
     end
@@ -331,7 +328,6 @@ class TestVICKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @data = Hash.new
     File.open("test/test_vickey.yaml") do |fh|
       @data = YAML.load(fh)
     end
