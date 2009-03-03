@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 87b15a8dafa3 2009/03/03 22:23:41 roberto $
+# $Id: test_key.rb,v eda08fe55fc0 2009/03/03 22:29:25 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -362,15 +362,6 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal b, VICKey.to_numeric(a)
   end # -- test_to_numeric
   
-  # === test_submod10
-  #
-  def test_submod10
-    a = [ 7, 7, 6, 5, 1 ]
-    b = [ 7, 4, 1, 7, 7 ]
-    r = [ 0, 3, 5, 8, 4 ]
-    assert_equal r, VICKey.submod10(a,b)
-  end # -- test_submod10
-  
   # === test_chainadd
   #
   def test_chainadd
@@ -399,5 +390,19 @@ class TestVICKey < Test::Unit::TestCase
     c = VICKey.addmod10(a,b)
     assert_equal test["c"], c
   end # -- test_addmod10
+  
+  # === test_submod10
+  #
+  def test_submod10
+    a = [ 7, 7, 6, 5, 1 ]
+    b = [ 7, 4, 1, 7, 7 ]
+    r = [ 0, 3, 5, 8, 4 ]
+    
+    res = VICKey.submod10(a,b)
+    
+    assert_not_nil res
+    assert_equal Array, res.class
+    assert_equal r, res
+  end # -- test_submod10
   
 end # -- class TestVICKey
