@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 7ac4aed205c1 2009/03/03 22:36:00 roberto $
+# $Id: test_key.rb,v 3aff08c5faa1 2009/03/03 22:37:16 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -40,6 +40,8 @@ class TestKey < Test::Unit::TestCase
   def test_init
     @data.keys.each do |word|
       key = Key.new(word)
+
+      assert_not_nil key
       assert_equal key.key, word.upcase
     end
   end # -- test_init
@@ -49,6 +51,8 @@ class TestKey < Test::Unit::TestCase
   def test_condensed
     @data.keys.each do |word|
       key = Key.new(word)
+
+      assert_not_nil key
       assert_equal key.condensed, @data[word]["condensed"]
     end
   end # -- test_condensed
@@ -58,6 +62,8 @@ class TestKey < Test::Unit::TestCase
   def test_length
     @data.keys.each do |word|
       key = Key.new(word)
+
+      assert_not_nil key
       assert_equal key.length, word.length
     end
   end # -- test_length
@@ -82,6 +88,8 @@ class TestTKey < Test::Unit::TestCase
   def test_init
     @data.keys.each do |word|
       key = TKey.new(word)
+
+      assert_not_nil key
       assert_equal key.key, word.upcase
     end
   end # -- test_init
@@ -91,6 +99,8 @@ class TestTKey < Test::Unit::TestCase
   def test_to_numeric_1
     @data.keys.each do |word|
       key = TKey.new(word)
+
+      assert_not_nil key
       assert_equal key.to_numeric, @data[word]["num"]
     end
   end # -- test_to_numeric_1
@@ -100,6 +110,8 @@ class TestTKey < Test::Unit::TestCase
   def test_to_numeric_2
     @data.keys.each do |word|
       key = TKey.new(word)
+
+      assert_not_nil key
       assert_equal key.to_numeric2, @data[word]["num"]
     end
   end # -- test_to_numeric_2
@@ -109,6 +121,8 @@ class TestTKey < Test::Unit::TestCase
   def test_to_numeric10
     @data.keys.each do |word|
       key = TKey.new(word)
+
+      assert_not_nil key
       assert_equal key.to_numeric10, @data[word]["num10"]
     end
   end # -- test_to_numeric10
@@ -123,6 +137,8 @@ class TestSKey < Test::Unit::TestCase
   def test_presence_of_alpha
     word = "arabesque"
     key = SKey.new(word)
+
+    assert_not_nil key      
     assert_not_nil key.alpha
     assert_not_nil key.ralpha
   end # -- test_presence_of_alpha
@@ -137,6 +153,7 @@ class TestKeyCaesar < Test::Unit::TestCase
   def setup
     word = 3
     @key = Caesar.new(word)
+    assert_not_nil @key
   end # -- setup
   
   # === test_alpha
@@ -167,10 +184,14 @@ class TestKeyCaesar < Test::Unit::TestCase
   def test_encode
     pt = "A"
     ct = @key.encode(pt)
+
+    assert_not_nil ct
     assert_equal ct, "D"
     
     pt = "Y"
     ct = @key.encode(pt)
+
+    assert_not_nil ct
     assert_equal ct, "B"
   end # -- test_encode
   
@@ -179,10 +200,14 @@ class TestKeyCaesar < Test::Unit::TestCase
   def test_decode
     ct = "D"
     pt = @key.decode(ct)
+
+    assert_not_nil pt
     assert_equal pt, "A"
     
     ct = "C"
     pt = @key.decode(ct)
+
+    assert_not_nil pt
     assert_equal pt, "Z"
   end # -- test_decode
 end # -- class TestKeyCaesar
@@ -204,6 +229,8 @@ class TestSCKey < Test::Unit::TestCase
   def test_presence_of_alpha
     word = "arabesque"
     key = SCKey.new(word)
+
+    assert_not_nil key
     assert_not_nil key.alpha
     assert_not_nil key.ralpha
   end # -- test_presence_of_alpha
@@ -213,6 +240,8 @@ class TestSCKey < Test::Unit::TestCase
   def test_checkerboard
     @data.keys.each do |word|
       key = SCKey.new(word)
+
+      assert_not_nil key
       assert_equal @data[word]["full_key"], key.full_key
     end
   end # -- test_checkerboard
@@ -223,6 +252,7 @@ class TestSCKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = SCKey.new(word)
     
+      assert_not_nil key
       assert_equal SCKey, key.class
       assert_equal @data[word]["alpha"], key.alpha
       assert_equal @data[word]["ralpha"], key.ralpha
@@ -233,7 +263,8 @@ class TestSCKey < Test::Unit::TestCase
   #
   def test_is_long
     key = SCKey.new("arabesque")
-    
+
+    assert_not_nil key
     assert !key.is_long?(0)
     assert key.is_long?(9)
   end # -- test_is_long
@@ -243,6 +274,9 @@ class TestSCKey < Test::Unit::TestCase
   def test_encode
     @data.keys.each do |word|
       key = SCKey.new(word)
+
+      assert_not_nil key
+      
       test = @data[word]["encode"]
       encode_in = test["in"]
       encode_out = test["out"]
@@ -257,6 +291,9 @@ class TestSCKey < Test::Unit::TestCase
   def test_decode
     @data.keys.each do |word|
       key = SCKey.new(word)
+
+      assert_not_nil key
+      
       test = @data[word]["encode"]
       decode_in = test["out"]
       decode_out = test["in"]
@@ -284,7 +321,8 @@ class TestSQKey < Test::Unit::TestCase
   def test_gen_rings
     @data.keys.each do |word|
       key = SQKey.new(word, @data[word]["type"])
-    
+
+      assert_not_nil key
       assert_equal key.class, SQKey
       assert_equal key.alpha, @data[word]["alpha"]
       assert_equal key.ralpha, @data[word]["ralpha"]
@@ -296,6 +334,9 @@ class TestSQKey < Test::Unit::TestCase
   def test_encode
     @data.keys.each do |word|
       key = SQKey.new(word, @data[word]["type"])
+
+      assert_not_nil key
+      
       test = @data[word]["encode"]
       encode_in = test["in"]
       encode_out = test["out"]
@@ -310,6 +351,9 @@ class TestSQKey < Test::Unit::TestCase
   def test_decode
     @data.keys.each do |word|
       key = SQKey.new(word, @data[word]["type"])
+
+      assert_not_nil key
+      
       test = @data[word]["encode"]
       encode_in = test["out"]
       encode_out = test["in"]
@@ -375,9 +419,14 @@ class TestVICKey < Test::Unit::TestCase
     @num = @data["num"]
     a = @num["a"]
     b = @num["b"]
+
     assert_equal String, a.class
     assert_equal Array, b.class
-    assert_equal b, VICKey.to_numeric(a)
+    
+    res = VICKey.to_numeric(a)
+    
+    assert_not_nil res
+    assert_equal b, res
   end # -- test_to_numeric
   
   # === test_chainadd
@@ -386,7 +435,11 @@ class TestVICKey < Test::Unit::TestCase
     @keys.keys.each do |ca|
       a = @keys[ca]["a"]
       b = @keys[ca]["b"]
-      assert_equal b, VICKey.chainadd(a), "#{ca} failed"
+      
+      res = VICKey.chainadd(a)
+      
+      assert_not_nil res
+      assert_equal b, res, "#{ca} failed"
     end
   end # -- test_chainadd
   
@@ -395,6 +448,8 @@ class TestVICKey < Test::Unit::TestCase
   def test_expand5to10
     @expd = @data["expd"]
     expd = VICKey.expand5to10(@expd["base"])
+    
+    assert_not_nil expd
     assert_equal @expd["5to10"], expd
   end # -- test_expand5to10
   
@@ -404,8 +459,12 @@ class TestVICKey < Test::Unit::TestCase
     test = @data["addmod"]
     a = test["a"]
     b = test["b"]
+    
     assert a.length == b.length
+    
     c = VICKey.addmod10(a,b)
+    
+    assert_not_nil c
     assert_equal test["c"], c
   end # -- test_addmod10
   
