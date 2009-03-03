@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 5a4b8cc6aee0 2009/03/03 14:15:41 roberto $
+# $Id: key.rb,v 08a1b1534356 2009/03/03 15:17:17 roberto $
 
 # == class String
 #
@@ -412,26 +412,32 @@ class VICKey
   def key_expand
   end # -- key_expand
   
-  # === expand5to10
+  # === VICKey.chainadd
   #
-  # [ x, y, z, t, u ] is expanded into
-  # [ x, y, z, t, u, x + y, y + z, z + t, t + u, u + ( x + y) ]
-  #   a0 a1 a2 a3 a4 a5     a6     a7     a8     a9
-  #                  a0 + a1
-  #                         a1 + a2
-  #                                a2 + a3
-  #                                       a3 + a4
-  #                                              a4 + a5
-  #                                             
-  # for i in len..len+4
+  # [ a0, a1, a2, a3, a4 ] is transformed into
+  # [ b0, b1, b2, b3, b4 ]
+  #
+  # b0 = a0 + a1
+  # b1 = a1 + a2
+  # b2 = a2 + a3
+  # b3 = a3 + a4
+  # b4 = a4 + b0
+  #
+  #
+  def self.chainadd(a)
+    b = a.dup
+    len = a.length
+    a.each_with_index{|e,i| b[i] = (e + b[(i+1) % len]) % 10 }
+    b
+  end # -- expand5to10
+  
+  # == VICKey.expand5to10
+  #
+  # Use VICKey.chainadd to generate the expanded key
   #
   def self.expand5to10(data)
-    expd = data.dup
-    len = data.length
-    data.each_index do |i|
-      expd[len + i] = (expd[i] + expd[i + 1]) % 10
-    end
-    expd
+    expd = VICKey.chainadd(data)
+    (data + expd)
   end # -- expand5to10
   
   # === self.addmod10

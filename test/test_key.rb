@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 5a4b8cc6aee0 2009/03/03 14:15:41 roberto $
+# $Id: test_key.rb,v 08a1b1534356 2009/03/03 15:17:17 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -335,6 +335,7 @@ class TestVICKey < Test::Unit::TestCase
     File.open("test/test_vickey.yaml") do |fh|
       @data = YAML.load(fh)
     end
+    @keys = @data["keys"]
   end # -- setup
 
   # === test_key_schedule
@@ -346,6 +347,16 @@ class TestVICKey < Test::Unit::TestCase
 #      key = VICKey.new(ikey, phrase, imsg)
 #    end
   end # -- test_key_schedule
+  
+  # === test_chainadd
+  #
+  def test_chainadd
+    @keys.keys.each do |ca|
+      a = @keys[ca]["a"]
+      b = @keys[ca]["b"]
+      assert_equal b, VICKey.chainadd(a), "#{ca} failed"
+    end
+  end # -- test_chainadd
   
   # === test_expand5to10
   #
