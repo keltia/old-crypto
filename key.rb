@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v a399a96c2f72 2009/03/03 23:16:27 roberto $
+# $Id: key.rb,v 1c5914ded430 2009/03/03 23:16:59 roberto $
 
 # == class String
 #
@@ -402,7 +402,7 @@ end # -- class SQKey
 # Step2 uses VICKey.chainadd on phrase (after conversion)
 #
 class VICKey
-  attr_reader :first, :p1, :p2, :two, :ikey5
+  attr_reader :first, :second, :p1, :p2, :ikey5
   
   # === initialize
   #
@@ -415,12 +415,16 @@ class VICKey
     res = VICKey.submod10(@imsg, @ikey5)
     @first = VICKey.expand5to10(res)
     #
-    # Second phase (we use TKey to get numeric keys)
+    # Second phase (we use TKey to get numeric keys but we *must* use 
+    # normalize because TKey uses 0-based arrays) XXX
     #
-    @p1 = TKey.new(phrase[0..9]).to_numeric
-    @p2 = TKey.new(phrase[10..19]).to_numeric
-    @two = VICKey.chainadd(@p1)
-    @second = VICKey.addmod10(@first, @two)
+    # We split the key phrase into two 10 digits parts @p1 & @p2
+    # Then we add mod 10 @p1 and the first expanded ikey (as @first)
+    #
+    @p1 = VICKey.normalize(TKey.new(phrase[0..9]).to_numeric)
+    @p2 = VICKey.normalize(TKey.new(phrase[10..19]).to_numeric)
+    tmp = VICKey.addmod10(@first, @p1)
+    @second = VICKey.p1_encode(tmp, @p2)
     #
     # Third phase
     #

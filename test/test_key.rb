@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v a399a96c2f72 2009/03/03 23:16:27 roberto $
+# $Id: test_key.rb,v 1c5914ded430 2009/03/03 23:16:59 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -390,8 +390,10 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal Array, key.first.class
     assert(key.first.length != 0)
     
-    assert_equal init['ikey5'], key.ikey5
+    assert_equal init["p1"], key.p1
+    assert_equal init["ikey5"], key.ikey5
     assert_equal init["first"], key.first
+    assert_equal init["second"], key.second
   end # -- test_init
 
   # === test_normalize
