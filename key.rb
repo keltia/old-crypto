@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v e436dc8941d1 2009/03/03 22:34:03 roberto $
+# $Id: key.rb,v 53b3b8934d84 2009/03/03 22:51:02 roberto $
 
 # == class String
 #
@@ -411,7 +411,9 @@ class VICKey
     # First phase
     #
     @ikey5 = VICKey.to_numeric(ikey[0..4])
-    @first = VICKey.expand5to10(ikey5)
+    @imsg = VICKey.to_numeric(imsg)
+    res = VICKey.submod10(@imsg, @ikey5)
+    @first = VICKey.expand5to10(res)
     #
     # Second phase
     #

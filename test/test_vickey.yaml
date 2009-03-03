@@ -121,9 +121,25 @@ num:
   - 7
 init:
   ikey: "741776"
+  ikey5:
+  - 7
+  - 4
+  - 1
+  - 7
+  - 7
   phrase: IDREAMOFJEANNIEWITHT
   imsg: "77651"
   first:
+  - 0
+  - 3
+  - 5
+  - 8
+  - 4
+  - 3
+  - 8
+  - 3
+  - 2
+  - 7
   two:
 p1:
   r1:
