@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 2c77a57aa6bb 2009/03/03 22:51:22 roberto $
+# $Id: key.rb,v a399a96c2f72 2009/03/03 23:16:27 roberto $
 
 # == class String
 #
@@ -435,6 +435,12 @@ class VICKey
   #
   def key_expand
   end # -- key_expand
+  
+  # === normalize
+  #
+  def VICKey.normalize(a)
+    a.collect!{|e| (e + 1) % 10 }
+  end # -- normalize
   
   # === to_numeric
   #

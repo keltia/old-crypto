@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 53b3b8934d84 2009/03/03 22:51:02 roberto $
+# $Id: test_key.rb,v a399a96c2f72 2009/03/03 23:16:27 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -394,6 +394,21 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal init["first"], key.first
   end # -- test_init
 
+  # === test_normalize
+  #
+  def test_normalize
+    init = @data["init"]
+    a = TKey.new("IDREAMOFJE").to_numeric
+    
+    assert_not_nil a
+    assert_equal Array, a.class
+    
+    res = VICKey.normalize(a)
+    
+    assert_not_nil res
+    assert_equal init["p1"], res
+  end # -- test_normalize
+  
   # === test_p1_encode
   #
   def test_p1_encode
