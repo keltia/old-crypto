@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 10830414ed7d 2009/03/03 22:20:20 roberto $
+# $Id: key.rb,v 27ed200a0e8d 2009/03/03 22:21:51 roberto $
 
 # == class String
 #
@@ -399,15 +399,26 @@ end # -- class SQKey
 # Step2 uses VICKey.chainadd on phrase (after conversion)
 #
 class VICKey
-  attr_reader :first, :t_phrase, :two, :ikey5
+  attr_reader :first, :p1, :p2, :two, :ikey5
   
   # === initialize
   #
   def initialize(ikey, phrase, imsg)
+    #
+    # First phase
+    #
     @ikey5 = VICKey.to_numeric(ikey[0..4])
     @first = VICKey.expand5to10(ikey5)
-    @t_phrase = TKey.new(phrase[0..9])
-    @two = VICKey.chainadd(@t_phrase.to_numeric10)
+    #
+    # Second phase
+    #
+    @p1 = TKey.new(phrase[0..9]).to_numeric
+    @p2 = TKey.new(phrase[10..19]).to_numeric
+    @two = VICKey.chainadd(@p1)
+    @second = VICKey.addmod10(@first, @two)
+    #
+    # Third phase
+    #
   end # -- initialize
   
   # === key_schedule
