@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v c2530d33145f 2009/03/03 13:12:46 roberto $
+# $Id: test_key.rb,v 4bcd9f836ba2 2009/03/03 13:25:33 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -323,3 +323,37 @@ class TestSQKey < Test::Unit::TestCase
   end # -- test_decode
   
 end # -- class TestSQKey
+
+# == class TestVICKey
+#
+class TestVICKey < Test::Unit::TestCase
+
+  # === setup
+  #
+  def setup
+    @data = Hash.new
+    File.open("test/test_vickey.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @expd = @data["expd"]
+  end # -- setup
+
+  # === test_key_schedule
+  #
+  def test_key_schedule
+    false
+#    @data.keys.each do |word|
+#      ikey, phrase, imsg = word.split
+#      key = VICKey.new(ikey, phrase, imsg)
+#    end
+  end # -- test_key_schedule
+  
+  # === test_expand5to10
+  #
+  def test_expand5to10
+    key = VICKey.new
+    expd = key.expand5to10(@expd["base"])
+    assert_equal @expd["5to10"], expd
+  end # -- test_expand5to10
+  
+end # -- class TestVICKey

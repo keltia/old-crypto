@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v c2530d33145f 2009/03/03 13:12:46 roberto $
+# $Id: key.rb,v 4bcd9f836ba2 2009/03/03 13:25:33 roberto $
 
 # == class String
 #
@@ -383,6 +383,58 @@ class SQKey < SKey
   end # -- gen_rings
 
 end # -- class SQKey
+
+# == class VICKey
+#
+# The VIC cipher is described on the following Wikipedia page:
+# http://en.wikipedia.org/wiki/VIC_cipher
+#
+# and a working example is here:
+# http://www.hypermaths.org/quadibloc/crypto/pp1324.htm
+#
+# This uses a very complex key schedule as the basis of a straddling
+# checkerboard.
+#
+class VICKey
+  
+  # === initialize
+  #
+  def initialize
+  end # -- initialize
+  
+  # === key_schedule
+  #
+  def key_schedule
+  end # -- key_schedule
+  
+  # === key_expand
+  #
+  def key_expand
+  end # -- key_expand
+  
+  # === expand5to10
+  #
+  # [ x, y, z, t, u ] is expand into
+  # [ x, y, z, t, u, x + y, y + z, z + t, t + u, u + ( x + y) ]
+  #   a0 a1 a2 a3 a4 a5     a6     a7     a8     a9
+  #                  a0 + a1
+  #                         a1 + a2
+  #                                a2 + a3
+  #                                       a3 + a4
+  #                                              a4 + a5
+  #                                             
+  # for i in len..len+4
+  #
+  def expand5to10(data)
+    expd = data.dup
+    len = data.length
+    data.each_index do |i|
+      expd[len + i] = (expd[i] + expd[i + 1]) % 10
+    end
+    expd
+  end # -- expand5to10
+  
+end # -- class VICKey
 
 if $0 == __FILE__ then
   
