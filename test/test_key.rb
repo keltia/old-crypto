@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 8b8c7cc1a9e0 2009/03/03 23:54:07 roberto $
+# $Id: test_key.rb,v 205f02596d82 2009/03/04 09:04:25 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -231,8 +231,11 @@ class TestSCKey < Test::Unit::TestCase
     key = SCKey.new(word)
 
     assert_not_nil key
+    assert_equal SCKey, key.class
     assert_not_nil key.alpha
     assert_not_nil key.ralpha
+    assert_equal SCKey::BASE.length, key.alpha.length
+    assert_equal SCKey::BASE.length, key.ralpha.length
   end # -- test_presence_of_alpha
 
   # === test_checkerboard
@@ -242,6 +245,8 @@ class TestSCKey < Test::Unit::TestCase
       key = SCKey.new(word)
 
       assert_not_nil key
+      assert_not_nil key.full_key
+      assert_equal SCKey::BASE.length, key.full_key.length
       assert_equal @data[word]["full_key"], key.full_key
     end
   end # -- test_checkerboard
@@ -253,7 +258,6 @@ class TestSCKey < Test::Unit::TestCase
       key = SCKey.new(word)
     
       assert_not_nil key
-      assert_equal SCKey, key.class
       assert_equal @data[word]["alpha"], key.alpha
       assert_equal @data[word]["ralpha"], key.ralpha
     end
