@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v dd854a6faf58 2009/02/25 15:40:31 roberto $
+# $Id: cipher.rb,v 72bd0cbf733e 2009/03/04 09:04:56 roberto $
 
 require "key"
 
@@ -204,7 +204,7 @@ end # -- class Transposition
 # This is the Straddling Checkerboard system (intended as a first pass to
 # the Nihilist cipher and possibly others).
 #
-class StraddlingCheckerboard
+class StraddlingCheckerboard  < SimpleCipher
   
   def initialize(key, super_key = "")
     @scb = SCKey.new(key)
@@ -284,7 +284,7 @@ end # -- class StraddlingCheckerboard
 # One possible variation would be having a transposition as supercipher.
 # This is the one here.
 #
-class NihilistT
+class NihilistT < SimpleCipher
   attr_reader :super_key
 
   def initialize(key, super_key = "")
@@ -323,7 +323,7 @@ end # -- class NihilistT
 # See The Codebreakers, D. Kahn, 1996 for reference.
 #     http://en.wikipedia.org/wiki/ADFGVX
 #
-class ADFGVX
+class ADFGVX < SimpleCipher
   attr_reader :subst, :transp
   
   # === initialize
