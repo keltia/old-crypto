@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 8b8c7cc1a9e0 2009/03/03 23:54:07 roberto $
+# $Id: key.rb,v 62aef83377d2 2009/03/04 09:07:03 roberto $
 
 # == class String
 #
@@ -435,11 +435,7 @@ class VICKey
       r = VICKey.chainadd(r)
     end
     @third = r
-    if RUBY_VERSION =~ /1\.9/ then
-      @sc_key = TKey.new(@third.join).to_numeric
-    else
-      @sc_key = TKey.new(@third.to_s).to_numeric
-    end
+    @sc_key = TKey.new(@third.join).to_numeric
   end # -- initialize
   
   # === key_schedule
