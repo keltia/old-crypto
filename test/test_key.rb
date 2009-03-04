@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 61957f8ad0a3 2009/03/04 16:46:33 roberto $
+# $Id: test_key.rb,v 3e54a3de90fc 2009/03/04 16:47:08 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -423,9 +423,6 @@ class TestVICKey < Test::Unit::TestCase
   # === test_p1_encode
   #
   def test_p1_encode
-    #
-    # Get test data
-    #
     init = @data["init"]
     p1 = @data["p1"]
     in_p1 = p1["r1"]
