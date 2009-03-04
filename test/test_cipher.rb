@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 47c336e36030 2009/03/04 13:03:02 roberto $
+# $Id: test_cipher.rb,v 3282e21342d4 2009/03/04 13:14:18 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -8,7 +8,7 @@ require "cipher"
 
 # ==  TestSimpleCipher
 #
- TestSimpleCipher < Test::Unit::TestCase
+class TestSimpleCipher < Test::Unit::TestCase
   
   # === test_encode
   #
