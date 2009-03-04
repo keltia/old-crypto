@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 6ff5b72ef913 2009/03/04 13:23:33 roberto $
+# $Id: test_key.rb,v 61957f8ad0a3 2009/03/04 16:46:33 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -409,7 +409,7 @@ class TestVICKey < Test::Unit::TestCase
   #
   def test_normalize
     init = @data["init"]
-    a = TKey.new("IDREAMOFJE").to_numeric
+    a = TKey.new(init["phrase"][0..9]).to_numeric
     
     assert_not_nil a
     assert_equal Array, a.class
