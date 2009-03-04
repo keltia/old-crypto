@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 752c4b2f7a59 2009/03/04 10:47:09 roberto $
+# $Id: key.rb,v 60e76f2ab0cd 2009/03/04 10:47:23 roberto $
 
 # == class String
 #
@@ -399,7 +399,7 @@ end # -- class SQKey
 # Step1 uses VICKey.expand5to10
 # Step2 uses VICKey.chainadd on phrase (after conversion)
 #
-class VICKey
+class VICKey < Key
   attr_reader :first, :second, :third, :p1, :p2, :ikey5, :sc_key
   
   # === initialize
