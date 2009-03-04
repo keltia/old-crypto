@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 47c336e36030 2009/03/04 13:03:02 roberto $
+# $Id: cipher.rb,v 7f75477f22b4 2009/03/04 15:43:42 roberto $
 
 require "key"
 
@@ -31,10 +31,6 @@ end # -- SimpleCipher
 class Substitution < SimpleCipher
   attr_reader :key
   
-  def initialize(key)
-    @key = SKey.new(key)
-  end
-
   # === encode
   #
   def encode(plain_text)
@@ -57,24 +53,7 @@ class Substitution < SimpleCipher
     return plain_text
   end # -- decode
   
-  # === forward
-  #
-  def forward
-    @key.alpha.keys.sort.each do |k|
-      v = @key.alpha[k].to_i
-      yield k, v
-    end
-  end # -- forward
-
-  # === reverse
-  #
-  def reverse
-    @key.ralpha.keys.sort.each do |k|
-      v = @key.ralpha[k].to_s
-      yield k, v
-    end
-  end # -- reverse
-end # --  Cipher
+end # --  Substitution
 
 # ==  Caesar
 #
