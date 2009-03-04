@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 6ff5b72ef913 2009/03/04 13:23:33 roberto $
+# $Id: key.rb,v 7f9dc0b92a21 2009/03/04 16:45:51 roberto $
 
 # == String
 #
@@ -435,16 +435,6 @@ class VICKey < Key
     @third = r
     @sc_key = TKey.new(@third.join).to_numeric
   end # -- initialize
-  
-  # === key_schedule
-  #
-  def key_schedule
-  end # -- key_schedule
-  
-  # === key_expand
-  #
-  def key_expand
-  end # -- key_expand
   
   # === normalize
   #
