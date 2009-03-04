@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 72bd0cbf733e 2009/03/04 09:04:56 roberto $
+# $Id: cipher.rb,v e37b9f5bcc46 2009/03/04 10:45:58 roberto $
 
 require "key"
 
@@ -204,10 +204,10 @@ end # -- class Transposition
 # This is the Straddling Checkerboard system (intended as a first pass to
 # the Nihilist cipher and possibly others).
 #
-class StraddlingCheckerboard  < SimpleCipher
+class StraddlingCheckerboard  < Substitution
   
-  def initialize(key, super_key = "")
-    @scb = SCKey.new(key)
+  def initialize(key)
+    @key = SCKey.new(key)
   end
 
   # === encode
@@ -218,11 +218,11 @@ class StraddlingCheckerboard  < SimpleCipher
     pt = plain_text.dup
     pt.scan(/./) do |c|
       if c >= "0" and c <= "9" then
-        cipher_text << @scb.encode("/")
+        cipher_text << @key.encode("/")
         cipher_text << c + c
-        cipher_text << @scb.encode("/")
+        cipher_text << @key.encode("/")
       else
-        cipher_text << @scb.encode(c)
+        cipher_text << @key.encode(c)
       end
     end
     return cipher_text
@@ -245,10 +245,10 @@ class StraddlingCheckerboard  < SimpleCipher
       else
         d = c[0] - 48
       end
-      if @scb.is_long?(d)
+      if @key.is_long?(d)
         c << ct.slice!(0,1)
       end
-      pt = @scb.decode(c)
+      pt = @key.decode(c)
       #
       # Number shift
       #
