@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 47c336e36030 2009/03/04 13:03:02 roberto $
+# $Id: key.rb,v 6ff5b72ef913 2009/03/04 13:23:33 roberto $
 
 # == String
 #
@@ -22,7 +22,7 @@ class String
     c_alpha = ''
     
     self.scan(/./) do |c|
-      if c_alpha !~ /#{c}/
+      if not c_alpha.include?(c) then
         c_alpha = c_alpha + c
       end
     end

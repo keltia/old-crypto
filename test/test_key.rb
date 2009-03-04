@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 47c336e36030 2009/03/04 13:03:02 roberto $
+# $Id: test_key.rb,v 6ff5b72ef913 2009/03/04 13:23:33 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -9,17 +9,14 @@ require "key"
 #
 class TestString < Test::Unit::TestCase
 
-  # === test_condensed1
+  # === test_condensed
   #
-  def test_condensed1
-    assert_equal "ARABESQUE".condensed, "ARBESQU"
+  def test_condensed
+    assert_equal "ARBESQU", "ARABESQUE".condensed
+    assert_equal "SUBWAY", "SUBWAY".condensed
+    assert_equal "FO.BAR", "FOO.BAR".condensed
+    assert_equal "FO?BAR", "FOO?BAR".condensed
   end # -- test_condensed
-
-  # === test_condensed2
-  #
-  def test_condensed2
-    assert_equal "SUBWAY".condensed, "SUBWAY"
-  end # -- test_condensed2
 
 end # --  TestString
 
