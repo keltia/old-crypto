@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 62aef83377d2 2009/03/04 09:07:03 roberto $
+# $Id: key.rb,v 752c4b2f7a59 2009/03/04 10:47:09 roberto $
 
 # == class String
 #
@@ -217,8 +217,6 @@ class SCKey < SKey
   
   def initialize(key, longc = [ 8, 9 ])
     super(key)
-    @alpha = Hash.new
-    @ralpha = Hash.new
     @longc = longc
     @full_key = checkerboard()
     gen_rings()
