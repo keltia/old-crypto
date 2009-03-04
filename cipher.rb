@@ -1,11 +1,11 @@
 #
-# $Id: cipher.rb,v e37b9f5bcc46 2009/03/04 10:45:58 roberto $
+# $Id: cipher.rb,v 47c336e36030 2009/03/04 13:03:02 roberto $
 
 require "key"
 
 module Cipher
 
-# == class SimpleCipher
+# ==  SimpleCipher
 #
 # Base class, encode() returns plain text as does decode()
 #
@@ -24,7 +24,7 @@ class SimpleCipher
   
 end # -- SimpleCipher
 
-# class Substitution
+#  Substitution
 #
 # Class for substitution cipher (Caesar, Polyalphabetic, Nihilist)
 #
@@ -74,9 +74,9 @@ class Substitution < SimpleCipher
       yield k, v
     end
   end # -- reverse
-end # -- class Cipher
+end # --  Cipher
 
-# == class Caesar
+# ==  Caesar
 #
 # Caesar cipher, monoalphabetic substitution, offset is 3
 #
@@ -88,9 +88,9 @@ class Caesar < Substitution
     @key = ::Caesar.new(offset)
   end # -- initialize
   
-end # -- class Caesar
+end # --  Caesar
 
-# == class Polybius
+# ==  Polybius
 #
 class Polybius < Substitution
   
@@ -115,9 +115,9 @@ class Polybius < Substitution
     return plain_text
   end # -- decode
   
-end # -- class Polybius
+end # --  Polybius
 
-# == class Transposition
+# ==  Transposition
 #
 # Plain Transposition aka transposition
 #
@@ -197,9 +197,9 @@ class Transposition < SimpleCipher
     return plain
   end # -- decode
   
-end # -- class Transposition
+end # --  Transposition
 
-# == class StraddlingCheckerboard
+# ==  StraddlingCheckerboard
 #
 # This is the Straddling Checkerboard system (intended as a first pass to
 # the Nihilist cipher and possibly others).
@@ -268,9 +268,9 @@ class StraddlingCheckerboard  < Substitution
     return plain_text
   end # -- decode
   
-end # -- class StraddlingCheckerboard
+end # --  StraddlingCheckerboard
 
-# == class Nihilist
+# ==  Nihilist
 #
 # The Nihilist cipher has gone through several variations over the original
 # version by the Russians nihilists.  Main characteristics is  the 
@@ -314,7 +314,7 @@ class NihilistT < SimpleCipher
     return plain_text
   end # -- decode
   
-end # -- class NihilistT
+end # --  NihilistT
 
 # Implementation of the well known cipher used by Germany during
 # WWI. Code number assignment is probably different from the original

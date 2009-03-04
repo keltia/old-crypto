@@ -1,11 +1,11 @@
-# $Id: test_key.rb,v 205f02596d82 2009/03/04 09:04:25 roberto $
+# $Id: test_key.rb,v 47c336e36030 2009/03/04 13:03:02 roberto $
 
 require 'test/unit'
 require "yaml"
 
 require "key"
 
-# == class TestString
+# ==  TestString
 #
 class TestString < Test::Unit::TestCase
 
@@ -21,9 +21,9 @@ class TestString < Test::Unit::TestCase
     assert_equal "SUBWAY".condensed, "SUBWAY"
   end # -- test_condensed2
 
-end # -- class TestString
+end # --  TestString
 
-# == class TestKey
+# ==  TestKey
 #
 class TestKey < Test::Unit::TestCase
 
@@ -68,7 +68,7 @@ class TestKey < Test::Unit::TestCase
     end
   end # -- test_length
   
-end # -- class TestKey
+end # --  TestKey
 
 # == TestTKey
 #
@@ -126,9 +126,9 @@ class TestTKey < Test::Unit::TestCase
       assert_equal key.to_numeric10, @data[word]["num10"]
     end
   end # -- test_to_numeric10
-end # -- class TestTKey
+end # --  TestTKey
 
-# == class TestSKey
+# ==  TestSKey
 #
 class TestSKey < Test::Unit::TestCase
   
@@ -142,9 +142,9 @@ class TestSKey < Test::Unit::TestCase
     assert_not_nil key.alpha
     assert_not_nil key.ralpha
   end # -- test_presence_of_alpha
-end # -- class TestSKey
+end # --  TestSKey
 
-# == class TestKeyCaesar
+# ==  TestKeyCaesar
 #
 class TestKeyCaesar < Test::Unit::TestCase
   
@@ -210,9 +210,9 @@ class TestKeyCaesar < Test::Unit::TestCase
     assert_not_nil pt
     assert_equal pt, "Z"
   end # -- test_decode
-end # -- class TestKeyCaesar
+end # --  TestKeyCaesar
 
-# == class TestSCKey
+# ==  TestSCKey
 #
 class TestSCKey < Test::Unit::TestCase
   
@@ -306,9 +306,9 @@ class TestSCKey < Test::Unit::TestCase
       end
     end
   end # -- test_decode
-end # -- class TestSCKey
+end # --  TestSCKey
 
-# == class TestSQKey
+# ==  TestSQKey
 #
 class TestSQKey < Test::Unit::TestCase
 
@@ -367,9 +367,9 @@ class TestSQKey < Test::Unit::TestCase
     end
   end # -- test_decode
   
-end # -- class TestSQKey
+end # --  TestSQKey
 
-# == class TestVICKey
+# ==  TestVICKey
 #
 class TestVICKey < Test::Unit::TestCase
 
@@ -514,4 +514,4 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal r, res
   end # -- test_submod10
   
-end # -- class TestVICKey
+end # --  TestVICKey

@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 3192bbdf20ad 2009/02/25 14:58:12 roberto $
+# $Id: test_cipher.rb,v 47c336e36030 2009/03/04 13:03:02 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -6,9 +6,9 @@ require 'yaml'
 require "key"
 require "cipher"
 
-# == class TestSimpleCipher
+# ==  TestSimpleCipher
 #
-class TestSimpleCipher < Test::Unit::TestCase
+ TestSimpleCipher < Test::Unit::TestCase
   
   # === test_encode
   #
@@ -26,9 +26,9 @@ class TestSimpleCipher < Test::Unit::TestCase
     assert_equal ct, "plain text"
   end # -- test_decode
   
-end # -- class TestSimpleCipher
+end # --  TestSimpleCipher
 
-# == class TestCipherCaesar
+# ==  TestCipherCaesar
 #
 class TestCipherCaesar < Test::Unit::TestCase
   
@@ -51,9 +51,9 @@ class TestCipherCaesar < Test::Unit::TestCase
     pt = @cipher.decode(ct)
     assert_equal pt, "XYZAB"
   end
-end # -- class TestCipherCaesar
+end # --  TestCipherCaesar
 
-# == class TestCipherCaesar7
+# ==  TestCipherCaesar7
 #
 class TestCipherCaesar7 < Test::Unit::TestCase
   
@@ -76,9 +76,9 @@ class TestCipherCaesar7 < Test::Unit::TestCase
     pt = @cipher.decode(ct)
     assert_equal pt, "TUVWX"
   end
-end # -- class TestCipherCaesar_7
+end # --  TestCipherCaesar_7
 
-# == class TestTransposition
+# ==  TestTransposition
 #
 class TestTransposition < Test::Unit::TestCase
 
@@ -113,9 +113,9 @@ class TestTransposition < Test::Unit::TestCase
       assert_equal plain, pt, "key is #{word}" 
     end
   end # -- test_decode
-end # -- class TestTransposition
+end # --  TestTransposition
 
-# == class TestPolybius
+# ==  TestPolybius
 #
 class TestPolybius < Test::Unit::TestCase
   
@@ -150,9 +150,9 @@ class TestPolybius < Test::Unit::TestCase
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
-end # -- class TestPolybius
+end # --  TestPolybius
 
-# == class TestStraddlingCheckerboard
+# ==  TestStraddlingCheckerboard
 #
 class TestStraddlingCheckerboard < Test::Unit::TestCase
   # === setup
@@ -187,9 +187,9 @@ class TestStraddlingCheckerboard < Test::Unit::TestCase
     end
   end # -- test_decode
   
-end # -- class TestStraddlingCheckerboard
+end # --  TestStraddlingCheckerboard
 
-# == class TestNihilistT
+# ==  TestNihilistT
 #
 class TestNihilistT < Test::Unit::TestCase
   # === setup
@@ -226,9 +226,9 @@ class TestNihilistT < Test::Unit::TestCase
     end
   end # -- test_decode
   
-end # -- class TestNihilistT
+end # --  TestNihilistT
 
-# == class TestADFGVX
+# ==  TestADFGVX
 #
 class TestADFGVX < Test::Unit::TestCase
   
@@ -266,4 +266,4 @@ class TestADFGVX < Test::Unit::TestCase
     end
   end # -- test_decode
   
-end # -- class TestADFGVX
+end # --  TestADFGVX
