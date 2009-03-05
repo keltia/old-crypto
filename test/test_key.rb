@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 3e54a3de90fc 2009/03/04 16:47:08 roberto $
+# $Id: test_key.rb,v 839b8fc421fa 2009/03/05 13:56:07 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -42,6 +42,17 @@ class TestKey < Test::Unit::TestCase
       assert_equal key.key, word.upcase
     end
   end # -- test_init
+  
+  # === test_params
+  #
+  def test_params
+    assert_raise(ArgumentError) { Key.new(nil)}
+    assert_raise(ArgumentError) { Key.new(Array.new) }
+    assert_nothing_raised(ArgumentError) { Key.new(3) }
+    assert_nothing_raised(ArgumentError) { Key.new("") }
+    assert_nothing_raised(ArgumentError) { Key.new("FOOBAR") }
+    assert_raise(RangeError) { Key.new(42) }
+  end # -- test_params
   
   # === test_condensed1
   #
