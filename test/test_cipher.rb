@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 3282e21342d4 2009/03/04 13:14:18 roberto $
+# $Id: test_cipher.rb,v 22e7567033c9 2009/03/05 11:10:21 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -6,6 +6,7 @@ require 'yaml'
 require "key"
 require "cipher"
 
+module TestCipher
 # ==  TestSimpleCipher
 #
 class TestSimpleCipher < Test::Unit::TestCase
@@ -267,3 +268,4 @@ class TestADFGVX < Test::Unit::TestCase
   end # -- test_decode
   
 end # --  TestADFGVX
+end # -- TestCipher
