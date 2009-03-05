@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 86388382ca71 2009/03/05 13:56:18 roberto $
+# $Id: key.rb,v 256ede666c72 2009/03/05 14:11:04 roberto $
 
 # == String
 #
@@ -160,13 +160,13 @@ class SKey < Key
   # === encode
   #
   def encode(c)
-    @alpha[c] || ''
+    @alpha[c] || c
   end # -- encode
   
   # === decode
   #
   def decode(c)
-    @ralpha[c] || ''
+    @ralpha[c] || c
   end # -- decode
 
 end # -- SKey

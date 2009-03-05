@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 839b8fc421fa 2009/03/05 13:56:07 roberto $
+# $Id: test_key.rb,v 256ede666c72 2009/03/05 14:11:04 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -150,6 +150,16 @@ class TestSKey < Test::Unit::TestCase
     assert_not_nil key.alpha
     assert_not_nil key.ralpha
   end # -- test_presence_of_alpha
+
+  # === test_encode_decode
+  #
+  def test_encode_decode
+    key = SKey.new("")
+    
+    assert_equal "P", key.decode("P")
+    assert_equal "P", key.encode("P")
+  end # -- test_encode_decode
+
 end # --  TestSKey
 
 # ==  TestKeyCaesar

@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v e5b1d6ab51f1 2009/03/05 11:11:28 roberto $
+# $Id: cipher.rb,v 256ede666c72 2009/03/05 14:11:04 roberto $
 
 require "key"
 
@@ -33,7 +33,7 @@ class Substitution < SimpleCipher
   
   # === initialize
   #
-  def initialize(key)
+  def initialize(key = "")
     @key = SKey.new(key)
   end # -- initialize
   
