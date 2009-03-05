@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 7f75477f22b4 2009/03/04 15:43:42 roberto $
+# $Id: cipher.rb,v e5b1d6ab51f1 2009/03/05 11:11:28 roberto $
 
 require "key"
 
@@ -30,6 +30,12 @@ end # -- SimpleCipher
 #
 class Substitution < SimpleCipher
   attr_reader :key
+  
+  # === initialize
+  #
+  def initialize(key)
+    @key = SKey.new(key)
+  end # -- initialize
   
   # === encode
   #
