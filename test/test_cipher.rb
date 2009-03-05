@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 22e7567033c9 2009/03/05 11:10:21 roberto $
+# $Id: test_cipher.rb,v 1e38c6aef819 2009/03/05 11:11:04 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -28,6 +28,26 @@ class TestSimpleCipher < Test::Unit::TestCase
   end # -- test_decode
   
 end # --  TestSimpleCipher
+
+# ==  TestSubstitution
+#
+class TestSubstitution < Test::Unit::TestCase
+
+  # === setup
+  #
+  def setup
+    @cipher = Cipher::Substitution.new("FOOBAR")
+  end # -- setup
+  
+  # === test_init
+  #
+  def test_init
+    assert_not_nil(@cipher.key)
+    assert_not_nil(@cipher.key.alpha)
+    assert_not_nil(@cipher.key.ralpha)
+  end # -- test_init
+  
+end # -- TestSubstitution
 
 # ==  TestCipherCaesar
 #
