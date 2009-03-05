@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 1e38c6aef819 2009/03/05 11:11:04 roberto $
+# $Id: test_cipher.rb,v 8cb0cbe896f5 2009/03/05 14:03:52 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -47,6 +47,41 @@ class TestSubstitution < Test::Unit::TestCase
     assert_not_nil(@cipher.key.ralpha)
   end # -- test_init
   
+  # === test_null_key
+  #
+  def test_null_key
+    cipher = Cipher::Substitution.new()
+    
+    assert_not_nil cipher
+  end # -- test_null_key
+  
+  # === test_encode_null
+  #
+  def test_encode_null
+    cipher = Cipher::Substitution.new()
+
+    pt = "TEST"
+    ct = cipher.encode(pt)
+    assert_equal pt, ct, "Should degrade into 'give back plaintext'."
+  end # -- test_encode_null
+  
+  # === test_encode_null
+  #
+  def test_decode_null
+    cipher = Cipher::Substitution.new()
+
+    ct = "TEST"
+    pt = cipher.decode(ct)
+    assert_equal ct, pt, "Should degrade into 'give back plaintext'."
+  end # -- test_decode_null
+  
+  # === test_both
+  #
+  def test_both
+    cipher = Cipher::Substitution.new()
+    
+    assert_equal "PLAINTEXT", cipher.decode(cipher.encode("PLAINTEXT"))
+  end # -- test_both
 end # -- TestSubstitution
 
 # ==  TestCipherCaesar
