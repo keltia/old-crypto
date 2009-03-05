@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 256ede666c72 2009/03/05 14:11:04 roberto $
+# $Id: key.rb,v efa4a2342466 2009/03/05 18:36:24 roberto $
 
 # == String
 #
@@ -452,11 +452,7 @@ class VICKey < Key
   # XXX ASCII-dependant
   #
   def VICKey.to_numeric(str)
-    if RUBY_VERSION =~ /1\.9/ then
-      str.scan(/./).collect{|e| e.ord - 48 }
-    else
-      str.scan(/./).collect{|e| e[0] - 48 }
-    end
+    str.split('').collect{|i| i.to_i }
   end # -- to_numeric
   
   # === p1_encode
