@@ -6,31 +6,9 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 256ede666c72 2009/03/05 14:11:04 roberto $
+# $Id: key.rb,v ac11203bc89c 2009/03/08 23:38:57 roberto $
 
-# == String
-#
-# Small addon to String class
-#
-class String
-  
-  # === condensed
-  #
-  # Condense word by removing every duplicated letter
-  #
-  def condensed
-    c_alpha = ''
-    
-    self.scan(/./) do |c|
-      if not c_alpha.include?(c) then
-        c_alpha = c_alpha + c
-      end
-    end
-    c_alpha
-  end # -- condensed
-
-end # -- String
-
+require "crypto_helper"
 
 # == Key
 #
@@ -78,65 +56,18 @@ end # -- Key
 # See http://en.wikipedia.org/wiki/Transposition_cipher
 
 class TKey < Key
+  include Crypto
+  
   def initialize(key)
     super(key)
   end
   
   # === to_numeric
   #
-  # Generate a numeric key from a keyword
-  #
-  # For each letter in the keyword, scan for the lowest letter, assign
-  # it an index # then scan again till there are no letter left
-  #
-  # XXX modified to be 0-based
-  #
-  # By Dave Thomas, IRC #ruby-lang on Thu Aug  9 17:36:39 CEST 2001
-  # 
   def to_numeric
-    letters = @key.to_s.split('')
-    sorted = letters.sort
-    num_key = letters.collect do |l|
-      k = sorted.index(l)
-      sorted[k] = nil
-      k
-    end
-    num_key
+    @key.to_numeric
   end # -- to_numeric
-
-  # === to_numeric2
-  #
-  # Alternate version
-  # By dblack, IRC #ruby-lang
-  #
-  # XXX modified to be 0-based
-  #
-  def to_numeric2
-    srt = @key.to_s.split('').sort
-
-    n_key = @key.to_s.split('').map do |s|
-      srt[srt.index(s)] = srt.index(s)
-    end
-    n_key
-  end # -- to_numeric2
-
-  # === to_numeric10
-  #
-  # 1-based version modulo 10
-  #
-  # Based on:
-  # Alternate version
-  # By dblack, IRC #ruby-lang
-  #
-  def to_numeric10
-    srt = @key.to_s.split('').sort
-
-    n_key = @key.to_s.split('').map do |s|
-      srt[srt.index(s)] = (srt.index(s) + 1) % 10
-    end
-    n_key
-  end # -- to_numeric10
-
+  
 end # -- TKey
 
 # == SKey
@@ -405,6 +336,8 @@ end # -- SQKey
 # Step2 uses VICKey.chainadd on phrase (after conversion)
 #
 class VICKey < Key
+  include Crypto
+  
   attr_reader :first, :second, :third, :p1, :p2, :ikey5, :sc_key
   
   # === initialize
@@ -413,10 +346,10 @@ class VICKey < Key
     #
     # First phase
     #
-    @ikey5 = VICKey.to_numeric(ikey[0..4])
-    @imsg = VICKey.to_numeric(imsg)
-    res = VICKey.submod10(@imsg, @ikey5)
-    @first = VICKey.expand5to10(res)
+    @ikey5 = str_to_numeric(ikey[0..4])
+    @imsg = str_to_numeric(imsg)
+    res = submod10(@imsg, @ikey5)
+    @first = expand5to10(res)
     #
     # Second phase (we use TKey to get numeric keys but we *must* use 
     # normalize because TKey uses 0-based arrays) XXX
@@ -424,10 +357,10 @@ class VICKey < Key
     # We split the key phrase into two 10 digits parts @p1 & @p2
     # Then we add mod 10 @p1 and the first expanded ikey (as @first)
     #
-    @p1 = VICKey.normalize(TKey.new(phrase[0..9]).to_numeric)
-    @p2 = VICKey.normalize(TKey.new(phrase[10..19]).to_numeric)
-    tmp = VICKey.addmod10(@first, @p1)
-    @second = VICKey.p1_encode(tmp, @p2)
+    @p1 = normalize(phrase[0..9].to_numeric)
+    @p2 = normalize(phrase[10..19].to_numeric)
+    tmp = addmod10(@first, @p1)
+    @second = p1_encode(tmp, @p2)
     #
     # Third phase
     #
@@ -435,88 +368,11 @@ class VICKey < Key
     #
     r = @second.dup
     5.times do
-      r = VICKey.chainadd(r)
+      r = chainadd(r)
     end
     @third = r
-    @sc_key = TKey.new(@third.join).to_numeric
+    @sc_key = @third.join.to_numeric
   end # -- initialize
-  
-  # === normalize
-  #
-  def VICKey.normalize(a)
-    a.collect!{|e| (e + 1) % 10 }
-  end # -- normalize
-  
-  # === to_numeric
-  #
-  # XXX ASCII-dependant
-  #
-  def VICKey.to_numeric(str)
-    if RUBY_VERSION =~ /1\.9/ then
-      str.scan(/./).collect{|e| e.ord - 48 }
-    else
-      str.scan(/./).collect{|e| e[0] - 48 }
-    end
-  end # -- to_numeric
-  
-  # === p1_encode
-  #
-  # This encoding method uses the array p2 to encode array p1
-  # in a simplified tabular substitution
-  #
-  def VICKey.p1_encode(p1, p2)
-    r = Array.new
-    p1.each do |e|
-      r << p2[(e + 10) % 10 - 1]
-    end
-    r
-  end # -- p1_encode
-  
-  # === VICKey.chainadd
-  #
-  # [ a0, a1, a2, a3, a4 ] is transformed into
-  # [ b0, b1, b2, b3, b4 ]
-  #
-  # b0 = a0 + a1
-  # b1 = a1 + a2
-  # b2 = a2 + a3
-  # b3 = a3 + a4
-  # b4 = a4 + b0
-  #
-  #
-  def VICKey.chainadd(a)
-    b = a.dup
-    len = a.length
-    a.each_with_index{|e,i| b[i] = (e + b[(i+1) % len]) % 10 }
-    b
-  end # -- chainadd
-  
-  # == VICKey.expand5to10
-  #
-  # Use VICKey.chainadd to generate the expanded key
-  #
-  def VICKey.expand5to10(data)
-    expd = VICKey.chainadd(data)
-    (data + expd)
-  end # -- expand5to10
-  
-  # === addmod10
-  #
-  # Addition modulo 10
-  #
-  def VICKey.addmod10(a, b)
-    raise DataError if a.length != b.length
-    (0..a.length-1).collect {|i| (a[i] + b[i]) % 10  }
-  end # -- addmod10
-  
-  # === submod10
-  #
-  # Substraction modulo 10 (step 1)
-  #
-  def VICKey.submod10(a, b)
-    len = a.length
-    c = (0..len-1).collect{|i| (a[i] - b[i] + 10) % 10 }
-  end # -- submod10
   
 end # -- VICKey
 
