@@ -1,24 +1,10 @@
-# $Id: test_key.rb,v 256ede666c72 2009/03/05 14:11:04 roberto $
+# $Id: test_key.rb,v ac11203bc89c 2009/03/08 23:38:57 roberto $
 
 require 'test/unit'
 require "yaml"
 
 require "key"
-
-# ==  TestString
-#
-class TestString < Test::Unit::TestCase
-
-  # === test_condensed
-  #
-  def test_condensed
-    assert_equal "ARBESQU", "ARABESQUE".condensed
-    assert_equal "SUBWAY", "SUBWAY".condensed
-    assert_equal "FO.BAR", "FOO.BAR".condensed
-    assert_equal "FO?BAR", "FOO?BAR".condensed
-  end # -- test_condensed
-
-end # --  TestString
+require "crypto_helper"
 
 # ==  TestKey
 #
@@ -102,38 +88,15 @@ class TestTKey < Test::Unit::TestCase
     end
   end # -- test_init
   
-  # === test_to_numeric_1
+  # === test_to_numeric
   #
-  def test_to_numeric_1
+  def test_to_numeric
     @data.keys.each do |word|
       key = TKey.new(word)
 
-      assert_not_nil key
-      assert_equal key.to_numeric, @data[word]["num"]
+      assert_equal @data[word]["num"], key.to_numeric
     end
-  end # -- test_to_numeric_1
-  
-  # === test_to_numeric_2
-  #
-  def test_to_numeric_2
-    @data.keys.each do |word|
-      key = TKey.new(word)
-
-      assert_not_nil key
-      assert_equal key.to_numeric2, @data[word]["num"]
-    end
-  end # -- test_to_numeric_2
-
-  # === test_to_numeric_10
-  #
-  def test_to_numeric10
-    @data.keys.each do |word|
-      key = TKey.new(word)
-
-      assert_not_nil key
-      assert_equal key.to_numeric10, @data[word]["num10"]
-    end
-  end # -- test_to_numeric10
+  end # -- test_to_numeric
 end # --  TestTKey
 
 # ==  TestSKey
@@ -390,7 +353,8 @@ end # --  TestSQKey
 # ==  TestVICKey
 #
 class TestVICKey < Test::Unit::TestCase
-
+  include Crypto
+  
   # === setup
   #
   def setup
@@ -426,107 +390,4 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal init["sc_key"], key.sc_key
   end # -- test_init
 
-  # === test_normalize
-  #
-  def test_normalize
-    init = @data["init"]
-    a = TKey.new(init["phrase"][0..9]).to_numeric
-    
-    assert_not_nil a
-    assert_equal Array, a.class
-    
-    res = VICKey.normalize(a)
-    
-    assert_not_nil res
-    assert_equal init["p1"], res
-  end # -- test_normalize
-  
-  # === test_p1_encode
-  #
-  def test_p1_encode
-    init = @data["init"]
-    p1 = @data["p1"]
-    in_p1 = p1["r1"]
-    in_p2 = p1["r2"]
-    exp = p1["r"]
-    
-    assert_equal Array, in_p1.class
-    assert_equal Array, in_p2.class
-    assert_equal Array, exp.class
-    
-    res = VICKey.p1_encode(in_p1, in_p2)
-    
-    assert_not_nil res
-    assert_equal exp, res
-  end # -- test_p1_encode
-  
-  # === test_to_numeric
-  #
-  def test_to_numeric
-    @num = @data["num"]
-    a = @num["a"]
-    b = @num["b"]
-
-    assert_equal String, a.class
-    assert_equal Array, b.class
-    
-    res = VICKey.to_numeric(a)
-    
-    assert_not_nil res
-    assert_equal b, res
-  end # -- test_to_numeric
-  
-  # === test_chainadd
-  #
-  def test_chainadd
-    @keys.keys.each do |ca|
-      a = @keys[ca]["a"]
-      b = @keys[ca]["b"]
-      
-      res = VICKey.chainadd(a)
-      
-      assert_not_nil res
-      assert_equal b, res, "#{ca} failed"
-    end
-  end # -- test_chainadd
-  
-  # === test_expand5to10
-  #
-  def test_expand5to10
-    @expd = @data["expd"]
-    expd = VICKey.expand5to10(@expd["base"])
-    
-    assert_not_nil expd
-    assert_equal @expd["5to10"], expd
-  end # -- test_expand5to10
-  
-  # === test_addmod10
-  #
-  def test_addmod10
-    test = @data["addmod"]
-    a = test["a"]
-    b = test["b"]
-    
-    assert a.length == b.length
-    
-    c = VICKey.addmod10(a,b)
-    
-    assert_not_nil c
-    assert_equal test["c"], c
-  end # -- test_addmod10
-  
-  # === test_submod10
-  #
-  def test_submod10
-    a = [ 7, 7, 6, 5, 1 ]
-    b = [ 7, 4, 1, 7, 7 ]
-    r = [ 0, 3, 5, 8, 4 ]
-    
-    res = VICKey.submod10(a,b)
-    
-    assert_not_nil res
-    assert_equal Array, res.class
-    assert_equal r, res
-  end # -- test_submod10
-  
 end # --  TestVICKey
