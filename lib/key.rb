@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 96e2b5e2dffb 2009/03/08 23:43:41 roberto $
+# $Id$
 
 require "crypto_helper"
 

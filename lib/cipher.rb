@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 256ede666c72 2009/03/05 14:11:04 roberto $
+# $Id$
 
 require "key"
 
