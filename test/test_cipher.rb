@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 8cb0cbe896f5 2009/03/05 14:03:52 roberto $
+# $Id: test_cipher.rb,v c6f46f7a34d1 2009/03/09 23:12:22 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -15,7 +15,10 @@ class TestSimpleCipher < Test::Unit::TestCase
   #
   def test_encode
     cipher = Cipher::SimpleCipher.new
+    
+    assert_not_nil(cipher)
     ct = cipher.encode("plain text")
+    assert_not_nil(ct)
     assert_equal ct, "plain text"
   end # -- test_encode
   
@@ -23,7 +26,9 @@ class TestSimpleCipher < Test::Unit::TestCase
   #
   def test_decode
     cipher = Cipher::SimpleCipher.new
+    assert_not_nil(cipher)
     ct = cipher.decode("plain text")
+    assert_not_nil(ct)
     assert_equal ct, "plain text"
   end # -- test_decode
   
@@ -62,6 +67,7 @@ class TestSubstitution < Test::Unit::TestCase
 
     pt = "TEST"
     ct = cipher.encode(pt)
+    assert_not_nil(ct)
     assert_equal pt, ct, "Should degrade into 'give back plaintext'."
   end # -- test_encode_null
   
@@ -72,6 +78,7 @@ class TestSubstitution < Test::Unit::TestCase
 
     ct = "TEST"
     pt = cipher.decode(ct)
+    assert_not_nil(pt)
     assert_equal ct, pt, "Should degrade into 'give back plaintext'."
   end # -- test_decode_null
   
@@ -99,12 +106,14 @@ class TestCipherCaesar < Test::Unit::TestCase
   def test_encode
     pt = "ABCDE"
     ct = @cipher.encode(pt)
+    assert_not_nil(ct)
     assert_equal ct, "DEFGH"
   end # -- test_encode
   
   def test_decode
     ct = "ABCDE"
     pt = @cipher.decode(ct)
+    assert_not_nil(pt)
     assert_equal pt, "XYZAB"
   end
 end # --  TestCipherCaesar
@@ -124,12 +133,14 @@ class TestCipherCaesar7 < Test::Unit::TestCase
   def test_encode
     pt = "ABCDE"
     ct = @cipher.encode(pt)
+    assert_not_nil(ct)
     assert_equal ct, "HIJKL"
   end # -- test_encode
   
   def test_decode
     ct = "ABCDE"
     pt = @cipher.decode(ct)
+    assert_not_nil(pt)
     assert_equal pt, "TUVWX"
   end
 end # --  TestCipherCaesar_7
@@ -154,7 +165,9 @@ class TestTransposition < Test::Unit::TestCase
     pt = @data["plain"]
     @keys.keys.each do |word|
       cipher = Cipher::Transposition.new(word)
+      assert_not_nil(cipher)
       ct = cipher.encode(pt)
+      assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
   end # -- test_encode
@@ -165,7 +178,9 @@ class TestTransposition < Test::Unit::TestCase
     plain = @data["plain"]
     @keys.keys.each do |word|
       cipher = Cipher::Transposition.new(word)
+      assert_not_nil(cipher)
       pt = cipher.decode(@keys[word]["ct"])
+      assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}" 
     end
   end # -- test_decode
@@ -191,7 +206,9 @@ class TestPolybius < Test::Unit::TestCase
     pt = @data["plain"]
     @keys.keys.each do |word|
       cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
+      assert_not_nil(cipher)
       ct = cipher.encode(pt)
+      assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
   end # -- test_encode
@@ -202,7 +219,9 @@ class TestPolybius < Test::Unit::TestCase
     plain = @data["plain"]
     @keys.keys.each do |word|
       cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
+      assert_not_nil(cipher)
       pt = cipher.decode(@keys[word]["ct"])
+      assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
@@ -227,7 +246,9 @@ class TestStraddlingCheckerboard < Test::Unit::TestCase
     pt = @data["plain"]
     @keys.keys.each do |word|
       cipher = Cipher::StraddlingCheckerboard.new(word)
+      assert_not_nil(cipher)
       ct = cipher.encode(pt)
+      assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
   end # -- test_encode
@@ -238,7 +259,9 @@ class TestStraddlingCheckerboard < Test::Unit::TestCase
     plain = @data["plain"]
     @keys.keys.each do |word|
       cipher = Cipher::StraddlingCheckerboard.new(word)
+      assert_not_nil(cipher)
       pt = cipher.decode(@keys[word]["ct"])
+      assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
@@ -265,7 +288,9 @@ class TestNihilistT < Test::Unit::TestCase
     @keys.keys.each do |word|
       s, t = word.split(%r{,})
       cipher = Cipher::NihilistT.new(s, t)
+      assert_not_nil(cipher)
       ct = cipher.encode(pt)
+      assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
   end # -- test_encode
@@ -277,7 +302,9 @@ class TestNihilistT < Test::Unit::TestCase
     @keys.keys.each do |word|
       s, t = word.split(%{,})
       cipher = Cipher::NihilistT.new(s, t)
+      assert_not_nil(cipher)
       pt = cipher.decode(@keys[word]["ct"])
+      assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
@@ -305,7 +332,9 @@ class TestADFGVX < Test::Unit::TestCase
     @keys.keys.each do |word|
       s, t = word.split(%r{,})
       cipher = Cipher::ADFGVX.new(s, t)
+      assert_not_nil(cipher)
       ct = cipher.encode(pt)
+      assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
   end # -- test_encode
@@ -317,7 +346,9 @@ class TestADFGVX < Test::Unit::TestCase
     @keys.keys.each do |word|
       s, t = word.split(%{,})
       cipher = Cipher::ADFGVX.new(s, t)
+      assert_not_nil(cipher)
       pt = cipher.decode(@keys[word]["ct"])
+      assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
