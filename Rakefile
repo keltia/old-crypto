@@ -1,7 +1,8 @@
-# $Id: Rakefile,v ce951ed43ef0 2009/03/09 21:26:02 roberto $
+# $Id: Rakefile,v 26d3386bd301 2009/03/09 22:26:19 roberto $
 #
 require 'rake'
 require 'rake/testtask'
+require 'hoe'
 
 task :default => [:test_units]
 
@@ -19,5 +20,11 @@ task :stats do
     ["Code", "lib"],
     ["Units", "test"]
   ).to_s
+end
+
+require './lib/old_crypto.rb'
+
+Hoe.new('OldCrypto', OldCrypto::VERSION) do |p|
+  p.developer('Ollivier Robert', 'roberto@keltia.freenix.fr')
 end
 
