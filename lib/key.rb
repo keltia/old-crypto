@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id$
+# $Id: key.rb,v 58bfbb9b9f32 2009/03/10 15:28:33 roberto $
 
 require "crypto_helper"
 
@@ -332,8 +332,11 @@ end # -- SQKey
 # This uses a very complex key schedule as the basis of a straddling
 # checkerboard.
 #
-# Step1 uses VICKey.expand5to10
-# Step2 uses VICKey.chainadd on phrase (after conversion)
+# Step1 uses Crypto.expand5to10
+# Step2 uses Crypto.chainadd on phrase (after conversion)
+# Step3 uses the previously calculated data by running it 5 times through
+# the Crypto.chainadd method.  The key thus calculated is then converted
+# through a transposition.
 #
 class VICKey < Key
   include Crypto
@@ -351,8 +354,8 @@ class VICKey < Key
     res = submod10(@imsg, @ikey5)
     @first = expand5to10(res)
     #
-    # Second phase (we use TKey to get numeric keys but we *must* use 
-    # normalize because TKey uses 0-based arrays) XXX
+    # Second phase: we take the long numeric keys in two parts but we *must*
+    # use normalize because String#to_numeric uses 0-based arrays) XXX
     #
     # We split the key phrase into two 10 digits parts @p1 & @p2
     # Then we add mod 10 @p1 and the first expanded ikey (as @first)
