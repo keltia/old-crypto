@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v d158b3deab76 2009/03/12 18:41:38 roberto $
+# $Id: test_cipher.rb,v 3b7cbdcea1b7 2009/03/12 18:43:19 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -196,15 +196,15 @@ class TestTransposition < Test::Unit::TestCase
   end # -- test_decode
 end # --  TestTransposition
 
-# ==  TestPlayfair
+# ==  TestPolybius
 #
-class TestPlayfair < Test::Unit::TestCase
+class TestPolybius < Test::Unit::TestCase
   
   # === setup
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_Playfair.yaml") do |fh|
+    File.open("test/test_cipher_polybius.yaml") do |fh|
       @data = YAML.load(fh)
     end
     @keys = @data["keys"]
@@ -215,7 +215,7 @@ class TestPlayfair < Test::Unit::TestCase
   def test_encode
     pt = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Playfair.new(word, SQKey::SQ_NUMBERS)
+      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
@@ -228,14 +228,14 @@ class TestPlayfair < Test::Unit::TestCase
   def test_decode
     plain = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Playfair.new(word, SQKey::SQ_NUMBERS)
+      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
       pt = cipher.decode(@keys[word]["ct"])
       assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
-end # --  TestPlayfair
+end # --  TestPolybius
 
 # ==  TestStraddlingCheckerboard
 #
