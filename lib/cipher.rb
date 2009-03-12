@@ -1,5 +1,5 @@
 #
-# $Id$
+# $Id: cipher.rb,v f717ea3b9b68 2009/03/12 17:13:43 roberto $
 
 require "key"
 
@@ -101,6 +101,32 @@ class Polybius < Substitution
   end # -- decode
   
 end # --  Polybius
+
+# == Playfair
+#
+# Bigrammatic substitution through a square alphabet
+#
+class Playfair < Substitution
+  
+  # === initialize
+  #
+  def initialize(key)
+    @key = ::Playfair.new(key)
+  end # -- substitution
+  
+  # === encode
+  #
+  def encode(plain_text)
+    plain_text
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(cipher_text)
+    cipher_text
+  end # -- decode
+  
+end # -- Playfair
 
 # ==  Transposition
 #
