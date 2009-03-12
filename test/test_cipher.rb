@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v c6f46f7a34d1 2009/03/09 23:12:22 roberto $
+# $Id: test_cipher.rb,v d67ecbc0bde4 2009/03/12 10:45:48 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -186,15 +186,15 @@ class TestTransposition < Test::Unit::TestCase
   end # -- test_decode
 end # --  TestTransposition
 
-# ==  TestPolybius
+# ==  TestPlayfair
 #
-class TestPolybius < Test::Unit::TestCase
+class TestPlayfair < Test::Unit::TestCase
   
   # === setup
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_polybius.yaml") do |fh|
+    File.open("test/test_cipher_Playfair.yaml") do |fh|
       @data = YAML.load(fh)
     end
     @keys = @data["keys"]
@@ -205,7 +205,7 @@ class TestPolybius < Test::Unit::TestCase
   def test_encode
     pt = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
+      cipher = Cipher::Playfair.new(word, SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
@@ -218,14 +218,14 @@ class TestPolybius < Test::Unit::TestCase
   def test_decode
     plain = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
+      cipher = Cipher::Playfair.new(word, SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
       pt = cipher.decode(@keys[word]["ct"])
       assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
-end # --  TestPolybius
+end # --  TestPlayfair
 
 # ==  TestStraddlingCheckerboard
 #
@@ -354,4 +354,46 @@ class TestADFGVX < Test::Unit::TestCase
   end # -- test_decode
   
 end # --  TestADFGVX
+
+# ==  TestPlayfair
+#
+class TestPlayfair < Test::Unit::TestCase
+  
+  # === setup
+  #
+  def setup
+    @data = Hash.new
+    File.open("test/test_cipher_playfair.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"]
+  end # -- setup
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::Playfair.new(word)
+      assert_not_nil(cipher)
+      ct = cipher.encode(pt)
+      assert_not_nil(ct)
+      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+    end
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    plain = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::Playfair.new(word)
+      assert_not_nil(cipher)
+      pt = cipher.decode(@keys[word]["ct"])
+      assert_not_nil(pt)
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+    end
+  end # -- test_decode
+end # --  TestPlayfair
+
 end # -- TestCipher
