@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v a772091ca9e7 2009/03/12 18:40:13 roberto $
+# $Id: test_cipher.rb,v d158b3deab76 2009/03/12 18:41:38 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -12,13 +12,23 @@ module TestCipher
 #
 class TestSimpleCipher < Test::Unit::TestCase
   
+  # === setup
+  #
+  def setup
+    @cipher = Cipher::SimpleCipher.new
+  end # -- setup
+  
+  # === test_init
+  #
+  def test_init
+    assert_not_nil(@cipher)
+  end # -- test_init
+  
   # === test_encode
   #
   def test_encode
-    cipher = Cipher::SimpleCipher.new
+    ct = @cipher.encode("plain text")
     
-    assert_not_nil(cipher)
-    ct = cipher.encode("plain text")
     assert_not_nil(ct)
     assert_equal ct, "plain text"
   end # -- test_encode
@@ -26,9 +36,8 @@ class TestSimpleCipher < Test::Unit::TestCase
   # === test_decode
   #
   def test_decode
-    cipher = Cipher::SimpleCipher.new
-    assert_not_nil(cipher)
-    ct = cipher.decode("plain text")
+    ct = @cipher.decode("plain text")
+    
     assert_not_nil(ct)
     assert_equal ct, "plain text"
   end # -- test_decode
