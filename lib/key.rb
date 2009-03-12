@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v bae0266ebf3b 2009/03/12 10:41:08 roberto $
+# $Id: key.rb,v 353cf99492de 2009/03/12 17:15:06 roberto $
 
 require "crypto_helper"
 
@@ -356,6 +356,7 @@ class Playfair < SKey
       CODE_WORD.each do |j|
         c = word[ind]
         @alpha[c.chr] = [ i, j ]
+        @ralpha[[ i, j ]] = c.chr
         ind += 1
       end
     end

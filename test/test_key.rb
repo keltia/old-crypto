@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v bae0266ebf3b 2009/03/12 10:41:08 roberto $
+# $Id: test_key.rb,v 353cf99492de 2009/03/12 17:15:06 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -383,6 +383,7 @@ class TestPlayfair < Test::Unit::TestCase
       assert_not_nil key
       assert_equal Playfair, key.class
       assert_not_nil key.alpha
+      assert_not_nil key.ralpha
       assert_equal @data[word]["full_key"], key.full_key
     end
   end # -- test_init
@@ -394,6 +395,7 @@ class TestPlayfair < Test::Unit::TestCase
       key = Playfair.new(word)
 
       assert_equal @data[word]["alpha"], key.alpha
+      assert_equal @data[word]["ralpha"], key.ralpha
     end
   end # -- test_gen_rings
   
