@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 353cf99492de 2009/03/12 17:15:06 roberto $
+# $Id: key.rb,v 689044692477 2009/03/12 17:16:48 roberto $
 
 require "crypto_helper"
 
@@ -364,14 +364,40 @@ class Playfair < SKey
   
   # === encode
   #
+  # Same row: p(r,c) -> p(r, c + 1 mod 5) 
+  # Same col: p(r,c) -> p(r + 1 mod 5, c)
+  # Diff.col/row:
+  #  P = K(r,c),K(r',c') -> C = K(r,c'),K(r,c)
+  #
   def encode(c)
-    c
+    p1, p2 = c.split(//)
+    r1, c1 = @alpha[p1]
+    r2, c2 = @alpha[p2]
+    if r1 == r2 then
+       return @ralpha[[r1, (c1 + 1) % 5]] + @ralpha[[r2, (c2 + 1) % 5]]
+    end
+    if c1 == c2 then
+       return @ralpha[[(r1 + 1) % 5, c1]] + @ralpha[[(r2 + 1) % 5, c2]]
+    end
+    return @ralpha[[r1, c2]] + @ralpha[[r2, c1]]
   end # -- encode
   
   # === decode
   #
+  # Decoding is the same if the two letters form a square.  If same row or
+  # same col, take the previous letter (mod 5) in the array
+  #
   def decode(c)
-    c
+    p1, p2 = c.split(//)
+    r1, c1 = @alpha[p1]
+    r2, c2 = @alpha[p2]
+    if r1 == r2 then
+       return @ralpha[[r1, (c1 + 4) % 5]] + @ralpha[[r2, (c2 + 4) % 5]]
+    end
+    if c1 == c2 then
+       return @ralpha[[(r1 + 4) % 5, c1]] + @ralpha[[(r2 + 4) % 5, c2]]
+    end
+    return @ralpha[[r1, c2]] + @ralpha[[r2, c1]]
   end # -- decode
   
 end # -- Playfair
