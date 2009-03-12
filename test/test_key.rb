@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 353cf99492de 2009/03/12 17:15:06 roberto $
+# $Id: test_key.rb,v 63fb5e7b2658 2009/03/12 17:16:07 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -411,7 +411,7 @@ class TestPlayfair < Test::Unit::TestCase
       encode_in = test["in"]
       encode_out = test["out"]
       encode_in.each do |c|
-        assert_equal encode_out.shift, key.encode(c), "#{word}"
+        assert_equal encode_out.shift, key.encode(c), "#{word} #{c}"
       end
     end
   end # -- test_encode
@@ -428,7 +428,7 @@ class TestPlayfair < Test::Unit::TestCase
       encode_in = test["out"]
       encode_out = test["in"]
       encode_in.each do |ct|
-        assert_equal encode_out.shift, key.decode(ct), "#{word}"
+        assert_equal encode_out.shift, key.decode(ct), "#{word} #{ct} "
       end
     end
   end # -- test_decode
