@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 67c64e19ed0e 2009/03/12 23:10:06 roberto $
+# $Id: cipher.rb,v 777f1203f07c 2009/03/12 23:10:44 roberto $
 
 require "key"
 
@@ -88,6 +88,8 @@ class Polybius < Substitution
   # === decode
   #
   def decode(cipher_text)
+    raise ArgumentError, "Mangled cryptogram" if cipher_text.length.odd?
+    
     plain_text = ""
     
     cipher_text.scan(/../) do |ct|
