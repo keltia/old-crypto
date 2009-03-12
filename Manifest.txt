@@ -7,6 +7,7 @@ rake/code_statistics.rb
 test/test_cipher.rb
 test/test_cipher_adfgvx.yaml
 test/test_cipher_nihilistt.yaml
+test/test_cipher_playfair.yaml
 test/test_cipher_polybius.yaml
 test/test_cipher_straddling.yaml
 test/test_cipher_transp.yaml
@@ -14,6 +15,7 @@ test/test_crypto.yaml
 test/test_crypto_helper.rb
 test/test_key.rb
 test/test_key.yaml
+test/test_playfair.yaml
 test/test_sckey.yaml
 test/test_sqkey.yaml
 test/test_string.yaml
