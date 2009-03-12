@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v ac11203bc89c 2009/03/08 23:38:57 roberto $
+# $Id: test_key.rb,v 18458dade1d4 2009/03/12 10:39:51 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -301,6 +301,17 @@ class TestSQKey < Test::Unit::TestCase
     end
   end # -- setup
 
+  # === test_init
+  #
+  def test_init
+    @data.keys.each do |word|
+      key = SQKey.new(word, @data[word]["type"])
+
+      assert_not_nil key
+      assert_equal @data[word]["full_key"], key.full_key
+    end
+  end # -- test_init
+  
   # === test_gen_rings
   #
   def test_gen_rings
