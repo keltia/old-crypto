@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v dc19f796b2b2 2009/03/12 18:43:40 roberto $
+# $Id: test_cipher.rb,v aff5b9ee621e 2009/03/12 23:11:05 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -230,6 +230,8 @@ class TestPolybius < Test::Unit::TestCase
     @keys.keys.each do |word|
       cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
+      assert_raise(ArgumentError) { cipher.decode("AAA") }
+      
       pt = cipher.decode(@keys[word]["ct"])
       assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
@@ -385,6 +387,7 @@ class TestPlayfair < Test::Unit::TestCase
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word)
       assert_not_nil(cipher)
+      
       ct = cipher.encode(pt)
       assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
@@ -398,6 +401,8 @@ class TestPlayfair < Test::Unit::TestCase
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word)
       assert_not_nil(cipher)
+      assert_raise(ArgumentError) { cipher.decode("AAA") }
+      
       pt = cipher.decode(@keys[word]["ct"])
       assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
