@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 1c25a4d1ef70 2009/03/12 18:38:47 roberto $
+# $Id: cipher.rb,v 57d3fc1745c7 2009/03/12 23:09:45 roberto $
 
 require "key"
 
@@ -90,11 +90,8 @@ class Polybius < Substitution
   def decode(cipher_text)
     plain_text = ""
     
-    ct = cipher_text.dup
-    len = cipher_text.length / 2
-    for i in 0..(len - 1) do
-      bigram = ct.slice!(0,2) 
-      pt = @key.decode(bigram)
+    cipher_text.scan(/../) do |ct|
+      pt = @key.decode(ct)
       plain_text << pt
     end
     return plain_text
