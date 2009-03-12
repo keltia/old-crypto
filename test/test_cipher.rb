@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 3b7cbdcea1b7 2009/03/12 18:43:19 roberto $
+# $Id: test_cipher.rb,v dc19f796b2b2 2009/03/12 18:43:40 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -372,7 +372,6 @@ class TestPlayfair < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @data = Hash.new
     File.open("test/test_cipher_playfair.yaml") do |fh|
       @data = YAML.load(fh)
     end
