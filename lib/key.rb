@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v ad880654be0a 2009/03/12 10:39:21 roberto $
+# $Id: key.rb,v bae0266ebf3b 2009/03/12 10:41:08 roberto $
 
 require "crypto_helper"
 
@@ -317,6 +317,63 @@ class SQKey < SKey
   end # -- gen_rings
 
 end # -- SQKey
+
+# == Playfair
+#
+# The Playfait cipher was invented by Charles Wheatstone but popularized by
+# his friend, the Baron Playfair.
+#
+# Description of the cipher on http://en.wikipedia.org/wiki/Playfair_cipher
+# JS version on http://www.simonsingh.net/The_Black_Chamber/playfaircipher.htm
+#
+# Playfair is a bigrammatic cipher but it does not use a Polybius square
+#
+class Playfair < SKey
+  include Crypto
+  
+  BASE25 = "ABCDEFGHIJKLMNOPRSTUVWXYZ"
+  
+  CODE_WORD = [ 0, 1, 2, 3, 4 ]
+  
+  attr_reader :full_key
+  
+  # === initialize
+  #
+  def initialize(key)
+    super(key.gsub(%r{\s*}, ''))
+    @alpha = Hash.new
+    @base = BASE25
+    @full_key = (@key + @base).condensed
+    gen_rings()
+  end # -- initialize
+  
+  # === gen_rings
+  #
+  def gen_rings
+    ind = 0
+    word = @full_key.dup
+    CODE_WORD.each do |i|
+      CODE_WORD.each do |j|
+        c = word[ind]
+        @alpha[c.chr] = [ i, j ]
+        ind += 1
+      end
+    end
+  end # -- gen_rings
+  
+  # === encode
+  #
+  def encode(c)
+    c
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(c)
+    c
+  end # -- decode
+  
+end # -- Playfair
 
 # == VICKey
 #
