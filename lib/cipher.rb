@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v f717ea3b9b68 2009/03/12 17:13:43 roberto $
+# $Id: cipher.rb,v 1c25a4d1ef70 2009/03/12 18:38:47 roberto $
 
 require "key"
 
@@ -117,13 +117,32 @@ class Playfair < Substitution
   # === encode
   #
   def encode(plain_text)
-    plain_text
+    #
+    # Add a "X" if of odd length
+    #
+    if plain_text.length.odd? then
+      plain_text << "X"
+    end
+    
+    cipher_text = ""
+    plain_text.scan(/../) do |pt|
+      ct = @key.encode(pt)
+      cipher_text << ct
+    end
+    cipher_text
   end # -- encode
   
   # === decode
   #
   def decode(cipher_text)
-    cipher_text
+    Raise DataError, "Mangled cryptogram" if cipher_text.length.odd?
+    
+    plain_text = ""
+    cipher_text.scan(/../) do |ct|
+      pt = @key.decode(ct)
+      plain_text << pt
+    end
+    plain_text
   end # -- decode
   
 end # -- Playfair
