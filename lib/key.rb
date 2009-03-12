@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 58bfbb9b9f32 2009/03/10 15:28:33 roberto $
+# $Id: key.rb,v ad880654be0a 2009/03/12 10:39:21 roberto $
 
 require "crypto_helper"
 
@@ -288,7 +288,7 @@ class SQKey < SKey
   attr_reader :full_key, :type
   
   def initialize(key, type = SQ_ADFGVX)
-    super(key)
+    super(key.gsub(%r{\s*}, ''))
     @alpha = Hash.new
     @ralpha = Hash.new
     @type = type
