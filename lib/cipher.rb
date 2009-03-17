@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 777f1203f07c 2009/03/12 23:10:44 roberto $
+# $Id: cipher.rb,v 848e7d050f31 2009/03/17 10:16:09 roberto $
 
 require "key"
 
@@ -324,8 +324,6 @@ class NihilistT < SimpleCipher
   # === encode
   #
   def encode(plain_text)
-    cipher_text = ""
-    
     # First pass ciphertext
     #
     ct = @scb.encode(plain_text)
@@ -336,8 +334,6 @@ class NihilistT < SimpleCipher
   # === decode
   #
   def decode(cipher_text)
-    plain_text = ""
-    
     ct = @super_key.decode(cipher_text)
     plain_text = @scb.decode(ct)
     return plain_text
