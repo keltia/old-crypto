@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 689044692477 2009/03/12 17:16:48 roberto $
+# $Id: key.rb,v 19ed39bf1f05 2009/03/17 16:11:30 roberto $
 
 require "crypto_helper"
 
@@ -238,7 +238,9 @@ class SCKey < SKey
   #
   def gen_rings
     shortc = (0..9).collect{|i| i unless @longc.include?(i) }.compact
+    raise DataError if shortc.nil?
     long = @longc.collect{|i| (0..9).collect{|j| i*10+j } }.flatten
+    raise DataError if long.nil?
     @shortc = shortc.dup
 
     word = @full_key.dup
