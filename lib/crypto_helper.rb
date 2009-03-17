@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 27cdadb5eb5b 2009/03/05 20:31:23 roberto $
+# $Id: crypto_helper.rb,v 126330a999ab 2009/03/17 11:17:01 roberto $
 
 
 # == String
@@ -54,6 +54,9 @@ class String
   #
   # Alternate version
   # By dblack, IRC #ruby-lang
+  #
+  # This version is more than 3 times as slow as #to_numeric
+  # See misc/bench.rb
   #
   # XXX modified to be 0-based
   #
