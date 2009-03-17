@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v aff5b9ee621e 2009/03/12 23:11:05 roberto $
+# $Id: test_cipher.rb,v 77647c6c2314 2009/03/17 16:11:41 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -392,6 +392,10 @@ class TestPlayfair < Test::Unit::TestCase
       assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
+    
+    pt = "PQRST"
+    cipher = Cipher::Playfair.new("FOOBAR")
+    assert_raise(NoMethodError) {  ct = cipher.encode(pt) }
   end # -- test_encode
   
   # === test_decode
