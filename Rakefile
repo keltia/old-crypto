@@ -1,4 +1,4 @@
-# $Id: Rakefile,v 26d3386bd301 2009/03/09 22:26:19 roberto $
+# $Id: Rakefile,v 8e3a20a562ea 2010/02/01 14:31:10 roberto $
 #
 require 'rake'
 require 'rake/testtask'
@@ -24,7 +24,8 @@ end
 
 require './lib/old_crypto.rb'
 
-Hoe.new('OldCrypto', OldCrypto::VERSION) do |p|
-  p.developer('Ollivier Robert', 'roberto@keltia.freenix.fr')
+Hoe.spec 'OldCrypto' do
+  self.developer('Ollivier Robert', 'roberto@keltia.net')
+  self.version = OldCrypto::VERSION
 end
 
