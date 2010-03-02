@@ -1,4 +1,4 @@
-# $Id: Rakefile,v 8e3a20a562ea 2010/02/01 14:31:10 roberto $
+# $Id: Rakefile,v bdc07d891b44 2010/03/02 13:41:58 roberto $
 #
 require 'rake'
 require 'rake/testtask'
@@ -15,7 +15,7 @@ Rake::TestTask.new("test_units") { |t|
 
 desc "Report code statistics (KLOCs, etc) from the application"
 task :stats do
-  require 'rake/code_statistics'
+  require './rake/code_statistics'
   CodeStatistics.new(
     ["Code", "lib"],
     ["Units", "test"]
