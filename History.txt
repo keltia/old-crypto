@@ -1,708 +1,732 @@
 === 0.0.1 WIP
 
+2010-03-02  Ollivier Robert  <roberto@keltia.net>
+
+        * lib/cipher.rb, lib/key.rb, test/test_cipher.rb, test/test_key.rb:
+        Move all key classes into a common module Key::.
+        [a6aee4c85157] [tip]
+
+2010-02-01  Ollivier Robert  <roberto@keltia.net>
+
+        * README.txt:
+        Add $Id: History.txt,v b6421bf9bf50 2010/03/02 09:44:08 roberto $.
+        [24ca11af3b60]
+
+        * DESIGN.txt, README.txt:
+        Please Hoe again, rename DESIGN into more proper README.
+        [7823fe11c58e]
+
+        * Rakefile:
+        Adapt to new Hoe.
+        [8e3a20a562ea]
+
+        * History.txt:
+        Add History.txt to silence Hoe.
+        [8d164ea51223]
+
 2009-03-17  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* test/test_cipher.rb:
-	Test for invalid data.
-	[77647c6c2314] [tip]
+        * test/test_cipher.rb:
+        Test for invalid data.
+        [77647c6c2314] [tip]
 
-	* lib/key.rb:
-	Try to catch internal errors.
-	[19ed39bf1f05]
+        * lib/key.rb:
+        Try to catch internal errors.
+        [19ed39bf1f05]
 
-	* lib/crypto_helper.rb, misc/bench.rb:
-	Mention that #to_numeric2 is 3x as slow as #to_numeric. Add bench.
-	[126330a999ab]
+        * lib/crypto_helper.rb, misc/bench.rb:
+        Mention that #to_numeric2 is 3x as slow as #to_numeric. Add bench.
+        [126330a999ab]
 
-	* lib/cipher.rb:
-	Remove dead code.
+        * lib/cipher.rb:
+        Remove dead code.
 
-	Found by: heckle
-	[848e7d050f31]
+        Found by: heckle
+        [848e7d050f31]
 
 2009-03-13  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* test/test_cipher.rb:
-	More tests.
-	[aff5b9ee621e]
+        * test/test_cipher.rb:
+        More tests.
+        [aff5b9ee621e]
 
-	* lib/cipher.rb:
-	Raise exception for odd-length ciphertext like Playfair.
-	[777f1203f07c]
+        * lib/cipher.rb:
+        Raise exception for odd-length ciphertext like Playfair.
+        [777f1203f07c]
 
-	* lib/cipher.rb:
-	Fix typo: Raise -> raise.
-	[67c64e19ed0e]
+        * lib/cipher.rb:
+        Fix typo: Raise -> raise.
+        [67c64e19ed0e]
 
-	* lib/cipher.rb:
-	Simplify.
-	[57d3fc1745c7]
+        * lib/cipher.rb:
+        Simplify.
+        [57d3fc1745c7]
 
 2009-03-12  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* Manifest.txt:
-	Fix manifest.
-	[562cbe137f97]
+        * Manifest.txt:
+        Fix manifest.
+        [562cbe137f97]
 
-	* test/test_cipher.rb:
-	Remove unnecessary code.
-	[dc19f796b2b2]
+        * test/test_cipher.rb:
+        Remove unnecessary code.
+        [dc19f796b2b2]
 
-	* test/test_cipher.rb:
-	Fix botched search/replace.
-	[3b7cbdcea1b7]
+        * test/test_cipher.rb:
+        Fix botched search/replace.
+        [3b7cbdcea1b7]
 
-	* test/test_cipher.rb:
-	More tests for Cipher::SimpleCipher.
-	[d158b3deab76]
+        * test/test_cipher.rb:
+        More tests for Cipher::SimpleCipher.
+        [d158b3deab76]
 
-	* test/test_cipher.rb:
-	Reformat.
-	[a772091ca9e7]
+        * test/test_cipher.rb:
+        Reformat.
+        [a772091ca9e7]
 
-	* lib/cipher.rb:
-	Implement Playfair#encode/#decode.
-	[1c25a4d1ef70]
+        * lib/cipher.rb:
+        Implement Playfair#encode/#decode.
+        [1c25a4d1ef70]
 
-	* lib/key.rb:
-	Implement Playfair#encode/#decode. All tests pass.
-	[689044692477]
+        * lib/key.rb:
+        Implement Playfair#encode/#decode. All tests pass.
+        [689044692477]
 
-	* test/test_key.rb:
-	Be a bit more verbose.
-	[63fb5e7b2658]
+        * test/test_key.rb:
+        Be a bit more verbose.
+        [63fb5e7b2658]
 
-	* lib/key.rb, test/test_key.rb, test/test_playfair.yaml:
-	Generate @ralpha as well, it is useful. Add tests & test data.
-	[353cf99492de]
+        * lib/key.rb, test/test_key.rb, test/test_playfair.yaml:
+        Generate @ralpha as well, it is useful. Add tests & test data.
+        [353cf99492de]
 
-	* lib/cipher.rb, test/test_cipher_playfair.yaml:
-	Skeleton for Cipher::Playfair & tests.
-	[f717ea3b9b68]
+        * lib/cipher.rb, test/test_cipher_playfair.yaml:
+        Skeleton for Cipher::Playfair & tests.
+        [f717ea3b9b68]
 
-	* test/test_cipher.rb, test/test_cipher_playfair.yaml:
-	Add tests for Cipher::Playfair.
-	[d67ecbc0bde4]
+        * test/test_cipher.rb, test/test_cipher_playfair.yaml:
+        Add tests for Cipher::Playfair.
+        [d67ecbc0bde4]
 
-	* lib/key.rb, test/test_key.rb, test/test_playfair.yaml:
-	Begin implementation of Playfair & tests.
-	[bae0266ebf3b]
+        * lib/key.rb, test/test_key.rb, test/test_playfair.yaml:
+        Begin implementation of Playfair & tests.
+        [bae0266ebf3b]
 
-	* test/test_key.rb:
-	Asserts are using "expected, actual" interface, not the other way
-	around.
-	[13ce3850d1d0]
+        * test/test_key.rb:
+        Asserts are using "expected, actual" interface, not the other way
+        around.
+        [13ce3850d1d0]
 
-	* test/test_key.rb:
-	Test @full_key.
-	[18458dade1d4]
+        * test/test_key.rb:
+        Test @full_key.
+        [18458dade1d4]
 
-	* lib/key.rb:
-	Remove whitespace in keys.
-	[ad880654be0a]
+        * lib/key.rb:
+        Remove whitespace in keys.
+        [ad880654be0a]
 
 2009-03-10  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* lib/key.rb:
-	Fix comments.
-	[58bfbb9b9f32]
+        * lib/key.rb:
+        Fix comments.
+        [58bfbb9b9f32]
 
-	* test/test_cipher.rb:
-	Add a few more assert_not_nil assertions.
-	[c6f46f7a34d1]
+        * test/test_cipher.rb:
+        Add a few more assert_not_nil assertions.
+        [c6f46f7a34d1]
 
 2009-03-09  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* Manifest.txt, Rakefile, lib/old_crypto.rb:
-	Add tentative gem infrastructure through hoe.
-	[26d3386bd301]
+        * Manifest.txt, Rakefile, lib/old_crypto.rb:
+        Add tentative gem infrastructure through hoe.
+        [26d3386bd301]
 
-	* Rakefile, cipher.rb, key.rb, lib/cipher.rb, lib/key.rb:
-	Reorganize code. Fix Rakefile for "stats".
-	[ce951ed43ef0]
+        * Rakefile, cipher.rb, key.rb, lib/cipher.rb, lib/key.rb:
+        Reorganize code. Fix Rakefile for "stats".
+        [ce951ed43ef0]
 
-	* key.rb:
-	Automated merge with file:///Volumes/Users/roberto/Src/Perso/HG/old-
-	crypto-wip
-	[96e2b5e2dffb]
+        * key.rb:
+        Automated merge with file:///Volumes/Users/roberto/Src/Perso/HG/old-
+        crypto-wip
+        [96e2b5e2dffb]
 
-	* key.rb, test/test_key.rb:
-	Use the new crypto_helper module. Sync tests.
-	[ac11203bc89c]
+        * key.rb, test/test_key.rb:
+        Use the new crypto_helper module. Sync tests.
+        [ac11203bc89c]
 
 2009-03-05  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* lib/crypto_helper.rb, test/test_crypto.yaml,
-	test/test_crypto_helper.rb, test/test_string.yaml:
-	Move methods out of TKey&VICKey into a helper module. Add tests.
-	[27cdadb5eb5b]
+        * lib/crypto_helper.rb, test/test_crypto.yaml,
+        test/test_crypto_helper.rb, test/test_string.yaml:
+        Move methods out of TKey&VICKey into a helper module. Add tests.
+        [27cdadb5eb5b]
 
-	* key.rb:
-	Replace #to_numeric with an ASCII-independant version from -wip.
-	[efa4a2342466]
+        * key.rb:
+        Replace #to_numeric with an ASCII-independant version from -wip.
+        [efa4a2342466]
 
-	* cipher.rb, key.rb, test/test_key.rb:
-	SKey/Cipher::Substitution with empty/null keys should degrade into
-	no-cipher.
-	[256ede666c72]
+        * cipher.rb, key.rb, test/test_key.rb:
+        SKey/Cipher::Substitution with empty/null keys should degrade into
+        no-cipher.
+        [256ede666c72]
 
-	* test/test_cipher.rb:
-	Allow null key for Cipher::Substitution, should degrade into
-	SimpleCipher.
-	[8cb0cbe896f5]
+        * test/test_cipher.rb:
+        Allow null key for Cipher::Substitution, should degrade into
+        SimpleCipher.
+        [8cb0cbe896f5]
 
-	* key.rb:
-	Fix tests.
-	[86388382ca71]
+        * key.rb:
+        Fix tests.
+        [86388382ca71]
 
-	* test/test_key.rb:
-	More tests for class Key.
-	[839b8fc421fa]
+        * test/test_key.rb:
+        More tests for class Key.
+        [839b8fc421fa]
 
-	* cipher.rb:
-	Fix test failure for Cipher::Substitution.
-	[e5b1d6ab51f1]
+        * cipher.rb:
+        Fix test failure for Cipher::Substitution.
+        [e5b1d6ab51f1]
 
-	* test/test_cipher.rb:
-	Add missing tests for Cipher::Substitution.
-	[1e38c6aef819]
+        * test/test_cipher.rb:
+        Add missing tests for Cipher::Substitution.
+        [1e38c6aef819]
 
-	* test/test_cipher.rb:
-	Be consistent and put everything inside "module TestCipher".
-	[22e7567033c9]
+        * test/test_cipher.rb:
+        Be consistent and put everything inside "module TestCipher".
+        [22e7567033c9]
 
 2009-03-04  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* test/test_key.rb:
-	Remove redundant comment.
-	[3e54a3de90fc]
+        * test/test_key.rb:
+        Remove redundant comment.
+        [3e54a3de90fc]
 
-	* test/test_key.rb:
-	Do not hardcode test data.
-	[61957f8ad0a3]
+        * test/test_key.rb:
+        Do not hardcode test data.
+        [61957f8ad0a3]
 
-	* key.rb:
-	Remove never-implemented skeleton code.
-	[7f9dc0b92a21]
+        * key.rb:
+        Remove never-implemented skeleton code.
+        [7f9dc0b92a21]
 
-	* test.rb:
-	Remove unused, poor man's substitute to unit tests.
-	[32c19c0a734c]
+        * test.rb:
+        Remove unused, poor man's substitute to unit tests.
+        [32c19c0a734c]
 
-	* cipher.rb:
-	Remove unused code.
-	[7f75477f22b4]
+        * cipher.rb:
+        Remove unused code.
+        [7f75477f22b4]
 
-	* key.rb, test/test_key.rb:
-	Rewrite String#condensed to avoid using characters as RE. Fix
-	tests.
+        * key.rb, test/test_key.rb:
+        Rewrite String#condensed to avoid using characters as RE. Fix
+        tests.
 
-	Submitted by: Samuel Tardieu <sam@rfc1149.net>
-	[6ff5b72ef913]
+        Submitted by: Samuel Tardieu <sam@rfc1149.net>
+        [6ff5b72ef913]
 
-	* test/test_cipher.rb:
-	Add back removed "class".
-	[3282e21342d4]
+        * test/test_cipher.rb:
+        Add back removed "class".
+        [3282e21342d4]
 
-	* cipher.rb, key.rb, test/test_cipher.rb, test/test_key.rb:
-	Remove "class Foo" from comments, it confuses rake stats.
-	[47c336e36030]
+        * cipher.rb, key.rb, test/test_cipher.rb, test/test_key.rb:
+        Remove "class Foo" from comments, it confuses rake stats.
+        [47c336e36030]
 
-	* key.rb:
-	VICKey is derived from Key for consistency.
-	[60e76f2ab0cd]
+        * key.rb:
+        VICKey is derived from Key for consistency.
+        [60e76f2ab0cd]
 
-	* key.rb:
-	There are initialized by superclass.
-	[752c4b2f7a59]
+        * key.rb:
+        There are initialized by superclass.
+        [752c4b2f7a59]
 
-	* cipher.rb:
-	StraddlingCheckerboard is derived from Substitution and has only one
-	key. Be consistent in naming.
-	[e37b9f5bcc46]
+        * cipher.rb:
+        StraddlingCheckerboard is derived from Substitution and has only one
+        key. Be consistent in naming.
+        [e37b9f5bcc46]
 
-	* key.rb:
-	The 1.9 way is 1.8-compatible.Tests ok.
-	[62aef83377d2]
+        * key.rb:
+        The 1.9 way is 1.8-compatible.Tests ok.
+        [62aef83377d2]
 
-	* cipher.rb:
-	Inheriting from SimpleCipher for consistency.
-	[72bd0cbf733e]
+        * cipher.rb:
+        Inheriting from SimpleCipher for consistency.
+        [72bd0cbf733e]
 
-	* test/test_key.rb:
-	Reorganize tests.
-	[205f02596d82]
+        * test/test_key.rb:
+        Reorganize tests.
+        [205f02596d82]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	Implement third phase of key schedule with chainadd & transposition.
-	More tests.
-	[8b8c7cc1a9e0]
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        Implement third phase of key schedule with chainadd & transposition.
+        More tests.
+        [8b8c7cc1a9e0]
 
-	* key.rb:
-	Expose more members for tests.
-	[4b3921cd16b2]
+        * key.rb:
+        Expose more members for tests.
+        [4b3921cd16b2]
 
-	* key.rb, test/test_key.rb:
-	Validate second phase through tests.
-	[1c5914ded430]
+        * key.rb, test/test_key.rb:
+        Validate second phase through tests.
+        [1c5914ded430]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	Add VICKey.normalize and tests & test data.
-	[a399a96c2f72]
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        Add VICKey.normalize and tests & test data.
+        [a399a96c2f72]
 
 2009-03-03  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* key.rb:
-	Add comment.
-	[2c77a57aa6bb]
+        * key.rb:
+        Add comment.
+        [2c77a57aa6bb]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	Vaidate first phase of key schedule through tests.
-	[53b3b8934d84]
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        Vaidate first phase of key schedule through tests.
+        [53b3b8934d84]
 
-	* test/test_key.rb:
-	Many more tests incl. assert_not_nil.
-	[3aff08c5faa1]
+        * test/test_key.rb:
+        Many more tests incl. assert_not_nil.
+        [3aff08c5faa1]
 
-	* test/test_key.rb:
-	Test various key members after renaming and additions.
-	[7ac4aed205c1]
+        * test/test_key.rb:
+        Test various key members after renaming and additions.
+        [7ac4aed205c1]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	Add VICKey.p1_encode & tests & test data to match. Remove
-	test_key_schedule.
-	[e436dc8941d1]
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        Add VICKey.p1_encode & tests & test data to match. Remove
+        test_key_schedule.
+        [e436dc8941d1]
 
-	* test/test_key.rb:
-	Move test_submod10 closer to test_addmod10.
-	[eda08fe55fc0]
+        * test/test_key.rb:
+        Move test_submod10 closer to test_addmod10.
+        [eda08fe55fc0]
 
-	* key.rb:
-	Add XXX comment about arrays being 1-based mod 10 ones.
-	[84b5ac77d4ae]
+        * key.rb:
+        Add XXX comment about arrays being 1-based mod 10 ones.
+        [84b5ac77d4ae]
 
-	* test/test_key.rb:
-	Cleanup, this is not needed.
-	[87b15a8dafa3]
+        * test/test_key.rb:
+        Cleanup, this is not needed.
+        [87b15a8dafa3]
 
-	* key.rb:
-	Beginning of coding for the whoe key schedule/expansion.
-	[27ed200a0e8d]
+        * key.rb:
+        Beginning of coding for the whoe key schedule/expansion.
+        [27ed200a0e8d]
 
-	* key.rb:
-	Fix comment.
-	[10830414ed7d]
+        * key.rb:
+        Fix comment.
+        [10830414ed7d]
 
-	* key.rb:
-	Be consistent in comments as well.
-	[36ac3cf8800a]
+        * key.rb:
+        Be consistent in comments as well.
+        [36ac3cf8800a]
 
-	* key.rb:
-	Move similar methods together.
-	[4c4615289442]
+        * key.rb:
+        Move similar methods together.
+        [4c4615289442]
 
-	* key.rb, test/test_key.rb:
-	Be consistent in naming methods.
-	[fb322d19ce56]
+        * key.rb, test/test_key.rb:
+        Be consistent in naming methods.
+        [fb322d19ce56]
 
-	* key.rb:
-	Be consistent.
-	[10f2a1baa6e8]
+        * key.rb:
+        Be consistent.
+        [10f2a1baa6e8]
 
-	* key.rb:
-	Fix for 1.9.
-	[eeb010babff5]
+        * key.rb:
+        Fix for 1.9.
+        [eeb010babff5]
 
-	* key.rb, test/test_key.rb:
-	Start filling in #initialize and associated tests.
-	[09b3770ce062]
+        * key.rb, test/test_key.rb:
+        Start filling in #initialize and associated tests.
+        [09b3770ce062]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	New methods and tests for VICKey: to_numeric & substract10.
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        New methods and tests for VICKey: to_numeric & substract10.
 
-	key.rb/test_key.rb:
-	  - new class methods: o to_numeric to convert a string of numbers
-	in an array o substract10 to substract two arrays modulo 10
-	  - add tests test_vickey.yaml: new data for tests, incl. #initialize.
-	[c39567927c3e]
+        key.rb/test_key.rb:
+          - new class methods: o to_numeric to convert a string of numbers
+        in an array o substract10 to substract two arrays modulo 10
+          - add tests test_vickey.yaml: new data for tests, incl. #initialize.
+        [c39567927c3e]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	Create VICKey.chainadd to reflect intent. Make expand5to10 use it.
-	Adapt tests.
-	[08a1b1534356]
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        Create VICKey.chainadd to reflect intent. Make expand5to10 use it.
+        Adapt tests.
+        [08a1b1534356]
 
-	* key.rb, test/test_key.rb:
-	#expand5to10 is now a class method.
-	[5a4b8cc6aee0]
+        * key.rb, test/test_key.rb:
+        #expand5to10 is now a class method.
+        [5a4b8cc6aee0]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	Add VICKey.addmod10 for modulo 10 addition and tests.
-	[078887fd5b1f]
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        Add VICKey.addmod10 for modulo 10 addition and tests.
+        [078887fd5b1f]
 
-	* test/test_key.rb:
-	Move it into a more natural place.
-	[aff22dc2b8fb]
+        * test/test_key.rb:
+        Move it into a more natural place.
+        [aff22dc2b8fb]
 
-	* key.rb:
-	Typo.
-	[0a9688543355]
+        * key.rb:
+        Typo.
+        [0a9688543355]
 
-	* key.rb, test/test_key.rb, test/test_vickey.yaml:
-	WIP on VIC cipher. Add #expand5to10 and tests.
-	[4bcd9f836ba2]
+        * key.rb, test/test_key.rb, test/test_vickey.yaml:
+        WIP on VIC cipher. Add #expand5to10 and tests.
+        [4bcd9f836ba2]
 
-	* key.rb, test/test_key.rb, test/test_tkey.yaml:
-	Add TKey.to_numeric10, an alternate method to get 1-based indices
-	modulo 10.
+        * key.rb, test/test_key.rb, test/test_tkey.yaml:
+        Add TKey.to_numeric10, an alternate method to get 1-based indices
+        modulo 10.
 
-	It will be used by the VIC cipher. Add tests.
-	[c2530d33145f]
+        It will be used by the VIC cipher. Add tests.
+        [c2530d33145f]
 
 2009-02-26  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* key.rb:
-	It is either c.ord or c[0], not both for 1.8/1.9.
-	[05749325e0e1]
+        * key.rb:
+        It is either c.ord or c[0], not both for 1.8/1.9.
+        [05749325e0e1]
 
 2009-02-25  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* key.rb:
-	Remove test for key.
-	[02c21fd02836]
+        * key.rb:
+        Remove test for key.
+        [02c21fd02836]
 
-	* cipher.rb:
-	Fix for 1.9.
-	[dd854a6faf58]
+        * cipher.rb:
+        Fix for 1.9.
+        [dd854a6faf58]
 
-	* cipher.rb:
-	super_key is unused here.
-	[a7da860dada0]
+        * cipher.rb:
+        super_key is unused here.
+        [a7da860dada0]
 
-	* cipher.rb, test/test_cipher.rb, test/test_cipher_nihilistt.yaml,
-	test/test_cipher_straddling.yaml:
-	Refactor NihilistT by creating StraddlingCheckerboard. Add & adapt
-	tests for both.
-	[3192bbdf20ad]
+        * cipher.rb, test/test_cipher.rb, test/test_cipher_nihilistt.yaml,
+        test/test_cipher_straddling.yaml:
+        Refactor NihilistT by creating StraddlingCheckerboard. Add & adapt
+        tests for both.
+        [3192bbdf20ad]
 
-	* cipher.rb:
-	Fix #first_phase for NihilistT (soon to be refactored).
-	[db488de075ed]
+        * cipher.rb:
+        Fix #first_phase for NihilistT (soon to be refactored).
+        [db488de075ed]
 
-	* key.rb:
-	Add rdoc comments.
-	[b8de7aaf98c2]
+        * key.rb:
+        Add rdoc comments.
+        [b8de7aaf98c2]
 
 2009-02-24  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* test/test_cipher.rb:
-	Reformat.
-	[ec23621364b4]
+        * test/test_cipher.rb:
+        Reformat.
+        [ec23621364b4]
 
-	* test/test_cipher.rb:
-	Fix test setup.
-	[f34acfb09681]
+        * test/test_cipher.rb:
+        Fix test setup.
+        [f34acfb09681]
 
-	* cipher.rb:
-	Implement NihilistT#decode correctly with numbers.
-	[2907becd9c5d]
+        * cipher.rb:
+        Implement NihilistT#decode correctly with numbers.
+        [2907becd9c5d]
 
-	* cipher.rb, test/test_cipher.rb:
-	Split NihilistT#encode into two phase, create #first_pass. Add test
-	for #first_pass.
-	[a93cbaec67c3]
+        * cipher.rb, test/test_cipher.rb:
+        Split NihilistT#encode into two phase, create #first_pass. Add test
+        for #first_pass.
+        [a93cbaec67c3]
 
-	* test/test_cipher_nihilistt.yaml:
-	Add NihilistT#encode/#decode test data.
-	[0ee993e9a074]
+        * test/test_cipher_nihilistt.yaml:
+        Add NihilistT#encode/#decode test data.
+        [0ee993e9a074]
 
-	* key.rb, test/test_sckey.yaml:
-	Use strings, not integeres. Fix tests.
-	[43a347c34d80]
+        * key.rb, test/test_sckey.yaml:
+        Use strings, not integeres. Fix tests.
+        [43a347c34d80]
 
-	* key.rb:
-	Fix redefinition of :long (1.9.1).
-	[15291c86a19d]
+        * key.rb:
+        Fix redefinition of :long (1.9.1).
+        [15291c86a19d]
 
 2009-02-23  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* adfgvx.js, misc/adfgvx.js, misc/nihilist.pl, misc/nihilist.plain.rb,
-	misc/nihilist.rb, nihilist.pl, nihilist.plain.rb, nihilist.rb:
-	Move these out of the way
-	[eef6e412efd0]
+        * adfgvx.js, misc/adfgvx.js, misc/nihilist.pl, misc/nihilist.plain.rb,
+        misc/nihilist.rb, nihilist.pl, nihilist.plain.rb, nihilist.rb:
+        Move these out of the way
+        [eef6e412efd0]
 
-	* test/test_cipher.rb:
-	Make the tests just fail for now.
-	[7d1e487f27b0]
+        * test/test_cipher.rb:
+        Make the tests just fail for now.
+        [7d1e487f27b0]
 
-	* cipher.rb:
-	Implement NihilistT#decode with the newy created SCKey#is_long?
-	method.
-	[67fc3967e56d]
+        * cipher.rb:
+        Implement NihilistT#decode with the newy created SCKey#is_long?
+        method.
+        [67fc3967e56d]
 
-	* key.rb, test/test_key.rb:
-	Build on improvements on SCKey#gen_rings and add #is_long? for
-	decoding. Add tests.
-	[af0ad34a00a2]
+        * key.rb, test/test_key.rb:
+        Build on improvements on SCKey#gen_rings and add #is_long? for
+        decoding. Add tests.
+        [af0ad34a00a2]
 
-	* key.rb:
-	Improve SCKey#gen_rings and remove the limitation on cipher letters.
-	[b7ef3d0f58ec]
+        * key.rb:
+        Improve SCKey#gen_rings and remove the limitation on cipher letters.
+        [b7ef3d0f58ec]
 
-	* cipher.rb:
-	Begin implementation of class NihilistT.
-	[11e9d2976241]
+        * cipher.rb:
+        Begin implementation of class NihilistT.
+        [11e9d2976241]
 
-	* test/test_cipher.rb, test/test_cipher_nihilistt.yaml:
-	Tests for class NihilistT.
-	[4b9233f34dfe]
+        * test/test_cipher.rb, test/test_cipher_nihilistt.yaml:
+        Tests for class NihilistT.
+        [4b9233f34dfe]
 
-	* test/test_key.rb:
-	Fix test for #decode.
-	[ae37023217ff]
+        * test/test_key.rb:
+        Fix test for #decode.
+        [ae37023217ff]
 
-	* test/test_key.rb:
-	Fix order of parameters to assert_equal.
-	[152a9e71dbff]
+        * test/test_key.rb:
+        Fix order of parameters to assert_equal.
+        [152a9e71dbff]
 
-	* key.rb:
-	Remove limitation in get_rings (XXX comment).
-	[0389553c543f]
+        * key.rb:
+        Remove limitation in get_rings (XXX comment).
+        [0389553c543f]
 
-	* test/test_key.rb, test/test_sqkey.yaml:
-	Try to complete SQKey tests.
-	[e6063f56d5d9]
+        * test/test_key.rb, test/test_sqkey.yaml:
+        Try to complete SQKey tests.
+        [e6063f56d5d9]
 
-	* key.rb:
-	#encode & #decode are inherited from SKey.
-	[e8ecf5eefa2f]
+        * key.rb:
+        #encode & #decode are inherited from SKey.
+        [e8ecf5eefa2f]
 
 2009-02-21  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* key.rb:
-	key.rb is now 1.9 compatible.
-	[8c17f92acc3e]
+        * key.rb:
+        key.rb is now 1.9 compatible.
+        [8c17f92acc3e]
 
-	* key.rb:
-	Add XXX for asumptions.
-	[48334643e66f]
+        * key.rb:
+        Add XXX for asumptions.
+        [48334643e66f]
 
-	* cipher.rb:
-	Add comment for class ADFGVX.
-	[a00c422469a5]
+        * cipher.rb:
+        Add comment for class ADFGVX.
+        [a00c422469a5]
 
-	* adfgvx.pl:
-	We do not need the Perl version anymore.
-	[568a4bba9610]
+        * adfgvx.pl:
+        We do not need the Perl version anymore.
+        [568a4bba9610]
 
-	* adfgvx.rb:
-	File obsoleted by Cipher::ADFGVX.
-	[42344ce52763]
+        * adfgvx.rb:
+        File obsoleted by Cipher::ADFGVX.
+        [42344ce52763]
 
-	* cipher.rb, test/test_cipher.rb, test/test_cipher_adfgvx.yaml:
-	Implement ADFGVX and tests.
-	[d27736fd846b]
+        * cipher.rb, test/test_cipher.rb, test/test_cipher_adfgvx.yaml:
+        Implement ADFGVX and tests.
+        [d27736fd846b]
 
-	* test/test_cipher.rb:
-	Fix tests for Cipher::Polybius API.
-	[4488ad1d8245]
+        * test/test_cipher.rb:
+        Fix tests for Cipher::Polybius API.
+        [4488ad1d8245]
 
-	* cipher.rb:
-	Cipher::Polybius should have its own #decode method.
-	[47fb25e84154]
+        * cipher.rb:
+        Cipher::Polybius should have its own #decode method.
+        [47fb25e84154]
 
-	* cipher.rb:
-	Try to express Cipher::ADFGVX with SQKey & Transposition.
-	[c5324a7009a6]
+        * cipher.rb:
+        Try to express Cipher::ADFGVX with SQKey & Transposition.
+        [c5324a7009a6]
 
-	* cipher.rb, test/test_cipher.rb, test/test_cipher_polybius.yaml:
-	Add Cipher::Polybius and tests.
-	[02f54bae22e3]
+        * cipher.rb, test/test_cipher.rb, test/test_cipher_polybius.yaml:
+        Add Cipher::Polybius and tests.
+        [02f54bae22e3]
 
-	* key.rb, test/test_sqkey.yaml:
-	Remove support for 5x5 Polybius square, default is now ADFGVX.
-	[0510f1f5d897]
+        * key.rb, test/test_sqkey.yaml:
+        Remove support for 5x5 Polybius square, default is now ADFGVX.
+        [0510f1f5d897]
 
-	* key.rb, test/test_key.rb, test/test_sqkey.yaml:
-	Implement Polybius square key class and tests.
-	[f7f81f5c1ec6]
+        * key.rb, test/test_key.rb, test/test_sqkey.yaml:
+        Implement Polybius square key class and tests.
+        [f7f81f5c1ec6]
 
-	* key.rb:
-	Now that SCKey derives from SKey and not Key itself, #encode/#decode
-	are inherited.
-	[aaa810d73ce6]
+        * key.rb:
+        Now that SCKey derives from SKey and not Key itself, #encode/#decode
+        are inherited.
+        [aaa810d73ce6]
 
 2009-02-20  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* cipher.rb:
-	Add rdoc comment.
-	[8f9dc4317ad0]
+        * cipher.rb:
+        Add rdoc comment.
+        [8f9dc4317ad0]
 
-	* cipher.rb:
-	Remove debug messages.
-	[6ba0b6bf3d27]
+        * cipher.rb:
+        Remove debug messages.
+        [6ba0b6bf3d27]
 
-	* key.rb:
-	SCKey is a child of SKey, not Key.
-	[71d7510d8a14]
+        * key.rb:
+        SCKey is a child of SKey, not Key.
+        [71d7510d8a14]
 
-	* cipher.rb, test/test_cipher.rb, test/test_cipher_transp.yaml:
-	Implement Transposition#encode/#decode and add tests.
-	[e0aaddf81515]
+        * cipher.rb, test/test_cipher.rb, test/test_cipher_transp.yaml:
+        Implement Transposition#encode/#decode and add tests.
+        [e0aaddf81515]
 
-	* test/test_key.rb, test/test_tkey.yaml:
-	TKey has no #encode/#decode. Change tests to match.
-	[a6c5b68b7c88]
+        * test/test_key.rb, test/test_tkey.yaml:
+        TKey has no #encode/#decode. Change tests to match.
+        [a6c5b68b7c88]
 
-	* test/test_key.rb, test/test_tkey.yaml:
-	Change structure of test data.
-	[5a13db59fca3]
+        * test/test_key.rb, test/test_tkey.yaml:
+        Change structure of test data.
+        [5a13db59fca3]
 
-	* test/test_key.rb, test/test_key_caesar.yaml:
-	Two more assert for Caesaer, remove empty test data.
-	[e66f6a5c87ef]
+        * test/test_key.rb, test/test_key_caesar.yaml:
+        Two more assert for Caesaer, remove empty test data.
+        [e66f6a5c87ef]
 
 2009-02-19  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* cipher.rb, test/test_cipher.rb, test/test_key.rb,
-	test/test_key_caesar.yaml:
-	Add Caesar classes in Key and Cipher, add tests.
-	[790c7468c59e]
+        * cipher.rb, test/test_cipher.rb, test/test_key.rb,
+        test/test_key_caesar.yaml:
+        Add Caesar classes in Key and Cipher, add tests.
+        [790c7468c59e]
 
-	* test/test_cipher.rb:
-	Add rdoc comments.
-	[e49cf56356a8]
+        * test/test_cipher.rb:
+        Add rdoc comments.
+        [e49cf56356a8]
 
-	* test/test_cipher.rb:
-	key.rb is required here too.
-	[383a43e15ad2]
+        * test/test_cipher.rb:
+        key.rb is required here too.
+        [383a43e15ad2]
 
-	* key.rb:
-	Fix Caesar key generation.
-	[7080efeb2b85]
+        * key.rb:
+        Fix Caesar key generation.
+        [7080efeb2b85]
 
-	* cipher.rb:
-	key.rb is required for cipher.rb.
-	[bc07ab3a526c]
+        * cipher.rb:
+        key.rb is required for cipher.rb.
+        [bc07ab3a526c]
 
-	* key.rb, test/test_key.rb:
-	Add Caesar class & tests.
-	[30f366a1f2d8]
+        * key.rb, test/test_key.rb:
+        Add Caesar class & tests.
+        [30f366a1f2d8]
 
-	* test/test_key.rb:
-	Add rdoc comments.
-	[ce596c6602c6]
+        * test/test_key.rb:
+        Add rdoc comments.
+        [ce596c6602c6]
 
-	* key.rb:
-	Add SKey#encode & SKey#decode.
-	[94ad28ddea89]
+        * key.rb:
+        Add SKey#encode & SKey#decode.
+        [94ad28ddea89]
 
-	* cipher.rb:
-	Use Key#encode & Key#decode.
-	[9f9e20443c07]
+        * cipher.rb:
+        Use Key#encode & Key#decode.
+        [9f9e20443c07]
 
-	* Rakefile, rake/code_statistics.rb:
-	Add code statistics from RoR.
-	[8cb890021e66]
+        * Rakefile, rake/code_statistics.rb:
+        Add code statistics from RoR.
+        [8cb890021e66]
 
-	* key.rb, test/test_key.rb, test/test_sckey.yaml:
-	Add SCKey#encode & #decode. Add tests & data for both.
-	[4c170ce41bbe]
+        * key.rb, test/test_key.rb, test/test_sckey.yaml:
+        Add SCKey#encode & #decode. Add tests & data for both.
+        [4c170ce41bbe]
 
-	* key.rb:
-	Change comment.
-	[334cabbd4aa1]
+        * key.rb:
+        Change comment.
+        [334cabbd4aa1]
 
-	* key.rb:
-	Move $Id: History.txt,v 8d164ea51223 2010/02/01 14:30:48 roberto $ into comment.
-	[9ab29224f28a]
+        * key.rb:
+        Move $Id: History.txt,v b6421bf9bf50 2010/03/02 09:44:08 roberto $ into comment.
+        [9ab29224f28a]
 
-	* test/test_key.rb, test/test_key.yaml, test/test_sckey.yaml,
-	test/test_tkey.yaml:
-	Move test data into yaml files.
-	[39b7b840a7b7]
+        * test/test_key.rb, test/test_key.yaml, test/test_sckey.yaml,
+        test/test_tkey.yaml:
+        Move test data into yaml files.
+        [39b7b840a7b7]
 
-	* cipher.rb:
-	Make $Id: History.txt,v 8d164ea51223 2010/02/01 14:30:48 roberto $ a comment.
-	[4b321eb0f80c]
+        * cipher.rb:
+        Make $Id: History.txt,v b6421bf9bf50 2010/03/02 09:44:08 roberto $ a comment.
+        [4b321eb0f80c]
 
 2009-02-16  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* Rakefile:
-	Make Rakefile more generic..
-	[56696addd4a6]
+        * Rakefile:
+        Make Rakefile more generic..
+        [56696addd4a6]
 
 2009-02-13  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* Rakefile, test/test_cipher.rb:
-	Add unit tests for Cipher module.
-	[2371e41abf17]
+        * Rakefile, test/test_cipher.rb:
+        Add unit tests for Cipher module.
+        [2371e41abf17]
 
 2009-02-12  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* cipher.rb:
-	Add Id.
-	[877272dae5d5]
+        * cipher.rb:
+        Add Id.
+        [877272dae5d5]
 
-	* Rakefile:
-	Add default task.
-	[7f69ba3ed4f1]
+        * Rakefile:
+        Add default task.
+        [7f69ba3ed4f1]
 
-	* key.rb:
-	Remove debug message.
-	[ec4d1c4942eb]
+        * key.rb:
+        Remove debug message.
+        [ec4d1c4942eb]
 
-	* test/test_key.rb:
-	Add some unit tests.
-	[3c5d129b91c0]
+        * test/test_key.rb:
+        Add some unit tests.
+        [3c5d129b91c0]
 
-	* Rakefile:
-	Add Rakefile.
-	[79032e572710]
+        * Rakefile:
+        Add Rakefile.
+        [79032e572710]
 
-	* test/test_key.rb:
-	Add beginning of test units.
-	[194f7579df8c]
+        * test/test_key.rb:
+        Add beginning of test units.
+        [194f7579df8c]
 
-	* test.rb:
-	Use 1.8 for now.
-	[d1598f2a8c05]
+        * test.rb:
+        Use 1.8 for now.
+        [d1598f2a8c05]
 
 2009-02-04  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* cipher.rb, key.rb:
-	Massive changes in both code & architecture, not worth putting more
-	details. Not working yet.
-	[0dde729d0219]
+        * cipher.rb, key.rb:
+        Massive changes in both code & architecture, not worth putting more
+        details. Not working yet.
+        [0dde729d0219]
 
-	* DESIGN.txt:
-	Add design document.
-	[8eb1e703bc30]
+        * DESIGN.txt:
+        Add design document.
+        [8eb1e703bc30]
 
-	* test.rb:
-	Driver for testing, mostly for "ruby -r debug".
-	[58bef856f927]
+        * test.rb:
+        Driver for testing, mostly for "ruby -r debug".
+        [58bef856f927]
 
-	* adfgvx.js:
-	Add a javascript implementation of ADFGVX.
-	[5c554da1e743]
+        * adfgvx.js:
+        Add a javascript implementation of ADFGVX.
+        [5c554da1e743]
 
 2009-01-27  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* cipher.rb:
-	Take things out of nihilist.rb into its own file.
-	[34aed0faad51]
+        * cipher.rb:
+        Take things out of nihilist.rb into its own file.
+        [34aed0faad51]
 
-	* key.rb:
-	Add implementation of class Key & TKey.
-	[4a61ad89f91d]
+        * key.rb:
+        Add implementation of class Key & TKey.
+        [4a61ad89f91d]
 
 2009-01-22  Ollivier Robert  <roberto@keltia.freenix.fr>
 
-	* nihilist.rb:
-	Remove extra space before ().
-	[89d3551bbf2f]
+        * nihilist.rb:
+        Remove extra space before ().
+        [89d3551bbf2f]
 
-	* adfgvx.pl, adfgvx.rb, nihilist.pl, nihilist.plain.rb, nihilist.rb:
-	Import ADFGVX/Nihilist ciphers from old.
-	[96ed61ae8961]
+        * adfgvx.pl, adfgvx.rb, nihilist.pl, nihilist.plain.rb, nihilist.rb:
+        Import ADFGVX/Nihilist ciphers from old.
+        [96ed61ae8961]
 
