@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v a6aee4c85157 2010/03/02 09:39:42 roberto $
+# $Id: cipher.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
 
 require "key"
 
@@ -105,12 +105,14 @@ end # --  Polybius
 #
 # Bigrammatic substitution through a square alphabet
 #
+# Alphabet is missing Q by default
+#
 class Playfair < Substitution
   
   # === initialize
   #
-  def initialize(key)
-    @key = Key::Playfair.new(key)
+  def initialize(key, type = Key::Playfair::WITH_Q)
+    @key = Key::Playfair.new(key, type)
   end # -- substitution
   
   # === encode

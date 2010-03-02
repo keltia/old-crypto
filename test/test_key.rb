@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v a6aee4c85157 2010/03/02 09:39:42 roberto $
+# $Id: test_key.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -363,13 +363,13 @@ end # --  TestSQKey
 
 # == TestPlayfair
 #
-class TestPlayfair < Test::Unit::TestCase
+class TestPlayfair_Q < Test::Unit::TestCase
   include Crypto
   
   # === setup
   #
   def setup
-    File.open("test/test_playfair.yaml") do |fh|
+    File.open("test/test_playfair_q.yaml") do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -433,6 +433,79 @@ class TestPlayfair < Test::Unit::TestCase
     end
   end # -- test_decode
 end # -- TestPlayfair
+
+# == TestPlayfair1
+#
+class TestPlayfair_J < Test::Unit::TestCase
+  include Crypto
+  
+  # === setup
+  #
+  def setup
+    File.open("test/test_playfair_j.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+  end # -- setup
+
+  # === test_init
+  #
+  def test_init
+    @data.keys.each do |word|
+      key = Key::Playfair.new(word, Key::Playfair::WITH_J)
+
+      assert_not_nil key
+      assert_equal Key::Playfair, key.class
+      assert_not_nil key.alpha
+      assert_not_nil key.ralpha
+      assert_equal @data[word]["full_key"], key.full_key
+    end
+  end # -- test_init
+  
+  # === test_gen_rings
+  #
+  def test_gen_rings
+    @data.keys.each do |word|
+      key = Key::Playfair.new(word, Key::Playfair::WITH_J)
+
+      assert_equal @data[word]["alpha"], key.alpha
+      assert_equal @data[word]["ralpha"], key.ralpha
+    end
+  end # -- test_gen_rings
+  
+  # === test_encode
+  #
+  def test_encode
+    @data.keys.each do |word|
+      key = Key::Playfair.new(word, Key::Playfair::WITH_J)
+
+      assert_not_nil key
+      
+      test = @data[word]["encode"]
+      encode_in = test["in"]
+      encode_out = test["out"]
+      encode_in.each do |c|
+        assert_equal encode_out.shift, key.encode(c), "#{word} #{c}"
+      end
+    end
+  end # -- test_encode
+
+  # === test_decode
+  #
+  def test_decode
+    @data.keys.each do |word|
+      key = Key::Playfair.new(word, Key::Playfair::WITH_J)
+
+      assert_not_nil key
+      
+      test = @data[word]["encode"]
+      encode_in = test["out"]
+      encode_out = test["in"]
+      encode_in.each do |ct|
+        assert_equal encode_out.shift, key.decode(ct), "#{word} #{ct} "
+      end
+    end
+  end # -- test_decode
+end # -- TestPlayfair_J
 
 # ==  TestVICKey
 #

@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v a6aee4c85157 2010/03/02 09:39:42 roberto $
+# $Id: key.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
 
 require "crypto_helper"
 
@@ -334,18 +334,23 @@ end # -- SQKey
 class Playfair < SKey
   include Crypto
   
-  BASE25 = "ABCDEFGHIJKLMNOPRSTUVWXYZ"
-  
   CODE_WORD = [ 0, 1, 2, 3, 4 ]
+  
+  WITH_J = 0
+  WITH_Q = 1
   
   attr_reader :full_key
   
   # === initialize
   #
-  def initialize(key)
+  def initialize(key, type = WITH_Q)
     super(key.gsub(%r{\s*}, ''))
     @alpha = Hash.new
-    @base = BASE25
+    if type == WITH_J then
+      @base = "ABCDEFGHIJKLMNOPRSTUVWXYZ"
+    else
+      @base = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+    end
     @full_key = (@key + @base).condensed
     gen_rings()
   end # -- initialize
@@ -370,7 +375,7 @@ class Playfair < SKey
   # Same row: p(r,c) -> p(r, c + 1 mod 5) 
   # Same col: p(r,c) -> p(r + 1 mod 5, c)
   # Diff.col/row:
-  #  P = K(r,c),K(r',c') -> C = K(r,c'),K(r,c)
+  #  P = K(r1,c1),K(r2,c2) -> C = K(r1,c2),K(r2,c1)
   #
   def encode(c)
     p1, p2 = c.split(//)

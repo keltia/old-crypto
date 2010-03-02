@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v a6aee4c85157 2010/03/02 09:39:42 roberto $
+# $Id: test_cipher.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -367,14 +367,63 @@ class TestADFGVX < Test::Unit::TestCase
   
 end # --  TestADFGVX
 
-# ==  TestPlayfair
+# ==  TestPlayfair_J
 #
-class TestPlayfair < Test::Unit::TestCase
+class TestPlayfair_J < Test::Unit::TestCase
   
   # === setup
   #
   def setup
-    File.open("test/test_cipher_playfair.yaml") do |fh|
+    File.open("test/test_cipher_playfair_j.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"]
+  end # -- setup
+  
+  # === test_encode
+  #
+  def test_encode
+    pt = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::Playfair.new(word, Key::Playfair::WITH_J)
+      assert_not_nil(cipher)
+      
+      ct = cipher.encode(pt)
+      assert_not_nil(ct)
+      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+    end
+    
+    pt = "PJRST"
+    cipher = Cipher::Playfair.new("FOOBAR", Key::Playfair::WITH_J)
+    ct = cipher.encode(pt)
+    assert_equal "WPBUSY", ct, "Text is padded with X"
+    
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    plain = @data["plain"]
+    @keys.keys.each do |word|
+      cipher = Cipher::Playfair.new(word, Key::Playfair::WITH_J)
+      assert_not_nil(cipher)
+      assert_raise(ArgumentError) { cipher.decode("AAA") }
+      
+      pt = cipher.decode(@keys[word]["ct"])
+      assert_not_nil(pt)
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+    end
+  end # -- test_decode
+end # --  TestPlayfair_J
+
+# ==  TestPlayfair_Q
+#
+class TestPlayfair_Q < Test::Unit::TestCase
+  
+  # === setup
+  #
+  def setup
+    File.open("test/test_cipher_playfair_q.yaml") do |fh|
       @data = YAML.load(fh)
     end
     @keys = @data["keys"]
@@ -395,7 +444,8 @@ class TestPlayfair < Test::Unit::TestCase
     
     pt = "PQRST"
     cipher = Cipher::Playfair.new("FOOBAR")
-    assert_raise(NoMethodError) {  ct = cipher.encode(pt) }
+    ct = cipher.encode(pt)
+    assert_equal "QSBUSY", ct, "Text is padded with X"
   end # -- test_encode
   
   # === test_decode
@@ -412,6 +462,6 @@ class TestPlayfair < Test::Unit::TestCase
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
-end # --  TestPlayfair
+end # --  TestPlayfair_Q
 
 end # -- TestCipher
