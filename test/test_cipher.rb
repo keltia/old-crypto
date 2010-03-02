@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
+# $Id: test_cipher.rb,v 2e9a23be4a89 2010/03/02 21:39:16 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -446,6 +446,11 @@ class TestPlayfair_Q < Test::Unit::TestCase
     cipher = Cipher::Playfair.new("FOOBAR")
     ct = cipher.encode(pt)
     assert_equal "QSBUSY", ct, "Text is padded with X"
+    
+    pt = "PQRJTS"
+    cipher = Cipher::Playfair.new("FOOBAR")
+    assert_raise(ArgumentError) { ct = cipher.encode(pt) }
+    
   end # -- test_encode
   
   # === test_decode
@@ -460,6 +465,11 @@ class TestPlayfair_Q < Test::Unit::TestCase
       pt = cipher.decode(@keys[word]["ct"])
       assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+
+      ct = "PQRJTS"
+      cipher = Cipher::Playfair.new("FOOBAR")
+      assert_raise(ArgumentError) { pt = cipher.decode(ct) }
+
     end
   end # -- test_decode
 end # --  TestPlayfair_Q

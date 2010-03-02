@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
+# $Id: cipher.rb,v 2e9a23be4a89 2010/03/02 21:39:16 roberto $
 
 require "key"
 
@@ -113,6 +113,7 @@ class Playfair < Substitution
   #
   def initialize(key, type = Key::Playfair::WITH_Q)
     @key = Key::Playfair.new(key, type)
+    @type = type
   end # -- substitution
   
   # === encode
@@ -124,6 +125,8 @@ class Playfair < Substitution
     if plain_text.length.odd? then
       plain_text << "X"
     end
+    
+    check_input(plain_text)
     
     cipher_text = ""
     plain_text.scan(/../) do |pt|
@@ -138,6 +141,8 @@ class Playfair < Substitution
   def decode(cipher_text)
     raise ArgumentError, "Mangled cryptogram" if cipher_text.length.odd?
     
+    check_input(cipher_text)
+    
     plain_text = ""
     cipher_text.scan(/../) do |ct|
       pt = @key.decode(ct)
@@ -145,6 +150,17 @@ class Playfair < Substitution
     end
     plain_text
   end # -- decode
+  
+  # === check_input
+  #
+  def check_input(str)
+    case @type
+    when Key::Playfair::WITH_J
+      raise ArgumentError if str =~ /Q/
+    when Key::Playfair::WITH_Q
+      raise ArgumentError if str =~ /J/
+    end
+  end # -- check_input
   
 end # -- Playfair
 
