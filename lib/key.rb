@@ -6,10 +6,11 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 19ed39bf1f05 2009/03/17 16:11:30 roberto $
+# $Id: key.rb,v a6aee4c85157 2010/03/02 09:39:42 roberto $
 
 require "crypto_helper"
 
+module Key
 # == Key
 #
 # Virtual base class for keys
@@ -465,28 +466,30 @@ class VICKey < Key
   
 end # -- VICKey
 
+end # -- Key
+
 if $0 == __FILE__ then
   
   # several test keys
   #
   # square
   #
-  k = SCKey.new("ARABESQUE")
+  k = Key::SCKey.new("ARABESQUE")
   p k.condensed
   
   # not square but known -- see above comments
   #
-  m = SCKey.new("subway")
+  m = Key::SCKey.new("subway")
   p m.condensed
   
   # not square
   #
-  n = SCKey.new("portable")
+  n = Key::SCKey.new("portable")
   p n.condensed
 
   # key for transposition
   #
-  t = TKey.new("retribution")
+  t = Key::TKey.new("retribution")
   #
   #
   # Main usage, get the numerical order of letters

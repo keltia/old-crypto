@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 77647c6c2314 2009/03/17 16:11:41 roberto $
+# $Id: test_cipher.rb,v a6aee4c85157 2010/03/02 09:39:42 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -215,7 +215,7 @@ class TestPolybius < Test::Unit::TestCase
   def test_encode
     pt = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
+      cipher = Cipher::Polybius.new(word, Key::SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
@@ -228,7 +228,7 @@ class TestPolybius < Test::Unit::TestCase
   def test_decode
     plain = @data["plain"]
     @keys.keys.each do |word|
-      cipher = Cipher::Polybius.new(word, SQKey::SQ_NUMBERS)
+      cipher = Cipher::Polybius.new(word, Key::SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
       assert_raise(ArgumentError) { cipher.decode("AAA") }
       

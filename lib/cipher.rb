@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 848e7d050f31 2009/03/17 10:16:09 roberto $
+# $Id: cipher.rb,v a6aee4c85157 2010/03/02 09:39:42 roberto $
 
 require "key"
 
@@ -34,7 +34,7 @@ class Substitution < SimpleCipher
   # === initialize
   #
   def initialize(key = "")
-    @key = SKey.new(key)
+    @key = Key::SKey.new(key)
   end # -- initialize
   
   # === encode
@@ -70,7 +70,7 @@ class Caesar < Substitution
   # === initialize
   #
   def initialize(offset = 3)
-    @key = ::Caesar.new(offset)
+    @key = Key::Caesar.new(offset)
   end # -- initialize
   
 end # --  Caesar
@@ -81,8 +81,8 @@ class Polybius < Substitution
   
   # === initialize
   #
-  def initialize(key, type = SQKey::SQ_ADFGVX)
-    @key = ::SQKey.new(key, type)
+  def initialize(key, type = Key::SQKey::SQ_ADFGVX)
+    @key = Key::SQKey.new(key, type)
   end # -- initialize
 
   # === decode
@@ -110,7 +110,7 @@ class Playfair < Substitution
   # === initialize
   #
   def initialize(key)
-    @key = ::Playfair.new(key)
+    @key = Key::Playfair.new(key)
   end # -- substitution
   
   # === encode
@@ -152,7 +152,7 @@ end # -- Playfair
 #
 class Transposition < SimpleCipher
   def initialize(key)
-    @key = TKey.new(key)
+    @key = Key::TKey.new(key)
   end
   
   # === encode
@@ -236,7 +236,7 @@ end # --  Transposition
 class StraddlingCheckerboard  < Substitution
   
   def initialize(key)
-    @key = SCKey.new(key)
+    @key = Key::SCKey.new(key)
   end
 
   # === encode
