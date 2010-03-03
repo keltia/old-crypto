@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 1b399db995b3 2010/03/03 13:50:54 roberto $
+# $Id: crypto_helper.rb,v d2d45252294f 2010/03/03 14:23:03 roberto $
 
 
 # == String
@@ -33,7 +33,7 @@ class String
   def expand
     a_str = self.split(//)
     i = 0
-    l = a_str.length / 2
+    l = a_str.length - 1
     while i < l do
       if a_str[i] == a_str[i+1] then
         a_str.insert(i+1, "X")
