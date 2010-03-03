@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 126330a999ab 2009/03/17 11:17:01 roberto $
+# $Id: crypto_helper.rb,v 1b399db995b3 2010/03/03 13:50:54 roberto $
 
 
 # == String
@@ -28,6 +28,22 @@ class String
     c_alpha
   end # -- condensed
 
+  # === expand
+  #
+  def expand
+    a_str = self.split(//)
+    i = 0
+    l = a_str.length / 2
+    while i < l do
+      if a_str[i] == a_str[i+1] then
+        a_str.insert(i+1, "X")
+        i += 1
+      end
+      i += 1
+    end
+    return a_str.to_s
+  end # -- expand
+  
   # === to_numeric
   #
   # Generate a numeric key from a keyword

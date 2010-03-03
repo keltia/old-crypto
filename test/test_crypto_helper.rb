@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 27cdadb5eb5b 2009/03/05 20:31:23 roberto $
+# $Id: test_crypto_helper.rb,v 1b399db995b3 2010/03/03 13:50:54 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -24,7 +24,14 @@ class TestString < Test::Unit::TestCase
       assert_equal @data[word]["condensed"], word.condensed
     end
   end # -- test_condensed
-
+  
+  # === test_expand_double
+  #
+  def test_expand_double
+    @data.keys.each do |word|
+      assert_equal @data[word]["expanded"], word.expand
+    end
+  end # -- test_expand_double
   # === test_to_numeric
   #
   def test_to_numeric

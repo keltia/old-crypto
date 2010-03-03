@@ -1,6 +1,6 @@
 --- 
-arabesque: 
-  condensed: arbesqu
+ARABESQUE: 
+  condensed: ARBESQU
   num: 
   - 0
   - 6
@@ -21,8 +21,9 @@ arabesque:
   - 6
   - 9
   - 5
-subway: 
-  condensed: subway
+  expanded: ARABESQUE
+SUBWAY: 
+  condensed: SUBWAY
   num: 
   - 2
   - 3
@@ -37,8 +38,9 @@ subway:
   - 5
   - 1
   - 6
-portable: 
-  condensed: portable
+  expanded: SUBWAY
+PORTABLE: 
+  condensed: PORTABLE
   num: 
   - 5
   - 4
@@ -57,3 +59,26 @@ portable:
   - 2
   - 4
   - 3
+  expanded: PORTABLE
+LANNONCE:
+  condensed: LANOCE
+  num:
+  - 3
+  - 0
+  - 4
+  - 5
+  - 7
+  - 6
+  - 1
+  - 2
+  num10:
+  - 4
+  - 1
+  - 5
+  - 6
+  - 8
+  - 7
+  - 2
+  - 3
+  expanded: LANXNONCE
+
