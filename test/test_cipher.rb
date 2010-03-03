@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 2e9a23be4a89 2010/03/02 21:39:16 roberto $
+# $Id: test_cipher.rb,v c81fde45960b 2010/03/03 14:24:06 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -457,6 +457,7 @@ class TestPlayfair_Q < Test::Unit::TestCase
   #
   def test_decode
     plain = @data["plain"]
+    eplain = @data["eplain"]
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word)
       assert_not_nil(cipher)
@@ -464,7 +465,7 @@ class TestPlayfair_Q < Test::Unit::TestCase
       
       pt = cipher.decode(@keys[word]["ct"])
       assert_not_nil(pt)
-      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+      assert_equal eplain, pt, "key: #{word}\ncipher: #{@keys[word]["ct"]}" 
 
       ct = "PQRJTS"
       cipher = Cipher::Playfair.new("FOOBAR")
