@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v c81fde45960b 2010/03/03 14:24:06 roberto $
+# $Id: test_cipher.rb,v 76ebaf116f77 2010/03/04 11:10:27 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -392,14 +392,25 @@ class TestPlayfair_J < Test::Unit::TestCase
       assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
-    
+  end # -- test_encode
+  
+  # === test_encode_padding
+  #
+  def test_encode_padding
     pt = "PJRST"
     cipher = Cipher::Playfair.new("FOOBAR", Key::Playfair::WITH_J)
     ct = cipher.encode(pt)
-    assert_equal "WPBUSY", ct, "Text is padded with X"
-    
-  end # -- test_encode
+    assert_equal "WPBUSY", ct, "Text should be padded with X"
+  end # -- test_encode_padding
   
+  # === test_encode_invalid
+  #
+  def test_encode_invalid
+    pt = "PQRJTS"
+    cipher = Cipher::Playfair.new("FOOBAR", Key::Playfair::WITH_J)
+    assert_raise(ArgumentError) { ct = cipher.encode(pt) }
+  end # -- test_encode_invalid
+    
   # === test_decode
   #
   def test_decode
@@ -441,18 +452,25 @@ class TestPlayfair_Q < Test::Unit::TestCase
       assert_not_nil(ct)
       assert_equal @keys[word]["ct"], ct, "key is #{word}"
     end
-    
+  end # -- test_encode
+  
+  # === test_encode_padding
+  #
+  def test_encode_padding
     pt = "PQRST"
     cipher = Cipher::Playfair.new("FOOBAR")
     ct = cipher.encode(pt)
     assert_equal "QSBUSY", ct, "Text is padded with X"
-    
+  end # -- test_encode_padding  
+
+  # === test_encode_invalid
+  #
+  def test_encode_invalid
     pt = "PQRJTS"
     cipher = Cipher::Playfair.new("FOOBAR")
     assert_raise(ArgumentError) { ct = cipher.encode(pt) }
+  end # -- test_encode_invalid
     
-  end # -- test_encode
-  
   # === test_decode
   #
   def test_decode
@@ -467,12 +485,17 @@ class TestPlayfair_Q < Test::Unit::TestCase
       assert_not_nil(pt)
       assert_equal eplain, pt, "key: #{word}\ncipher: #{@keys[word]["ct"]}" 
 
-      ct = "PQRJTS"
-      cipher = Cipher::Playfair.new("FOOBAR")
-      assert_raise(ArgumentError) { pt = cipher.decode(ct) }
-
     end
   end # -- test_decode
+  
+  # === test_decode_invalid
+  #
+  def test_decode_invalid
+    ct = "PQRJTS"
+    cipher = Cipher::Playfair.new("FOOBAR")
+    assert_raise(ArgumentError) { pt = cipher.decode(ct) }
+  end # -- test_decode_invalid
+  
 end # --  TestPlayfair_Q
 
 end # -- TestCipher
