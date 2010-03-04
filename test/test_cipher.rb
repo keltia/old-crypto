@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 76ebaf116f77 2010/03/04 11:10:27 roberto $
+# $Id: test_cipher.rb,v bdacd4eec8d9 2010/03/04 11:10:45 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -422,7 +422,7 @@ class TestPlayfair_J < Test::Unit::TestCase
       
       pt = cipher.decode(@keys[word]["ct"])
       assert_not_nil(pt)
-      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+      assert_equal plain, pt, "key: #{word}\ncipher: #{@keys[word]["ct"]}" 
     end
   end # -- test_decode
 end # --  TestPlayfair_J
