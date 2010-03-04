@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 2fd5824ed6e6 2010/03/03 13:51:39 roberto $
+# $Id: cipher.rb,v 1b387e81e836 2010/03/04 13:14:37 roberto $
 
 require "key"
 
@@ -119,21 +119,21 @@ class Playfair < Substitution
   # === encode
   #
   def encode(plain_text)
-    
+    #
     # Do expand the double letters inside
     #
-    pt = plain_text.expand
+    plain = plain_text.expand
     
     # Add a "X" if of odd length
     #
-    if pt.length.odd? then
-      pt << "X"
+    if plain.length.odd? then
+      plain << "X"
     end
     
-    check_input(pt)
+    check_input(plain)
     
     cipher_text = ""
-    pt.scan(/../) do |pt|
+    plain.scan(/../) do |pt|
       ct = @key.encode(pt)
       cipher_text << ct
     end
