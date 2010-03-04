@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v d2d45252294f 2010/03/03 14:23:03 roberto $
+# $Id: crypto_helper.rb,v 34829eaaca33 2010/03/04 13:16:16 roberto $
 
 
 # == String
@@ -33,15 +33,13 @@ class String
   def expand
     a_str = self.split(//)
     i = 0
-    l = a_str.length - 1
-    while i < l do
+    while i < a_str.length do
       if a_str[i] == a_str[i+1] then
         a_str.insert(i+1, "X")
-        i += 1
       end
-      i += 1
+      i += 2
     end
-    return a_str.to_s
+    return a_str.join.to_s
   end # -- expand
   
   # === to_numeric
