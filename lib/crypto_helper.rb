@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 34829eaaca33 2010/03/04 13:16:16 roberto $
+# $Id: crypto_helper.rb,v 921e3ad31ac8 2010/03/05 22:05:15 roberto $
 
 
 # == String
@@ -100,6 +100,24 @@ class String
     n_key
   end # -- to_numeric10
   
+  # === by_five
+  #
+  # Slice input into 5-letter groups
+  #
+  def by_five
+    str = self.dup
+    l = str.length
+    r = l % 5
+    if l <= 5 then
+      return str
+    else
+      a = str.scan(%r{(\w{5})}).join(' ')
+    end
+    if r != 0 then
+      a += " "+ str[-r, r]
+    end
+    return a
+  end # -- by_five
 end # -- String
 
 module Crypto
