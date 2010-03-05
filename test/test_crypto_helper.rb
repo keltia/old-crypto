@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 27aa77e7baef 2010/03/05 22:05:02 roberto $
+# $Id: test_crypto_helper.rb,v 762197de3fd1 2010/03/05 22:37:41 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -40,6 +40,7 @@ class TestString < Test::Unit::TestCase
       assert_equal @data[word]["num"], word.to_numeric
       assert_equal @data[word]["num"], word.to_numeric2 
       assert_equal @data[word]["num10"], word.to_numeric10
+      assert_equal @data[word]["num10"], word.to_numeric11
     end
   end # -- test_to_numeric
   

@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 921e3ad31ac8 2010/03/05 22:05:15 roberto $
+# $Id: crypto_helper.rb,v 762197de3fd1 2010/03/05 22:37:41 roberto $
 
 
 # == String
@@ -83,7 +83,29 @@ class String
     n_key
   end # -- to_numeric2
 
-  # === to_numeric10
+  # === to_numeric11
+  #
+  #
+  # 1-based version modulo 10
+  #
+  # Based on:
+  # For each letter in the keyword, scan for the lowest letter, assign
+  # it an index # then scan again till there are no letter left
+  #
+  # By Dave Thomas, IRC #ruby-lang on Thu Aug  9 17:36:39 CEST 2001
+  #
+  def to_numeric10
+    letters = self.to_s.split('')
+    sorted = letters.sort
+    num_key = letters.collect do |l|
+      k = sorted.index(l)
+      sorted[k] = nil
+      (k + 1) % 10
+    end
+    num_key
+  end # -- to_numeric10
+  
+  # === to_numeric11
   #
   # 1-based version modulo 10
   #
@@ -91,14 +113,14 @@ class String
   # Alternate version
   # By dblack, IRC #ruby-lang
   #
-  def to_numeric10
+  def to_numeric11
     srt = self.split('').sort
 
     n_key = self.split('').map do |s|
       srt[srt.index(s)] = (srt.index(s) + 1) % 10
     end
     n_key
-  end # -- to_numeric10
+  end # -- to_numeric11
   
   # === by_five
   #
