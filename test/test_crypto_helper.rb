@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 1b399db995b3 2010/03/03 13:50:54 roberto $
+# $Id: test_crypto_helper.rb,v 27aa77e7baef 2010/03/05 22:05:02 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -32,6 +32,7 @@ class TestString < Test::Unit::TestCase
       assert_equal @data[word]["expanded"], word.expand
     end
   end # -- test_expand_double
+  
   # === test_to_numeric
   #
   def test_to_numeric
@@ -42,6 +43,20 @@ class TestString < Test::Unit::TestCase
     end
   end # -- test_to_numeric
   
+  DATA_FIVE = {
+    'ABC'        => 'ABC',
+    'ABCDE'      => 'ABCDE',
+    'ABCDEFGH'   => 'ABCDE FGH',
+    'ABCDEFGHIJ' => 'ABCDE FGHIJ',
+  }
+    
+  # === test_by_five
+  #
+  def test_by_five
+    DATA_FIVE.each_pair do |text, out|
+      assert_equal out, text.by_five
+    end
+  end # -- test_by_five
 end # --  TestString
 
 # ==  TestCrypto
