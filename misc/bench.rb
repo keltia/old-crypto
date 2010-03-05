@@ -10,4 +10,10 @@ Benchmark.benchmark(' ' * 31 + Benchmark::Tms::CAPTION, 31) do |b|
   b.report('to_numeric2') do  
     N.times { "ANTICONSTITUTIONNELLEMENT".to_numeric2 }  
   end  
+  b.report('to_numeric10') do  
+    N.times { "ANTICONSTITUTIONNELLEMENT".to_numeric10 }  
+  end  
+  b.report('to_numeric11') do  
+    N.times { "ANTICONSTITUTIONNELLEMENT".to_numeric11 }  
+  end  
 end  
