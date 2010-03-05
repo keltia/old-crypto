@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 762197de3fd1 2010/03/05 22:37:41 roberto $
+# $Id: crypto_helper.rb,v b67b49209e04 2010/03/05 23:57:27 roberto $
 
 
 # == String
@@ -83,8 +83,7 @@ class String
     n_key
   end # -- to_numeric2
 
-  # === to_numeric11
-  #
+  # === to_numeric10
   #
   # 1-based version modulo 10
   #
