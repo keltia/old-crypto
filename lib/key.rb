@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
+# $Id: key.rb,v 5599ee896d07 2010/07/30 12:40:48 roberto $
 
 require "crypto_helper"
 
@@ -112,7 +112,7 @@ end # -- SKey
 #
 class Caesar < SKey
   def initialize(key)
-    super
+    super(key)
     gen_rings()
   end
   
