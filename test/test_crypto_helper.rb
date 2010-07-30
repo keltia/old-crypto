@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 762197de3fd1 2010/03/05 22:37:41 roberto $
+# $Id: test_crypto_helper.rb,v 62809c654251 2010/07/30 15:17:03 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -177,4 +177,17 @@ class TestCrypto < Test::Unit::TestCase
     assert_equal r, res
   end # -- test_submod10
   
+  # === test_keyshuffle
+  #
+  def test_keyshuffle
+    shf = @data["shuffle"]
+    base = shf["base"]
+    shf["keys"].each_pair do |k,r|
+      res = keyshuffle(k, base)
+    
+      assert_not_nil res
+      assert_equal String, res.class
+      assert_equal r, res
+    end
+  end # -- test_keyshuffle
 end # --  TestVICKey

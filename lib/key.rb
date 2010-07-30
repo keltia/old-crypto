@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 5599ee896d07 2010/07/30 12:40:48 roberto $
+# $Id: key.rb,v 62809c654251 2010/07/30 15:17:03 roberto $
 
 require "crypto_helper"
 
@@ -147,7 +147,7 @@ end # -- Caesar
 # See http://en.wikipedia.org/wiki/Straddling_checkerboard
 
 class SCKey < SKey
-
+  include Crypto
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
 
   attr_reader :full_key, :long, :shortc, :longc
@@ -155,76 +155,10 @@ class SCKey < SKey
   def initialize(key, longc = [ 8, 9 ])
     super(key)
     @longc = longc
-    @full_key = checkerboard()
+    @full_key = keyshuffle(@key, BASE)
     gen_rings()
   end
   
-  # === checkerboard
-  #
-  # Shuffle the alphabet a bit to avoid sequential allocation of the
-  # code numbers.  This is actually performing a transposition with the word
-  # itself as key.
-  #
-  # Regular rectangle
-  # -----------------
-  # Key is ARABESQUE condensed into ARBESQU (len = 7) (height = 4)
-  # Let word be ARBESQUCDFGHIJKLMNOPTVWXYZ/-
-  #
-  # First passes will generate
-  #
-  # A  RBESQUCDFGHIJKLMNOPTVWXYZ/-   c=0  0 x 6
-  # AC  RBESQUDFGHIJKLMNOPTVWXYZ/-   c=6  1 x 6
-  # ACK  RBESQUDFGHIJLMNOPTVWXYZ/-   c=12 2 x 6
-  # ACKV  RBESQUDFGHIJLMNOPTWXYZ/-   c=18 3 x 6
-  # ACKVR  BESQUDFGHIJLMNOPTWXYZ/-   c=0  0 x 5
-  # ACKVRD  BESQUFGHIJLMNOPTWXYZ/-   c=5  1 x 5
-  # ...
-  # ACKVRDLWBFMXEGNYSHOZQIP/UJT-
-  #
-  # Irregular rectangle
-  # -------------------
-  # Key is SUBWAY condensed info SUBWAY (len = 6) (height = 5)
-  #
-  # S  UBWAYCDEFGHIJKLMNOPQRTVXZ/-   c=0  0 x 5
-  # SC  UBWAYDEFGHIJKLMNOPQRTVXZ/-   c=5  1 x 5
-  # SCI  UBWAYDEFGHJKLMNOPQRTVXZ/-   c=10 2 x 5
-  # SCIO  UBWAYDEFGHJKLMNPQRTVXZ/-   c=15 3 x 5
-  # SCIOX  UBWAYDEFGHJKLMNPQRTVZ/-   c=20 4 x 5
-  # SCIOXU  BWAYDEFGHJKLMNPQRTVZ/-   c=0  0 x 4
-  # ...
-  # SCIOXUDJPZBEKQ/WFLR-AG  YHMNTV   c=1  1 x 1
-  # SCIOXUDJPZBEKQ/WFLR-AGM  YHNTV   c=2  2 x 1
-  # SCIOXUDJPZBEKQ/WFLR-AGMT  YHNV   c=3  3 x 1
-  # SCIOXUDJPZBEKQ/WFLR-AGMTYHNV
-  #
-  def checkerboard
-    word = (@key + BASE).condensed.dup
-    len = @key.condensed.length
-    height = BASE.length / len
-    
-    
-    # Odd rectangle
-    #
-    if (BASE.length % len) != 0
-      height = height + 1
-    end
-    
-    res = ""
-    (len - 1).downto(0) do |i|
-      0.upto(height - 1) do |j|
-        if word.length <= (height - 1) then
-          return res + word
-        else
-          c = word.slice!(i * j)
-          if not c.nil? then
-            res = res + c.chr
-          end
-        end
-      end
-    end
-    return res
-  end 
-
   # == gen_rings
   #
   # Assign a code number for each letter. Each code number is
