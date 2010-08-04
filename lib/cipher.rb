@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 1b387e81e836 2010/03/04 13:14:37 roberto $
+# $Id: cipher.rb,v 588bdffbc2b1 2010/08/04 15:35:56 roberto $
 
 require "key"
 
@@ -397,5 +397,21 @@ class ADFGVX < SimpleCipher
   end # -- decode
   
 end # -- ADFGVX
+
+class ChaoCipher < Substitution
+  include Crypto
+  
+  attr_reader :key
+  
+  # === initialize
+  #
+  def initialize(pw, cw, flag = false)
+    if flag then
+      pw = keyshuffle(pw, Key::ChaoKey::BASE)
+      cw = keyshuffle(cw, Key::ChaoKey::BASE)
+    end
+    @key = Key::ChaoKey.new(pw, cw)
+  end # -- initialize
+end # -- ChaoCipher
 
 end # -- module Cipher

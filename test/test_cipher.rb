@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v bdacd4eec8d9 2010/03/04 11:10:45 roberto $
+# $Id: test_cipher.rb,v 588bdffbc2b1 2010/08/04 15:35:56 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -497,5 +497,47 @@ class TestPlayfair_Q < Test::Unit::TestCase
   end # -- test_decode_invalid
   
 end # --  TestPlayfair_Q
+
+class TestChaoCipher < Test::Unit::TestCase
+  
+  # === setup
+  #
+  def setup
+    File.open("test/test_cipher_chao.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"]
+  end # -- setup
+
+  # === test_encode
+  #
+  def test_encode
+    @keys.each_value do |type|
+      pt = type["pt"]
+      cw = type["cw"]
+      pw = type["pw"]
+      
+      @key = Cipher::ChaoCipher.new(pw, cw)
+      ct = @key.encode(pt)
+      
+      assert_equal type["ct"], ct
+    end
+  end # -- test_encode
+
+  # === test_decode
+  #
+  def test_decode
+    @keys.each_value do |type|
+      ct = type["ct"]
+      cw = type["cw"]
+      pw = type["pw"]
+      
+      @key = Cipher::ChaoCipher.new(pw, cw)
+      pt = @key.decode(ct)
+      
+      assert_equal type["pt"], pt
+    end
+  end # -- test_encode
+end # -- TestChaoCipher
 
 end # -- TestCipher
