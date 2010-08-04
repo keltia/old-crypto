@@ -1,6 +1,6 @@
 # Design document
 #
-# $Id: README.txt,v 24ca11af3b60 2010/02/01 14:32:54 roberto $
+# $Id: README.txt,v 6eacd5db1203 2010/08/04 15:39:20 roberto $
 
 ## Key handling
 
@@ -8,6 +8,7 @@
 		SKey
 		TKey
 		SCKey
+		ChaoKey
 
 ## Cipher handling
 
@@ -15,6 +16,7 @@
 	
 	SimpleCipher => encode, decode
 	>	Substitution
+		>	ChaoCipher
 	>	Transposition
 	>	Nihilist
 	>	ADFGX
