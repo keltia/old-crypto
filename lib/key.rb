@@ -6,9 +6,12 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 62809c654251 2010/07/30 15:17:03 roberto $
+# $Id: key.rb,v dcfc1ef28932 2010/08/04 15:35:21 roberto $
 
 require "crypto_helper"
+
+class DataError < Exception
+end
 
 module Key
 # == Key
@@ -404,6 +407,85 @@ class VICKey < Key
   end # -- initialize
   
 end # -- VICKey
+
+
+# == ChaoKey
+#
+# Setup key schedule & encode:decode methods for the Chaocipher
+# algorithm.
+# See http://www.mountainvistasoft.com/chaocipher/index.htm
+#
+class ChaoKey < Key
+  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  ZENITH = 0
+  NADIR  = 13
+  
+  attr_reader :plain, :cipher
+
+  def initialize(pw, cw)
+    @plain  = pw
+    @cipher = cw
+    raise DataError, "Bad pw length" if pw.length != BASE.length
+    raise DataError, "Bad cw length" if cw.length != BASE.length
+  end
+  
+  # === encode
+  #
+  def encode(pt)
+    idx = @plain.index(pt)
+    @pt = pt
+    @ct = @cipher[idx]
+    advance(idx)
+    return @ct
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(ct)
+    idx = @cipher.index(ct)
+    @pt = @plain[idx]
+    @ct = ct
+    advance(idx)
+    return @pt
+  end # -- decode
+
+  # === advance
+  #
+  # Permute the two alphabets, first ciphertext then plaintext
+  # We use the current plain & ciphertext characters (akin to autoclave)
+  #
+  # Zenith is 0, Nadir is 13 (n/2 + 1 if 1-based)
+  # Steps for left:
+  # 1. shift from idx to Zenith
+  # 2. take Zenith+1 out
+  # 3. shift left one position and insert back the letter from step2
+  #
+  # Steps for right
+  # 1. shift everything from plain to Zenith
+  # 2. shift one more entire string
+  # 3. extract Zenith+2
+  # 4. shift from Zenith+3 to Nadir left
+  # 5. insert  letter from step 3 in place
+  #
+  def advance(idx)
+    if idx != 0 then
+      cw = @cipher[idx..-1] + @cipher[ZENITH..(idx - 1)]
+      pw = @plain[idx..-1] + @plain[ZENITH..(idx - 1)]
+    else
+      cw = @cipher
+      pw = @plain
+    end
+    @cipher = cw[ZENITH].chr + cw[(ZENITH + 2)..NADIR] + \
+              cw[ZENITH + 1].chr + cw[(NADIR + 1)..-1]
+    raise DataError, "cw length bad" if cw.length != BASE.length
+
+    pw = pw[(ZENITH + 1)..-1] + pw[ZENITH].chr
+    @plain = pw[ZENITH..(ZENITH + 1)] + pw[(ZENITH + 3)..NADIR] + \
+             pw[ZENITH + 2].chr + pw[(NADIR + 1)..-1]
+    raise DataError, "pw length bad" if pw.length != BASE.length
+  end # -- advance
+
+end # -- ChaoKey
 
 end # -- Key
 

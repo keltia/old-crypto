@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 114d6e0ca199 2010/03/02 13:49:00 roberto $
+# $Id: test_key.rb,v dcfc1ef28932 2010/08/04 15:35:21 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -288,6 +288,44 @@ class TestSCKey < Test::Unit::TestCase
     end
   end # -- test_decode
 end # --  TestSCKey
+
+# == TestChaokey
+#
+class TestChaokey < Test::Unit::TestCase
+  
+  # === setup
+  #
+  def setup
+    File.open("test/test_chaokey.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+
+  end # -- setup
+
+  # === test_advance
+  #
+  def test_advance
+    a = Key::ChaoKey.new("PTLNBQDEOYSFAVZKGJRIHWXUMC",
+                         "HXUCZVAMDSLKPEFJRIGTWOBNYQ")
+    a.advance(12)
+    assert_equal 26, a.plain.length
+    assert_equal 26, a.cipher.length
+    assert_equal "VZGJRIHWXUMCPKTLNBQDEOYSFA", a.plain
+    assert_equal "PFJRIGTWOBNYQEHXUCZVAMDSLK", a.cipher
+  end # -- test_advance
+  
+  # === test_encode
+  #
+  def test_encode
+    false
+  end # -- test_encode
+  
+  # === test_decode
+  #
+  def test_decode
+    false
+  end # -- test_decode
+end # -- TestChaokey
 
 # ==  TestSQKey
 #
