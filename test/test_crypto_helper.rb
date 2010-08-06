@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 62809c654251 2010/07/30 15:17:03 roberto $
+# $Id: test_crypto_helper.rb,v 592ba2664a38 2010/08/06 12:59:47 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -190,4 +190,4 @@ class TestCrypto < Test::Unit::TestCase
       assert_equal r, res
     end
   end # -- test_keyshuffle
-end # --  TestVICKey
+end # --  TestCrypto
