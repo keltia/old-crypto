@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 62809c654251 2010/07/30 15:17:03 roberto $
+# $Id: crypto_helper.rb,v bd26f911ad0f 2010/08/06 09:36:32 roberto $
 
 
 # == String
@@ -29,6 +29,9 @@ class String
   end # -- condensed
 
   # === expand
+  #
+  # Insert an X between identical letters (mostly used for bigrammatic
+  # ciphers such as Playfair)
   #
   def expand
     a_str = self.split(//)
