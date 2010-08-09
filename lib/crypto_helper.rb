@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v bd26f911ad0f 2010/08/06 09:36:32 roberto $
+# $Id: crypto_helper.rb,v e95e2b0ec3e1 2010/08/09 14:10:16 roberto $
 
 
 # == String
@@ -287,5 +287,34 @@ module Crypto
     end
     return res
   end # -- keyshuffle
+
+  # === find_hole
+  #
+  # Given a keyword with spaces, output an array with their positions
+  #
+  def find_hole(kw, ph)
+    if kw.class == String then
+      kwn = kw[0..(ph.length - 1)].to_numeric10
+    elsif kw.class == Array
+      kwn = kw.dup
+    else
+      raise DataError, "Must be either String or Array of integers"
+    end
+    
+    a = Array.new
+    long  = Array.new
+    short = Array.new
+    i = 0
+    ph.scan(/./).each do |c|
+      a << c
+      if c == " " then
+        long << kwn[i]
+      else
+        short << kwn[i]
+      end
+      i += 1
+    end
+    long
+  end # -- find_hole
   
 end # -- Crypto

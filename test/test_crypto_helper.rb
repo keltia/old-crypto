@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 592ba2664a38 2010/08/06 12:59:47 roberto $
+# $Id: test_crypto_helper.rb,v e95e2b0ec3e1 2010/08/09 14:10:16 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -176,6 +176,25 @@ class TestCrypto < Test::Unit::TestCase
     assert_equal Array, res.class
     assert_equal r, res
   end # -- test_submod10
+  
+  # === test_find_hole
+  #
+  def test_find_hole
+    ph = "AT ONE SIR"
+    kw = "INDEPENDENCE"
+    res = find_hole(kw, ph)
+    assert_equal [1, 8], res
+    
+    ph = "ET AON RIS"
+    kw = "ABCDEFGHIJ"
+    res = find_hole(kw, ph)
+    assert_equal [3, 7], res
+    
+    ph = "AT ONE SIR"
+    kwn = [1, 2, 0 ,5, 3, 4, 8, 6, 7, 9]
+    res = find_hole(kwn, ph)
+    assert_equal [0, 8], res
+  end # -- test_find_hole
   
   # === test_keyshuffle
   #
