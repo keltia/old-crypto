@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v e95e2b0ec3e1 2010/08/09 14:10:16 roberto $
+# $Id: crypto_helper.rb,v 08e4a6559642 2010/08/09 14:10:58 roberto $
 
 
 # == String
@@ -318,3 +318,8 @@ module Crypto
   end # -- find_hole
   
 end # -- Crypto
+
+if __FILE__ == $0 then
+  puts "End."
+  find_hole("INDEPENDENCE","AT ONE SIR")
+end
