@@ -1,15 +1,173 @@
 === 0.0.1 WIP
 
+2010-08-09  Ollivier Robert  <roberto@keltia.net>
+
+        * lib/crypto_helper.rb:
+        Help debugging.
+        [08e4a6559642] [tip]
+
+        * lib/crypto_helper.rb, test/test_crypto_helper.rb:
+        Add a Crypto.find_hole method to return the index where spaces lie,
+        add tests..
+        [e95e2b0ec3e1]
+
+2010-08-06  Ollivier Robert  <roberto@keltia.net>
+
+        * test/test_crypto_helper.rb:
+        Fix comment.
+        [592ba2664a38]
+
+        * lib/crypto_helper.rb:
+        Clarify #expand usecase.
+        [bd26f911ad0f]
+
+2010-08-04  Ollivier Robert  <roberto@keltia.net>
+
+        * test/test_chaokey.yaml, test/test_cipher_chao.yaml:
+        It is much better if I commit the tests themselves...
+        [bcff1355a112]
+
+        * README.txt:
+        ChaoCipher is implemented. Closes #69.
+        [6eacd5db1203]
+
+        * lib/cipher.rb, test/test_cipher.rb:
+        Implement the ChaoCipher itself using Key::ChaoKey.
+        [588bdffbc2b1]
+
+        * lib/key.rb, test/test_key.rb:
+        Implement the key schedule & operation of the ChaoCipher
+        algorithm[1] with tests. Tests are based on the data posted on the
+        site.
+
+        [1] http://www.mountainvistasoft.com/chaocipher/index.htm
+        [dcfc1ef28932]
+
+2010-07-30  Ollivier Robert  <roberto@keltia.net>
+
+        * lib/crypto_helper.rb, lib/key.rb, test/test_crypto.yaml,
+        test/test_crypto_helper.rb:
+        Turn SCKey::checkerboard into Crypto::keyshuffle along with tests to
+        match.
+        [62809c654251]
+
+        * Rakefile:
+        Remove hoe stuff for now, too unstable WRT 1.9.2/1.9.3.
+        [107d2f132cc7]
+
+        * lib/key.rb:
+        FIX: key was not properly propagated down to SKey::new.
+        [5599ee896d07]
+
+2010-03-06  Ollivier Robert  <roberto@keltia.net>
+
+        * lib/crypto_helper.rb:
+        Fix comment.
+        [b67b49209e04]
+
+2010-03-05  Ollivier Robert  <roberto@keltia.net>
+
+        * misc/bench.rb:
+        Add bench for 1-based mod 10 versions.
+        [7ddf3eb4e203]
+
+        * lib/crypto_helper.rb, test/test_crypto_helper.rb:
+        Rename String#to_numeric10 into #to_numeric11 and replace it by
+        another implementation based on to_numeric instead of to_numeric2.
+
+        Add tests for both.
+        [762197de3fd1]
+
+        * lib/crypto_helper.rb:
+        Implement String#to_five.
+        [921e3ad31ac8]
+
+        * test/test_crypto_helper.rb:
+        Add tests for upcoming String#to_five.
+        [27aa77e7baef]
+
+2010-03-04  Ollivier Robert  <roberto@keltia.net>
+
+        * lib/crypto_helper.rb, test/test_string.yaml:
+        Fix: length was not recomputed. Add tests to check that.
+        [34829eaaca33]
+
+        * lib/cipher.rb:
+        Fix to defining "pt" twice.
+        [1b387e81e836]
+
+        * test/test_cipher.rb:
+        Unifiy message.
+        [bdacd4eec8d9]
+
+        * test/test_cipher.rb:
+        Reorganize tests, be more granular. Add one to Playfait_J.
+        [76ebaf116f77]
+
+2010-03-03  Ollivier Robert  <roberto@keltia.net>
+
+        * test/test_cipher.rb, test/test_cipher_playfair_q.yaml:
+        Assert that a string may have been expanded before #encode.
+        [c81fde45960b]
+
+        * test/test_string.yaml:
+        Test for the issue fixed by previous cset.
+        [ac9180854ac2]
+
+        * lib/crypto_helper.rb:
+        Fix: we iterate on the whole string, not just half.
+        [d2d45252294f]
+
+        * lib/cipher.rb:
+        Use String#expand before encoding.
+        [2fd5824ed6e6]
+
+        * lib/crypto_helper.rb, test/test_crypto_helper.rb,
+        test/test_string.yaml:
+        Implement String#expand to deal with double letters + tests.
+        [1b399db995b3]
+
+2010-03-02  Ollivier Robert  <roberto@keltia.freenix.fr>
+
+        * lib/cipher.rb, test/test_cipher.rb:
+        Validate input data for Playfair.
+        [2e9a23be4a89]
+
 2010-03-02  Ollivier Robert  <roberto@keltia.net>
+
+        * lib/cipher.rb, lib/key.rb, test/test_cipher.rb,
+        test/test_cipher_playfair.yaml, test/test_cipher_playfair_j.yaml,
+        test/test_cipher_playfair_q.yaml, test/test_key.rb,
+        test/test_playfair.yaml, test/test_playfair_j.yaml,
+        test/test_playfair_q.yaml:
+        Major change in Playfair
+
+        - Default alphabet is now merging I&J instead of removing Q
+        - Older alphabet is available by passing Key::Playfair::WITH_J as
+        second parameter to #initialize.
+        - Add tests and shuffle around existing ones to adapt
+
+        Prompted by: tweet by @ashbb
+        (http://twitter.com/ashbb/status/9825839605)
+        [114d6e0ca199]
+
+        * Rakefile:
+        Anchor rake directory.
+        [bdc07d891b44]
+
+        * History.txt:
+        Updated changelog.
+        [b6421bf9bf50]
 
         * lib/cipher.rb, lib/key.rb, test/test_cipher.rb, test/test_key.rb:
         Move all key classes into a common module Key::.
-        [a6aee4c85157] [tip]
+        [a6aee4c85157]
+
 
 2010-02-01  Ollivier Robert  <roberto@keltia.net>
 
         * README.txt:
-        Add $Id: History.txt,v b6421bf9bf50 2010/03/02 09:44:08 roberto $.
+        Add $Id: History.txt,v 820c96c64682 2010/09/07 22:39:20 roberto $.
         [24ca11af3b60]
 
         * DESIGN.txt, README.txt:
@@ -637,7 +795,7 @@
         [334cabbd4aa1]
 
         * key.rb:
-        Move $Id: History.txt,v b6421bf9bf50 2010/03/02 09:44:08 roberto $ into comment.
+        Move $Id: History.txt,v 820c96c64682 2010/09/07 22:39:20 roberto $ into comment.
         [9ab29224f28a]
 
         * test/test_key.rb, test/test_key.yaml, test/test_sckey.yaml,
@@ -646,7 +804,7 @@
         [39b7b840a7b7]
 
         * cipher.rb:
-        Make $Id: History.txt,v b6421bf9bf50 2010/03/02 09:44:08 roberto $ a comment.
+        Make $Id: History.txt,v 820c96c64682 2010/09/07 22:39:20 roberto $ a comment.
         [4b321eb0f80c]
 
 2009-02-16  Ollivier Robert  <roberto@keltia.freenix.fr>
