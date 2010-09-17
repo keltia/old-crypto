@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 2fd65cc211d3 2010/09/17 15:44:19 roberto $
+# $Id: test_key.rb,v 768bc30075b1 2010/09/17 15:58:41 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -299,31 +299,50 @@ class TestChaokey < Test::Unit::TestCase
     File.open("test/test_chaokey.yaml") do |fh|
       @data = YAML.load(fh)
     end
-
+    @a = Key::ChaoKey.new("PTLNBQDEOYSFAVZKGJRIHWXUMC",
+                         "HXUCZVAMDSLKPEFJRIGTWOBNYQ")
   end # -- setup
 
   # === test_advance
   #
   def test_advance
-    a = Key::ChaoKey.new("PTLNBQDEOYSFAVZKGJRIHWXUMC",
-                         "HXUCZVAMDSLKPEFJRIGTWOBNYQ")
-    a.advance(12)
-    assert_equal 26, a.plain.length
-    assert_equal 26, a.cipher.length
-    assert_equal "VZGJRIHWXUMCPKTLNBQDEOYSFA", a.plain
-    assert_equal "PFJRIGTWOBNYQEHXUCZVAMDSLK", a.cipher
+    @a.advance(12)
+    assert_equal 26, @a.plain.length
+    assert_equal 26, @a.cipher.length
+    assert_equal "VZGJRIHWXUMCPKTLNBQDEOYSFA", @a.plain
+    assert_equal "PFJRIGTWOBNYQEHXUCZVAMDSLK", @a.cipher
   end # -- test_advance
   
   # === test_encode
   #
+  # we test two steps to ensure the "rings" turn
+  #
   def test_encode
-    false
+    pt = "W"
+    ct = "O"
+    
+    nct = @a.encode(pt)
+    assert_equal ct, nct
+    
+    pt = "E"
+    ct = "A"
+    nct = @a.encode(pt)
+    assert_equal ct, nct
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    false
+    pt = "W"
+    ct = "O"
+    
+    npt = @a.decode(ct)
+    assert_equal pt, npt
+    
+    pt = "E"
+    ct = "A"
+    npt = @a.decode(ct)
+    assert_equal pt, npt
   end # -- test_decode
 end # -- TestChaokey
 
