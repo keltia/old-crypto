@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v dcfc1ef28932 2010/08/04 15:35:21 roberto $
+# $Id: test_key.rb,v 2fd65cc211d3 2010/09/17 15:44:19 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -471,6 +471,18 @@ class TestPlayfair_Q < Test::Unit::TestCase
     end
   end # -- test_decode
 end # -- TestPlayfair
+
+# == TestWheatstone
+#
+class TestWheatstone < Test::Unit::TestCase
+  include Crypto
+  
+  # === setup
+  #
+  def setup
+  end # -- setup
+  
+end # -- TestWheatstone
 
 # == TestPlayfair1
 #
