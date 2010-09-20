@@ -1,20 +1,10 @@
 === 0.0.1 WIP
 
-2010-09-17  Ollivier Robert  <roberto@keltia.net>
-
-        * test/test_key.rb:
-        Implement tests for ChaoKey::encode/decode.
-        [768bc30075b1] [tip]
-
-        * test/test_key.rb:
-        Beginning of implementation of the Wheatstone cipher.
-        [2fd65cc211d3]
-
 2010-08-09  Ollivier Robert  <roberto@keltia.net>
 
         * lib/crypto_helper.rb:
         Help debugging.
-        [08e4a6559642]
+        [08e4a6559642] [tip]
 
         * lib/crypto_helper.rb, test/test_crypto_helper.rb:
         Add a Crypto.find_hole method to return the index where spaces lie,
@@ -137,7 +127,6 @@
         Implement String#expand to deal with double letters + tests.
         [1b399db995b3]
 
-
 2010-03-02  Ollivier Robert  <roberto@keltia.freenix.fr>
 
         * lib/cipher.rb, test/test_cipher.rb:
@@ -172,12 +161,13 @@
 
         * lib/cipher.rb, lib/key.rb, test/test_cipher.rb, test/test_key.rb:
         Move all key classes into a common module Key::.
-        [a6aee4c85157] [tip]
+        [a6aee4c85157]
+
 
 2010-02-01  Ollivier Robert  <roberto@keltia.net>
 
         * README.txt:
-        Add $Id: History.txt,v f5483aaa681b 2010/09/17 16:05:17 roberto $.
+        Add $Id: History.txt,v 8773da4b9a2b 2010/09/20 08:02:26 roberto $.
         [24ca11af3b60]
 
         * DESIGN.txt, README.txt:
@@ -805,7 +795,7 @@
         [334cabbd4aa1]
 
         * key.rb:
-        Move $Id: History.txt,v f5483aaa681b 2010/09/17 16:05:17 roberto $ into comment.
+        Move $Id: History.txt,v 8773da4b9a2b 2010/09/20 08:02:26 roberto $ into comment.
         [9ab29224f28a]
 
         * test/test_key.rb, test/test_key.yaml, test/test_sckey.yaml,
@@ -814,7 +804,7 @@
         [39b7b840a7b7]
 
         * cipher.rb:
-        Make $Id: History.txt,v f5483aaa681b 2010/09/17 16:05:17 roberto $ a comment.
+        Make $Id: History.txt,v 8773da4b9a2b 2010/09/20 08:02:26 roberto $ a comment.
         [4b321eb0f80c]
 
 2009-02-16  Ollivier Robert  <roberto@keltia.freenix.fr>
