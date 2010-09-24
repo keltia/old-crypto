@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 699dc8ed13ef 2010/09/24 14:40:32 roberto $
+# $Id: crypto_helper.rb,v e7fb9450023a 2010/09/24 14:42:58 roberto $
 
 
 # == String
@@ -301,12 +301,10 @@ module Crypto
       raise DataError, "Must be either String or Array of integers"
     end
     
-    a = Array.new
     long  = Array.new
     short = Array.new
     i = 0
     ph.scan(/./).each do |c|
-      a << c
       if c == " " then
         long << kwn[i]
       else
