@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 08e4a6559642 2010/08/09 14:10:58 roberto $
+# $Id: crypto_helper.rb,v 950ae3f6d53f 2010/09/24 14:39:58 roberto $
 
 
 # == String
@@ -292,7 +292,7 @@ module Crypto
   #
   # Given a keyword with spaces, output an array with their positions
   #
-  def find_hole(kw, ph)
+  def find_hole(kw, ph = "AT ONE SIR")
     if kw.class == String then
       kwn = kw[0..(ph.length - 1)].to_numeric10
     elsif kw.class == Array
