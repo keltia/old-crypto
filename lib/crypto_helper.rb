@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 950ae3f6d53f 2010/09/24 14:39:58 roberto $
+# $Id: crypto_helper.rb,v 699dc8ed13ef 2010/09/24 14:40:32 roberto $
 
 
 # == String
@@ -314,7 +314,7 @@ module Crypto
       end
       i += 1
     end
-    long
+    long.compact
   end # -- find_hole
   
 end # -- Crypto
