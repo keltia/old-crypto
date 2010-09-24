@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v dcfc1ef28932 2010/08/04 15:35:21 roberto $
+# $Id: key.rb,v 8ef7bac358d2 2010/09/24 14:56:11 roberto $
 
 require "crypto_helper"
 
@@ -153,7 +153,7 @@ class SCKey < SKey
   include Crypto
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
 
-  attr_reader :full_key, :long, :shortc, :longc
+  attr_reader :full_key, :shortc, :longc
   
   def initialize(key, longc = [ 8, 9 ])
     super(key)
