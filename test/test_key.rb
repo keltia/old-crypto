@@ -1,14 +1,16 @@
-# $Id: test_key.rb,v 768bc30075b1 2010/09/17 15:58:41 roberto $
+# $Id: test_key.rb,v ff555b0ccec1 2010/09/26 23:04:35 roberto $
 
-require 'test/unit'
+require 'minitest/unit'
 require "yaml"
+
+MiniTest::Unit.autorun
 
 require "key"
 require "crypto_helper"
 
 # ==  TestKey
 #
-class TestKey < Test::Unit::TestCase
+class TestKey < MiniTest::Unit::TestCase
 
   # === setup
   #
@@ -24,7 +26,7 @@ class TestKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Key.new(word)
 
-      assert_not_nil key
+      refute_nil key
       assert_equal key.key, word.upcase
     end
   end # -- test_init
@@ -32,12 +34,12 @@ class TestKey < Test::Unit::TestCase
   # === test_params
   #
   def test_params
-    assert_raise(ArgumentError) { Key::Key.new(nil)}
-    assert_raise(ArgumentError) { Key::Key.new(Array.new) }
+    assert_raises(ArgumentError) { Key::Key.new(nil)}
+    assert_raises(ArgumentError) { Key::Key.new(Array.new) }
     assert_nothing_raised(ArgumentError) { Key::Key.new(3) }
     assert_nothing_raised(ArgumentError) { Key::Key.new("") }
     assert_nothing_raised(ArgumentError) { Key::Key.new("FOOBAR") }
-    assert_raise(RangeError) { Key::Key.new(42) }
+    assert_raises(RangeError) { Key::Key.new(42) }
   end # -- test_params
   
   # === test_condensed1
@@ -46,7 +48,7 @@ class TestKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Key.new(word)
 
-      assert_not_nil key
+      refute_nil key
       assert_equal key.condensed, @data[word]["condensed"]
     end
   end # -- test_condensed
@@ -57,7 +59,7 @@ class TestKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Key.new(word)
 
-      assert_not_nil key
+      refute_nil key
       assert_equal key.length, word.length
     end
   end # -- test_length
@@ -66,7 +68,7 @@ end # --  TestKey
 
 # == TestTKey
 #
-class TestTKey < Test::Unit::TestCase
+class TestTKey < MiniTest::Unit::TestCase
 
   # === setup
   #
@@ -83,7 +85,7 @@ class TestTKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::TKey.new(word)
 
-      assert_not_nil key
+      refute_nil key
       assert_equal key.key, word.upcase
     end
   end # -- test_init
@@ -101,7 +103,7 @@ end # --  TestTKey
 
 # ==  TestSKey
 #
-class TestSKey < Test::Unit::TestCase
+class TestSKey < MiniTest::Unit::TestCase
   
   # === test_alpha
   #
@@ -109,9 +111,9 @@ class TestSKey < Test::Unit::TestCase
     word = "arabesque"
     key = Key::SKey.new(word)
 
-    assert_not_nil key      
-    assert_not_nil key.alpha
-    assert_not_nil key.ralpha
+    refute_nil key      
+    refute_nil key.alpha
+    refute_nil key.ralpha
   end # -- test_presence_of_alpha
 
   # === test_encode_decode
@@ -127,21 +129,21 @@ end # --  TestSKey
 
 # ==  TestKeyCaesar
 #
-class TestKeyCaesar < Test::Unit::TestCase
+class TestKeyCaesar < MiniTest::Unit::TestCase
   
   # === setup
   #
   def setup
     word = 3
     @key = Key::Caesar.new(word)
-    assert_not_nil @key
+    refute_nil @key
   end # -- setup
   
   # === test_alpha
   #
   def test_presence_of_alpha
-    assert_not_nil @key.alpha
-    assert_not_nil @key.ralpha
+    refute_nil @key.alpha
+    refute_nil @key.ralpha
   end # -- test_presence_of_alpha
   
   # === test_alpha
@@ -166,13 +168,13 @@ class TestKeyCaesar < Test::Unit::TestCase
     pt = "A"
     ct = @key.encode(pt)
 
-    assert_not_nil ct
+    refute_nil ct
     assert_equal ct, "D"
     
     pt = "Y"
     ct = @key.encode(pt)
 
-    assert_not_nil ct
+    refute_nil ct
     assert_equal ct, "B"
   end # -- test_encode
   
@@ -182,20 +184,20 @@ class TestKeyCaesar < Test::Unit::TestCase
     ct = "D"
     pt = @key.decode(ct)
 
-    assert_not_nil pt
+    refute_nil pt
     assert_equal pt, "A"
     
     ct = "C"
     pt = @key.decode(ct)
 
-    assert_not_nil pt
+    refute_nil pt
     assert_equal pt, "Z"
   end # -- test_decode
 end # --  TestKeyCaesar
 
 # ==  TestSCKey
 #
-class TestSCKey < Test::Unit::TestCase
+class TestSCKey < MiniTest::Unit::TestCase
   
   # === setup
   #
@@ -211,10 +213,10 @@ class TestSCKey < Test::Unit::TestCase
     word = "arabesque"
     key = Key::SCKey.new(word)
 
-    assert_not_nil key
+    refute_nil key
     assert_equal Key::SCKey, key.class
-    assert_not_nil key.alpha
-    assert_not_nil key.ralpha
+    refute_nil key.alpha
+    refute_nil key.ralpha
     assert_equal Key::SCKey::BASE.length, key.alpha.length
     assert_equal Key::SCKey::BASE.length, key.ralpha.length
   end # -- test_presence_of_alpha
@@ -225,8 +227,8 @@ class TestSCKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SCKey.new(word)
 
-      assert_not_nil key
-      assert_not_nil key.full_key
+      refute_nil key
+      refute_nil key.full_key
       assert_equal Key::SCKey::BASE.length, key.full_key.length
       assert_equal @data[word]["full_key"], key.full_key
     end
@@ -238,7 +240,7 @@ class TestSCKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SCKey.new(word)
     
-      assert_not_nil key
+      refute_nil key
       assert_equal @data[word]["alpha"], key.alpha
       assert_equal @data[word]["ralpha"], key.ralpha
     end
@@ -249,7 +251,7 @@ class TestSCKey < Test::Unit::TestCase
   def test_is_long
     key = Key::SCKey.new("arabesque")
 
-    assert_not_nil key
+    refute_nil key
     assert !key.is_long?(0)
     assert key.is_long?(9)
   end # -- test_is_long
@@ -260,7 +262,7 @@ class TestSCKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SCKey.new(word)
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       encode_in = test["in"]
@@ -277,7 +279,7 @@ class TestSCKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SCKey.new(word)
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       decode_in = test["out"]
@@ -291,7 +293,7 @@ end # --  TestSCKey
 
 # == TestChaokey
 #
-class TestChaokey < Test::Unit::TestCase
+class TestChaokey < MiniTest::Unit::TestCase
   
   # === setup
   #
@@ -348,7 +350,7 @@ end # -- TestChaokey
 
 # ==  TestSQKey
 #
-class TestSQKey < Test::Unit::TestCase
+class TestSQKey < MiniTest::Unit::TestCase
 
   # === setup
   #
@@ -364,7 +366,7 @@ class TestSQKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SQKey.new(word, @data[word]["type"])
 
-      assert_not_nil key
+      refute_nil key
       assert_equal @data[word]["full_key"], key.full_key
     end
   end # -- test_init
@@ -375,7 +377,7 @@ class TestSQKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SQKey.new(word, @data[word]["type"])
 
-      assert_not_nil key
+      refute_nil key
       assert_equal Key::SQKey, key.class
       assert_equal @data[word]["alpha"], key.alpha
       assert_equal @data[word]["ralpha"], key.ralpha
@@ -388,7 +390,7 @@ class TestSQKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SQKey.new(word, @data[word]["type"])
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       encode_in = test["in"]
@@ -405,7 +407,7 @@ class TestSQKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::SQKey.new(word, @data[word]["type"])
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       encode_in = test["out"]
@@ -420,7 +422,7 @@ end # --  TestSQKey
 
 # == TestPlayfair
 #
-class TestPlayfair_Q < Test::Unit::TestCase
+class TestPlayfair_Q < MiniTest::Unit::TestCase
   include Crypto
   
   # === setup
@@ -437,10 +439,10 @@ class TestPlayfair_Q < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word)
 
-      assert_not_nil key
+      refute_nil key
       assert_equal Key::Playfair, key.class
-      assert_not_nil key.alpha
-      assert_not_nil key.ralpha
+      refute_nil key.alpha
+      refute_nil key.ralpha
       assert_equal @data[word]["full_key"], key.full_key
     end
   end # -- test_init
@@ -462,7 +464,7 @@ class TestPlayfair_Q < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word)
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       encode_in = test["in"]
@@ -479,7 +481,7 @@ class TestPlayfair_Q < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word)
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       encode_in = test["out"]
@@ -493,7 +495,7 @@ end # -- TestPlayfair
 
 # == TestWheatstone
 #
-class TestWheatstone < Test::Unit::TestCase
+class TestWheatstone < MiniTest::Unit::TestCase
   include Crypto
   
   # === setup
@@ -505,7 +507,7 @@ end # -- TestWheatstone
 
 # == TestPlayfair1
 #
-class TestPlayfair_J < Test::Unit::TestCase
+class TestPlayfair_J < MiniTest::Unit::TestCase
   include Crypto
   
   # === setup
@@ -522,10 +524,10 @@ class TestPlayfair_J < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word, Key::Playfair::WITH_J)
 
-      assert_not_nil key
+      refute_nil key
       assert_equal Key::Playfair, key.class
-      assert_not_nil key.alpha
-      assert_not_nil key.ralpha
+      refute_nil key.alpha
+      refute_nil key.ralpha
       assert_equal @data[word]["full_key"], key.full_key
     end
   end # -- test_init
@@ -547,7 +549,7 @@ class TestPlayfair_J < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word, Key::Playfair::WITH_J)
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       encode_in = test["in"]
@@ -564,7 +566,7 @@ class TestPlayfair_J < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word, Key::Playfair::WITH_J)
 
-      assert_not_nil key
+      refute_nil key
       
       test = @data[word]["encode"]
       encode_in = test["out"]
@@ -578,7 +580,7 @@ end # -- TestPlayfair_J
 
 # ==  TestVICKey
 #
-class TestVICKey < Test::Unit::TestCase
+class TestVICKey < MiniTest::Unit::TestCase
   include Crypto
   
   # === setup
@@ -596,11 +598,11 @@ class TestVICKey < Test::Unit::TestCase
     init = @data["init"]
     key = Key::VICKey.new(init["ikey"], init["phrase"], init["imsg"])
     
-    assert_not_nil key
-    assert_not_nil key.first
-    assert_not_nil key.second
-    assert_not_nil key.third
-    assert_not_nil key.sc_key
+    refute_nil key
+    refute_nil key.first
+    refute_nil key.second
+    refute_nil key.third
+    refute_nil key.sc_key
     
     assert_equal Array, key.p1.class
     assert_equal Array, key.p2.class
