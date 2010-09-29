@@ -1,15 +1,13 @@
-# $Id: test_crypto_helper.rb,v ff555b0ccec1 2010/09/26 23:04:35 roberto $
+# $Id: test_crypto_helper.rb,v e94ecb60adb4 2010/09/29 22:44:35 roberto $
 
-require 'minitest/unit'
+require 'test/unit'
 require "yaml"
 
-MiniTest::Unit.autorun
-    
 require "crypto_helper"
 
 # ==  TestString
 #
-class TestString < MiniTest::Unit::TestCase
+class TestString < Test::Unit::TestCase
   include Crypto
   
   # === setup
@@ -64,7 +62,7 @@ end # --  TestString
 
 # ==  TestCrypto
 #
-class TestCrypto < MiniTest::Unit::TestCase
+class TestCrypto < Test::Unit::TestCase
   include Crypto
   
   # === setup
@@ -82,12 +80,12 @@ class TestCrypto < MiniTest::Unit::TestCase
     init = @data["init"]
     a = (init["phrase"][0..9]).to_numeric
     
-    refute_nil a
+    assert_not_nil a
     assert_equal Array, a.class
     
     res = normalize(a)
     
-    refute_nil res
+    assert_not_nil res
     assert_equal init["p1"], res
   end # -- test_normalize
   
@@ -106,7 +104,7 @@ class TestCrypto < MiniTest::Unit::TestCase
     
     res = p1_encode(in_p1, in_p2)
     
-    refute_nil res
+    assert_not_nil res
     assert_equal exp, res
   end # -- test_p1_encode
   
@@ -122,7 +120,7 @@ class TestCrypto < MiniTest::Unit::TestCase
     
     res = str_to_numeric(a)
     
-    refute_nil res
+    assert_not_nil res
     assert_equal b, res
   end # -- test_to_numeric
   
@@ -135,7 +133,7 @@ class TestCrypto < MiniTest::Unit::TestCase
       
       res = chainadd(a)
       
-      refute_nil res
+      assert_not_nil res
       assert_equal b, res, "#{ca} failed"
     end
   end # -- test_chainadd
@@ -146,7 +144,7 @@ class TestCrypto < MiniTest::Unit::TestCase
     @expd = @data["expd"]
     expd = expand5to10(@expd["base"])
     
-    refute_nil expd
+    assert_not_nil expd
     assert_equal @expd["5to10"], expd
   end # -- test_expand5to10
   
@@ -161,7 +159,7 @@ class TestCrypto < MiniTest::Unit::TestCase
     
     c = addmod10(a,b)
     
-    refute_nil c
+    assert_not_nil c
     assert_equal test["c"], c
   end # -- test_addmod10
   
@@ -174,7 +172,7 @@ class TestCrypto < MiniTest::Unit::TestCase
     
     res = submod10(a,b)
     
-    refute_nil res
+    assert_not_nil res
     assert_equal Array, res.class
     assert_equal r, res
   end # -- test_submod10
@@ -206,7 +204,7 @@ class TestCrypto < MiniTest::Unit::TestCase
     shf["keys"].each_pair do |k,r|
       res = keyshuffle(k, base)
     
-      refute_nil res
+      assert_not_nil res
       assert_equal String, res.class
       assert_equal r, res
     end
