@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 8ef7bac358d2 2010/09/24 14:56:11 roberto $
+# $Id: key.rb,v 6572d8654c0d 2010/09/29 22:59:52 roberto $
 
 require "crypto_helper"
 
@@ -436,7 +436,7 @@ class ChaoKey < Key
     @pt = pt
     @ct = @cipher[idx]
     advance(idx)
-    return @ct
+    return @ct.chr
   end # -- encode
   
   # === decode
@@ -446,7 +446,7 @@ class ChaoKey < Key
     @pt = @plain[idx]
     @ct = ct
     advance(idx)
-    return @pt
+    return @pt.chr
   end # -- decode
 
   # === advance
