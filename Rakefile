@@ -1,4 +1,4 @@
-# $Id: Rakefile,v b4b5278e9199 2010/09/29 23:11:28 roberto $
+# $Id: Rakefile,v 4a8461664a2a 2010/09/29 23:11:44 roberto $
 #
 require 'rake'
 require 'rake/testtask'
@@ -20,6 +20,17 @@ task :stats do
     ["Code", "lib"],
     ["Units", "test"]
   ).to_s
+end
+
+desc "Cleanup files that are auto-generated"
+task :clean do
+  FileUtils.rm Dir.glob("**/*.rbc")
+end
+
+desc "Cleanup even more files"
+task :realclean do
+  FileUtils.rm Dir.glob("**/*.rej")
+  FileUtils.rm Dir.glob("**/*.orig")
 end
 
 require './lib/old_crypto.rb'
