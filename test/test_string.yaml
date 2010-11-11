@@ -81,6 +81,41 @@ LANNONCE:
   - 2
   - 3
   expanded: LANXNONCE
+AAABRAACADAABRA:
+  condensed: ABRCD
+  expanded: AXAXABRAACADAXABRA
+  num:
+  - 0
+  - 1
+  - 2
+  - 9
+  - 13
+  - 3
+  - 4
+  - 11
+  - 5
+  - 12
+  - 6
+  - 7
+  - 10
+  - 14
+  - 8
+  num10:
+  - 1
+  - 2
+  - 3
+  - 0
+  - 4
+  - 4
+  - 5
+  - 2
+  - 6
+  - 3
+  - 7
+  - 8
+  - 1
+  - 5
+  - 9
 ABCDEFGHJJKLM:
   condensed: ABCDEFGHJKLM
   num:
