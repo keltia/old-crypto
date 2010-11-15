@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 6572d8654c0d 2010/09/29 22:59:52 roberto $
+# $Id: key.rb,v e5b96bdedd8c 2010/11/15 00:20:57 roberto $
 
 require "crypto_helper"
 
@@ -185,13 +185,11 @@ class SCKey < SKey
     word.scan(/./) do |c|
       if c =~ /[ESANTIRU]/
         ind = shortc.shift
-        @alpha[c] = ind.to_s
-        @ralpha[ind.to_s] = c
       else
         ind = long.shift
-        @alpha[c] = ind.to_s
-        @ralpha[ind.to_s] = c
       end
+      @alpha[c] = ind.to_s
+      @ralpha[ind.to_s] = c
     end
   end # -- gen_rings
   
