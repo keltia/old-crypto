@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 3366b2f29e80 2010/11/15 09:49:21 roberto $
+# $Id: cipher.rb,v bf7f32c95dc4 2010/11/15 10:16:20 roberto $
 
 require "key"
 
@@ -321,6 +321,36 @@ class StraddlingCheckerboard  < Substitution
   
 end # --  StraddlingCheckerboard
 
+# == GenericBiCipher
+#
+# Generic framework class for ciphers using one cipher after another.
+#
+class GenericBiCipher < SimpleCipher
+  attr_reader :key, :super_key
+
+  def initialize(ch1, key, ch2, super_key = "")
+    @subst = ch1.send(:new, key)
+    @super_key = ch2.send(:new, super_key)
+  end
+
+  # === encode
+  #
+  def encode(plain)
+    ct = @subst.encode(plain)
+    cipher = @super_key.encode(ct)
+    return cipher
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(cipher)
+    ct = @super_key.decode(cipher)
+    plain = @subst.decode(ct)
+    return plain
+  end # -- decode
+  
+end
+
 # ==  Nihilist
 #
 # The Nihilist cipher has gone through several variations over the original
@@ -335,32 +365,14 @@ end # --  StraddlingCheckerboard
 # One possible variation would be having a transposition as supercipher.
 # This is the one here.
 #
-class NihilistT < SimpleCipher
-  attr_reader :super_key
+class NihilistT < GenericBiCipher
 
+  # === initialize
+  #
   def initialize(key, super_key = "")
-    @subst = Cipher::StraddlingCheckerboard.new(key)
-    @super_key = Cipher::Transposition.new(super_key)
+    super(Cipher::StraddlingCheckerboard, key, Cipher::Transposition, super_key)
   end
 
-  # === encode
-  #
-  def encode(plain)
-    # First pass ciphertext
-    #
-    ct = @subst.encode(plain)
-    cipher = @super_key.encode(ct)
-    return cipher
-  end # -- encode
-  
-  # === decode
-  #
-  def decode(cipher)
-    ct = @super_key.decode(cipher)
-    plain = @subst.decode(ct)
-    return plain
-  end # -- decode
-  
 end # --  NihilistT
 
 # Implementation of the well known cipher used by Germany during
@@ -370,31 +382,13 @@ end # --  NihilistT
 # See The Codebreakers, D. Kahn, 1996 for reference.
 #     http://en.wikipedia.org/wiki/ADFGVX
 #
-class ADFGVX < SimpleCipher
-  attr_reader :subst, :transp
-  
+class ADFGVX <  GenericBiCipher
+
   # === initialize
   #
   def initialize(key, super_key = "")
-    @subst = Cipher::Polybius.new(key)
-    @super_key = Cipher::Transposition.new(super_key)
+    super(Cipher::Polybius, key, Cipher::Transposition, super_key)
   end # -- initialize
-  
-  # === encode
-  #
-  def encode(plain)
-    ct = @subst.encode(plain)
-    cipher = @super_key.encode(ct)
-    return cipher
-  end # -- encode
-  
-  # === decode
-  #
-  def decode(cipher)
-    pt = @super_key.decode(cipher)
-    plain = @subst.decode(pt)
-    return plain
-  end # -- decode
   
 end # -- ADFGVX
 
