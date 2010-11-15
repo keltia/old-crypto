@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v e5b96bdedd8c 2010/11/15 00:20:57 roberto $
+# $Id: key.rb,v 5d0db8fcb8d6 2010/11/15 00:29:26 roberto $
 
 require "crypto_helper"
 
@@ -183,7 +183,7 @@ class SCKey < SKey
 
     word = @full_key.dup
     word.scan(/./) do |c|
-      if c =~ /[ESANTIRU]/
+      if "ESANTIRU".include? c then
         ind = shortc.shift
       else
         ind = long.shift
