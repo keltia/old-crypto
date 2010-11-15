@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 588bdffbc2b1 2010/08/04 15:35:56 roberto $
+# $Id: cipher.rb,v 3366b2f29e80 2010/11/15 09:49:21 roberto $
 
 require "key"
 
@@ -339,26 +339,26 @@ class NihilistT < SimpleCipher
   attr_reader :super_key
 
   def initialize(key, super_key = "")
-    @scb = Cipher::StraddlingCheckerboard.new(key)
+    @subst = Cipher::StraddlingCheckerboard.new(key)
     @super_key = Cipher::Transposition.new(super_key)
   end
 
   # === encode
   #
-  def encode(plain_text)
+  def encode(plain)
     # First pass ciphertext
     #
-    ct = @scb.encode(plain_text)
-    cipher_text = @super_key.encode(ct)
-    return cipher_text
+    ct = @subst.encode(plain)
+    cipher = @super_key.encode(ct)
+    return cipher
   end # -- encode
   
   # === decode
   #
-  def decode(cipher_text)
-    ct = @super_key.decode(cipher_text)
-    plain_text = @scb.decode(ct)
-    return plain_text
+  def decode(cipher)
+    ct = @super_key.decode(cipher)
+    plain = @subst.decode(ct)
+    return plain
   end # -- decode
   
 end # --  NihilistT
@@ -375,25 +375,25 @@ class ADFGVX < SimpleCipher
   
   # === initialize
   #
-  def initialize(key, super_key)
+  def initialize(key, super_key = "")
     @subst = Cipher::Polybius.new(key)
-    @transp = Cipher::Transposition.new(super_key)
+    @super_key = Cipher::Transposition.new(super_key)
   end # -- initialize
   
   # === encode
   #
-  def encode(text)
-    ct = @subst.encode(text)
-    cipher_text = @transp.encode(ct)
-    return cipher_text
-  end # -- encode(text)
+  def encode(plain)
+    ct = @subst.encode(plain)
+    cipher = @super_key.encode(ct)
+    return cipher
+  end # -- encode
   
   # === decode
   #
-  def decode(text)
-    pt = @transp.decode(text)
-    plain_text = @subst.decode(pt)
-    return plain_text
+  def decode(cipher)
+    pt = @super_key.decode(cipher)
+    plain = @subst.decode(pt)
+    return plain
   end # -- decode
   
 end # -- ADFGVX
