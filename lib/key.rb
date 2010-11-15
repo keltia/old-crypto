@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 5d0db8fcb8d6 2010/11/15 00:29:26 roberto $
+# $Id: key.rb,v 2d6ec45a2663 2010/11/15 09:26:46 roberto $
 
 require "crypto_helper"
 
@@ -305,44 +305,44 @@ class Playfair < SKey
     end
   end # -- gen_rings
   
+  PLF_ENCODE = 1
+  PLF_DECODE = 4
+  
   # === encode
+  #
+  def encode(c)
+    return encode_or_decode(c, PLF_ENCODE)
+  end # -- encode
+  
+  # === decode
+  #
+  def decode(c)
+    return encode_or_decode(c, PLF_DECODE)
+  end # -- decode
+  
+  private
+  # === encode_or_decode
   #
   # Same row: p(r,c) -> p(r, c + 1 mod 5) 
   # Same col: p(r,c) -> p(r + 1 mod 5, c)
   # Diff.col/row:
   #  P = K(r1,c1),K(r2,c2) -> C = K(r1,c2),K(r2,c1)
   #
-  def encode(c)
-    p1, p2 = c.split(//)
-    r1, c1 = @alpha[p1]
-    r2, c2 = @alpha[p2]
-    if r1 == r2 then
-       return @ralpha[[r1, (c1 + 1) % 5]] + @ralpha[[r2, (c2 + 1) % 5]]
-    end
-    if c1 == c2 then
-       return @ralpha[[(r1 + 1) % 5, c1]] + @ralpha[[(r2 + 1) % 5, c2]]
-    end
-    return @ralpha[[r1, c2]] + @ralpha[[r2, c1]]
-  end # -- encode
-  
-  # === decode
-  #
   # Decoding is the same if the two letters form a square.  If same row or
   # same col, take the previous letter (mod 5) in the array
   #
-  def decode(c)
+  def encode_or_decode(c, a)
     p1, p2 = c.split(//)
     r1, c1 = @alpha[p1]
     r2, c2 = @alpha[p2]
     if r1 == r2 then
-       return @ralpha[[r1, (c1 + 4) % 5]] + @ralpha[[r2, (c2 + 4) % 5]]
+       return @ralpha[[r1, (c1 + a) % 5]] + @ralpha[[r2, (c2 + a) % 5]]
     end
     if c1 == c2 then
-       return @ralpha[[(r1 + 4) % 5, c1]] + @ralpha[[(r2 + 4) % 5, c2]]
+       return @ralpha[[(r1 + a) % 5, c1]] + @ralpha[[(r2 + a) % 5, c2]]
     end
     return @ralpha[[r1, c2]] + @ralpha[[r2, c1]]
-  end # -- decode
-  
+  end # -- encode_or_decode
 end # -- Playfair
 
 # == VICKey
