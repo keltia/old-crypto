@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v c0e1ca1ef051 2010/11/16 10:55:41 roberto $
+# $Id: cipher.rb,v 8e4c3fb8bb3c 2010/11/16 12:00:58 roberto $
 
 require "key"
 
@@ -253,16 +253,13 @@ class StraddlingCheckerboard  < Substitution
   # === encode
   #
   def encode(plain_text)
-    cipher_text = ""
-    
-    pt = plain_text.dup
-    pt.scan(/./) do |c|
+    cipher_text = plain_text.each_char.inject('') do |text, c|
       if c >= "0" and c <= "9" then
-        cipher_text << @key.encode("/")
-        cipher_text << c + c
-        cipher_text << @key.encode("/")
+        text << @key.encode("/")
+        text << c + c
+        text << @key.encode("/")
       else
-        cipher_text << @key.encode(c)
+        text << @key.encode(c)
       end
     end
     return cipher_text
