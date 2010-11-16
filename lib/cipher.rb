@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v a8594cc0c5a4 2010/11/16 13:26:18 roberto $
+# $Id: cipher.rb,v eb14e9f512ac 2010/11/16 13:32:45 roberto $
 
 require "key"
 
@@ -321,7 +321,6 @@ class GenericBiCipher < SimpleCipher
   def encode(plain)
     ct = @subst.encode(plain)
     cipher = @super_key.encode(ct)
-    return cipher
   end # -- encode
   
   # === decode
@@ -329,7 +328,6 @@ class GenericBiCipher < SimpleCipher
   def decode(cipher)
     ct = @super_key.decode(cipher)
     plain = @subst.decode(ct)
-    return plain
   end # -- decode
   
 end
