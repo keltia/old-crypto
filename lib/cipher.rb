@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v c341fc91b2c9 2010/11/16 12:37:04 roberto $
+# $Id: cipher.rb,v a36da06df5db 2010/11/16 13:04:17 roberto $
 
 require "key"
 
@@ -71,14 +71,17 @@ class Caesar < Substitution
   
 end # --  Caesar
 
-# ==  Polybius
+# == BiGrammatic
 #
-class Polybius < Substitution
-  
+# Generic bigrammatic cipherclass
+#
+class BiGrammatic < Substitution
+
   # === initialize
   #
-  def initialize(key, type = Key::SQKey::SQ_ADFGVX)
-    @key = Key::SQKey.new(key, type)
+  def initialize(cipher, key, type)
+    @key = cipher.send(:new, key, type)
+    @type = type
   end # -- initialize
 
   # === decode
@@ -86,11 +89,37 @@ class Polybius < Substitution
   def decode(cipher_text)
     raise ArgumentError, "Mangled cryptogram" if cipher_text.length.odd?
     
+    check_input(cipher_text) if @type == Key::Playfair::WITH_Q or
+                                @type == Key::Playfair::WITH_J
+
     plain_text = cipher_text.scan(/../).inject('') do |text, ct|
       text + @key.decode(ct)
     end
   end # -- decode
   
+  # === check_input
+  #
+  def check_input(str)
+    case @type
+    when Key::Playfair::WITH_J
+      raise ArgumentError if str.include? ?Q
+    when Key::Playfair::WITH_Q
+      raise ArgumentError if str.include? ?J
+    end
+  end # -- check_input
+  
+end # -- BiGrammatic
+
+# ==  Polybius
+#
+class Polybius < BiGrammatic
+  
+  # === initialize
+  #
+  def initialize(key, type = Key::SQKey::SQ_ADFGVX)
+    super(Key::SQKey, key, type)
+  end # -- initialize
+
 end # --  Polybius
 
 # == Playfair
@@ -99,13 +128,12 @@ end # --  Polybius
 #
 # Alphabet is missing Q by default
 #
-class Playfair < Substitution
+class Playfair < BiGrammatic
   
   # === initialize
   #
   def initialize(key, type = Key::Playfair::WITH_Q)
-    @key = Key::Playfair.new(key, type)
-    @type = type
+    super(Key::Playfair, key, type)
   end # -- substitution
   
   # === encode
@@ -128,29 +156,6 @@ class Playfair < Substitution
       text + @key.encode(pt)
     end
   end # -- encode
-  
-  # === decode
-  #
-  def decode(cipher_text)
-    raise ArgumentError, "Mangled cryptogram" if cipher_text.length.odd?
-    
-    check_input(cipher_text)
-    
-    plain_text = cipher_text.scan(/../).inject('') do |text, ct|
-      text + @key.decode(ct)
-    end
-  end # -- decode
-  
-  # === check_input
-  #
-  def check_input(str)
-    case @type
-    when Key::Playfair::WITH_J
-      raise ArgumentError if str =~ /Q/
-    when Key::Playfair::WITH_Q
-      raise ArgumentError if str =~ /J/
-    end
-  end # -- check_input
   
 end # -- Playfair
 
