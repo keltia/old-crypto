@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v a36da06df5db 2010/11/16 13:04:17 roberto $
+# $Id: cipher.rb,v 97a6456f32b7 2010/11/16 13:08:58 roberto $
 
 require "key"
 
@@ -170,7 +170,7 @@ class Transposition < SimpleCipher
   
   # === encode
   #
-  def encode(text)
+  def encode(plain_text)
     #
     j = 0
     t_len = @key.length
@@ -181,17 +181,16 @@ class Transposition < SimpleCipher
     #
     # XXX String.scan in 1.9, #each_byte?
     #
-    text.scan(/./) do |pt|
+    plain_text.scan(/./) do |pt|
       table[tkey[j]] << pt
       j = (j + 1) % t_len
     end
     #
     # Now take every column based upon key ordering
     #
-    tkey.sort.each do |t|
-      cipher_text << table[t]
+    cipher_text = tkey.sort.each.inject("") do |text, t|
+      text +  table[t]
     end
-    return cipher_text
   end # -- encode
   
   # === decode
