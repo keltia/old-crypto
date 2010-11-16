@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 5ea2da8872a1 2010/11/16 12:23:01 roberto $
+# $Id: cipher.rb,v c341fc91b2c9 2010/11/16 12:37:04 roberto $
 
 require "key"
 
@@ -252,9 +252,7 @@ class StraddlingCheckerboard  < Substitution
   def encode(plain_text)
     cipher_text = plain_text.each_char.inject('') do |text, c|
       if c >= "0" and c <= "9" then
-        text << @key.encode("/")
-        text << c + c
-        text << @key.encode("/")
+        text << @key.encode("/") << c + c << @key.encode("/")
       else
         text << @key.encode(c)
       end
@@ -358,6 +356,8 @@ class NihilistT < GenericBiCipher
 
 end # --  NihilistT
 
+# == ADFGVX
+#
 # Implementation of the well known cipher used by Germany during
 # WWI. Code number assignment is probably different from the original
 # cipher due to implementation choices.
@@ -374,6 +374,12 @@ class ADFGVX <  GenericBiCipher
   end # -- initialize
   
 end # -- ADFGVX
+
+# == ChaoCipher
+#
+# Cipher invented in 1917 but only recently released.
+# See http://www.mountainvistasoft.com/chaocipher/index.htm
+# Key schedule in lib/key.rb
 
 class ChaoCipher < Substitution
   include Crypto
