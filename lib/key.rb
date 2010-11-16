@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 2d6ec45a2663 2010/11/15 09:26:46 roberto $
+# $Id: key.rb,v 9a834362c4ac 2010/11/16 12:22:48 roberto $
 
 require "crypto_helper"
 
@@ -423,8 +423,9 @@ class ChaoKey < Key
   def initialize(pw, cw)
     @plain  = pw
     @cipher = cw
-    raise DataError, "Bad pw length" if pw.length != BASE.length
-    raise DataError, "Bad cw length" if cw.length != BASE.length
+    [pw, cw].each do |e|
+      raise DataError, "Bad #{e} length" if e.length != BASE.length
+    end
   end
   
   # === encode
