@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 9a834362c4ac 2010/11/16 12:22:48 roberto $
+# $Id: key.rb,v 5d21638f2ffd 2010/11/16 13:57:54 roberto $
 
 require "crypto_helper"
 
@@ -430,23 +430,24 @@ class ChaoKey < Key
   
   # === encode
   #
-  def encode(pt)
-    idx = @plain.index(pt)
-    @pt = pt
-    @ct = @cipher[idx]
-    advance(idx)
-    return @ct.chr
+  def encode(c)
+    return encode_or_decode(plain, cipher, c)
   end # -- encode
   
   # === decode
   #
-  def decode(ct)
-    idx = @cipher.index(ct)
-    @pt = @plain[idx]
-    @ct = ct
-    advance(idx)
-    return @pt.chr
+  def decode(c)
+    return encode_or_decode(cipher, plain, c)
   end # -- decode
+  
+  # === encode_or_decode
+  #
+  def encode_or_decode(r1, r2, c)
+    idx = r1.index(c)
+    pt = r2[idx]
+    advance(idx)
+    return pt.chr
+  end # -- encode_or_decode
 
   # === advance
   #
