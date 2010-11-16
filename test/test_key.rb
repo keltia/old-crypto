@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v e94ecb60adb4 2010/09/29 22:44:35 roberto $
+# $Id: test_key.rb,v ce48fd918b40 2010/11/16 22:08:01 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -501,6 +501,9 @@ class TestWheatstone < Test::Unit::TestCase
   def setup
   end # -- setup
   
+  def test_init
+    true
+  end
 end # -- TestWheatstone
 
 # == TestPlayfair1
