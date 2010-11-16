@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 0001dec229f6 2010/11/16 10:52:35 roberto $
+# $Id: cipher.rb,v c0e1ca1ef051 2010/11/16 10:55:41 roberto $
 
 require "key"
 
@@ -127,12 +127,9 @@ class Playfair < Substitution
     
     check_input(plain)
     
-    cipher_text = ""
-    plain.scan(/../) do |pt|
-      ct = @key.encode(pt)
-      cipher_text << ct
+    cipher_text = plain.scan(/../).inject('') do |text, pt|
+      text + @key.encode(pt)
     end
-    cipher_text
   end # -- encode
   
   # === decode
@@ -142,12 +139,9 @@ class Playfair < Substitution
     
     check_input(cipher_text)
     
-    plain_text = ""
-    cipher_text.scan(/../) do |ct|
-      pt = @key.decode(ct)
-      plain_text << pt
+    plain_text = cipher_text.scan(/../).inject('') do |text, ct|
+      text + @key.decode(ct)
     end
-    plain_text
   end # -- decode
   
   # === check_input
