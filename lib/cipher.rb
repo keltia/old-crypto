@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 0992927c0057 2010/11/16 09:27:02 roberto $
+# $Id: cipher.rb,v 0001dec229f6 2010/11/16 10:52:35 roberto $
 
 require "key"
 
@@ -88,9 +88,8 @@ class Polybius < Substitution
     
     plain_text = ""
     
-    cipher_text.scan(/../) do |ct|
-      pt = @key.decode(ct)
-      plain_text << pt
+    plain_text = cipher_text.scan(/../).inject('') do |text, ct|
+      text + @key.decode(ct)
     end
     return plain_text
   end # -- decode
