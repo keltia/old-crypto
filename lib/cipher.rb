@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 97a6456f32b7 2010/11/16 13:08:58 roberto $
+# $Id: cipher.rb,v b4d4eb1a4055 2010/11/16 13:25:46 roberto $
 
 require "key"
 
@@ -52,7 +52,6 @@ class Substitution < SimpleCipher
     plain_text = cipher_text.each_char.inject("") do |text, ct|
       text + @key.decode(ct)
     end
-    return plain_text
   end # -- decode
   
 end # --  Substitution
