@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 5d21638f2ffd 2010/11/16 13:57:54 roberto $
+# $Id: key.rb,v b41c05c94e6a 2010/11/21 20:24:08 roberto $
 
 require "crypto_helper"
 
@@ -344,6 +344,42 @@ class Playfair < SKey
     return @ralpha[[r1, c2]] + @ralpha[[r2, c1]]
   end # -- encode_or_decode
 end # -- Playfair
+
+# == WheatstoneKey
+#
+# The Wheatstone cipher (not to be confused with Playfair, also from the author) is a
+# polyalphabetic stream cipher represented by a mechanical device with two synchronized
+# rotors just like a clock called the Wheatstone Cryptograph.
+#
+# For more details see
+# http://csc.colstate.edu/summers/Research/Cipher-Machines.doc
+# http://bit.ly/983rDL
+#
+class WheatstoneKey < SKey
+  include Crypto
+  
+  attr_accessor :plw, :ctw
+  
+  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  # == initialize
+  #
+  def initialize(start, plw = BASE, ctw = BASE)
+    if plw.length != BASE.length then
+      #
+      # Assume al is a word we use as a base to generate an alphabet with #keyshuffle
+      #
+      @plw = keyshuffle(plw)
+    end
+    if ctw.length != BASE.length then
+      #
+      # Assume al is a word we use as a base to generate an alphabet with #keyshuffle
+      #
+      @ctw = keyshuffle(ctw)
+    end
+    
+  end # -- initialize
+  
+end # -- WheatstoneKey
 
 # == VICKey
 #
