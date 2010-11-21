@@ -1,6 +1,6 @@
 # Design document
 #
-# $Id: README.txt,v 6eacd5db1203 2010/08/04 15:39:20 roberto $
+# $Id$
 
 ## Key handling
 
