@@ -1,17 +1,16 @@
-# $Id: Rakefile,v 4a8461664a2a 2010/09/29 23:11:44 roberto $
+# $Id: Rakefile,v 8f4f6c962d6b 2011/08/11 14:33:31 roberto $
 #
 require 'rake'
 require 'rake/testtask'
-#require 'hoe'
 
 task :default => [:test_units]
 
 desc "Run basic tests"
-Rake::TestTask.new("test_units") { |t|
-  t.pattern = 'test/test_*.rb'
+Rake::TestTask.new("test_units") do |t|
+  t.pattern = 'test/**/*.rb'
   t.verbose = true
   t.warning = true
-}
+end
 
 desc "Report code statistics (KLOCs, etc) from the application"
 task :stats do
@@ -33,10 +32,9 @@ task :realclean do
   FileUtils.rm Dir.glob("**/*.orig")
 end
 
-require './lib/old_crypto.rb'
-
-#Hoe.spec 'OldCrypto' do
-#  self.developer('Ollivier Robert', 'roberto@keltia.net')
-#  self.version = OldCrypto::VERSION
-#end
+desc "Push changes"
+task :push do
+  system "/usr/local/bin/hg push"
+  system "/usr/local/bin/hg push ssh://hg@bitbucket.org/keltia/old-crypto"
+end
 
