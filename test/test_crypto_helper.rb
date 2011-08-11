@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v e94ecb60adb4 2010/09/29 22:44:35 roberto $
+# $Id: test_crypto_helper.rb,v 87321d58c6bd 2011/08/11 15:10:32 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -92,7 +92,6 @@ class TestCrypto < Test::Unit::TestCase
   # === test_p1_encode
   #
   def test_p1_encode
-    init = @data["init"]
     p1 = @data["p1"]
     in_p1 = p1["r1"]
     in_p2 = p1["r2"]

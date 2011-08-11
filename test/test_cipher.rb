@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v e94ecb60adb4 2010/09/29 22:44:35 roberto $
+# $Id: test_cipher.rb,v 87321d58c6bd 2011/08/11 15:10:32 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -408,7 +408,7 @@ class TestPlayfair_J < Test::Unit::TestCase
   def test_encode_invalid
     pt = "PQRJTS"
     cipher = Cipher::Playfair.new("FOOBAR", Key::Playfair::WITH_J)
-    assert_raise(ArgumentError) { ct = cipher.encode(pt) }
+    assert_raise(ArgumentError) { cipher.encode(pt) }
   end # -- test_encode_invalid
     
   # === test_decode
@@ -468,13 +468,12 @@ class TestPlayfair_Q < Test::Unit::TestCase
   def test_encode_invalid
     pt = "PQRJTS"
     cipher = Cipher::Playfair.new("FOOBAR")
-    assert_raise(ArgumentError) { ct = cipher.encode(pt) }
+    assert_raise(ArgumentError) { cipher.encode(pt) }
   end # -- test_encode_invalid
     
   # === test_decode
   #
   def test_decode
-    plain = @data["plain"]
     eplain = @data["eplain"]
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word)
@@ -493,7 +492,7 @@ class TestPlayfair_Q < Test::Unit::TestCase
   def test_decode_invalid
     ct = "PQRJTS"
     cipher = Cipher::Playfair.new("FOOBAR")
-    assert_raise(ArgumentError) { pt = cipher.decode(ct) }
+    assert_raise(ArgumentError) { cipher.decode(ct) }
   end # -- test_decode_invalid
   
 end # --  TestPlayfair_Q

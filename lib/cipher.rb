@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 794304785743 2010/11/16 13:35:07 roberto $
+# $Id: cipher.rb,v 87321d58c6bd 2011/08/11 15:10:32 roberto $
 
 require "key"
 
@@ -43,6 +43,7 @@ class Substitution < SimpleCipher
     cipher_text = plain_text.each_char.inject("") do |text, pt|
       text + @key.encode(pt)
     end
+    return cipher_text
   end # -- encode
   
   # === decode
@@ -51,6 +52,7 @@ class Substitution < SimpleCipher
     plain_text = cipher_text.each_char.inject("") do |text, ct|
       text + @key.decode(ct)
     end
+    return plain_text
   end # -- decode
   
 end # --  Substitution
@@ -93,6 +95,7 @@ class BiGrammatic < Substitution
     plain_text = cipher_text.scan(/../).inject('') do |text, ct|
       text + @key.decode(ct)
     end
+    return plain_text
   end # -- decode
   
   # === check_input
@@ -153,6 +156,7 @@ class Playfair < BiGrammatic
     cipher_text = plain.scan(/../).inject('') do |text, pt|
       text + @key.encode(pt)
     end
+    return cipher_text
   end # -- encode
   
 end # -- Playfair
@@ -226,14 +230,13 @@ class Transposition < SimpleCipher
     #
     # Now take the plain text
     #
-    plain = ""
     for j in 0..(t_height - 1) do
       for i in 0..(t_len - 1) do
         col = table[i]
-        plain << (col[j] || '')
+        plain_text << (col[j] || '')
       end
     end
-    return plain
+    return plain_text
   end # -- decode
   
 end # --  Transposition
