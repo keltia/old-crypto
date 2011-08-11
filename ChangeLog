@@ -1,8 +1,63 @@
+2011-08-11  Ollivier Robert  <roberto@keltia.net>
+
+	* lib/cipher.rb, test/test_cipher.rb, test/test_crypto_helper.rb:
+	Silence 1.9.3-preview1 warnings.
+	[87321d58c6bd] [tip]
+
+	* Rakefile:
+	Workaround a bug in 1.9.3-preview1 when using rake. See
+	https://github.com/jimweirich/rake/issues/51 for details.
+
+	Suggested by: Mark Somerville (on ruby-forum.com)
+	[b644908571bf]
+
+	* Automated merge with ssh://keltia.freenix.org//data/HG/mirrors/old-
+	crypto
+	[f7e1d5feac8f]
+
+	* Rakefile:
+	Remove unneeded require.
+	[8f4f6c962d6b]
+
+	* Rakefile:
+	Add :push task.
+	[8be60377da5e]
+
+	* Rakefile:
+	Be consistent with {} vs do...end usage.
+	[c6a0ce55d080]
+
+	* Rakefile:
+	Remove remainder of deprecated Hoe-based code.
+	[f5cb85b76669]
+
+	* lib/old-crypto.rb:
+	Add missing gem/bundler infrastructure.
+	[7757267a2ebd]
+
+	* Gemfile, lib/old-crypto/version.rb, old-crypto.gemspec:
+	Add gem/bundler infrastructure.
+	[4bf2d137da0e]
+
+	* Rakefile:
+	Try to fix issue with Ruby 1.9.3-preview1.
+	[eaa88fd12ab0]
+
+2010-12-25  Ollivier Robert  <roberto@keltia.net>
+
+	* lib/key.rb:
+	2nd argument is not implicitely defined by #keyshuffle. Add it.
+	[be6ef87f2a03]
+
 2010-11-22  Ollivier Robert  <roberto@keltia.net>
+
+	* ChangeLog, History.txt:
+	Sync it and give it its proper name.
+	[21156ae5b630]
 
 	* README.md, README.txt:
 	Readme is Markdown.
-	[fb0bc82f8591] [tip]
+	[fb0bc82f8591]
 
 	* Manifest.txt:
 	Manifest.txt was for Hoe, remove it.
