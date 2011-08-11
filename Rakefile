@@ -1,4 +1,4 @@
-# $Id: Rakefile,v 4a8461664a2a 2010/09/29 23:11:44 roberto $
+# $Id: Rakefile,v eaa88fd12ab0 2011/08/11 14:28:04 roberto $
 #
 require 'rake'
 require 'rake/testtask'
@@ -8,7 +8,7 @@ task :default => [:test_units]
 
 desc "Run basic tests"
 Rake::TestTask.new("test_units") { |t|
-  t.pattern = 'test/test_*.rb'
+  t.pattern = 'test/**/*.rb'
   t.verbose = true
   t.warning = true
 }
