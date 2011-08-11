@@ -1,4 +1,4 @@
-# $Id: Rakefile,v 8be60377da5e 2011/08/11 14:33:10 roberto $
+# $Id: Rakefile,v 8f4f6c962d6b 2011/08/11 14:33:31 roberto $
 #
 require 'rake'
 require 'rake/testtask'
@@ -37,6 +37,4 @@ task :push do
   system "/usr/local/bin/hg push"
   system "/usr/local/bin/hg push ssh://hg@bitbucket.org/keltia/old-crypto"
 end
-
-require './lib/old_crypto.rb'
 
