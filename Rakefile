@@ -1,4 +1,4 @@
-# $Id: Rakefile,v 8f4f6c962d6b 2011/08/11 14:33:31 roberto $
+# $Id: Rakefile,v b644908571bf 2011/08/11 14:39:32 roberto $
 #
 require 'rake'
 require 'rake/testtask'
@@ -7,7 +7,7 @@ task :default => [:test_units]
 
 desc "Run basic tests"
 Rake::TestTask.new("test_units") do |t|
-  t.pattern = 'test/**/*.rb'
+  t.test_files = Dir.glob('test/**/*.rb')
   t.verbose = true
   t.warning = true
 end
