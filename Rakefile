@@ -1,4 +1,4 @@
-# $Id: Rakefile,v c6a0ce55d080 2011/08/11 14:31:29 roberto $
+# $Id: Rakefile,v 8be60377da5e 2011/08/11 14:33:10 roberto $
 #
 require 'rake'
 require 'rake/testtask'
@@ -30,6 +30,12 @@ desc "Cleanup even more files"
 task :realclean do
   FileUtils.rm Dir.glob("**/*.rej")
   FileUtils.rm Dir.glob("**/*.orig")
+end
+
+desc "Push changes"
+task :push do
+  system "/usr/local/bin/hg push"
+  system "/usr/local/bin/hg push ssh://hg@bitbucket.org/keltia/old-crypto"
 end
 
 require './lib/old_crypto.rb'
