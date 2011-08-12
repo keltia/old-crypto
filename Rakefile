@@ -1,5 +1,8 @@
-# $Id: Rakefile,v b644908571bf 2011/08/11 14:39:32 roberto $
+# $Id: Rakefile,v 85568ff1833c 2011/08/12 00:19:35 roberto $
 #
+require 'bundler'
+Bundler::GemHelper.install_tasks
+
 require 'rake'
 require 'rake/testtask'
 
