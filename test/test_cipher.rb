@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 87321d58c6bd 2011/08/11 15:10:32 roberto $
+# $Id: test_cipher.rb,v 651446246666 2011/12/23 20:45:10 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -154,6 +154,33 @@ class TestCipherCaesar7 < Test::Unit::TestCase
     assert_equal pt, "TUVWX"
   end
 end # --  TestCipherCaesar_7
+
+# ==  TestCipherRot13
+#
+class TestCipherRot13 < Test::Unit::TestCase
+
+  # === setup
+  #
+  def setup
+    @cipher = Cipher::Caesar.new(13)
+  end # -- setup
+
+  # === test_encode
+  #
+  def test_encode
+    pt = "ABCDE"
+    ct = @cipher.encode(pt)
+    assert_not_nil(ct)
+    assert_equal ct, "NOPQR"
+  end # -- test_encode
+
+  def test_decode
+    ct = "ABCDE"
+    pt = @cipher.decode(ct)
+    assert_not_nil(pt)
+    assert_equal pt, "NOPQR"
+  end
+end # --  TestCipherRot13
 
 # ==  TestTransposition
 #

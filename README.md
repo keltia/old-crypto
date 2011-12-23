@@ -1,6 +1,6 @@
 # Design document
 #
-# $Id$
+# $Id: README.md,v 651446246666 2011/12/23 20:45:10 roberto $
 
 ## Key handling
 
@@ -17,6 +17,8 @@
 	SimpleCipher => encode, decode
 	>	Substitution
 		>	ChaoCipher
+		>   Caesar
+		>   Rot13
 	>	Transposition
 	>	Nihilist
 	>	ADFGX

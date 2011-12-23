@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 87321d58c6bd 2011/08/11 15:10:32 roberto $
+# $Id: cipher.rb,v 651446246666 2011/12/23 20:45:10 roberto $
 
 require "key"
 
@@ -70,6 +70,20 @@ class Caesar < Substitution
   end # -- initialize
   
 end # --  Caesar
+
+# == Rot13
+#
+# Special version for Internet, using offset of 13.
+#
+class Rot13 < Substitution
+
+  # === initialize
+  #
+  def initialize(offset = 3)
+    @key = Key::Caesar.new(offset)
+  end # -- initialize
+
+end # --  Rot13
 
 # == BiGrammatic
 #
