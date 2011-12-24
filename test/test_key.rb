@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v d87582d2359a 2011/12/24 01:37:22 roberto $
+# $Id: test_key.rb,v 4cbac77ed1ad 2011/12/24 08:48:35 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -135,6 +135,8 @@ class TestKeyCaesar < Test::Unit::TestCase
     word = 3
     @key = Key::Caesar.new(word)
     assert_not_nil @key
+    assert_not_nil @key.offset
+    assert_equal word, @key.offset
   end # -- setup
   
   # === test_alpha

@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v d87582d2359a 2011/12/24 01:37:22 roberto $
+# $Id: key.rb,v 4cbac77ed1ad 2011/12/24 08:48:35 roberto $
 
 require "crypto_helper"
 
@@ -114,6 +114,8 @@ end # -- SKey
 # XXX Assume US-ASCII or lowest 256 chars of Unicode
 #
 class Caesar < SKey
+  attr_reader :offset
+
   def initialize(key)
     super(key)
     gen_rings()
@@ -122,7 +124,7 @@ class Caesar < SKey
   # === gen_rings
   #
   def gen_rings
-    offset = @key.to_i
+    @offset = @key.to_i
   
     if RUBY_VERSION =~ /1\.9/ then
       BASE.scan(/./) do |c|
