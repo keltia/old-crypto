@@ -21,4 +21,7 @@ Gem::Specification.new do |s|
   s.test_files    = `/usr/local/bin/hg locate -- {test,spec,features}/*`.split("\n")
   s.executables   = `/usr/local/bin/hg locate -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  s.add_dependency "rake"
+  s.add_dependency "rspec"
 end
