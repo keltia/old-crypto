@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v e7fb9450023a 2010/09/24 14:42:58 roberto $
+# $Id: crypto_helper.rb,v 4624a5d4c049 2011/12/24 10:01:29 roberto $
 
 
 # == String
@@ -260,7 +260,9 @@ module Crypto
   # SCIOXUDJPZBEKQ/WFLR-AGMT  YHNV   c=3  3 x 1
   # SCIOXUDJPZBEKQ/WFLR-AGMTYHNV
 
-  def keyshuffle(key, base)
+  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+  def keyshuffle(key, base = BASE)
     word = (key + base).condensed.dup
     len = key.condensed.length
     height = base.length / len
