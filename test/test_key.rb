@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v ce48fd918b40 2010/11/16 22:08:01 roberto $
+# $Id: test_key.rb,v d87582d2359a 2011/12/24 01:37:22 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -499,11 +499,31 @@ class TestWheatstone < Test::Unit::TestCase
   # === setup
   #
   def setup
+    File.open("test/test_wheat.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+
+    @plwk = "CIPHER"
+    @ctwk = "MACHINE"
+    @pt = @data["pt"]
+    @ct = @data["ct"]
   end # -- setup
   
   def test_init
-    true
+    key = Key::Wheatstone.new("M", @plwk, @ctwk)
+    assert_not_nil key
+    assert_equal Key::Wheatstone, key.class
+    assert_equal @data["plw"], key.plw
+    assert_equal @data["ctw"], key.ctw
   end
+
+  def test_encode
+
+  end # -- test_encode
+
+  def test_decode
+
+  end # -- test_decode
 end # -- TestWheatstone
 
 # == TestPlayfair1

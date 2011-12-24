@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v be6ef87f2a03 2010/12/24 23:18:52 roberto $
+# $Id: key.rb,v d87582d2359a 2011/12/24 01:37:22 roberto $
 
 require "crypto_helper"
 
@@ -345,7 +345,7 @@ class Playfair < SKey
   end # -- encode_or_decode
 end # -- Playfair
 
-# == WheatstoneKey
+# == Wheatstone
 #
 # The Wheatstone cipher (not to be confused with Playfair, also from the author) is a
 # polyalphabetic stream cipher represented by a mechanical device with two synchronized
@@ -355,20 +355,24 @@ end # -- Playfair
 # http://csc.colstate.edu/summers/Research/Cipher-Machines.doc
 # http://bit.ly/983rDL
 #
-class WheatstoneKey < SKey
+class Wheatstone < SKey
   include Crypto
   
   attr_accessor :plw, :ctw
   
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
   # == initialize
+  #
+  # Either we give full alphabets are keys or just words.
+  # In the latter case, generate full alphabets as usual through #keyshuffle
   #
   def initialize(start, plw = BASE, ctw = BASE)
     if plw.length != BASE.length then
       #
-      # Assume al is a word we use as a base to generate an alphabet with #keyshuffle
+      # Assume al is a word we use as a base to generate an alphabet with #keyshuffle including space (as +)
       #
-      @plw = keyshuffle(plw, BASE)
+      @plw = keyshuffle(plw, BASE + "+")
     end
     if ctw.length != BASE.length then
       #
@@ -379,7 +383,7 @@ class WheatstoneKey < SKey
     
   end # -- initialize
   
-end # -- WheatstoneKey
+end # -- Wheatstone
 
 # == VICKey
 #
