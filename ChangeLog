@@ -1,8 +1,24 @@
+2011-12-23  Ollivier Robert  <roberto@keltia.net>
+
+	* README.md, lib/cipher.rb, test/test_cipher.rb:
+	Implement specific class for Rot13, with specs.
+	[651446246666] [tip]
+
+2011-08-12  Ollivier Robert  <roberto@keltia.net>
+
+	* Rakefile:
+	Add bundler hooks.
+	[85568ff1833c]
+
 2011-08-11  Ollivier Robert  <roberto@keltia.net>
+
+	* ChangeLog:
+	Sync.
+	[f3b4cd1a8fb0]
 
 	* lib/cipher.rb, test/test_cipher.rb, test/test_crypto_helper.rb:
 	Silence 1.9.3-preview1 warnings.
-	[87321d58c6bd] [tip]
+	[87321d58c6bd]
 
 	* Rakefile:
 	Workaround a bug in 1.9.3-preview1 when using rake. See
