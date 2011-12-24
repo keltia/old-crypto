@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 651446246666 2011/12/23 20:45:10 roberto $
+# $Id: cipher.rb,v 79562ad57eae 2011/12/24 08:55:26 roberto $
 
 require "key"
 
@@ -79,7 +79,7 @@ class Rot13 < Substitution
 
   # === initialize
   #
-  def initialize(offset = 3)
+  def initialize(offset = 13)
     @key = Key::Caesar.new(offset)
   end # -- initialize
 

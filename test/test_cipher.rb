@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 651446246666 2011/12/23 20:45:10 roberto $
+# $Id: test_cipher.rb,v 79562ad57eae 2011/12/24 08:55:26 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -110,7 +110,15 @@ class TestCipherCaesar < Test::Unit::TestCase
   def setup
     @cipher = Cipher::Caesar.new
   end # -- setup
-  
+
+  # === test_setup
+  #
+  def test_setup
+    assert_not_nil @cipher
+    assert_not_nil @cipher.key
+    assert_equal 3, @cipher.key.offset
+  end
+
   # === test_encode
   #
   def test_encode
@@ -138,6 +146,14 @@ class TestCipherCaesar7 < Test::Unit::TestCase
     @cipher = Cipher::Caesar.new(7)
   end # -- setup
   
+  # === test_setup
+  #
+  def test_setup
+    assert_not_nil @cipher
+    assert_not_nil @cipher.key
+    assert_equal 7, @cipher.key.offset
+  end
+
   # === test_encode
   #
   def test_encode
@@ -162,8 +178,16 @@ class TestCipherRot13 < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @cipher = Cipher::Caesar.new(13)
+    @cipher = Cipher::Rot13.new
   end # -- setup
+
+  # === test_setup
+  #
+  def test_setup
+    assert_not_nil @cipher
+    assert_not_nil @cipher.key
+    assert_equal 13, @cipher.key.offset
+  end
 
   # === test_encode
   #
