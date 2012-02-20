@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 1f094e509fb3 2012/02/20 23:04:14 roberto $
+# $Id: test_key.rb,v 478c614f081f 2012/02/20 23:15:15 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -504,27 +504,29 @@ class TestWheatstone < Test::Unit::TestCase
     File.open("test/test_wheat.yaml") do |fh|
       @data = YAML.load(fh)
     end
-
-    @plwk = "CIPHER"
-    @ctwk = "MACHINE"
-    @pt = @data["pt"]
-    @ct = @data["ct"]
   end # -- setup
   
   def test_init
-    key = Key::Wheatstone.new("M", @plwk, @ctwk)
+    @d1 = @data["init1"]
+    @plwk = @d1["plwk"]
+    @ctwk = @d1["ctwk"]
+    @pt = @d1["pt"]
+    @ct = @d1["ct"]
+    key = Key::Wheatstone.new(@d1["start"], @plwk, @ctwk)
     assert_not_nil key
     assert_equal Key::Wheatstone, key.class
-    assert_equal @data["plw"], key.plw
-    assert_equal @data["ctw"], key.ctw
+    assert_equal @d1["plw"], key.plw
+    assert_equal @d1["ctw"], key.ctw
 
-    @ctwk = "FRANCE"
-    key = Key::Wheatstone.new("F", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", @ctwk)
+    @d2 = @data["init2"]
+    @plwk = @d2["plwk"]
+    @ctwk = @d2["ctwk"]
+    key = Key::Wheatstone.new(@d2["start"], @plwk, @ctwk)
     assert_not_nil key
     assert_equal Key::Wheatstone, key.class
     assert_equal key.plw.length, (Key::Wheatstone::BASE.length + 1)
-    assert_equal "+ABCDEFGHIJKLMNOPQRSTUVWXYZ", key.plw
-    assert_equal "FBKSYRDLTZAGMUNHOVCIPWEJQX", key.ctw
+    assert_equal @d2["plw"], key.plw
+    assert_equal @d2["ctw"], key.ctw
   end
 
   def test_encode
