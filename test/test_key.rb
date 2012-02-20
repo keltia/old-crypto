@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 4cbac77ed1ad 2011/12/24 08:48:35 roberto $
+# $Id: test_key.rb,v 1f094e509fb3 2012/02/20 23:04:14 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -517,6 +517,14 @@ class TestWheatstone < Test::Unit::TestCase
     assert_equal Key::Wheatstone, key.class
     assert_equal @data["plw"], key.plw
     assert_equal @data["ctw"], key.ctw
+
+    @ctwk = "FRANCE"
+    key = Key::Wheatstone.new("F", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", @ctwk)
+    assert_not_nil key
+    assert_equal Key::Wheatstone, key.class
+    assert_equal key.plw.length, (Key::Wheatstone::BASE.length + 1)
+    assert_equal "+ABCDEFGHIJKLMNOPQRSTUVWXYZ", key.plw
+    assert_equal "FBKSYRDLTZAGMUNHOVCIPWEJQX", key.ctw
   end
 
   def test_encode
