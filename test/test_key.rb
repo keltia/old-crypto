@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v 478c614f081f 2012/02/20 23:15:15 roberto $
+# $Id: test_key.rb,v e8f7e36f0c9d 2012/02/20 23:19:11 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -506,7 +506,7 @@ class TestWheatstone < Test::Unit::TestCase
     end
   end # -- setup
   
-  def test_init
+  def test_init1
     @d1 = @data["init1"]
     @plwk = @d1["plwk"]
     @ctwk = @d1["ctwk"]
@@ -517,7 +517,9 @@ class TestWheatstone < Test::Unit::TestCase
     assert_equal Key::Wheatstone, key.class
     assert_equal @d1["plw"], key.plw
     assert_equal @d1["ctw"], key.ctw
+  end # -- test_init1
 
+  def test_init2
     @d2 = @data["init2"]
     @plwk = @d2["plwk"]
     @ctwk = @d2["ctwk"]
@@ -527,7 +529,7 @@ class TestWheatstone < Test::Unit::TestCase
     assert_equal key.plw.length, (Key::Wheatstone::BASE.length + 1)
     assert_equal @d2["plw"], key.plw
     assert_equal @d2["ctw"], key.ctw
-  end
+  end # -- test_init2
 
   def test_encode
 
