@@ -1,8 +1,80 @@
+2012-02-22  Ollivier Robert  <roberto@keltia.net>
+
+	* Automated merge with ssh://keltia.freenix.org//data/HG/mirrors/old-
+	crypto
+	[92a93930cd97] [tip]
+
+2012-02-21  Ollivier Robert  <roberto@keltia.net>
+
+	* test/test_key.rb:
+	Split #test_init into 2.
+	[e8f7e36f0c9d]
+
+	* test/test_key.rb, test/test_wheat.yaml:
+	Reorganise for 2 tests.
+	[478c614f081f]
+
+	* lib/key.rb, test/test_key.rb:
+	Add code to deal with diff. init. for Wheatstone + tests.
+	[1f094e509fb3]
+
+	* lib/key.rb:
+	Add comment on Wheatstone.
+	[df30806f6394]
+
+	* README.md:
+	Mention Wheatstone system.
+	[7502e2998475]
+
+2012-02-22  Ollivier Robert  <roberto@keltia.net>
+
+	* README.md:
+	Mention Wheatstone.
+	[fad98edc60e0]
+
+	* lib/key.rb:
+	Add description about Wheatstone.
+	[8a77d874363a]
+
+2011-12-24  Ollivier Robert  <roberto@keltia.net>
+
+	* lib/crypto_helper.rb:
+	Add default value for the base parameter in #keyshuffle.
+	[4624a5d4c049]
+
+	* lib/key.rb:
+	Fix variable name in comment.
+	[15ef830675c9]
+
+	* lib/key.rb:
+	Fix test, was addd space at the wrong place.
+	[aca1836fec45]
+
+	* old-crypto.gemspec:
+	Register dependencies.
+	[08b7bf954d95]
+
+	* lib/cipher.rb, test/test_cipher.rb:
+	Fix Cipher::Rot13 initialization. Add tests.
+	[79562ad57eae]
+
+	* lib/key.rb, test/test_key.rb:
+	Add offset as an attribute + tests.
+	[4cbac77ed1ad]
+
+	* lib/key.rb, test/test_key.rb, test/test_wheat.yaml:
+	Begin implementation of Key::Wheatstone.
+	[d87582d2359a]
+
+	* ChangeLog:
+	Sync.
+	[43292b28a15a]
+
 2011-12-23  Ollivier Robert  <roberto@keltia.net>
 
 	* README.md, lib/cipher.rb, test/test_cipher.rb:
 	Implement specific class for Rot13, with specs.
-	[651446246666] [tip]
+	[651446246666]
 
 2011-08-12  Ollivier Robert  <roberto@keltia.net>
 
