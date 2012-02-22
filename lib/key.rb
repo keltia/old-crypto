@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 15ef830675c9 2011/12/24 09:24:21 roberto $
+# $Id: key.rb,v 8a77d874363a 2012/02/22 13:34:13 roberto $
 
 require "crypto_helper"
 
@@ -356,6 +356,9 @@ end # -- Playfair
 # For more details see
 # http://csc.colstate.edu/summers/Research/Cipher-Machines.doc
 # http://bit.ly/983rDL
+#
+# All in all, this is a sliding system where the plain text "wheel/alphabet" slides over repetition
+# of the ciphertext wheel/alphabet.
 #
 class Wheatstone < SKey
   include Crypto
