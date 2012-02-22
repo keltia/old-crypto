@@ -1,6 +1,6 @@
 # Design document
 #
-# $Id: README.md,v 651446246666 2011/12/23 20:45:10 roberto $
+# $Id: README.md,v fad98edc60e0 2012/02/22 13:34:29 roberto $
 
 ## Key handling
 
@@ -19,6 +19,7 @@
 		>	ChaoCipher
 		>   Caesar
 		>   Rot13
+		>   Wheatstone cryptograph
 	>	Transposition
 	>	Nihilist
 	>	ADFGX
