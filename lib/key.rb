@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 8a77d874363a 2012/02/22 13:34:13 roberto $
+# $Id: key.rb,v 1f094e509fb3 2012/02/20 23:04:14 roberto $
 
 require "crypto_helper"
 
@@ -378,12 +378,16 @@ class Wheatstone < SKey
       # Assume plw is a word we use as a base to generate an alphabet with #keyshuffle including space (as +)
       #
       @plw = "+" + keyshuffle(plw, BASE)
+    else
+      @plw = "+" + plw
     end
     if ctw.length != BASE.length then
       #
       # Assume ctw is a word we use as a base to generate an alphabet with #keyshuffle
       #
       @ctw = keyshuffle(ctw, BASE)
+    else
+      @ctw = ctw
     end
     
   end # -- initialize
