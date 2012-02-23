@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v b66f0b749c91 2012/02/23 23:25:00 roberto $
+# $Id: key.rb,v 261d578041d9 2012/02/23 23:50:45 roberto $
 
 require "crypto_helper"
 
@@ -363,7 +363,7 @@ end # -- Playfair
 class Wheatstone < SKey
   include Crypto
   
-  attr_accessor :plw, :ctw, :aplw, :actw
+  attr_accessor :plw, :ctw, :aplw, :actw, :curpos
   
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -392,7 +392,22 @@ class Wheatstone < SKey
     @aplw = @plw.each_char.to_a
     @actw = @ctw.each_char.to_a
   end # -- initialize
-  
+
+  def search_plw(pl)
+    if a = @aplw[@curpos, -1].index(pl)
+      @curpos = a
+    else
+      @curpos = @aplw[0, @curpos].index(pl)
+    end
+    @curpos
+  end # -- search_plw
+
+  def encode(c)
+    curpos = search_plw(c)
+    ct = @actw[curpos]
+    ct
+  end # -- encode
+
 end # -- Wheatstone
 
 # == VICKey
