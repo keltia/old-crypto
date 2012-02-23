@@ -1,4 +1,4 @@
-# $Id: Rakefile,v 85568ff1833c 2011/08/12 00:19:35 roberto $
+# $Id: Rakefile,v c1dd5edc9e6c 2012/02/23 23:51:59 roberto $
 #
 require 'bundler'
 Bundler::GemHelper.install_tasks
@@ -39,5 +39,6 @@ desc "Push changes"
 task :push do
   system "/usr/local/bin/hg push"
   system "/usr/local/bin/hg push ssh://hg@bitbucket.org/keltia/old-crypto"
+  system "/usr/local/bin/hg push ~/Dropbox/HG/old-crypto"
 end
 
