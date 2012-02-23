@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v e8f7e36f0c9d 2012/02/20 23:19:11 roberto $
+# $Id: test_key.rb,v b66f0b749c91 2012/02/23 23:25:00 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -512,23 +512,48 @@ class TestWheatstone < Test::Unit::TestCase
     @ctwk = @d1["ctwk"]
     @pt = @d1["pt"]
     @ct = @d1["ct"]
+
     key = Key::Wheatstone.new(@d1["start"], @plwk, @ctwk)
+
     assert_not_nil key
     assert_equal Key::Wheatstone, key.class
+
+    assert_equal key.plw.length, (Key::Wheatstone::BASE.length + 1)
+    assert_equal key.ctw.length, (Key::Wheatstone::BASE.length)
+
     assert_equal @d1["plw"], key.plw
     assert_equal @d1["ctw"], key.ctw
+
+    assert_equal @d1["actw"].size, key.ctw.length
+    assert_equal @d1["aplw"].size, key.plw.length
+
+    assert_equal @d1["aplw"], key.aplw
+    assert_equal @d1["actw"], key.actw
   end # -- test_init1
 
   def test_init2
     @d2 = @data["init2"]
     @plwk = @d2["plwk"]
     @ctwk = @d2["ctwk"]
+    @pt = @d2["pt"]
+    @ct = @d2["ct"]
+
     key = Key::Wheatstone.new(@d2["start"], @plwk, @ctwk)
+
     assert_not_nil key
     assert_equal Key::Wheatstone, key.class
+
     assert_equal key.plw.length, (Key::Wheatstone::BASE.length + 1)
+    assert_equal key.ctw.length, (Key::Wheatstone::BASE.length)
+
     assert_equal @d2["plw"], key.plw
     assert_equal @d2["ctw"], key.ctw
+
+    assert_equal @d2["actw"].size, key.ctw.length
+    assert_equal @d2["aplw"].size, key.plw.length
+
+    assert_equal @d2["aplw"], key.aplw
+    assert_equal @d2["actw"], key.actw
   end # -- test_init2
 
   def test_encode
