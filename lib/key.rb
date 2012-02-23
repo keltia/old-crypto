@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 1f094e509fb3 2012/02/20 23:04:14 roberto $
+# $Id: key.rb,v 9fa139cd8e59 2012/02/23 22:58:51 roberto $
 
 require "crypto_helper"
 
@@ -222,7 +222,7 @@ class SQKey < SKey
 
   CODE_WORD = {
     SQ_NUMBERS => [ 0, 1, 2, 3, 4, 5 ],
-    SQ_ADFGVX  => [ 'A', 'D', 'F', 'G', 'V', 'X' ],
+    SQ_ADFGVX  => "ADFGVX".each_char.to_a
   }
 
   attr_reader :full_key, :type
