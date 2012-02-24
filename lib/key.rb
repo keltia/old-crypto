@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v a0394b77f24a 2012/02/24 11:36:16 roberto $
+# $Id: key.rb,v 12da4e08825e 2012/02/24 11:36:44 roberto $
 
 require "crypto_helper"
 
@@ -396,20 +396,30 @@ class Wheatstone < SKey
     @off = 0
   end # -- initialize
 
-  def search_plw(pl)
-    if a = @aplw[@curpos, -1].index(pl)
-      @curpos = a
-    else
-      @curpos = @aplw[0, @curpos].index(pl)
-    end
-    @curpos
-  end # -- search_plw
-
   def encode(c)
-    curpos = search_plw(c)
-    ct = @actw[curpos]
+    a = @aplw.index(c)
+    puts("a: #{a} curpos: #{@curpos} off: #{@off}")
+    if a < @curpos
+      # we have made a turn
+      @off += 1
+    end
+
+    @curpos = (a + @off) % @ctw.length
+    ct = @actw[@curpos]
     ct
-  end # -- encode
+  end
+
+  def decode(c)
+    a = @actw.index(c)
+    puts("a: #{a} curpos: #{@curpos} off: #{@off}")
+    if a <= @curpos
+      @off += 1
+    end
+
+    @curpos = (a - @off) % plw.length
+    pl = @aplw[@curpos]
+    pl
+  end # -- decode
 
 end # -- Wheatstone
 
