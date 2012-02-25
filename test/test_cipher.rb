@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v b65054dee54d 2012/02/25 15:36:16 roberto $
+# $Id: test_cipher.rb,v 44d15ec14f10 2012/02/25 17:07:37 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -548,6 +548,53 @@ class TestPlayfair_Q < Test::Unit::TestCase
   
 end # --  TestPlayfair_Q
 
+class TestWheatstone < Test::Unit::TestCase
+  
+  # === setup
+  #
+  def setup
+    File.open("test/test_cipher_wheat.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"]
+  end # -- setup
+
+  # === test_encode
+  #
+  def test_encode
+    @keys.each_value do |type|
+      start = type["start"]
+      cw = type["cw"]
+      pw = type["pw"]
+      pt = type["pt"]
+
+      assert_equal type['ptr'], pt.replace_double
+
+      cipher = Cipher::Wheatstone.new(start, pw, cw)
+      ct = cipher.encode(pt)
+      
+      assert_equal type["ct"], ct
+    end
+  end # -- test_encode
+
+  # === test_decode
+  #
+  def test_decode
+    @keys.each_value do |type|
+      start = type["start"]
+      cw = type["cw"]
+      pw = type["pw"]
+      ct = type["ct"]
+
+      cipher = Cipher::Wheatstone.new(start, pw, cw)
+      pt = cipher.decode(ct)
+
+      assert_equal type["ptr"], pt
+    end
+  end # -- test_encode
+end # -- TestWheatstone
+  
+  
 class TestChaoCipher < Test::Unit::TestCase
   
   # === setup
