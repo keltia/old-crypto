@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v dd7b7de2e1a1 2012/02/25 15:33:08 roberto $
+# $Id: key.rb,v 9048c83e8f3d 2012/02/25 17:03:59 roberto $
 
 require "crypto_helper"
 
@@ -401,7 +401,7 @@ class Wheatstone < SKey
 
   def encode(c)
     a = @aplw.index(c)
-    if a < @curpos
+    if a <= @curpos
       # we have made a turn
       off = (a + @l_aplw) - @curpos
     else
@@ -415,7 +415,7 @@ class Wheatstone < SKey
 
   def decode(c)
     a = @actw.index(c)
-    if a < @ctpos
+    if a <= @ctpos
       # we have made a turn
       off = (a + @l_actw) - @ctpos
     else
