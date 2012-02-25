@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 9048c83e8f3d 2012/02/25 17:03:59 roberto $
+# $Id: key.rb,v 4b61081291c9 2012/02/25 17:04:26 roberto $
 
 require "crypto_helper"
 
@@ -409,7 +409,6 @@ class Wheatstone < SKey
     end
     @curpos = a
     @ctpos = (@ctpos + off) % @l_actw
-    puts("curpos: #{@curpos} ctpos: #{@ctpos}")
     @actw[@ctpos]
   end
 
@@ -423,7 +422,6 @@ class Wheatstone < SKey
     end
     @ctpos = a
     @curpos = (@curpos + off) % @l_aplw
-    puts("curpos: #{@curpos} ctpos: #{@ctpos}")
     @aplw[@curpos]
   end # -- decode
 
