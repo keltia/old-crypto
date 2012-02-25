@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v d719547c1422 2012/02/25 17:22:17 roberto $
+# $Id: key.rb,v d8aab6a25f73 2012/02/25 22:29:35 roberto $
 
 require "crypto_helper"
 
@@ -394,6 +394,14 @@ class Wheatstone < SKey
     #
     @aplw = plw.each_char.to_a
     @actw = ctw.each_char.to_a
+
+    # Starting letter is not the first one, shift till it is
+    #
+    if @actw[0] != start
+      n = plw.index(start)
+      @actw.rotate!(n)
+    end
+
     @l_aplw = @aplw.size
     @l_actw = @actw.size
     @curpos = 0
