@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 9ca94a024a69 2012/02/25 15:37:19 roberto $
+# $Id: cipher.rb,v 9f1193f4b808 2012/02/25 17:05:26 roberto $
 
 require "key"
 
@@ -398,7 +398,7 @@ class Wheatstone < Substitution
   # === initialize
   #
   def initialize(start, plain, cipher)
-    @key = Key::Wheatstone.new(start, plain = BASE, cipher = BASE)
+    @key = Key::Wheatstone.new(start, plain, cipher)
   end # -- initialize
 
 end # -- Wheatstone
