@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 4c098ee94698 2012/02/25 16:37:50 roberto $
+# $Id: crypto_helper.rb,v 299cde862a21 2012/02/25 16:53:03 roberto $
 
 
 # == String
@@ -45,12 +45,12 @@ class String
     return a_str.join.to_s
   end # -- expand
   
-  # === replace
+  # === replace_double
   #
   # Replace the second of two identical letters by Q (used for Wheatstone
   # cipher)
   #
-  def replace(letter = "Q")
+  def replace_double(letter = "Q")
     a_str = self.split(//)
     i = 0
     while i < a_str.length do
@@ -60,7 +60,7 @@ class String
       i += 2
     end
     return a_str.join.to_s
-  end # -- replace
+  end # -- replace_double
 
   # === to_numeric
   #
