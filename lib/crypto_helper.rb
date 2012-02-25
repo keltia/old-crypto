@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 4624a5d4c049 2011/12/24 10:01:29 roberto $
+# $Id: crypto_helper.rb,v 3d9da80b4764 2012/02/25 16:31:59 roberto $
 
 
 # == String
@@ -33,12 +33,12 @@ class String
   # Insert an X between identical letters (mostly used for bigrammatic
   # ciphers such as Playfair)
   #
-  def expand
+  def expand(letter = "X")
     a_str = self.split(//)
     i = 0
     while i < a_str.length do
       if a_str[i] == a_str[i+1] then
-        a_str.insert(i+1, "X")
+        a_str.insert(i+1, letter)
       end
       i += 2
     end
