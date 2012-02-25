@@ -1,4 +1,4 @@
-# $Id: test_key.rb,v b66f0b749c91 2012/02/23 23:25:00 roberto $
+# $Id: test_key.rb,v 113bf5803932 2012/02/25 15:33:58 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -510,50 +510,34 @@ class TestWheatstone < Test::Unit::TestCase
     @d1 = @data["init1"]
     @plwk = @d1["plwk"]
     @ctwk = @d1["ctwk"]
-    @pt = @d1["pt"]
-    @ct = @d1["ct"]
 
     key = Key::Wheatstone.new(@d1["start"], @plwk, @ctwk)
 
     assert_not_nil key
     assert_equal Key::Wheatstone, key.class
 
-    assert_equal key.plw.length, (Key::Wheatstone::BASE.length + 1)
-    assert_equal key.ctw.length, (Key::Wheatstone::BASE.length)
+    assert_equal key.aplw.size, (Key::Wheatstone::BASE.length + 1)
+    assert_equal key.actw.size, (Key::Wheatstone::BASE.length)
 
-    assert_equal @d1["plw"], key.plw
-    assert_equal @d1["ctw"], key.ctw
-
-    assert_equal @d1["actw"].size, key.ctw.length
-    assert_equal @d1["aplw"].size, key.plw.length
-
-    assert_equal @d1["aplw"], key.aplw
     assert_equal @d1["actw"], key.actw
+    assert_equal @d1["aplw"], key.aplw
   end # -- test_init1
 
   def test_init2
     @d2 = @data["init2"]
     @plwk = @d2["plwk"]
     @ctwk = @d2["ctwk"]
-    @pt = @d2["pt"]
-    @ct = @d2["ct"]
 
     key = Key::Wheatstone.new(@d2["start"], @plwk, @ctwk)
 
     assert_not_nil key
     assert_equal Key::Wheatstone, key.class
 
-    assert_equal key.plw.length, (Key::Wheatstone::BASE.length + 1)
-    assert_equal key.ctw.length, (Key::Wheatstone::BASE.length)
+    assert_equal key.aplw.size, (Key::Wheatstone::BASE.length + 1)
+    assert_equal key.actw.size, (Key::Wheatstone::BASE.length)
 
-    assert_equal @d2["plw"], key.plw
-    assert_equal @d2["ctw"], key.ctw
-
-    assert_equal @d2["actw"].size, key.ctw.length
-    assert_equal @d2["aplw"].size, key.plw.length
-
-    assert_equal @d2["aplw"], key.aplw
     assert_equal @d2["actw"], key.actw
+    assert_equal @d2["aplw"], key.aplw
   end # -- test_init2
 
   def test_encode
