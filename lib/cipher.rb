@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 9f1193f4b808 2012/02/25 17:05:26 roberto $
+# $Id: cipher.rb,v ae30e674ed7c 2012/02/25 17:06:29 roberto $
 
 require "key"
 
@@ -400,6 +400,19 @@ class Wheatstone < Substitution
   def initialize(start, plain, cipher)
     @key = Key::Wheatstone.new(start, plain, cipher)
   end # -- initialize
+
+  # === encode
+  #
+  def encode(plain_text)
+    #
+    # Doubled letters cc should be replaced by cQ
+    #
+    pl = plain_text.replace_double("Q")
+    cipher_text = pl.each_char.inject("") do |text, pt|
+      text + @key.encode(pt)
+    end
+    cipher_text
+  end # -- encode
 
 end # -- Wheatstone
 
