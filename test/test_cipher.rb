@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 79562ad57eae 2011/12/24 08:55:26 roberto $
+# $Id: test_cipher.rb,v b65054dee54d 2012/02/25 15:36:16 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -567,8 +567,8 @@ class TestChaoCipher < Test::Unit::TestCase
       cw = type["cw"]
       pw = type["pw"]
       
-      @key = Cipher::ChaoCipher.new(pw, cw)
-      ct = @key.encode(pt)
+      cipher = Cipher::ChaoCipher.new(pw, cw)
+      ct = cipher.encode(pt)
       
       assert_equal type["ct"], ct
     end
@@ -582,8 +582,8 @@ class TestChaoCipher < Test::Unit::TestCase
       cw = type["cw"]
       pw = type["pw"]
       
-      @key = Cipher::ChaoCipher.new(pw, cw)
-      pt = @key.decode(ct)
+      cipher = Cipher::ChaoCipher.new(pw, cw)
+      pt = cipher.decode(ct)
       
       assert_equal type["pt"], pt
     end
