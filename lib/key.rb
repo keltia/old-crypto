@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 12da4e08825e 2012/02/24 11:36:44 roberto $
+# $Id: key.rb,v dd7b7de2e1a1 2012/02/25 15:33:08 roberto $
 
 require "crypto_helper"
 
@@ -363,7 +363,7 @@ end # -- Playfair
 class Wheatstone < SKey
   include Crypto
   
-  attr_accessor :plw, :ctw, :aplw, :actw, :curpos
+  attr_accessor :aplw, :actw, :curpos, :ctpos
   
   BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -374,51 +374,57 @@ class Wheatstone < SKey
   #
   def initialize(start, plw = BASE, ctw = BASE)
     super(start)
-    @curpos = 0
     if plw.length != BASE.length then
       #
       # Assume plw is a word we use as a base to generate an alphabet with #keyshuffle including space (as +)
       #
-      @plw = "+" + keyshuffle(plw, BASE)
-    else
-      @plw = "+" + plw
+      plw = keyshuffle(plw, BASE)
     end
+    plw = "+" + plw
+
     if ctw.length != BASE.length then
       #
       # Assume ctw is a word we use as a base to generate an alphabet with #keyshuffle
       #
-      @ctw = keyshuffle(ctw, BASE)
-    else
-      @ctw = ctw
+      ctw = keyshuffle(ctw, BASE)
     end
-    @aplw = @plw.each_char.to_a
-    @actw = @ctw.each_char.to_a
-    @off = 0
+
+    # We use array versions of the keys
+    #
+    @aplw = plw.each_char.to_a
+    @actw = ctw.each_char.to_a
+    @l_aplw = @aplw.size
+    @l_actw = @actw.size
+    @curpos = 0
+    @ctpos = 0
   end # -- initialize
 
   def encode(c)
     a = @aplw.index(c)
-    puts("a: #{a} curpos: #{@curpos} off: #{@off}")
     if a < @curpos
       # we have made a turn
-      @off += 1
+      off = (a + @l_aplw) - @curpos
+    else
+      off = a - @curpos
     end
-
-    @curpos = (a + @off) % @ctw.length
-    ct = @actw[@curpos]
-    ct
+    @curpos = a
+    @ctpos = (@ctpos + off) % @l_actw
+    puts("curpos: #{@curpos} ctpos: #{@ctpos}")
+    @actw[@ctpos]
   end
 
   def decode(c)
     a = @actw.index(c)
-    puts("a: #{a} curpos: #{@curpos} off: #{@off}")
-    if a <= @curpos
-      @off += 1
+    if a < @ctpos
+      # we have made a turn
+      off = (a + @l_actw) - @ctpos
+    else
+      off = a - @ctpos
     end
-
-    @curpos = (a - @off) % plw.length
-    pl = @aplw[@curpos]
-    pl
+    @ctpos = a
+    @curpos = (@curpos + off) % @l_aplw
+    puts("curpos: #{@curpos} ctpos: #{@ctpos}")
+    @aplw[@curpos]
   end # -- decode
 
 end # -- Wheatstone
