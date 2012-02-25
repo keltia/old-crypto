@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 3d9da80b4764 2012/02/25 16:31:59 roberto $
+# $Id: crypto_helper.rb,v 4c098ee94698 2012/02/25 16:37:50 roberto $
 
 
 # == String
@@ -45,6 +45,23 @@ class String
     return a_str.join.to_s
   end # -- expand
   
+  # === replace
+  #
+  # Replace the second of two identical letters by Q (used for Wheatstone
+  # cipher)
+  #
+  def replace(letter = "Q")
+    a_str = self.split(//)
+    i = 0
+    while i < a_str.length do
+      if a_str[i] == a_str[i+1] then
+        a_str[i+1] = letter
+      end
+      i += 2
+    end
+    return a_str.join.to_s
+  end # -- replace
+
   # === to_numeric
   #
   # Generate a numeric key from a keyword
