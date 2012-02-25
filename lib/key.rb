@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 4b61081291c9 2012/02/25 17:04:26 roberto $
+# $Id: key.rb,v d719547c1422 2012/02/25 17:22:17 roberto $
 
 require "crypto_helper"
 
@@ -354,7 +354,8 @@ end # -- Playfair
 # rotors just like a clock called the Wheatstone Cryptograph.
 #
 # For more details see
-# http://csc.colstate.edu/summers/Research/Cipher-Machines.doc
+# http://members.aon.at/cipherclerk/Doc/Whetstone.html
+# http://www.apprendre-en-ligne.net/crypto/instruments/index.html
 # http://bit.ly/983rDL
 #
 # All in all, this is a sliding system where the plain text "wheel/alphabet" slides over repetition
