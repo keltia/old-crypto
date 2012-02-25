@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 79562ad57eae 2011/12/24 08:55:26 roberto $
+# $Id: cipher.rb,v 9ca94a024a69 2012/02/25 15:37:19 roberto $
 
 require "key"
 
@@ -389,6 +389,19 @@ class ADFGVX <  GenericBiCipher
   end # -- initialize
   
 end # -- ADFGVX
+
+# == Wheatstone
+#
+class Wheatstone < Substitution
+  include Crypto
+
+  # === initialize
+  #
+  def initialize(start, plain, cipher)
+    @key = Key::Wheatstone.new(start, plain = BASE, cipher = BASE)
+  end # -- initialize
+
+end # -- Wheatstone
 
 # == ChaoCipher
 #
