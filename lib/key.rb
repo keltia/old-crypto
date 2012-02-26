@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v d8aab6a25f73 2012/02/25 22:29:35 roberto $
+# $Id: key.rb,v 025f49ae53d2 2012/02/26 00:37:12 roberto $
 
 require "crypto_helper"
 
@@ -395,17 +395,16 @@ class Wheatstone < SKey
     @aplw = plw.each_char.to_a
     @actw = ctw.each_char.to_a
 
-    # Starting letter is not the first one, shift till it is
+    # We always start at the space (named +) on plaintext
     #
-    if @actw[0] != start
-      n = plw.index(start)
-      @actw.rotate!(n)
-    end
+    @curpos = 0
+
+    # Starting letter for ciphertext is not the first one, set ctpos to its position
+    #
+    @ctpos = ctw.index(start)
 
     @l_aplw = @aplw.size
     @l_actw = @actw.size
-    @curpos = 0
-    @ctpos = 0
   end # -- initialize
 
   def encode(c)
