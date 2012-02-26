@@ -125,3 +125,66 @@
     - J
     - Q
     - X
+  init3:
+    plwk: "CIPHER"
+    ctwk: "MACHINE"
+    start: "A"
+    plw: "+CAKSYIBLTZPDMUHFNVEGOWRJQX"
+    ctw: "MBOVADPWCFQXHGRYIJSZNKTELU"
+    pt: "CHARLES+WHEATSTONE+HAD+A+REMARKABLY+FERTILE+MIND"
+    ct: "DZWORUXCALOHZYNPVDGOIMYJIGQDKIEEOVBEGINWDWSMGWSR"
+    aplw:
+    - +
+    - C
+    - A
+    - K
+    - S
+    - Y
+    - I
+    - B
+    - L
+    - T
+    - Z
+    - P
+    - D
+    - M
+    - U
+    - H
+    - F
+    - N
+    - V
+    - E
+    - G
+    - O
+    - W
+    - R
+    - J
+    - Q
+    - X
+    actw:
+    - M
+    - B
+    - O
+    - V
+    - A
+    - D
+    - P
+    - W
+    - C
+    - F
+    - Q
+    - X
+    - H
+    - G
+    - R
+    - Y
+    - I
+    - J
+    - S
+    - Z
+    - N
+    - K
+    - T
+    - E
+    - L
+    - U
