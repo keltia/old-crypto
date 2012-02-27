@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 025f49ae53d2 2012/02/26 00:37:12 roberto $
+# $Id: key.rb,v e85db556b73a 2012/02/27 19:16:38 roberto $
 
 require "crypto_helper"
 
@@ -53,7 +53,7 @@ end # -- Key
 #
 # Class for transposition keys
 #
-# A transposition key does not ghet condensed but serve as a generator for
+# A transposition key does not get condensed but serve as a generator for
 # a numeric key based on letters.  Later on, these numbers will be used to
 # extract columns.
 #
