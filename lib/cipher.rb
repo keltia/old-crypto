@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v ae30e674ed7c 2012/02/25 17:06:29 roberto $
+# $Id: cipher.rb,v ad9edc88cb14 2012/02/28 22:17:48 roberto $
 
 require "key"
 
@@ -254,6 +254,124 @@ class Transposition < SimpleCipher
   end # -- decode
   
 end # --  Transposition
+
+# == DisruptedTransposition
+#
+# This is a complicated transposition scheme where several areas are ignored at initial filling according to
+# the keyword then filled up later in the second phase.
+#
+# See: http://www.quadibloc.com/crypto/pp1324.htm
+#      http://users.telenet.be/d.rijmenants/en/handciphers.htm
+#
+class DisruptedTransposition
+  include Crypto
+
+  attr_reader :key, :second
+
+  def initialize(key)
+    @key = Key::TKey.new(key)
+    @nkey = @key.to_numeric
+    @lkey = @nkey.size
+    @second = Array.new
+  end
+
+  # === encode
+  #
+  def encode(plain_text)
+    @msglen = plain_text.length
+    holes = compute_holes(@msglen)
+
+    j = 0
+    t_len = @key.length
+    t_height = @msglen / t_len + 1
+    table = Array.new(t_len) { "" }
+    cipher_text = ""
+
+    tkey = @key.to_numeric
+    #
+    # XXX String.scan in 1.9, #each_byte?
+    #
+    # 1st phase: fill in everything else than a hole
+    i = 0
+    plain = plain_text.each_char.to_a
+    for k in 0..(@msglen - 1) do
+      pt = plain.shift
+      print "pt: #{pt} #{[i / t_len,j]} tkey[#{j}]: #{tkey[j]} "
+      if holes.include?([i / t_len,j])
+        table[tkey[j]] << "."
+        plain.unshift(pt)
+      else
+        table[tkey[j]] << pt
+      end
+      puts " table[#{tkey[j]}]: #{table[tkey[j]]}"
+      i += 1
+      j = (j + 1) % t_len
+    end
+    p holes
+    p table
+    p plain
+    #
+    # 2nd phase: fill in all holes
+    #
+    holes.each do |e|
+      row = e[0]
+      col = @nkey[e[1]]
+
+      p = plain.shift
+      curcol = table[col]
+      curcol[row] = p
+      puts("holes: #{row},#{col} -> #{p} curcol: #{curcol}")
+    end
+
+    # Now take every column based upon key ordering
+    #
+    cipher_text = tkey.sort.each.inject("") do |text, t|
+      text +  table[t]
+    end
+  end # -- encode
+
+  # === decode
+  #
+  def decode
+    @msglen = plain_text.length
+    holes = compute_holes(@msglen)
+
+  end # -- decode
+
+  # === compute_holes
+  #
+  # Compute the list of cells to be ignored in first filling phase
+  #
+  def compute_holes(len)
+    #
+    # We have potentially as many holes as we have key letters
+    # but we have a much more simple stop condition, that is, the last
+    # hole is incomplete
+    #
+    # Return the list of unavailable [x,y] (i.e. all areas merged)
+    #
+    holes = Array.new
+    start_row = 0
+    start_x = 0
+    loop do
+      pos = @nkey.index(start_x)
+      hole = HoleArea.new(start_row, pos, @lkey - pos, len)
+      holes << hole.a
+      break unless hole.complete?
+      start_x += 1
+      start_row = start_row + hole.ylen
+    end
+    holes.flatten(1)
+  end # -- compute_holes
+
+  # === is_first?
+  #
+  def is_first?(x, y)
+
+
+  end # -- is_first?
+
+end # -- DisruptedTransposition
 
 # ==  StraddlingCheckerboard
 #
