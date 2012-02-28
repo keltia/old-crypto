@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v e85db556b73a 2012/02/27 19:16:38 roberto $
+# $Id: key.rb,v 99a4b868fd63 2012/02/28 22:14:47 roberto $
 
 require "crypto_helper"
 
@@ -260,7 +260,7 @@ end # -- SQKey
 
 # == Playfair
 #
-# The Playfait cipher was invented by Charles Wheatstone but popularized by
+# The Playfair cipher was invented by Charles Wheatstone but popularized by
 # his friend, the Baron Playfair.
 #
 # Description of the cipher on http://en.wikipedia.org/wiki/Playfair_cipher
