@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 299cde862a21 2012/02/25 16:53:03 roberto $
+# $Id: crypto_helper.rb,v 3a20d8e9edeb 2012/02/28 22:14:03 roberto $
 
 
 # == String
@@ -333,7 +333,58 @@ module Crypto
     end
     long.compact
   end # -- find_hole
-  
+
+  # === HoleArea
+  #
+  # Used to find "holes" in a given according to a given keyword
+  #
+  # cf.
+  # http://users.telenet.be/d.rijmenants/en/handciphers.htm
+  #
+  # Used mainly by Cipher::DisruptedTransposition
+  #
+  class HoleArea
+    include Enumerable
+
+    attr_reader :a, :len, :xlen, :ylen, :totalx
+
+    def initialize(start_row, pos, xlen, len)
+      @a = Array.new
+      @xlen = xlen.to_i
+      @totalx = pos.to_i + xlen.to_i
+      @totaly = (len.to_i / @totalx) + 1
+      cpos = pos
+      for j in start_row..(@totaly - 1) do
+        for i in cpos..(pos + xlen - 1) do
+          @a << [ j, i ] if (( (j * totalx) + i) < len)
+        end
+        # We shift by one to the right
+        cpos += 1
+      end
+      @ylen = @a[-1][0] - start_row + 1
+      @cf = (@a.size == (xlen * (xlen + 1)) / 2)
+    end
+
+    # === each
+    #
+    # Needed for every Enumerable
+    #
+    def each
+      @a.each do |c|
+        yield c
+      end
+    end # -- each
+
+    # === complete?
+    #
+    # Flag testing whether the area is complete or not
+    # (i.e. is a full triangle)
+    #
+    def complete?
+      @cf
+    end
+  end # -- HoleArea
+
 end # -- Crypto
 
 if __FILE__ == $0 then

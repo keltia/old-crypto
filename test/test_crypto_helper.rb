@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 299cde862a21 2012/02/25 16:53:03 roberto $
+# $Id: test_crypto_helper.rb,v 3a20d8e9edeb 2012/02/28 22:14:03 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -214,4 +214,12 @@ class TestCrypto < Test::Unit::TestCase
       assert_equal r, res
     end
   end # -- test_keyshuffle
+
+  def test_holearea
+    a = HoleArea.new(0, 8, 5, 156)
+    assert_equal [[0, 8], [0, 9], [0, 10], [0, 11], [0, 12], [1, 9], [1, 10], [1, 11], [1, 12], [2, 10], [2, 11], [2, 12], [3, 11], [3, 12], [4, 12]], a.a
+
+    b = HoleArea.new(5, 4, 9, 156)
+  end # -- test_holearea
+
 end # --  TestCrypto
