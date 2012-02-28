@@ -1,8 +1,140 @@
+2012-02-26  Ollivier Robert  <roberto@keltia.net>
+
+	* misc/foo.rb:
+	Small test script, easier to test some things with.
+	[5d22334bd323] [tip]
+
+	* lib/key.rb:
+	Better way to handle the starting letter change.
+	[025f49ae53d2]
+
+	* test/test_cipher_wheat.yaml:
+	Add a 3rd test for Cipher::Wheatstone too.
+	[66866b439142]
+
+	* test/test_key.rb, test/test_wheat.yaml:
+	Add a 3rd test for Key::Wheatstone, refactor TestWheatstone.
+	[da3b98f12575]
+
+2012-02-25  Ollivier Robert  <roberto@keltia.net>
+
+	* lib/key.rb:
+	Implement starting letter support for Key::Wheatstone.
+	[d8aab6a25f73]
+
+	* lib/key.rb:
+	Remove dead URL, add two working ones.
+	[d719547c1422]
+
+	* test/test_cipher.rb, test/test_cipher_wheat.yaml:
+	Fix tests for doubled letters handling and more.
+	[44d15ec14f10]
+
+	* lib/cipher.rb:
+	Implement #encode with doubled letters handling.
+	[ae30e674ed7c]
+
+	* lib/cipher.rb:
+	Fix: Default parameters are not meant to be here.
+	[9f1193f4b808]
+
+	* lib/key.rb:
+	Remove debug messages.
+	[4b61081291c9]
+
+	* lib/key.rb:
+	Take into account that with doubled letters, we need to advance as
+	well.
+	[9048c83e8f3d]
+
+	* lib/crypto_helper.rb, test/test_crypto_helper.rb:
+	Rename #replace into #replace_double.
+	[299cde862a21]
+
+	* lib/crypto_helper.rb, test/test_crypto_helper.rb:
+	Add String#replace + tests.
+	[4c098ee94698]
+
+	* lib/crypto_helper.rb:
+	Allow expansion with a given letter (for Cipher::Wheatstone).
+	[3d9da80b4764]
+
+	* lib/cipher.rb:
+	Begin implementation of Cipher::Wheatstone.
+	[9ca94a024a69]
+
+	* test/test_cipher.rb:
+	A cipher is a cipher, not a key.
+	[b65054dee54d]
+
+	* test/test_key.rb:
+	Adapt Key::Whezatstone tests to the new interface.
+	[113bf5803932]
+
+	* lib/key.rb:
+	Rewrite the whole logic behind Wheatstone algorithm.
+	[dd7b7de2e1a1]
+
+	* test/test_cipher_wheat.yaml:
+	Add test file for Cipher::Wheatstone.
+	[0d349159c9e7]
+
+2012-02-24  Ollivier Robert  <roberto@keltia.net>
+
+	* lib/key.rb:
+	WIP properly inc. @off when needed.
+	[12da4e08825e]
+
+	* lib/key.rb:
+	Fix class initialization.
+	[a0394b77f24a]
+
+	* Rakefile:
+	Add pushing to Dropbox.
+	[c1dd5edc9e6c]
+
+	* lib/key.rb:
+	Begin to implement #encode.
+	[261d578041d9]
+
+	* lib/key.rb, test/test_key.rb, test/test_wheat.yaml:
+	More code for Key::Wheatstone + tests.
+	[b66f0b749c91]
+
+2012-02-23  Ollivier Robert  <roberto@keltia.net>
+
+	* lib/key.rb:
+	Change init.
+	[9fa139cd8e59]
+
+	* lib/old-crypto.rb, lib/old_crypto.rb:
+	Automated merge with ssh://keltia.freenix.org//data/HG/mirrors/old-
+	crypto
+	[fd4dfa30512a]
+
 2012-02-22  Ollivier Robert  <roberto@keltia.net>
+
+	* ChangeLog:
+	Sync.
+	[a9c4b64fbe26]
 
 	* Automated merge with ssh://keltia.freenix.org//data/HG/mirrors/old-
 	crypto
-	[92a93930cd97] [tip]
+	[92a93930cd97]
+
+	* README.md:
+	Mention Wheatstone.
+	[fad98edc60e0]
+
+	* lib/key.rb:
+	Add description about Wheatstone.
+	[8a77d874363a]
+
+2012-02-23  Ollivier Robert  <roberto@keltia.net>
+
+	* lib/old-crypto.rb, lib/old_crypto.rb:
+	Remove old files.
+	[6d4d781dd863]
 
 2012-02-21  Ollivier Robert  <roberto@keltia.net>
 
@@ -25,16 +157,6 @@
 	* README.md:
 	Mention Wheatstone system.
 	[7502e2998475]
-
-2012-02-22  Ollivier Robert  <roberto@keltia.net>
-
-	* README.md:
-	Mention Wheatstone.
-	[fad98edc60e0]
-
-	* lib/key.rb:
-	Add description about Wheatstone.
-	[8a77d874363a]
 
 2011-12-24  Ollivier Robert  <roberto@keltia.net>
 
