@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v e08ca319ba09 2012/02/29 21:51:11 roberto $
+# $Id: cipher.rb,v bed1e919836e 2012/02/29 22:15:32 roberto $
 
 require "key"
 
@@ -266,7 +266,7 @@ end # --  Transposition
 class DisruptedTransposition
   include Crypto
 
-  attr_reader :key
+  attr_reader :key, :nkey, :lkey
 
   def initialize(key)
     @key = Key::TKey.new(key)
