@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v ad9edc88cb14 2012/02/28 22:17:48 roberto $
+# $Id: cipher.rb,v e08ca319ba09 2012/02/29 21:51:11 roberto $
 
 require "key"
 
@@ -266,13 +266,12 @@ end # --  Transposition
 class DisruptedTransposition
   include Crypto
 
-  attr_reader :key, :second
+  attr_reader :key
 
   def initialize(key)
     @key = Key::TKey.new(key)
     @nkey = @key.to_numeric
     @lkey = @nkey.size
-    @second = Array.new
   end
 
   # === encode
@@ -287,30 +286,27 @@ class DisruptedTransposition
     table = Array.new(t_len) { "" }
     cipher_text = ""
 
-    tkey = @key.to_numeric
-    #
-    # XXX String.scan in 1.9, #each_byte?
-    #
     # 1st phase: fill in everything else than a hole
+    #
     i = 0
     plain = plain_text.each_char.to_a
     for k in 0..(@msglen - 1) do
       pt = plain.shift
-      print "pt: #{pt} #{[i / t_len,j]} tkey[#{j}]: #{tkey[j]} "
+      print "pt: #{pt} #{[i / t_len,j]} @nkey[#{j}]: #{@nkey[j]} "
       if holes.include?([i / t_len,j])
-        table[tkey[j]] << "."
+        table[@nkey[j]] << "."
         plain.unshift(pt)
       else
-        table[tkey[j]] << pt
+        table[@nkey[j]] << pt
       end
-      puts " table[#{tkey[j]}]: #{table[tkey[j]]}"
+      puts " table[#{@nkey[j]}]: #{table[@nkey[j]]}"
       i += 1
       j = (j + 1) % t_len
     end
     p holes
     p table
     p plain
-    #
+
     # 2nd phase: fill in all holes
     #
     holes.each do |e|
@@ -325,7 +321,7 @@ class DisruptedTransposition
 
     # Now take every column based upon key ordering
     #
-    cipher_text = tkey.sort.each.inject("") do |text, t|
+    cipher_text = @nkey.sort.each.inject("") do |text, t|
       text +  table[t]
     end
   end # -- encode
