@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v bed1e919836e 2012/02/29 22:15:32 roberto $
+# $Id: cipher.rb,v e5239e4f6600 2012/02/29 22:34:25 roberto $
 
 require "key"
 
@@ -282,15 +282,13 @@ class DisruptedTransposition
 
     j = 0
     t_len = @key.length
-    t_height = @msglen / t_len + 1
     table = Array.new(t_len) { "" }
     cipher_text = ""
 
     # 1st phase: fill in everything else than a hole
     #
-    i = 0
     plain = plain_text.each_char.to_a
-    for k in 0..(@msglen - 1) do
+    for i in 0..(@msglen - 1) do
       pt = plain.shift
       print "pt: #{pt} #{[i / t_len,j]} @nkey[#{j}]: #{@nkey[j]} "
       if holes.include?([i / t_len,j])
@@ -300,7 +298,6 @@ class DisruptedTransposition
         table[@nkey[j]] << pt
       end
       puts " table[#{@nkey[j]}]: #{table[@nkey[j]]}"
-      i += 1
       j = (j + 1) % t_len
     end
     p holes

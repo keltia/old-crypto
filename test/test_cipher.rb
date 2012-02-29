@@ -1,4 +1,4 @@
-# $Id: test_cipher.rb,v 44d15ec14f10 2012/02/25 17:07:37 roberto $
+# $Id: test_cipher.rb,v e5239e4f6600 2012/02/29 22:34:25 roberto $
 
 require 'test/unit'
 require 'yaml'
@@ -247,6 +247,41 @@ class TestTransposition < Test::Unit::TestCase
   end # -- test_decode
 end # --  TestTransposition
 
+class TestDisrupted < Test::Unit::TestCase
+
+  # === setup
+  #
+  def setup
+    @data = Hash.new
+    File.open("test/test_cipher_disrupted.yaml") do |fh|
+      @data = YAML.load(fh)
+    end
+    @keys = @data["keys"] || []
+  end # -- setup
+
+  def test_init
+    @keys.keys.each do |key|
+      cipher = Cipher::DisruptedTransposition.new(key)
+
+      assert_not_nil cipher
+      assert_not_nil cipher.key
+      assert_equal cipher.key.length, key.length
+    end
+  end
+
+  def test_encode
+    pt = @data["plain"]
+    @keys.keys.each do |key|
+      cipher = Cipher::DisruptedTransposition.new(key)
+      assert_not_nil cipher
+
+      ct = cipher.encode(pt)
+      assert_not_nil ct
+      assert_equal pt.length, ct.length
+      assert_equal @keys[key]["ct"], ct
+    end
+  end
+end # -- TestDisrupted
 # ==  TestPolybius
 #
 class TestPolybius < Test::Unit::TestCase
