@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v e5239e4f6600 2012/02/29 22:34:25 roberto $
+# $Id: cipher.rb,v 2878d1aaf2bb 2012/03/04 23:14:24 roberto $
 
 require "key"
 
@@ -356,13 +356,6 @@ class DisruptedTransposition
     end
     holes.flatten(1)
   end # -- compute_holes
-
-  # === is_first?
-  #
-  def is_first?(x, y)
-
-
-  end # -- is_first?
 
 end # -- DisruptedTransposition
 
