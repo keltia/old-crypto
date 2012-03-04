@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 2878d1aaf2bb 2012/03/04 23:14:24 roberto $
+# $Id: cipher.rb,v db036934b5e2 2012/03/04 23:15:29 roberto $
 
 require "key"
 
@@ -290,19 +290,16 @@ class DisruptedTransposition
     plain = plain_text.each_char.to_a
     for i in 0..(@msglen - 1) do
       pt = plain.shift
-      print "pt: #{pt} #{[i / t_len,j]} @nkey[#{j}]: #{@nkey[j]} "
+      #print "pt: #{pt} #{[i / t_len,j]} @nkey[#{j}]: #{@nkey[j]} "
       if holes.include?([i / t_len,j])
         table[@nkey[j]] << "."
         plain.unshift(pt)
       else
         table[@nkey[j]] << pt
       end
-      puts " table[#{@nkey[j]}]: #{table[@nkey[j]]}"
+      #puts " table[#{@nkey[j]}]: #{table[@nkey[j]]}"
       j = (j + 1) % t_len
     end
-    p holes
-    p table
-    p plain
 
     # 2nd phase: fill in all holes
     #
@@ -313,7 +310,7 @@ class DisruptedTransposition
       p = plain.shift
       curcol = table[col]
       curcol[row] = p
-      puts("holes: #{row},#{col} -> #{p} curcol: #{curcol}")
+      #puts("holes: #{row},#{col} -> #{p} curcol: #{curcol}")
     end
 
     # Now take every column based upon key ordering
