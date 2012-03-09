@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v db036934b5e2 2012/03/04 23:15:29 roberto $
+# $Id: cipher.rb,v 96f91c932961 2012/03/09 22:17:12 roberto $
 
 require "key"
 
@@ -263,7 +263,7 @@ end # --  Transposition
 # See: http://www.quadibloc.com/crypto/pp1324.htm
 #      http://users.telenet.be/d.rijmenants/en/handciphers.htm
 #
-class DisruptedTransposition
+class DisruptedTransposition < SimpleCipher
   include Crypto
 
   attr_reader :key, :nkey, :lkey
