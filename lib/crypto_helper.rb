@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 30bef7d9d22f 2012/03/15 21:44:55 roberto $
+# $Id: crypto_helper.rb,v f4762c3b366e 2012/03/15 21:47:20 roberto $
 
 
 # == String
@@ -55,7 +55,7 @@ class String
       if a_str[i] == a_str[i+1] then
         a_str[i+1] = letter
       end
-      i += 2
+      i += 1
     end
     return a_str.join.to_s
   end # -- replace_double
