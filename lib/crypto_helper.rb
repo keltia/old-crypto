@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v f4762c3b366e 2012/03/15 21:47:20 roberto $
+# $Id: crypto_helper.rb,v 213f8d85846a 2012/03/15 23:25:51 roberto $
 
 
 # == String
@@ -40,9 +40,9 @@ class String
       end
       i += 2
     end
-    return a_str.join.to_s
+    a_str.join.to_s
   end # -- expand
-  
+
   # === replace_double
   #
   # Replace the second of two identical letters by Q (used for Wheatstone
@@ -57,7 +57,7 @@ class String
       end
       i += 1
     end
-    return a_str.join.to_s
+    a_str.join.to_s
   end # -- replace_double
 
   # === to_numeric
@@ -155,7 +155,7 @@ class String
     if r != 0 then
       a += " "+ str[-r, r]
     end
-    return a
+    a
   end # -- by_five
 end # -- String
 
@@ -302,7 +302,7 @@ module Crypto
         end
       end
     end
-    return res
+    res
   end # -- keyshuffle
 
   # === find_hole
