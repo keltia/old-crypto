@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 9efa25a2b1d4 2012/02/29 22:11:24 roberto $
+# $Id: test_crypto_helper.rb,v e7bbd6f1b186 2012/03/15 21:42:05 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -37,6 +37,8 @@ class TestString < Test::Unit::TestCase
   def test_replace_double
     word = "COMMAND"
     assert_equal "COMQAND", word.replace_double
+    word = "TIONNELLEMENT"
+    assert_equal "TIONQELQEMENT", word.replace_double
   end # -- test_replace_double
 
   # === test_to_numeric
