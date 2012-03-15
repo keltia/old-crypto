@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 3a20d8e9edeb 2012/02/28 22:14:03 roberto $
+# $Id: crypto_helper.rb,v 57289140de3b 2012/03/15 21:23:11 roberto $
 
 
 # == String
@@ -18,14 +18,12 @@ class String
   # Condense word by removing every duplicated letter
   #
   def condensed
-    c_alpha = ''
-    
-    self.scan(/./) do |c|
-      if not c_alpha.include?(c) then
-        c_alpha = c_alpha + c
+    c_alpha = self.each_char.inject("") {|s,c|
+      if s.include?(c)
+        c = ''
       end
-    end
-    c_alpha
+      s+c
+    }
   end # -- condensed
 
   # === expand
