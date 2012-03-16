@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v 213f8d85846a 2012/03/15 23:25:51 roberto $
+# $Id: crypto_helper.rb,v be840e73631c 2012/03/16 00:04:19 roberto $
 
 
 # == String
@@ -49,15 +49,12 @@ class String
   # cipher)
   #
   def replace_double(letter = "Q")
-    a_str = self.split(//)
-    i = 0
-    while i < a_str.length do
-      if a_str[i] == a_str[i+1] then
-        a_str[i+1] = letter
+    self.each_char.inject("") {|s,c|
+      if s[-1] == c
+        c = letter
       end
-      i += 1
-    end
-    a_str.join.to_s
+      s+c
+    }
   end # -- replace_double
 
   # === to_numeric
