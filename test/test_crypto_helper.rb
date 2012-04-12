@@ -1,4 +1,4 @@
-# $Id: test_crypto_helper.rb,v 92ded41d6de5 2012/04/12 20:23:57 roberto $
+# $Id: test_crypto_helper.rb,v bd35b29bede2 2012/04/12 20:30:58 roberto $
 
 require 'test/unit'
 require "yaml"
@@ -33,16 +33,18 @@ class TestString < Test::Unit::TestCase
     end
   end # -- test_expand_double
 
+  DATA_DOUBLE = {
+    "ABCDE"         => "ABCDE",
+    "COMMAND"       => "COMQAND",
+    "MMMMMM"        => "MQMQMQ",
+    "TIONNELLEMENT" => "TIONQELQEMENT",
+  }
+
   # == test_replace_double
   def test_replace_double
-    word = "COMMAND"
-    assert_equal "COMQAND", word.replace_double
-    word = "TIONNELLEMENT"
-    assert_equal "TIONQELQEMENT", word.replace_double
-    word = "MMMMMM"
-    assert_equal "MQMQMQ", word.replace_double
-    word = "ABCDE"
-    assert_equal "ABCDE", word.replace_double
+    DATA_DOUBLE.each_pair do |word, data|
+      assert_equal data, word.replace_double
+    end
   end # -- test_replace_double
 
   # === test_to_numeric
