@@ -1,5 +1,5 @@
 #
-# $Id: cipher.rb,v 96f91c932961 2012/03/09 22:17:12 roberto $
+# $Id: cipher.rb,v 92942be91c96 2013/02/21 16:26:44 roberto $
 
 require "key"
 
@@ -392,11 +392,7 @@ class StraddlingCheckerboard  < Substitution
       #
       # XXX US-ASCII hack
       #
-      if RUBY_VERSION =~/1\.9/ then
-        d = c.ord - 48
-      else
-        d = c[0] - 48
-      end
+      d = c.ord - 48
       if @key.is_long?(d)
         c << ct.slice!(0,1)
       end

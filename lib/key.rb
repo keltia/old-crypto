@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 99a4b868fd63 2012/02/28 22:14:47 roberto $
+# $Id: key.rb,v 92942be91c96 2013/02/21 16:26:44 roberto $
 
 require "crypto_helper"
 
@@ -126,18 +126,10 @@ class Caesar < SKey
   def gen_rings
     @offset = @key.to_i
   
-    if RUBY_VERSION =~ /1\.9/ then
-      BASE.scan(/./) do |c|
-        d = ( (((c.ord - 65) + offset) % 26) + 65).chr
-        @alpha[c]  = d
-        @ralpha[d] = c
-      end
-    else
-      BASE.scan(/./) do |c|
-        d = ( (((c[0] - 65) + offset) % 26) + 65).chr
-        @alpha[c]  = d
-        @ralpha[d] = c
-      end
+    BASE.scan(/./) do |c|
+      d = ( (((c.ord - 65) + offset) % 26) + 65).chr
+      @alpha[c]  = d
+      @ralpha[d] = c
     end
   end # -- gen_rings
   
