@@ -6,9 +6,9 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 92942be91c96 2013/02/21 16:26:44 roberto $
+# $Id: key.rb,v 281fcc6035bc 2013/03/05 14:16:49 roberto $
 
-require "crypto_helper"
+require 'crypto_helper'
 
 class DataError < Exception
 end
@@ -82,7 +82,7 @@ end # -- TKey
 
 class SKey < Key
   
-  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  BASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   
   attr_reader :alpha, :ralpha
 
@@ -145,7 +145,7 @@ end # -- Caesar
 
 class SCKey < SKey
   include Crypto
-  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ/-"
+  BASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ/-'
 
   attr_reader :full_key, :shortc, :longc
   
@@ -177,7 +177,7 @@ class SCKey < SKey
 
     word = @full_key.dup
     word.scan(/./) do |c|
-      if "ESANTIRU".include? c then
+      if 'ESANTIRU'.include? c then
         ind = shortc.shift
       else
         ind = long.shift
@@ -207,14 +207,14 @@ end # -- SCKey
 #
 class SQKey < SKey
 
-  BASE36 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  BASE36 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
   SQ_NUMBERS = 1
   SQ_ADFGVX  = 2
 
   CODE_WORD = {
     SQ_NUMBERS => [ 0, 1, 2, 3, 4, 5 ],
-    SQ_ADFGVX  => "ADFGVX".each_char.to_a
+    SQ_ADFGVX  => 'ADFGVX'.each_char.to_a
   }
 
   attr_reader :full_key, :type
@@ -276,9 +276,9 @@ class Playfair < SKey
     super(key.gsub(%r{\s*}, ''))
     @alpha = Hash.new
     if type == WITH_J then
-      @base = "ABCDEFGHIJKLMNOPRSTUVWXYZ"
+      @base = 'ABCDEFGHIJKLMNOPRSTUVWXYZ'
     else
-      @base = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+      @base = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
     end
     @full_key = (@key + @base).condensed
     gen_rings()
@@ -358,7 +358,7 @@ class Wheatstone < SKey
   
   attr_accessor :aplw, :actw, :curpos, :ctpos
   
-  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  BASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   # == initialize
   #
@@ -496,7 +496,7 @@ end # -- VICKey
 # See http://www.mountainvistasoft.com/chaocipher/index.htm
 #
 class ChaoKey < Key
-  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  BASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   ZENITH = 0
   NADIR  = 13
   
@@ -559,12 +559,12 @@ class ChaoKey < Key
     end
     @cipher = cw[ZENITH].chr + cw[(ZENITH + 2)..NADIR] + \
               cw[ZENITH + 1].chr + cw[(NADIR + 1)..-1]
-    raise DataError, "cw length bad" if cw.length != BASE.length
+    raise DataError, 'cw length bad' if cw.length != BASE.length
 
     pw = pw[(ZENITH + 1)..-1] + pw[ZENITH].chr
     @plain = pw[ZENITH..(ZENITH + 1)] + pw[(ZENITH + 3)..NADIR] + \
              pw[ZENITH + 2].chr + pw[(NADIR + 1)..-1]
-    raise DataError, "pw length bad" if pw.length != BASE.length
+    raise DataError, 'pw length bad' if pw.length != BASE.length
   end # -- advance
 
 end # -- ChaoKey
@@ -577,22 +577,22 @@ if $0 == __FILE__ then
   #
   # square
   #
-  k = Key::SCKey.new("ARABESQUE")
+  k = Key::SCKey.new('ARABESQUE')
   p k.condensed
   
   # not square but known -- see above comments
   #
-  m = Key::SCKey.new("subway")
+  m = Key::SCKey.new('subway')
   p m.condensed
   
   # not square
   #
-  n = Key::SCKey.new("portable")
+  n = Key::SCKey.new('portable')
   p n.condensed
 
   # key for transposition
   #
-  t = Key::TKey.new("retribution")
+  t = Key::TKey.new('retribution')
   #
   #
   # Main usage, get the numerical order of letters
