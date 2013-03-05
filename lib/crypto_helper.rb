@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: crypto_helper.rb,v be840e73631c 2012/03/16 00:04:19 roberto $
+# $Id: crypto_helper.rb,v 1d557f2f8b62 2013/03/05 14:28:17 roberto $
 
 
 # == String
@@ -18,7 +18,7 @@ class String
   # Condense word by removing every duplicated letter
   #
   def condensed
-    self.each_char.inject("") {|s,c|
+    self.each_char.inject('') {|s,c|
       if s.include?(c)
         c = ''
       end
@@ -31,7 +31,7 @@ class String
   # Insert an X between identical letters (mostly used for bigrammatic
   # ciphers such as Playfair)
   #
-  def expand(letter = "X")
+  def expand(letter = 'X')
     a_str = self.split(//)
     i = 0
     while i < a_str.length do
@@ -48,8 +48,8 @@ class String
   # Replace the second of two identical letters by Q (used for Wheatstone
   # cipher)
   #
-  def replace_double(letter = "Q")
-    self.each_char.inject("") {|s,c|
+  def replace_double(letter = 'Q')
+    self.each_char.inject('') {|s,c|
       if s[-1] == c
         c = letter
       end
@@ -150,7 +150,7 @@ class String
       a = str.scan(%r{(\w{5})}).join(' ')
     end
     if r != 0 then
-      a += " "+ str[-r, r]
+      a += ' '+ str[-r, r]
     end
     a
   end # -- by_five
@@ -272,7 +272,7 @@ module Crypto
   # SCIOXUDJPZBEKQ/WFLR-AGMT  YHNV   c=3  3 x 1
   # SCIOXUDJPZBEKQ/WFLR-AGMTYHNV
 
-  BASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  BASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   def keyshuffle(key, base = BASE)
     word = (key + base).condensed.dup
@@ -286,7 +286,7 @@ module Crypto
       height = height + 1
     end
     
-    res = ""
+    res = ''
     (len - 1).downto(0) do |i|
       0.upto(height - 1) do |j|
         if word.length <= (height - 1) then
@@ -306,20 +306,20 @@ module Crypto
   #
   # Given a keyword with spaces, output an array with their positions
   #
-  def find_hole(kw, ph = "AT ONE SIR")
+  def find_hole(kw, ph = 'AT ONE SIR')
     if kw.class == String then
       kwn = kw[0..(ph.length - 1)].to_numeric10
     elsif kw.class == Array
       kwn = kw.dup
     else
-      raise DataError, "Must be either String or Array of integers"
+      raise DataError, 'Must be either String or Array of integers'
     end
     
     long  = Array.new
     short = Array.new
     i = 0
     ph.scan(/./).each do |c|
-      if c == " " then
+      if c == ' ' then
         long << kwn[i]
       else
         short << kwn[i]
@@ -331,7 +331,7 @@ module Crypto
 
   # === HoleArea
   #
-  # Used to find "holes" in a given according to a given keyword
+  # Used to find 'holes' in a given according to a given keyword
   #
   # cf.
   # http://users.telenet.be/d.rijmenants/en/handciphers.htm
@@ -383,6 +383,6 @@ module Crypto
 end # -- Crypto
 
 if __FILE__ == $0 then
-  puts "End."
-  find_hole("INDEPENDENCE","AT ONE SIR")
+  puts 'End.'
+  find_hole('INDEPENDENCE','AT ONE SIR')
 end
