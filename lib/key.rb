@@ -6,73 +6,15 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 281fcc6035bc 2013/03/05 14:16:49 roberto $
+# $Id: key.rb,v 630720bb99e5 2013/03/10 17:23:35 roberto $
 
 require 'crypto_helper'
+require 'key/base'
 
 class DataError < Exception
 end
 
 module Key
-# == Key
-#
-# Virtual base class for keys
-#
-class Key
-  attr_reader :key
-
-  def initialize(key)
-    raise ArgumentError if key.class != String and key.class != Fixnum
-    if key.class == Fixnum then
-      if key < 0 or key > 26 then
-        raise RangeError
-      end
-    end
-    @key = key.to_s.upcase
-  end
-
-  def to_s
-    @key
-  end
-  
-  # === condensed
-  #
-  def condensed
-    @key.condensed
-  end # -- condensed
-
-  # === length
-  #
-  def length
-    @key.length
-  end # -- length
-  
-end # -- Key
-
-# == TKey
-#
-# Class for transposition keys
-#
-# A transposition key does not get condensed but serve as a generator for
-# a numeric key based on letters.  Later on, these numbers will be used to
-# extract columns.
-#
-# See http://en.wikipedia.org/wiki/Transposition_cipher
-
-class TKey < Key
-  include Crypto
-  
-  def initialize(key)
-    super(key)
-  end
-  
-  # === to_numeric
-  #
-  def to_numeric
-    @key.to_numeric
-  end # -- to_numeric
-  
-end # -- TKey
 
 # == SKey
 #
