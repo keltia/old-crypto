@@ -1,10 +1,9 @@
-# $Id: test_key.rb,v 1d557f2f8b62 2013/03/05 14:28:17 roberto $
+# $Id: test_key.rb,v bdaffa944b90 2013/03/10 18:28:17 roberto $
 
 require 'test/unit'
 require 'yaml'
 
 require 'key'
-require 'crypto_helper'
 
 # ==  TestKey
 #
