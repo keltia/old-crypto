@@ -4,8 +4,9 @@
 # Author:: Ollivier Robert <roberto@keltia.net>
 # Copyright:: 2001-2013 © by Ollivier Robert
 #
-# $Id: caesar.rb,v 694c90e440db 2013/03/10 18:46:10 roberto $
+# $Id: caesar.rb,v 9ea677b34eed 2013/03/10 18:49:14 roberto $
 
+require 'key/caesar'
 require 'cipher/subst'
 
 module Cipher
