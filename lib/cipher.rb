@@ -1,28 +1,11 @@
 #
-# $Id: cipher.rb,v 281fcc6035bc 2013/03/05 14:16:49 roberto $
+# $Id: cipher.rb,v 98f23597bd3c 2013/03/10 18:37:21 roberto $
 
 require 'key'
 
-module Cipher
+require 'cipher/base'
 
-# ==  SimpleCipher
-#
-# Base class, encode() returns plain text as does decode()
-#
-class SimpleCipher
-  # === encode
-  #
-  def encode(text)
-    return text
-  end # -- encode
-  
-  # === decode
-  #
-  def decode(text)
-    return text
-  end # -- decode
-  
-end # -- SimpleCipher
+module Cipher
 
 #  Substitution
 #
