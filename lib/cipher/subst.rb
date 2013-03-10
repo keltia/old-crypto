@@ -4,7 +4,7 @@
 # Author:: Ollivier Robert <roberto@keltia.net>
 # Copyright:: 2001-2013 © by Ollivier Robert
 #
-# $Id: subst.rb,v 0039a1b51e12 2013/03/10 18:40:41 roberto $
+# $Id: subst.rb,v 886576ab2cda 2013/03/10 18:41:07 roberto $
 
 require 'cipher/base'
 
