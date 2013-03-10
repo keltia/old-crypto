@@ -6,9 +6,8 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 632a7b33242b 2013/03/10 17:34:45 roberto $
+# $Id: key.rb,v c2f376313cc4 2013/03/10 17:43:35 roberto $
 
-require 'crypto_helper'
 require 'key/base'
 require 'key/caesar'
 require 'key/skey'

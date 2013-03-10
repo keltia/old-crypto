@@ -4,7 +4,9 @@
 # Author:: Ollivier Robert <roberto@keltia.net>
 # Copyright:: © 2001-2013 by Ollivier Robert 
 #
-# $Id: base.rb,v c824ad9444b6 2013/03/10 17:17:45 roberto $
+# $Id: base.rb,v c2f376313cc4 2013/03/10 17:43:35 roberto $
+
+require 'crypto_helper'
 
 module Key
   # == Key
