@@ -6,10 +6,11 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 630720bb99e5 2013/03/10 17:23:35 roberto $
+# $Id: key.rb,v e9e9ed66001b 2013/03/10 17:27:40 roberto $
 
 require 'crypto_helper'
 require 'key/base'
+require 'key/tkey'
 
 class DataError < Exception
 end
