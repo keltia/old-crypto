@@ -4,11 +4,18 @@
 # Author:: Ollivier Robert <roberto@keltia.net>
 # Copyright:: © 2001-2013 by Ollivier Robert
 #
-# $Id: sckey.rb,v c8c0c8ea9f38 2013/03/10 17:44:31 roberto $
+# $Id: sckey.rb,v 215f60fa1e7f 2013/03/10 17:52:14 roberto $
 
 require 'key/skey'
 
 module Key
+  # == SCKey
+  #
+  # class for straddling checkerboard substitution keys
+  #
+  # SC-keys needs to be condensed and rings generated for ciphering/deciphering
+  #
+  # See http://en.wikipedia.org/wiki/Straddling_checkerboard
 
   class SCKey < SKey
     include Crypto

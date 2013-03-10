@@ -6,7 +6,7 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v c8c0c8ea9f38 2013/03/10 17:44:31 roberto $
+# $Id: key.rb,v 215f60fa1e7f 2013/03/10 17:52:14 roberto $
 
 require 'key/base'
 require 'key/caesar'
@@ -18,15 +18,6 @@ class DataError < Exception
 end
 
 module Key
-
-# == SCKey
-#
-# class for straddling checkerboard substitution keys
-#
-# SC-keys needs to be condensed and rings generated for ciphering/deciphering
-#
-# See http://en.wikipedia.org/wiki/Straddling_checkerboard
-
 
 # == SQKey
 #
