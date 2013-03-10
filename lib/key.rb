@@ -6,10 +6,11 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v 7b4b32e1312e 2013/03/10 17:29:52 roberto $
+# $Id: key.rb,v 632a7b33242b 2013/03/10 17:34:45 roberto $
 
 require 'crypto_helper'
 require 'key/base'
+require 'key/caesar'
 require 'key/skey'
 require 'key/tkey'
 
@@ -17,35 +18,6 @@ class DataError < Exception
 end
 
 module Key
-
-# == Caesar
-#
-# class for Caesar-like substitution ciphers: monoalphabetic with ordered
-# alphabet
-#
-# XXX Assume US-ASCII or lowest 256 chars of Unicode
-#
-class Caesar < SKey
-  attr_reader :offset
-
-  def initialize(key)
-    super(key)
-    gen_rings()
-  end
-  
-  # === gen_rings
-  #
-  def gen_rings
-    @offset = @key.to_i
-  
-    BASE.scan(/./) do |c|
-      d = ( (((c.ord - 65) + offset) % 26) + 65).chr
-      @alpha[c]  = d
-      @ralpha[d] = c
-    end
-  end # -- gen_rings
-  
-end # -- Caesar
 
 # == SCKey
 #
