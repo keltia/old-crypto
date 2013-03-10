@@ -1,44 +1,12 @@
 #
-# $Id: cipher.rb,v 98f23597bd3c 2013/03/10 18:37:21 roberto $
+# $Id: cipher.rb,v 0039a1b51e12 2013/03/10 18:40:41 roberto $
 
 require 'key'
 
 require 'cipher/base'
+require 'cipher/subst'
 
 module Cipher
-
-#  Substitution
-#
-# Class for substitution cipher (Caesar, Polyalphabetic, Nihilist)
-#
-class Substitution < SimpleCipher
-  attr_reader :key
-  
-  # === initialize
-  #
-  def initialize(key = '')
-    @key = Key::SKey.new(key)
-  end # -- initialize
-  
-  # === encode
-  #
-  def encode(plain_text)
-    cipher_text = plain_text.each_char.inject('') do |text, pt|
-      text + @key.encode(pt)
-    end
-    return cipher_text
-  end # -- encode
-  
-  # === decode
-  #
-  def decode(cipher_text)
-    plain_text = cipher_text.each_char.inject('') do |text, ct|
-      text + @key.decode(ct)
-    end
-    return plain_text
-  end # -- decode
-  
-end # --  Substitution
 
 # ==  Caesar
 #
