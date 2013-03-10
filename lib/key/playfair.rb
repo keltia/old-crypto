@@ -1,10 +1,10 @@
-# = skey.rb
+# = playfair.rb
 #
 # Description:: Playfair substitution key
 # Author:: Ollivier Robert <roberto@keltia.net>
 # Copyright:: © 2001-2013 by Ollivier Robert
 #
-# $Id: playfair.rb,v 2b633351f52e 2013/03/10 18:05:13 roberto $
+# $Id: playfair.rb,v cba71d9f8dda 2013/03/10 18:05:47 roberto $
 
 require 'key/skey'
 
