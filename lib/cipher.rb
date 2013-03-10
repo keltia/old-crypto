@@ -1,26 +1,13 @@
 #
-# $Id: cipher.rb,v 0039a1b51e12 2013/03/10 18:40:41 roberto $
+# $Id: cipher.rb,v 694c90e440db 2013/03/10 18:46:10 roberto $
 
 require 'key'
 
 require 'cipher/base'
 require 'cipher/subst'
+require 'cipher/caesar'
 
 module Cipher
-
-# ==  Caesar
-#
-# Caesar cipher, monoalphabetic substitution, offset is 3
-#
-class Caesar < Substitution
-  
-  # === initialize
-  #
-  def initialize(offset = 3)
-    @key = Key::Caesar.new(offset)
-  end # -- initialize
-  
-end # --  Caesar
 
 # == Rot13
 #
