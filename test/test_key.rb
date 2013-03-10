@@ -1,10 +1,10 @@
-# $Id: test_key.rb,v da3b98f12575 2012/02/26 00:35:09 roberto $
+# $Id: test_key.rb,v 1d557f2f8b62 2013/03/05 14:28:17 roberto $
 
 require 'test/unit'
-require "yaml"
+require 'yaml'
 
-require "key"
-require "crypto_helper"
+require 'key'
+require 'crypto_helper'
 
 # ==  TestKey
 #
@@ -13,7 +13,7 @@ class TestKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_key.yaml") do |fh|
+    File.open('test/test_key.yaml') do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -35,8 +35,8 @@ class TestKey < Test::Unit::TestCase
     assert_raise(ArgumentError) { Key::Key.new(nil)}
     assert_raise(ArgumentError) { Key::Key.new(Array.new) }
     assert_nothing_raised(ArgumentError) { Key::Key.new(3) }
-    assert_nothing_raised(ArgumentError) { Key::Key.new("") }
-    assert_nothing_raised(ArgumentError) { Key::Key.new("FOOBAR") }
+    assert_nothing_raised(ArgumentError) { Key::Key.new('') }
+    assert_nothing_raised(ArgumentError) { Key::Key.new('FOOBAR') }
     assert_raise(RangeError) { Key::Key.new(42) }
   end # -- test_params
   
@@ -47,7 +47,7 @@ class TestKey < Test::Unit::TestCase
       key = Key::Key.new(word)
 
       assert_not_nil key
-      assert_equal key.condensed, @data[word]["condensed"]
+      assert_equal key.condensed, @data[word]['condensed']
     end
   end # -- test_condensed
 
@@ -72,7 +72,7 @@ class TestTKey < Test::Unit::TestCase
   #
   def setup
     @data = Hash.new
-    File.open("test/test_tkey.yaml") do |fh|
+    File.open('test/test_tkey.yaml') do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -94,7 +94,7 @@ class TestTKey < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::TKey.new(word)
 
-      assert_equal @data[word]["num"], key.to_numeric
+      assert_equal @data[word]['num'], key.to_numeric
     end
   end # -- test_to_numeric
 end # --  TestTKey
@@ -106,7 +106,7 @@ class TestSKey < Test::Unit::TestCase
   # === test_alpha
   #
   def test_presence_of_alpha
-    word = "arabesque"
+    word = 'arabesque'
     key = Key::SKey.new(word)
 
     assert_not_nil key      
@@ -117,10 +117,10 @@ class TestSKey < Test::Unit::TestCase
   # === test_encode_decode
   #
   def test_encode_decode
-    key = Key::SKey.new("")
+    key = Key::SKey.new('')
     
-    assert_equal "P", key.decode("P")
-    assert_equal "P", key.encode("P")
+    assert_equal 'P', key.decode('P')
+    assert_equal 'P', key.encode('P')
   end # -- test_encode_decode
 
 end # --  TestSKey
@@ -165,33 +165,33 @@ class TestKeyCaesar < Test::Unit::TestCase
   # === test_encode
   #
   def test_encode
-    pt = "A"
+    pt = 'A'
     ct = @key.encode(pt)
 
     assert_not_nil ct
-    assert_equal ct, "D"
+    assert_equal ct, 'D'
     
-    pt = "Y"
+    pt = 'Y'
     ct = @key.encode(pt)
 
     assert_not_nil ct
-    assert_equal ct, "B"
+    assert_equal ct, 'B'
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    ct = "D"
+    ct = 'D'
     pt = @key.decode(ct)
 
     assert_not_nil pt
-    assert_equal pt, "A"
+    assert_equal pt, 'A'
     
-    ct = "C"
+    ct = 'C'
     pt = @key.decode(ct)
 
     assert_not_nil pt
-    assert_equal pt, "Z"
+    assert_equal pt, 'Z'
   end # -- test_decode
 end # --  TestKeyCaesar
 
@@ -202,7 +202,7 @@ class TestSCKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_sckey.yaml") do |fh|
+    File.open('test/test_sckey.yaml') do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -210,7 +210,7 @@ class TestSCKey < Test::Unit::TestCase
   # === test_alpha
   #
   def test_presence_of_alpha
-    word = "arabesque"
+    word = 'arabesque'
     key = Key::SCKey.new(word)
 
     assert_not_nil key
@@ -230,7 +230,7 @@ class TestSCKey < Test::Unit::TestCase
       assert_not_nil key
       assert_not_nil key.full_key
       assert_equal Key::SCKey::BASE.length, key.full_key.length
-      assert_equal @data[word]["full_key"], key.full_key
+      assert_equal @data[word]['full_key'], key.full_key
     end
   end # -- test_checkerboard
   
@@ -241,15 +241,15 @@ class TestSCKey < Test::Unit::TestCase
       key = Key::SCKey.new(word)
     
       assert_not_nil key
-      assert_equal @data[word]["alpha"], key.alpha
-      assert_equal @data[word]["ralpha"], key.ralpha
+      assert_equal @data[word]['alpha'], key.alpha
+      assert_equal @data[word]['ralpha'], key.ralpha
     end
   end # -- test_gen_rings
 
   # === test_is_long
   #
   def test_is_long
-    key = Key::SCKey.new("arabesque")
+    key = Key::SCKey.new('arabesque')
 
     assert_not_nil key
     assert !key.is_long?(0)
@@ -264,9 +264,9 @@ class TestSCKey < Test::Unit::TestCase
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      encode_in = test["in"]
-      encode_out = test["out"]
+      test = @data[word]['encode']
+      encode_in = test['in']
+      encode_out = test['out']
       encode_in.each do |c|
         assert_equal encode_out.shift, key.encode(c)
       end
@@ -281,9 +281,9 @@ class TestSCKey < Test::Unit::TestCase
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      decode_in = test["out"]
-      decode_out = test["in"]
+      test = @data[word]['encode']
+      decode_in = test['out']
+      decode_out = test['in']
       decode_in.each do |c|
         assert_equal decode_out.shift, key.decode(c)
       end
@@ -298,11 +298,11 @@ class TestChaokey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_chaokey.yaml") do |fh|
+    File.open('test/test_chaokey.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @a = Key::ChaoKey.new("PTLNBQDEOYSFAVZKGJRIHWXUMC",
-                         "HXUCZVAMDSLKPEFJRIGTWOBNYQ")
+    @a = Key::ChaoKey.new('PTLNBQDEOYSFAVZKGJRIHWXUMC',
+                         'HXUCZVAMDSLKPEFJRIGTWOBNYQ')
   end # -- setup
 
   # === test_advance
@@ -311,23 +311,23 @@ class TestChaokey < Test::Unit::TestCase
     @a.advance(12)
     assert_equal 26, @a.plain.length
     assert_equal 26, @a.cipher.length
-    assert_equal "VZGJRIHWXUMCPKTLNBQDEOYSFA", @a.plain
-    assert_equal "PFJRIGTWOBNYQEHXUCZVAMDSLK", @a.cipher
+    assert_equal 'VZGJRIHWXUMCPKTLNBQDEOYSFA', @a.plain
+    assert_equal 'PFJRIGTWOBNYQEHXUCZVAMDSLK', @a.cipher
   end # -- test_advance
   
   # === test_encode
   #
-  # we test two steps to ensure the "rings" turn
+  # we test two steps to ensure the 'rings' turn
   #
   def test_encode
-    pt = "W"
-    ct = "O"
+    pt = 'W'
+    ct = 'O'
     
     nct = @a.encode(pt)
     assert_equal ct, nct
     
-    pt = "E"
-    ct = "A"
+    pt = 'E'
+    ct = 'A'
     nct = @a.encode(pt)
     assert_equal ct, nct
   end # -- test_encode
@@ -335,14 +335,14 @@ class TestChaokey < Test::Unit::TestCase
   # === test_decode
   #
   def test_decode
-    pt = "W"
-    ct = "O"
+    pt = 'W'
+    ct = 'O'
     
     npt = @a.decode(ct)
     assert_equal pt, npt
     
-    pt = "E"
-    ct = "A"
+    pt = 'E'
+    ct = 'A'
     npt = @a.decode(ct)
     assert_equal pt, npt
   end # -- test_decode
@@ -355,7 +355,7 @@ class TestSQKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_sqkey.yaml") do |fh|
+    File.open('test/test_sqkey.yaml') do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -364,10 +364,10 @@ class TestSQKey < Test::Unit::TestCase
   #
   def test_init
     @data.keys.each do |word|
-      key = Key::SQKey.new(word, @data[word]["type"])
+      key = Key::SQKey.new(word, @data[word]['type'])
 
       assert_not_nil key
-      assert_equal @data[word]["full_key"], key.full_key
+      assert_equal @data[word]['full_key'], key.full_key
     end
   end # -- test_init
   
@@ -375,12 +375,12 @@ class TestSQKey < Test::Unit::TestCase
   #
   def test_gen_rings
     @data.keys.each do |word|
-      key = Key::SQKey.new(word, @data[word]["type"])
+      key = Key::SQKey.new(word, @data[word]['type'])
 
       assert_not_nil key
       assert_equal Key::SQKey, key.class
-      assert_equal @data[word]["alpha"], key.alpha
-      assert_equal @data[word]["ralpha"], key.ralpha
+      assert_equal @data[word]['alpha'], key.alpha
+      assert_equal @data[word]['ralpha'], key.ralpha
     end
   end # -- test_gen_rings
 
@@ -388,13 +388,13 @@ class TestSQKey < Test::Unit::TestCase
   #
   def test_encode
     @data.keys.each do |word|
-      key = Key::SQKey.new(word, @data[word]["type"])
+      key = Key::SQKey.new(word, @data[word]['type'])
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      encode_in = test["in"]
-      encode_out = test["out"]
+      test = @data[word]['encode']
+      encode_in = test['in']
+      encode_out = test['out']
       encode_in.each do |c|
         assert_equal encode_out.shift, key.encode(c), "#{word}"
       end
@@ -405,13 +405,13 @@ class TestSQKey < Test::Unit::TestCase
   #
   def test_decode
     @data.keys.each do |word|
-      key = Key::SQKey.new(word, @data[word]["type"])
+      key = Key::SQKey.new(word, @data[word]['type'])
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      encode_in = test["out"]
-      encode_out = test["in"]
+      test = @data[word]['encode']
+      encode_in = test['out']
+      encode_out = test['in']
       encode_in.each do |ct|
         assert_equal encode_out.shift, key.decode(ct), "#{word}"
       end
@@ -428,7 +428,7 @@ class TestPlayfair_Q < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_playfair_q.yaml") do |fh|
+    File.open('test/test_playfair_q.yaml') do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -443,7 +443,7 @@ class TestPlayfair_Q < Test::Unit::TestCase
       assert_equal Key::Playfair, key.class
       assert_not_nil key.alpha
       assert_not_nil key.ralpha
-      assert_equal @data[word]["full_key"], key.full_key
+      assert_equal @data[word]['full_key'], key.full_key
     end
   end # -- test_init
   
@@ -453,8 +453,8 @@ class TestPlayfair_Q < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word)
 
-      assert_equal @data[word]["alpha"], key.alpha
-      assert_equal @data[word]["ralpha"], key.ralpha
+      assert_equal @data[word]['alpha'], key.alpha
+      assert_equal @data[word]['ralpha'], key.ralpha
     end
   end # -- test_gen_rings
   
@@ -466,9 +466,9 @@ class TestPlayfair_Q < Test::Unit::TestCase
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      encode_in = test["in"]
-      encode_out = test["out"]
+      test = @data[word]['encode']
+      encode_in = test['in']
+      encode_out = test['out']
       encode_in.each do |c|
         assert_equal encode_out.shift, key.encode(c), "#{word} #{c}"
       end
@@ -483,9 +483,9 @@ class TestPlayfair_Q < Test::Unit::TestCase
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      encode_in = test["out"]
-      encode_out = test["in"]
+      test = @data[word]['encode']
+      encode_in = test['out']
+      encode_out = test['in']
       encode_in.each do |ct|
         assert_equal encode_out.shift, key.decode(ct), "#{word} #{ct} "
       end
@@ -501,7 +501,7 @@ class TestWheatstone < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_wheat.yaml") do |fh|
+    File.open('test/test_wheat.yaml') do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -509,10 +509,10 @@ class TestWheatstone < Test::Unit::TestCase
   def test_init
     @data.keys.each do |dt|
       d = @data[dt]
-      plwk = d["plwk"]
-      ctwk = d["ctwk"]
+      plwk = d['plwk']
+      ctwk = d['ctwk']
 
-      key = Key::Wheatstone.new(d["start"], plwk, ctwk)
+      key = Key::Wheatstone.new(d['start'], plwk, ctwk)
 
       assert_not_nil key
       assert_equal Key::Wheatstone, key.class
@@ -520,8 +520,8 @@ class TestWheatstone < Test::Unit::TestCase
       assert_equal key.aplw.size, (Key::Wheatstone::BASE.length + 1)
       assert_equal key.actw.size, (Key::Wheatstone::BASE.length)
 
-      assert_equal d["actw"], key.actw
-      assert_equal d["aplw"], key.aplw
+      assert_equal d['actw'], key.actw
+      assert_equal d['aplw'], key.aplw
     end
   end # -- test_init1
 
@@ -542,7 +542,7 @@ class TestPlayfair_J < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_playfair_j.yaml") do |fh|
+    File.open('test/test_playfair_j.yaml') do |fh|
       @data = YAML.load(fh)
     end
   end # -- setup
@@ -557,7 +557,7 @@ class TestPlayfair_J < Test::Unit::TestCase
       assert_equal Key::Playfair, key.class
       assert_not_nil key.alpha
       assert_not_nil key.ralpha
-      assert_equal @data[word]["full_key"], key.full_key
+      assert_equal @data[word]['full_key'], key.full_key
     end
   end # -- test_init
   
@@ -567,8 +567,8 @@ class TestPlayfair_J < Test::Unit::TestCase
     @data.keys.each do |word|
       key = Key::Playfair.new(word, Key::Playfair::WITH_J)
 
-      assert_equal @data[word]["alpha"], key.alpha
-      assert_equal @data[word]["ralpha"], key.ralpha
+      assert_equal @data[word]['alpha'], key.alpha
+      assert_equal @data[word]['ralpha'], key.ralpha
     end
   end # -- test_gen_rings
   
@@ -580,9 +580,9 @@ class TestPlayfair_J < Test::Unit::TestCase
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      encode_in = test["in"]
-      encode_out = test["out"]
+      test = @data[word]['encode']
+      encode_in = test['in']
+      encode_out = test['out']
       encode_in.each do |c|
         assert_equal encode_out.shift, key.encode(c), "#{word} #{c}"
       end
@@ -597,9 +597,9 @@ class TestPlayfair_J < Test::Unit::TestCase
 
       assert_not_nil key
       
-      test = @data[word]["encode"]
-      encode_in = test["out"]
-      encode_out = test["in"]
+      test = @data[word]['encode']
+      encode_in = test['out']
+      encode_out = test['in']
       encode_in.each do |ct|
         assert_equal encode_out.shift, key.decode(ct), "#{word} #{ct} "
       end
@@ -615,17 +615,17 @@ class TestVICKey < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_vickey.yaml") do |fh|
+    File.open('test/test_vickey.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
 
   # === test_init
   #
   def test_init
-    init = @data["init"]
-    key = Key::VICKey.new(init["ikey"], init["phrase"], init["imsg"])
+    init = @data['init']
+    key = Key::VICKey.new(init['ikey'], init['phrase'], init['imsg'])
     
     assert_not_nil key
     assert_not_nil key.first
@@ -638,13 +638,13 @@ class TestVICKey < Test::Unit::TestCase
     assert_equal Array, key.first.class
     assert(key.first.length != 0)
     
-    assert_equal init["p1"], key.p1
-    assert_equal init["ikey5"], key.ikey5
-    assert_equal init["first"], key.first
-    assert_equal init["second"], key.second
+    assert_equal init['p1'], key.p1
+    assert_equal init['ikey5'], key.ikey5
+    assert_equal init['first'], key.first
+    assert_equal init['second'], key.second
     
-    assert_equal init["third"], key.third
-    assert_equal init["sc_key"], key.sc_key
+    assert_equal init['third'], key.third
+    assert_equal init['sc_key'], key.sc_key
   end # -- test_init
 
 end # --  TestVICKey

@@ -1,7 +1,7 @@
 #
-# $Id: cipher.rb,v 96f91c932961 2012/03/09 22:17:12 roberto $
+# $Id: cipher.rb,v 281fcc6035bc 2013/03/05 14:16:49 roberto $
 
-require "key"
+require 'key'
 
 module Cipher
 
@@ -33,14 +33,14 @@ class Substitution < SimpleCipher
   
   # === initialize
   #
-  def initialize(key = "")
+  def initialize(key = '')
     @key = Key::SKey.new(key)
   end # -- initialize
   
   # === encode
   #
   def encode(plain_text)
-    cipher_text = plain_text.each_char.inject("") do |text, pt|
+    cipher_text = plain_text.each_char.inject('') do |text, pt|
       text + @key.encode(pt)
     end
     return cipher_text
@@ -49,7 +49,7 @@ class Substitution < SimpleCipher
   # === decode
   #
   def decode(cipher_text)
-    plain_text = cipher_text.each_char.inject("") do |text, ct|
+    plain_text = cipher_text.each_char.inject('') do |text, ct|
       text + @key.decode(ct)
     end
     return plain_text
@@ -101,7 +101,7 @@ class BiGrammatic < Substitution
   # === decode
   #
   def decode(cipher_text)
-    raise ArgumentError, "Mangled cryptogram" if cipher_text.length.odd?
+    raise ArgumentError, 'Mangled cryptogram' if cipher_text.length.odd?
     
     check_input(cipher_text) if @type == Key::Playfair::WITH_Q or
                                 @type == Key::Playfair::WITH_J
@@ -190,8 +190,8 @@ class Transposition < SimpleCipher
     #
     j = 0
     t_len = @key.length
-    table = Array.new(t_len) { "" }
-    cipher_text = ""
+    table = Array.new(t_len) { '' }
+    cipher_text = ''
     
     tkey = @key.to_numeric
     #
@@ -204,7 +204,7 @@ class Transposition < SimpleCipher
     #
     # Now take every column based upon key ordering
     #
-    cipher_text = tkey.sort.each.inject("") do |text, t|
+    cipher_text = tkey.sort.each.inject('') do |text, t|
       text +  table[t]
     end
   end # -- encode
@@ -223,8 +223,8 @@ class Transposition < SimpleCipher
     # columns pad-1 .. t_len-1 are shorter by 1
     #
     t_height = (text.length / t_len) + 1
-    table = Array.new(t_len) { "" }
-    plain_text = ""
+    table = Array.new(t_len) { '' }
+    plain_text = ''
     
     #puts "#{text.length} #{pad} #{t_height}"
     tkey = @key.to_numeric
@@ -282,8 +282,8 @@ class DisruptedTransposition < SimpleCipher
 
     j = 0
     t_len = @key.length
-    table = Array.new(t_len) { "" }
-    cipher_text = ""
+    table = Array.new(t_len) { '' }
+    cipher_text = ''
 
     # 1st phase: fill in everything else than a hole
     #
@@ -292,7 +292,7 @@ class DisruptedTransposition < SimpleCipher
       pt = plain.shift
       #print "pt: #{pt} #{[i / t_len,j]} @nkey[#{j}]: #{@nkey[j]} "
       if holes.include?([i / t_len,j])
-        table[@nkey[j]] << "."
+        table[@nkey[j]] << '.'
         plain.unshift(pt)
       else
         table[@nkey[j]] << pt
@@ -315,7 +315,7 @@ class DisruptedTransposition < SimpleCipher
 
     # Now take every column based upon key ordering
     #
-    cipher_text = @nkey.sort.each.inject("") do |text, t|
+    cipher_text = @nkey.sort.each.inject('') do |text, t|
       text +  table[t]
     end
   end # -- encode
@@ -371,8 +371,8 @@ class StraddlingCheckerboard  < Substitution
   #
   def encode(plain_text)
     cipher_text = plain_text.each_char.inject('') do |text, c|
-      if c >= "0" and c <= "9" then
-        text << @key.encode("/") << c + c << @key.encode("/")
+      if c >= '0' and c <= '9' then
+        text << @key.encode('/') << c + c << @key.encode('/')
       else
         text << @key.encode(c)
       end
@@ -392,11 +392,7 @@ class StraddlingCheckerboard  < Substitution
       #
       # XXX US-ASCII hack
       #
-      if RUBY_VERSION =~/1\.9/ then
-        d = c.ord - 48
-      else
-        d = c[0] - 48
-      end
+      d = c.ord - 48
       if @key.is_long?(d)
         c << ct.slice!(0,1)
       end
@@ -404,7 +400,7 @@ class StraddlingCheckerboard  < Substitution
       #
       # Number shift
       #
-      if pt == "/" then
+      if pt == '/' then
         if in_numbers then
           in_numbers = false
         else
@@ -429,7 +425,7 @@ end # --  StraddlingCheckerboard
 class GenericBiCipher < SimpleCipher
   attr_reader :key, :super_key
 
-  def initialize(ch1, key, ch2, super_key = "")
+  def initialize(ch1, key, ch2, super_key = '')
     @subst = ch1.send(:new, key)
     @super_key = ch2.send(:new, super_key)
   end
@@ -466,7 +462,7 @@ class NihilistT < GenericBiCipher
 
   # === initialize
   #
-  def initialize(key, super_key = "")
+  def initialize(key, super_key = '')
     super(Cipher::StraddlingCheckerboard, key, Cipher::Transposition, super_key)
   end
 
@@ -485,7 +481,7 @@ class ADFGVX <  GenericBiCipher
 
   # === initialize
   #
-  def initialize(key, super_key = "")
+  def initialize(key, super_key = '')
     super(Cipher::Polybius, key, Cipher::Transposition, super_key)
   end # -- initialize
   
@@ -508,8 +504,8 @@ class Wheatstone < Substitution
     #
     # Doubled letters cc should be replaced by cQ
     #
-    pl = plain_text.replace_double("Q")
-    cipher_text = pl.each_char.inject("") do |text, pt|
+    pl = plain_text.replace_double('Q')
+    cipher_text = pl.each_char.inject('') do |text, pt|
       text + @key.encode(pt)
     end
     cipher_text

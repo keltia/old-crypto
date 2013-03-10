@@ -1,10 +1,10 @@
-# $Id: test_cipher.rb,v e5239e4f6600 2012/02/29 22:34:25 roberto $
+# $Id: test_cipher.rb,v 1d557f2f8b62 2013/03/05 14:28:17 roberto $
 
 require 'test/unit'
 require 'yaml'
 
-require "key"
-require "cipher"
+require 'key'
+require 'cipher'
 
 module TestCipher
 
@@ -27,19 +27,19 @@ class TestSimpleCipher < Test::Unit::TestCase
   # === test_encode
   #
   def test_encode
-    ct = @cipher.encode("plain text")
+    ct = @cipher.encode('plain text')
     
     assert_not_nil(ct)
-    assert_equal ct, "plain text"
+    assert_equal ct, 'plain text'
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    ct = @cipher.decode("plain text")
+    ct = @cipher.decode('plain text')
     
     assert_not_nil(ct)
-    assert_equal ct, "plain text"
+    assert_equal ct, 'plain text'
   end # -- test_decode
   
 end # --  TestSimpleCipher
@@ -51,7 +51,7 @@ class TestSubstitution < Test::Unit::TestCase
   # === setup
   #
   def setup
-    @cipher = Cipher::Substitution.new("FOOBAR")
+    @cipher = Cipher::Substitution.new('FOOBAR')
   end # -- setup
   
   # === test_init
@@ -75,10 +75,10 @@ class TestSubstitution < Test::Unit::TestCase
   def test_encode_null
     cipher = Cipher::Substitution.new()
 
-    pt = "TEST"
+    pt = 'TEST'
     ct = cipher.encode(pt)
     assert_not_nil(ct)
-    assert_equal pt, ct, "Should degrade into 'give back plaintext'."
+    assert_equal pt, ct, 'Should degrade into "give back plaintext".'
   end # -- test_encode_null
   
   # === test_encode_null
@@ -86,10 +86,10 @@ class TestSubstitution < Test::Unit::TestCase
   def test_decode_null
     cipher = Cipher::Substitution.new()
 
-    ct = "TEST"
+    ct = 'TEST'
     pt = cipher.decode(ct)
     assert_not_nil(pt)
-    assert_equal ct, pt, "Should degrade into 'give back plaintext'."
+    assert_equal ct, pt, 'Should degrade into "give back plaintext".'
   end # -- test_decode_null
   
   # === test_both
@@ -97,7 +97,7 @@ class TestSubstitution < Test::Unit::TestCase
   def test_both
     cipher = Cipher::Substitution.new()
     
-    assert_equal "PLAINTEXT", cipher.decode(cipher.encode("PLAINTEXT"))
+    assert_equal 'PLAINTEXT', cipher.decode(cipher.encode('PLAINTEXT'))
   end # -- test_both
 end # -- TestSubstitution
 
@@ -122,17 +122,17 @@ class TestCipherCaesar < Test::Unit::TestCase
   # === test_encode
   #
   def test_encode
-    pt = "ABCDE"
+    pt = 'ABCDE'
     ct = @cipher.encode(pt)
     assert_not_nil(ct)
-    assert_equal ct, "DEFGH"
+    assert_equal ct, 'DEFGH'
   end # -- test_encode
   
   def test_decode
-    ct = "ABCDE"
+    ct = 'ABCDE'
     pt = @cipher.decode(ct)
     assert_not_nil(pt)
-    assert_equal pt, "XYZAB"
+    assert_equal pt, 'XYZAB'
   end
 end # --  TestCipherCaesar
 
@@ -157,17 +157,17 @@ class TestCipherCaesar7 < Test::Unit::TestCase
   # === test_encode
   #
   def test_encode
-    pt = "ABCDE"
+    pt = 'ABCDE'
     ct = @cipher.encode(pt)
     assert_not_nil(ct)
-    assert_equal ct, "HIJKL"
+    assert_equal ct, 'HIJKL'
   end # -- test_encode
   
   def test_decode
-    ct = "ABCDE"
+    ct = 'ABCDE'
     pt = @cipher.decode(ct)
     assert_not_nil(pt)
-    assert_equal pt, "TUVWX"
+    assert_equal pt, 'TUVWX'
   end
 end # --  TestCipherCaesar_7
 
@@ -192,17 +192,17 @@ class TestCipherRot13 < Test::Unit::TestCase
   # === test_encode
   #
   def test_encode
-    pt = "ABCDE"
+    pt = 'ABCDE'
     ct = @cipher.encode(pt)
     assert_not_nil(ct)
-    assert_equal ct, "NOPQR"
+    assert_equal ct, 'NOPQR'
   end # -- test_encode
 
   def test_decode
-    ct = "ABCDE"
+    ct = 'ABCDE'
     pt = @cipher.decode(ct)
     assert_not_nil(pt)
-    assert_equal pt, "NOPQR"
+    assert_equal pt, 'NOPQR'
   end
 end # --  TestCipherRot13
 
@@ -214,33 +214,33 @@ class TestTransposition < Test::Unit::TestCase
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_transp.yaml") do |fh|
+    File.open('test/test_cipher_transp.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
   
   # === test_encode
   #
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::Transposition.new(word)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
-      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+      assert_equal @keys[word]['ct'], ct, "key is #{word}"
     end
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    plain = @data["plain"]
+    plain = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::Transposition.new(word)
       assert_not_nil(cipher)
-      pt = cipher.decode(@keys[word]["ct"])
+      pt = cipher.decode(@keys[word]['ct'])
       assert_not_nil(pt)
       assert_equal plain, pt, "key is #{word}" 
     end
@@ -253,10 +253,10 @@ class TestDisrupted < Test::Unit::TestCase
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_disrupted.yaml") do |fh|
+    File.open('test/test_cipher_disrupted.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"] || []
+    @keys = @data['keys'] || []
   end # -- setup
 
   def test_init
@@ -270,7 +270,7 @@ class TestDisrupted < Test::Unit::TestCase
   end
 
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |key|
       cipher = Cipher::DisruptedTransposition.new(key)
       assert_not_nil cipher
@@ -278,7 +278,7 @@ class TestDisrupted < Test::Unit::TestCase
       ct = cipher.encode(pt)
       assert_not_nil ct
       assert_equal pt.length, ct.length
-      assert_equal @keys[key]["ct"], ct
+      assert_equal @keys[key]['ct'], ct
     end
   end
 end # -- TestDisrupted
@@ -290,37 +290,37 @@ class TestPolybius < Test::Unit::TestCase
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_polybius.yaml") do |fh|
+    File.open('test/test_cipher_polybius.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
   
   # === test_encode
   #
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::Polybius.new(word, Key::SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
-      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+      assert_equal @keys[word]['ct'], ct, "key is #{word}"
     end
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    plain = @data["plain"]
+    plain = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::Polybius.new(word, Key::SQKey::SQ_NUMBERS)
       assert_not_nil(cipher)
-      assert_raise(ArgumentError) { cipher.decode("AAA") }
+      assert_raise(ArgumentError) { cipher.decode('AAA') }
       
-      pt = cipher.decode(@keys[word]["ct"])
+      pt = cipher.decode(@keys[word]['ct'])
       assert_not_nil(pt)
-      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]['ct']}"
     end
   end # -- test_decode
 end # --  TestPolybius
@@ -332,35 +332,35 @@ class TestStraddlingCheckerboard < Test::Unit::TestCase
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_straddling.yaml") do |fh|
+    File.open('test/test_cipher_straddling.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
   
   # === test_encode
   #
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::StraddlingCheckerboard.new(word)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
-      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+      assert_equal @keys[word]['ct'], ct, "key is #{word}"
     end
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    plain = @data["plain"]
+    plain = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::StraddlingCheckerboard.new(word)
       assert_not_nil(cipher)
-      pt = cipher.decode(@keys[word]["ct"])
+      pt = cipher.decode(@keys[word]['ct'])
       assert_not_nil(pt)
-      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]['ct']}"
     end
   end # -- test_decode
   
@@ -373,37 +373,37 @@ class TestNihilistT < Test::Unit::TestCase
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_nihilistt.yaml") do |fh|
+    File.open('test/test_cipher_nihilistt.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
   
   # === test_encode
   #
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |word|
       s, t = word.split(%r{,})
       cipher = Cipher::NihilistT.new(s, t)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
-      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+      assert_equal @keys[word]['ct'], ct, "key is #{word}"
     end
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    plain = @data["plain"]
+    plain = @data['plain']
     @keys.keys.each do |word|
       s, t = word.split(%{,})
       cipher = Cipher::NihilistT.new(s, t)
       assert_not_nil(cipher)
-      pt = cipher.decode(@keys[word]["ct"])
+      pt = cipher.decode(@keys[word]['ct'])
       assert_not_nil(pt)
-      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]['ct']}"
     end
   end # -- test_decode
   
@@ -417,37 +417,37 @@ class TestADFGVX < Test::Unit::TestCase
   #
   def setup
     @data = Hash.new
-    File.open("test/test_cipher_adfgvx.yaml") do |fh|
+    File.open('test/test_cipher_adfgvx.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
 
   # === test_encode
   #
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |word|
       s, t = word.split(%r{,})
       cipher = Cipher::ADFGVX.new(s, t)
       assert_not_nil(cipher)
       ct = cipher.encode(pt)
       assert_not_nil(ct)
-      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+      assert_equal @keys[word]['ct'], ct, "key is #{word}"
     end
   end # -- test_encode
   
   # === test_decode
   #
   def test_decode
-    plain = @data["plain"]
+    plain = @data['plain']
     @keys.keys.each do |word|
       s, t = word.split(%{,})
       cipher = Cipher::ADFGVX.new(s, t)
       assert_not_nil(cipher)
-      pt = cipher.decode(@keys[word]["ct"])
+      pt = cipher.decode(@keys[word]['ct'])
       assert_not_nil(pt)
-      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]["ct"]}" 
+      assert_equal plain, pt, "key is #{word}\ncipher is #{@keys[word]['ct']}"
     end
   end # -- test_decode
   
@@ -460,55 +460,55 @@ class TestPlayfair_J < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_cipher_playfair_j.yaml") do |fh|
+    File.open('test/test_cipher_playfair_j.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
   
   # === test_encode
   #
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word, Key::Playfair::WITH_J)
       assert_not_nil(cipher)
       
       ct = cipher.encode(pt)
       assert_not_nil(ct)
-      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+      assert_equal @keys[word]['ct'], ct, "key is #{word}"
     end
   end # -- test_encode
   
   # === test_encode_padding
   #
   def test_encode_padding
-    pt = "PJRST"
-    cipher = Cipher::Playfair.new("FOOBAR", Key::Playfair::WITH_J)
+    pt = 'PJRST'
+    cipher = Cipher::Playfair.new('FOOBAR', Key::Playfair::WITH_J)
     ct = cipher.encode(pt)
-    assert_equal "WPBUSY", ct, "Text should be padded with X"
+    assert_equal 'WPBUSY', ct, 'Text should be padded with X'
   end # -- test_encode_padding
   
   # === test_encode_invalid
   #
   def test_encode_invalid
-    pt = "PQRJTS"
-    cipher = Cipher::Playfair.new("FOOBAR", Key::Playfair::WITH_J)
+    pt = 'PQRJTS'
+    cipher = Cipher::Playfair.new('FOOBAR', Key::Playfair::WITH_J)
     assert_raise(ArgumentError) { cipher.encode(pt) }
   end # -- test_encode_invalid
     
   # === test_decode
   #
   def test_decode
-    plain = @data["plain"]
+    plain = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word, Key::Playfair::WITH_J)
       assert_not_nil(cipher)
-      assert_raise(ArgumentError) { cipher.decode("AAA") }
+      assert_raise(ArgumentError) { cipher.decode('AAA') }
       
-      pt = cipher.decode(@keys[word]["ct"])
+      pt = cipher.decode(@keys[word]['ct'])
       assert_not_nil(pt)
-      assert_equal plain, pt, "key: #{word}\ncipher: #{@keys[word]["ct"]}" 
+      assert_equal plain, pt, "key: #{word}\ncipher: #{@keys[word]['ct']}"
     end
   end # -- test_decode
 end # --  TestPlayfair_J
@@ -520,55 +520,55 @@ class TestPlayfair_Q < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_cipher_playfair_q.yaml") do |fh|
+    File.open('test/test_cipher_playfair_q.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
   
   # === test_encode
   #
   def test_encode
-    pt = @data["plain"]
+    pt = @data['plain']
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word)
       assert_not_nil(cipher)
       
       ct = cipher.encode(pt)
       assert_not_nil(ct)
-      assert_equal @keys[word]["ct"], ct, "key is #{word}"
+      assert_equal @keys[word]['ct'], ct, "key is #{word}"
     end
   end # -- test_encode
   
   # === test_encode_padding
   #
   def test_encode_padding
-    pt = "PQRST"
-    cipher = Cipher::Playfair.new("FOOBAR")
+    pt = 'PQRST'
+    cipher = Cipher::Playfair.new('FOOBAR')
     ct = cipher.encode(pt)
-    assert_equal "QSBUSY", ct, "Text is padded with X"
+    assert_equal 'QSBUSY', ct, 'Text is padded with X'
   end # -- test_encode_padding  
 
   # === test_encode_invalid
   #
   def test_encode_invalid
-    pt = "PQRJTS"
-    cipher = Cipher::Playfair.new("FOOBAR")
+    pt = 'PQRJTS'
+    cipher = Cipher::Playfair.new('FOOBAR')
     assert_raise(ArgumentError) { cipher.encode(pt) }
   end # -- test_encode_invalid
     
   # === test_decode
   #
   def test_decode
-    eplain = @data["eplain"]
+    eplain = @data['eplain']
     @keys.keys.each do |word|
       cipher = Cipher::Playfair.new(word)
       assert_not_nil(cipher)
-      assert_raise(ArgumentError) { cipher.decode("AAA") }
+      assert_raise(ArgumentError) { cipher.decode('AAA') }
       
-      pt = cipher.decode(@keys[word]["ct"])
+      pt = cipher.decode(@keys[word]['ct'])
       assert_not_nil(pt)
-      assert_equal eplain, pt, "key: #{word}\ncipher: #{@keys[word]["ct"]}" 
+      assert_equal eplain, pt, "key: #{word}\ncipher: #{@keys[word]['ct']}"
 
     end
   end # -- test_decode
@@ -576,8 +576,8 @@ class TestPlayfair_Q < Test::Unit::TestCase
   # === test_decode_invalid
   #
   def test_decode_invalid
-    ct = "PQRJTS"
-    cipher = Cipher::Playfair.new("FOOBAR")
+    ct = 'PQRJTS'
+    cipher = Cipher::Playfair.new('FOOBAR')
     assert_raise(ArgumentError) { cipher.decode(ct) }
   end # -- test_decode_invalid
   
@@ -588,27 +588,27 @@ class TestWheatstone < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_cipher_wheat.yaml") do |fh|
+    File.open('test/test_cipher_wheat.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
 
   # === test_encode
   #
   def test_encode
     @keys.each_value do |type|
-      start = type["start"]
-      cw = type["cw"]
-      pw = type["pw"]
-      pt = type["pt"]
+      start = type['start']
+      cw = type['cw']
+      pw = type['pw']
+      pt = type['pt']
 
       assert_equal type['ptr'], pt.replace_double
 
       cipher = Cipher::Wheatstone.new(start, pw, cw)
       ct = cipher.encode(pt)
       
-      assert_equal type["ct"], ct
+      assert_equal type['ct'], ct
     end
   end # -- test_encode
 
@@ -616,15 +616,15 @@ class TestWheatstone < Test::Unit::TestCase
   #
   def test_decode
     @keys.each_value do |type|
-      start = type["start"]
-      cw = type["cw"]
-      pw = type["pw"]
-      ct = type["ct"]
+      start = type['start']
+      cw = type['cw']
+      pw = type['pw']
+      ct = type['ct']
 
       cipher = Cipher::Wheatstone.new(start, pw, cw)
       pt = cipher.decode(ct)
 
-      assert_equal type["ptr"], pt
+      assert_equal type['ptr'], pt
     end
   end # -- test_encode
 end # -- TestWheatstone
@@ -635,24 +635,24 @@ class TestChaoCipher < Test::Unit::TestCase
   # === setup
   #
   def setup
-    File.open("test/test_cipher_chao.yaml") do |fh|
+    File.open('test/test_cipher_chao.yaml') do |fh|
       @data = YAML.load(fh)
     end
-    @keys = @data["keys"]
+    @keys = @data['keys']
   end # -- setup
 
   # === test_encode
   #
   def test_encode
     @keys.each_value do |type|
-      pt = type["pt"]
-      cw = type["cw"]
-      pw = type["pw"]
+      pt = type['pt']
+      cw = type['cw']
+      pw = type['pw']
       
       cipher = Cipher::ChaoCipher.new(pw, cw)
       ct = cipher.encode(pt)
       
-      assert_equal type["ct"], ct
+      assert_equal type['ct'], ct
     end
   end # -- test_encode
 
@@ -660,14 +660,14 @@ class TestChaoCipher < Test::Unit::TestCase
   #
   def test_decode
     @keys.each_value do |type|
-      ct = type["ct"]
-      cw = type["cw"]
-      pw = type["pw"]
+      ct = type['ct']
+      cw = type['cw']
+      pw = type['pw']
       
       cipher = Cipher::ChaoCipher.new(pw, cw)
       pt = cipher.decode(ct)
       
-      assert_equal type["pt"], pt
+      assert_equal type['pt'], pt
     end
   end # -- test_encode
 end # -- TestChaoCipher
