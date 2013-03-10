@@ -1,27 +1,16 @@
 #
-# $Id: cipher.rb,v 07f48879a407 2013/03/10 18:59:22 roberto $
+# $Id: cipher.rb,v e554d04c10ed 2013/03/10 19:05:48 roberto $
 
 require 'key'
 
 require 'cipher/base'
 require 'cipher/subst'
 require 'cipher/bigrammatic'
+require 'cipher/polybius'
 require 'cipher/caesar'
 require 'cipher/rot13'
 
 module Cipher
-
-# ==  Polybius
-#
-class Polybius < BiGrammatic
-  
-  # === initialize
-  #
-  def initialize(key, type = Key::SQKey::SQ_ADFGVX)
-    super(Key::SQKey, key, type)
-  end # -- initialize
-
-end # --  Polybius
 
 # == Playfair
 #
