@@ -6,48 +6,17 @@
 # Author:: Ollivier Robert <roberto@keltia.freenix.fr>
 # Copyright:: © 2001-2009 by Ollivier Robert 
 #
-# $Id: key.rb,v e9e9ed66001b 2013/03/10 17:27:40 roberto $
+# $Id: key.rb,v 7b4b32e1312e 2013/03/10 17:29:52 roberto $
 
 require 'crypto_helper'
 require 'key/base'
+require 'key/skey'
 require 'key/tkey'
 
 class DataError < Exception
 end
 
 module Key
-
-# == SKey
-#
-# class for simple substitution keys
-#
-# See http://en.wikipedia.org/wiki/Substitution_cipher
-
-class SKey < Key
-  
-  BASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  
-  attr_reader :alpha, :ralpha
-
-  def initialize(key)
-    super(key)
-    @alpha = Hash.new
-    @ralpha = Hash.new
-  end
-  
-  # === encode
-  #
-  def encode(c)
-    @alpha[c] || c
-  end # -- encode
-  
-  # === decode
-  #
-  def decode(c)
-    @ralpha[c] || c
-  end # -- decode
-
-end # -- SKey
 
 # == Caesar
 #
