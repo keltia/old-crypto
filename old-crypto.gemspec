@@ -17,9 +17,9 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "old-crypto"
 
-  s.files         = `/usr/local/bin/hg locate`.split("\n")
-  s.test_files    = `/usr/local/bin/hg locate -- {test,spec,features}/*`.split("\n")
-  s.executables   = `/usr/local/bin/hg locate -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
   s.add_dependency "rake"
