@@ -312,7 +312,7 @@ module Crypto
           return res + word
         else
           c = word.slice!(i * j)
-          if not c.nil? then
+          unless c.nil?
             res = res + c.chr
           end
         end
