@@ -71,12 +71,11 @@ class String
   def to_numeric
     letters = self.to_s.split('')
     sorted = letters.sort
-    num_key = letters.collect do |l|
+    letters.collect do |l|
       k = sorted.index(l)
       sorted[k] = nil
       k
     end
-    num_key
   end # -- to_numeric
 
   # === to_numeric2
@@ -92,10 +91,9 @@ class String
   def to_numeric2
     srt = self.split('').sort
 
-    n_key = self.split('').map do |s|
+    self.split('').map do |s|
       srt[srt.index(s)] = srt.index(s)
     end
-    n_key
   end # -- to_numeric2
 
   # === to_numeric10
@@ -111,12 +109,11 @@ class String
   def to_numeric10
     letters = self.to_s.split('')
     sorted = letters.sort
-    num_key = letters.collect do |l|
+    letters.collect do |l|
       k = sorted.index(l)
       sorted[k] = nil
       (k + 1) % 10
     end
-    num_key
   end # -- to_numeric10
   
   # === to_numeric11
@@ -130,10 +127,9 @@ class String
   def to_numeric11
     srt = self.split('').sort
 
-    n_key = self.split('').map do |s|
+    self.split('').map do |s|
       srt[srt.index(s)] = (srt.index(s) + 1) % 10
     end
-    n_key
   end # -- to_numeric11
   
   # === by_five
