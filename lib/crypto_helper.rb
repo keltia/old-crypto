@@ -154,6 +154,13 @@ class String
     end
     a
   end # -- by_five
+
+  # === un_five
+  #
+  def un_five
+    str = self.dup
+    str.gsub(%r{ }, '')
+  end
 end # -- String
 
 module Crypto

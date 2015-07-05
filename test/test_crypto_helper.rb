@@ -72,6 +72,14 @@ class TestString < Test::Unit::TestCase
       assert_equal out, text.by_five
     end
   end # -- test_by_five
+
+  # === test_un_five
+  #
+  def test_un_five
+    DATA_FIVE.each_pair do |text, out|
+      assert_equal text, out.un_five
+    end
+  end # -- test_un_five
 end # --  TestString
 
 # ==  TestCrypto
