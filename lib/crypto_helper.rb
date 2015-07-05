@@ -157,12 +157,16 @@ class String
 
   # === un_five
   #
+  # Reverse #by_five
+  #
   def un_five
     str = self.dup
     str.gsub(%r{ }, '')
   end # -- un_five
 
   # === frequency
+  #
+  # Returns the frequency of each letters (or only the ones given)
   #
   def frequency(a = nil)
     if a.nil?
