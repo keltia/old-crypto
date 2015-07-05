@@ -161,6 +161,18 @@ class String
     str = self.dup
     str.gsub(%r{ }, '')
   end # -- un_five
+
+  # === frequency
+  #
+  def frequency(a = nil)
+    if a.nil?
+      self.condensed.scan(/./).collect do |i|
+        [i, self.count(i)]
+      end
+    else
+      [a, self.count(a)]
+    end
+  end # -- frequency
 end # -- String
 
 module Crypto
