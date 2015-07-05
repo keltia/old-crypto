@@ -1,21 +1,9 @@
 --- 
 portable: 
   encode:
-    in:
-    - A
-    - T
-    - T
-    - A
-    - C
-    - K
-    out:
-    - AV
-    - AG
-    - AG
-    - AV
-    - DF
-    - FG
-  ralpha: 
+    in: ["A", "T", "T", "A", "C", "K"]
+    out: ["AV", "AG", "AG", "AV", "DF", "FG"]
+  ralpha:
     XX: "9"
     VV: "2"
     VA: Y
@@ -94,21 +82,9 @@ portable:
 --- 
 arabesque: 
   encode:
-    in:
-    - A
-    - T
-    - T
-    - A
-    - C
-    - K
-    out:
-    - 00
-    - 32
-    - 32
-    - 00
-    - 11
-    - 22
-  ralpha: 
+    in: ["A", "T", "T", "A", "C", "K"]
+    out: ["00", "32", "32", "00", "11", "22"]
+  ralpha:
     "55": "9"
     "44": "2"
     "33": V

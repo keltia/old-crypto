@@ -1,34 +1,8 @@
 --- 
 "playfair example":
   encode:
-    in:
-    - HI
-    - DE
-    - TH
-    - EG
-    - OL
-    - DI
-    - NT
-    - HE
-    - TR
-    - EX
-    - ES
-    - TU
-    - MP
-    out:
-    - BM
-    - ND
-    - ZB
-    - XD
-    - KY
-    - BE
-    - JV
-    - DM
-    - UI
-    - XM
-    - MN
-    - UV
-    - IF
+    in: ["HI", "DE", "TH", "EG", "OL", "DI", "NT", "HE", "TR", "EX", "ES", "TU", "MP"]
+    out: ["BM", "ND", "ZB", "XD", "KY", "BE", "JV", "DM", "UI", "XM", "MN", "UV", "IF"]
   full_key: PLAYFIREXMBCDGHJKNOSTUVWZ
   alpha:
     V: 

@@ -1,175 +1,37 @@
 --- 
 ARABESQUE: 
   condensed: ARBESQU
-  num: 
-  - 0
-  - 6
-  - 1
-  - 2
-  - 3
-  - 7
-  - 5
-  - 8
-  - 4
-  num10: 
-  - 1
-  - 7
-  - 2
-  - 3
-  - 4
-  - 8
-  - 6
-  - 9
-  - 5
+  num: [0, 6, 1, 2, 3, 7, 5, 8, 4]
+  num10: [1, 7, 2, 3, 4, 8, 6, 9, 5]
   expanded: ARABESQUE
 SUBWAY: 
   condensed: SUBWAY
-  num: 
-  - 2
-  - 3
-  - 1
-  - 4
-  - 0
-  - 5
-  num10: 
-  - 3
-  - 4
-  - 2
-  - 5
-  - 1
-  - 6
+  num: [2, 3, 1, 4, 0, 5]
+  num10: [3, 4, 2, 5, 1, 6]
   expanded: SUBWAY
 PORTABLE: 
   condensed: PORTABLE
-  num: 
-  - 5
-  - 4
-  - 6
-  - 7
-  - 0
-  - 1
-  - 3
-  - 2
-  num10: 
-  - 6
-  - 5
-  - 7
-  - 8
-  - 1
-  - 2
-  - 4
-  - 3
+  num: [5, 4, 6, 7, 0, 1, 3, 2]
+  num10: [6, 5, 7, 8, 1, 2, 4, 3]
   expanded: PORTABLE
 LANNONCE:
   condensed: LANOCE
-  num:
-  - 3
-  - 0
-  - 4
-  - 5
-  - 7
-  - 6
-  - 1
-  - 2
-  num10:
-  - 4
-  - 1
-  - 5
-  - 6
-  - 8
-  - 7
-  - 2
-  - 3
+  num: [3, 0, 4, 5, 7, 6, 1, 2]
+  num10: [4, 1, 5, 6, 8, 7, 2, 3]
   expanded: LANXNONCE
 AAABRAACADAABRA:
   condensed: ABRCD
   expanded: AXAXABRAACADAXABRA
-  num:
-  - 0
-  - 1
-  - 2
-  - 9
-  - 13
-  - 3
-  - 4
-  - 11
-  - 5
-  - 12
-  - 6
-  - 7
-  - 10
-  - 14
-  - 8
-  num10:
-  - 1
-  - 2
-  - 3
-  - 0
-  - 4
-  - 4
-  - 5
-  - 2
-  - 6
-  - 3
-  - 7
-  - 8
-  - 1
-  - 5
-  - 9
+  num: [0, 1, 2, 9, 13, 3, 4, 11, 5, 12, 6, 7, 10, 14, 8]
+  num10: [1, 2, 3, 0, 4, 4, 5, 2, 6, 3, 7, 8, 1, 5, 9]
 ABCDEFGHJJKLM:
   condensed: ABCDEFGHJKLM
-  num:
-  - 0
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
-  - 7
-  - 8
-  - 9
-  - 10
-  - 11
-  - 12
-  num10:        
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
-  - 7
-  - 8
-  - 9
-  - 0
-  - 1
-  - 2
-  - 3
+  num: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  num10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3]
   expanded: ABCDEFGHJXJKLM
 PJRJJJJJJS:
   condensed: PJRS
-  num:
-  - 7
-  - 0
-  - 8
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
-  - 9
-  num10:
-  - 8
-  - 1
-  - 9
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
-  - 7
-  - 0
+  num: [7, 0, 8, 1, 2, 3, 4, 5, 6, 9]
+  num10: [8, 1, 9, 2, 3, 4, 5, 6, 7, 0]
   expanded: PJRJJXJXJXJXJS
 

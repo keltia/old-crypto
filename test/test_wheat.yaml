@@ -7,61 +7,8 @@
     ctw: "MBOVADPWCFQXHGRYIJSZNKTELU"
     pt: "CHARLES+WHEATSTONE+HAD+A+REMARKABLY+FERTILE+MIND"
     ct: "BYVLQKWAMNLCYXIOUBFLHTXGHFPBJHZZLUEZFHIVBVRTFVRQ"
-    aplw:
-    - +
-    - C
-    - A
-    - K
-    - S
-    - Y
-    - I
-    - B
-    - L
-    - T
-    - Z
-    - P
-    - D
-    - M
-    - U
-    - H
-    - F
-    - N
-    - V
-    - E
-    - G
-    - O
-    - W
-    - R
-    - J
-    - Q
-    - X
-    actw:
-    - M
-    - B
-    - O
-    - V
-    - A
-    - D
-    - P
-    - W
-    - C
-    - F
-    - Q
-    - X
-    - H
-    - G
-    - R
-    - Y
-    - I
-    - J
-    - S
-    - Z
-    - N
-    - K
-    - T
-    - E
-    - L
-    - U
+    aplw: ["+", "C", "A", "K", "S", "Y", "I", "B", "L", "T", "Z", "P", "D", "M", "U", "H", "F", "N", "V", "E", "G", "O", "W", "R", "J", "Q", "X"]
+    actw: ["M", "B", "O", "V", "A", "D", "P", "W", "C", "F", "Q", "X", "H", "G", "R", "Y", "I", "J", "S", "Z", "N", "K", "T", "E", "L", "U"]
   init2:
     plwk: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     ctwk: "FRANCE"
@@ -70,61 +17,8 @@
     ctw: "FBKSYRDLTZAGMUNHOVCIPWEJQX"
     pt: "THE+QUARTER+MASTER+GENERAL+SENDS+ORDERS+TO+MAJOR+GENERAL+FANE+TO+WITHDRAW+THE+CAVALRY+UNDER+HIS+COMMAND+TO+TOGAL+AND+LOURES"
     ct: "PZLSPQREQAJDITFBUFZOHQOSUQUDIKITORTWEZACMTPLERAUESKGSOFGFDKHLSJIRKHFHMFADAYIVUOHAOBLNOGREJAIBKMPJZTMJABQCNFPOZYHYRCZDCWBXUB"
-    aplw:
-    - +
-    - A
-    - B
-    - C
-    - D
-    - E
-    - F
-    - G
-    - H
-    - I
-    - J
-    - K
-    - L
-    - M
-    - N
-    - O
-    - P
-    - Q
-    - R
-    - S
-    - T
-    - U
-    - V
-    - W
-    - X
-    - Y
-    - Z
-    actw:
-    - F
-    - B
-    - K
-    - S
-    - Y
-    - R
-    - D
-    - L
-    - T
-    - Z
-    - A
-    - G
-    - M
-    - U
-    - N
-    - H
-    - O
-    - V
-    - C
-    - I
-    - P
-    - W
-    - E
-    - J
-    - Q
-    - X
+    aplw: ["+", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    actw: ["F", "B", "K", "S", "Y", "R", "D", "L", "T", "Z", "A", "G", "M", "U", "N", "H", "O", "V", "C", "I", "P", "W", "E", "J", "Q", "X"]
   init3:
     plwk: "CIPHER"
     ctwk: "MACHINE"
@@ -133,58 +27,5 @@
     ctw: "MBOVADPWCFQXHGRYIJSZNKTELU"
     pt: "CHARLES+WHEATSTONE+HAD+A+REMARKABLY+FERTILE+MIND"
     ct: "DZWORUXCALOHZYNPVDGOIMYJIGQDKIEEOVBEGINWDWSMGWSR"
-    aplw:
-    - +
-    - C
-    - A
-    - K
-    - S
-    - Y
-    - I
-    - B
-    - L
-    - T
-    - Z
-    - P
-    - D
-    - M
-    - U
-    - H
-    - F
-    - N
-    - V
-    - E
-    - G
-    - O
-    - W
-    - R
-    - J
-    - Q
-    - X
-    actw:
-    - M
-    - B
-    - O
-    - V
-    - A
-    - D
-    - P
-    - W
-    - C
-    - F
-    - Q
-    - X
-    - H
-    - G
-    - R
-    - Y
-    - I
-    - J
-    - S
-    - Z
-    - N
-    - K
-    - T
-    - E
-    - L
-    - U
+    aplw: ["+", "C", "A", "K", "S", "Y", "I", "B", "L", "T", "Z", "P", "D", "M", "U", "H", "F", "N", "V", "E", "G", "O", "W", "R", "J", "Q", "X"]
+    actw: ["M", "B", "O", "V", "A", "D", "P", "W", "C", "F", "Q", "X", "H", "G", "R", "Y", "I", "J", "S", "Z", "N", "K", "T", "E", "L", "U"]
