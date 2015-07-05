@@ -166,11 +166,11 @@ class String
   #
   def frequency(a = nil)
     if a.nil?
-      self.condensed.scan(/./).collect do |i|
+      a = self.dup.condensed
+    end
+
+    a.scan(/./).collect do |i|
         [i, self.count(i)]
-      end
-    else
-      [a, self.count(a)]
     end
   end # -- frequency
 end # -- String

@@ -90,7 +90,8 @@ class TestString < Test::Unit::TestCase
   def test_frequency
     DATA_FREQ.each_pair do |text, out|
       assert_equal out, text.frequency
-      assert_equal ['G', 3], text.frequency('G')
+      assert_equal [['G', 3]], text.frequency('G')
+      assert_equal [['G', 3], ['E', 2]], text.frequency('GE')
     end
   end # -- test_frequency
 end # --  TestString
