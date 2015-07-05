@@ -160,7 +160,7 @@ class String
   def un_five
     str = self.dup
     str.gsub(%r{ }, '')
-  end
+  end # -- un_five
 end # -- String
 
 module Crypto
