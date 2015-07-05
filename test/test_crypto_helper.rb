@@ -82,18 +82,25 @@ class TestString < Test::Unit::TestCase
   end # -- test_un_five
 
   DATA_FREQ = {
+      '' => [],
       'HGZEHGZHGEH' => [ ['H', 4], ['G', 3], ['Z', 2], ['E', 2]]
   }
 
-  # === test_frequency
+  # === test_frequency_1
   #
-  def test_frequency
+  def test_frequency_1
     DATA_FREQ.each_pair do |text, out|
       assert_equal out, text.frequency
-      assert_equal [['G', 3]], text.frequency('G')
-      assert_equal [['G', 3], ['E', 2]], text.frequency('GE')
+      assert_equal [], text.frequency('')
     end
-  end # -- test_frequency
+  end # -- test_frequency_1
+
+  # === test_frequency_2
+  #
+  def test_frequency_2
+    assert_equal [['G', 3]], 'HGZEHGZHGEH'.frequency('G')
+    assert_equal [['G', 3], ['E', 2]], 'HGZEHGZHGEH'.frequency('GE')
+  end # -- test_frequency_2
 end # --  TestString
 
 # ==  TestCrypto
