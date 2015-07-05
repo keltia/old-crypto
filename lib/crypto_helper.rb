@@ -35,7 +35,7 @@ class String
     a_str = self.split(//)
     i = 0
     while i < a_str.length do
-      if a_str[i] == a_str[i+1] then
+      if a_str[i] == a_str[i+1]
         a_str.insert(i+1, letter)
       end
       i += 2
@@ -140,12 +140,12 @@ class String
     str = self.dup
     l = str.length
     r = l % 5
-    if l <= 5 then
+    if l <= 5
       return str
     else
       a = str.scan(%r{(\w{5})}).join(' ')
     end
-    if r != 0 then
+    if r != 0
       a += ' '+ str[-r, r]
     end
     a
@@ -308,7 +308,7 @@ module Crypto
     res = ''
     (len - 1).downto(0) do |i|
       0.upto(height - 1) do |j|
-        if word.length <= (height - 1) then
+        if word.length <= (height - 1)
           return res + word
         else
           c = word.slice!(i * j)
@@ -326,7 +326,7 @@ module Crypto
   # Given a keyword with spaces, output an array with their positions
   #
   def find_hole(kw, ph = 'AT ONE SIR')
-    if kw.class == String then
+    if kw.class == String
       kwn = kw[0..(ph.length - 1)].to_numeric10
     elsif kw.class == Array
       kwn = kw.dup
@@ -338,7 +338,7 @@ module Crypto
     short = Array.new
     i = 0
     ph.scan(/./).each do |c|
-      if c == ' ' then
+      if c == ' '
         long << kwn[i]
       else
         short << kwn[i]
@@ -401,7 +401,7 @@ module Crypto
 
 end # -- Crypto
 
-if __FILE__ == $0 then
+if __FILE__ == $0
   puts 'End.'
   find_hole('INDEPENDENCE','AT ONE SIR')
 end
