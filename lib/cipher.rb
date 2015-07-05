@@ -160,6 +160,8 @@ class DisruptedTransposition < SimpleCipher
 
   # === decode
   #
+  # XXX to be completed
+  #
   def decode
     @msglen = plain_text.length
     holes = compute_holes(@msglen)
