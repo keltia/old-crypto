@@ -2,7 +2,7 @@
 
 # Design document
 
-old-crypto (see [my site here](http://www.keltia.net/topics/cryptography/)) is a project to implement old paper-and-pencil crypto systems, used by different organizations, countries and individuals over the years.
+old-crypto (see [my site here](http://www.keltia.net/topics/crypto/)) is a project to implement old paper-and-pencil crypto systems, used by different organizations, countries and individuals over the years.
 
 ## Key handling
 
